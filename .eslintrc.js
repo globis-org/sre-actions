@@ -7,7 +7,7 @@ module.exports = {
   extends: ['globis/base', 'plugin:jest/recommended'],
   parserOptions: {
     ecmaVersion: 'latest',
-    project: './tsconfig.eslint.json',
+    project: './tsconfig.json',
     sourceType: 'module',
   },
   plugins: ['jest'],
