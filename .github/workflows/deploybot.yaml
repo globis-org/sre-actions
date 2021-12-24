@@ -17,8 +17,40 @@ jobs:
 
   e2e:
     runs-on: ubuntu-latest
+    environment: e2e
     steps:
       - uses: actions/checkout@v2
-      - uses: ./deploybot
+      - name: The job has started
+        uses: ./deploybot
         with:
-          milliseconds: 500
+          status: started
+          token: ${{ secrets.SLACK_OAUTH_TOKEN }}
+          channel: ${{ secrets.SLACK_CHANNEL }}
+      - name: The job has succeeded
+        uses: ./deploybot
+        with:
+          status: success
+          token: ${{ secrets.SLACK_OAUTH_TOKEN }}
+          channel: ${{ secrets.SLACK_CHANNEL }}
+          custom_fields: |
+            - title: ECR Repository
+              value: "```dummy```"
+            - title: Image Tags
+              value: "```latest```"
+      - name: The job has failed
+        uses: ./deploybot
+        with:
+          status: failure
+          token: ${{ secrets.SLACK_OAUTH_TOKEN }}
+          channel: ${{ secrets.SLACK_CHANNEL }}
+          custom_fields: |
+            - title: ECR Repository
+              value: "```dummy```"
+            - title: Image Tags
+              value: "```latest```"
+      - name: The job has been cancelled
+        uses: ./deploybot
+        with:
+          status: cancelled
+          token: ${{ secrets.SLACK_OAUTH_TOKEN }}
+          channel: ${{ secrets.SLACK_CHANNEL }}

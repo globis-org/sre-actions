@@ -1,14 +1,23 @@
-import { wait } from '../src/wait'
+import { parse, Fields } from '../src/parse'
 
-test('throws invalid number', async () => {
-  const input = parseInt('foo', 10)
-  await expect(wait(input)).rejects.toThrow('milliseconds not a number')
+test('Parse valid yaml string to Fields', () => {
+  const raw = `
+    - title: foo
+      value: bar
+  `
+  const want: Fields = [{ title: 'foo', value: 'bar' }]
+  const got = parse(raw)
+
+  expect(got).toStrictEqual(want)
 })
 
-test('wait 500 ms', async () => {
-  const start = new Date()
-  await wait(500)
-  const end = new Date()
-  const delta = Math.abs(end.getTime() - start.getTime())
-  expect(delta).toBeGreaterThan(450)
+test('Parse invalid yaml string to Fields', () => {
+  const raw = `
+    title: foo
+    value: bar
+  `
+  const want: Fields = []
+  const got = parse(raw)
+
+  expect(got).toStrictEqual(want)
 })
