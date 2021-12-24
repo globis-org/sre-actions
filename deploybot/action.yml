@@ -1,11 +1,40 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: sre-actions/deploybot
+description: Notify workflow status
+author: sys-gdp
 inputs:
-  milliseconds: # change this
+  type:
+    description: Job type (docker or spa or ansible)
+    required: false
+    default: docker
+  status:
+    description: Job status
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+  github_token:
+    description: GitHub Token
+    required: false
+    default: ${{ github.token }}
+  token:
+    description: Slack OAuth Token
+    required: true
+  channel:
+    description: Slack channel
+    required: true
+  codebuild_id:
+    description: CodeBuild Build ID
+    required: false
+    default: ''
+  codebuild_region:
+    description: CodeBuild Region
+    required: false
+    default: ap-northeast-1
+  custom_fields:
+    description: Message fields
+    required: false
+    default: ''
+  suffix_on_failure:
+    description: Suffix text when action failed
+    required: false
+    default: ''
 runs:
   using: 'node12'
   main: 'dist/index.js'

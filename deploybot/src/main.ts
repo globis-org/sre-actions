@@ -1,19 +1,42 @@
 import * as core from '@actions/core'
+import { WebClient } from '@slack/web-api'
 
-import { wait } from './wait'
+import { messageFactory } from './factory'
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
+    const token = core.getInput('token')
+    const web = new WebClient(token)
+    core.info('[Info] Slack client has been initialized.')
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    const channel = core.getInput('channel')
+    const githubToken = core.getInput('github_token')
+    const status = core.getInput('status')
+    const type = core.getInput('type')
+    const codebuildID = core.getInput('codebuild_id')
+    const codebuildRegion = core.getInput('codebuild_region')
+    const customFields = core.getInput('custom_fields')
+    const suffixOnFailure = core.getInput('suffix_on_failure')
 
-    core.setOutput('time', new Date().toTimeString())
+    const message = await messageFactory({
+      type,
+      status,
+      githubToken,
+      channel,
+      customFields,
+      codebuild: { id: codebuildID, region: codebuildRegion },
+      suffixOnFailure,
+    })
+    core.debug(`[Info] Request body \n${JSON.stringify(message, undefined, 4)}`)
+    const { ok, error } = await web.chat.postMessage(message)
+    core.info(`[Info] Request result is ${ok.toString()}`)
+    if (error) {
+      throw new Error(error)
+    }
   } catch (error) {
-    if (error instanceof Error) core.setFailed(error.message)
+    if (error instanceof Error) {
+      core.setFailed(error.message)
+    }
   }
 }
 

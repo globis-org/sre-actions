@@ -10,6 +10,12 @@
     "all": "yarn build && yarn package"
   },
   "dependencies": {
-    "@actions/core": "^1.6.0"
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "@slack/web-api": "^6.5.1",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.5"
   }
 }
