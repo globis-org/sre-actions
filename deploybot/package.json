@@ -1,0 +1,15 @@
+{
+  "name": "deploybot",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "main": "lib/main.js",
+  "scripts": {
+    "build": "tsc",
+    "package": "ncc build --source-map --license licenses.txt",
+    "all": "yarn build && yarn package"
+  },
+  "dependencies": {
+    "@actions/core": "^1.6.0"
+  }
+}
