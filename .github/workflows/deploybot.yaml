@@ -26,6 +26,14 @@ jobs:
           status: started
           token: ${{ secrets.SLACK_OAUTH_TOKEN }}
           channel: ${{ secrets.SLACK_CHANNEL }}
+
+      - name: Generate image tags
+        id: tags
+        uses: ./docker-image-tag
+        with:
+          env: dev
+          suffix_type: auto
+
       - name: The job has succeeded
         uses: ./deploybot
         with:
@@ -36,7 +44,8 @@ jobs:
             - title: ECR Repository
               value: "```dummy```"
             - title: Image Tags
-              value: "```latest```"
+              value: "```${{ steps.tags.outputs.image_tag }}\n${{ steps.tags.outputs.latest_tag }}```"
+
       - name: The job has failed
         uses: ./deploybot
         with:
@@ -47,7 +56,8 @@ jobs:
             - title: ECR Repository
               value: "```dummy```"
             - title: Image Tags
-              value: "```latest```"
+              value: "```${{ steps.tags.outputs.image_tag }}\n${{ steps.tags.outputs.latest_tag }}```"
+
       - name: The job has been cancelled
         uses: ./deploybot
         with:
