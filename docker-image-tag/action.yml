@@ -1,0 +1,14 @@
+name: sre-actions/docker-image-tag
+description: Generate docker image tag
+author: sys-gdp
+inputs:
+  env:
+    description: Environment value for docker image tag
+    required: true
+  suffix_type:
+    description: Suffix for docker image tag ('hash' or 'tag' or 'auto')
+    required: false
+    default: auto
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
