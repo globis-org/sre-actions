@@ -25,12 +25,16 @@ inputs:
     description: ''
     required: false
     default: buildspec.yaml
+  env-vars-for-codebuild:
+    description: ''
+    required: false
+    default: ''
 outputs:
   codebuild-id:
     description: ''
     value: ${{ steps.build.outputs.aws-build-id }}
 runs:
-  using: 'composite'
+  using: composite
   steps:
     - name: Notify that job has started
       uses: globis-org/sre-actions/deploybot@v1
@@ -52,6 +56,7 @@ runs:
       with:
         project-name: ${{ inputs.codebuild-project }}
         buildspec-override: ${{ inputs.buildspec-override }}
+        env-vars-for-codebuild: ${{ inputs.env-vars-for-codebuild }}
 
     - name: Notify job status
       uses: globis-org/sre-actions/deploybot@v1
