@@ -1,0 +1,68 @@
+name: sre-actions/run-codebuild
+description: Run CodeBuild for GitHub Actions
+inputs:
+  slack-notification-type:
+    description: ''
+    required: false
+    default: unknown
+  slack-oauth-token:
+    description: ''
+    required: true
+  slack-channel:
+    description: ''
+    required: true
+  role-to-assume:
+    description: ''
+    required: true
+  aws-region:
+    description: ''
+    required: false
+    default: ap-northeast-1
+  codebuild-project:
+    description: ''
+    required: true
+  buildspec-override:
+    description: ''
+    required: false
+    default: buildspec.yaml
+  env-vars-for-codebuild:
+    description: ''
+    required: false
+    default: ''
+outputs:
+  codebuild-id:
+    description: ''
+    value: ${{ steps.build.outputs.aws-build-id }}
+runs:
+  using: composite
+  steps:
+    - name: Notify that job has started
+      uses: globis-org/sre-actions/deploybot@v1
+      with:
+        status: Started
+        type: ${{ inputs.slack-notification-type }}
+        token: ${{ inputs.slack-oauth-token }}
+        channel: ${{ inputs.slack-channel }}
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ inputs.role-to-assume }}
+        aws-region: ${{ inputs.aws-region }}
+
+    - name: Run CodeBuild
+      id: build
+      uses: aws-actions/aws-codebuild-run-project@v1
+      with:
+        project-name: ${{ inputs.codebuild-project }}
+        buildspec-override: ${{ inputs.buildspec-override }}
+        env-vars-for-codebuild: ${{ inputs.env-vars-for-codebuild }}
+
+    - name: Notify job status
+      uses: globis-org/sre-actions/deploybot@v1
+      with:
+        status: ${{ job.status }}
+        type: ${{ inputs.slack-notification-type }}
+        token: ${{ inputs.slack-oauth-token }}
+        channel: ${{ inputs.slack-channel }}
+      if: always()
