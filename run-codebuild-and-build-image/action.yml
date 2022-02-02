@@ -1,0 +1,94 @@
+name: sre-actions/run-codebuild-and-build-image
+description: Run CodeBuild and build docker image for GitHub Actions
+inputs:
+  slack-notification-type:
+    description: ''
+    required: false
+    default: docker
+  slack-oauth-token:
+    description: ''
+    required: true
+  slack-channel:
+    description: ''
+    required: true
+  role-to-assume:
+    description: ''
+    required: true
+  aws-region:
+    description: ''
+    required: false
+    default: ap-northeast-1
+  tag-env:
+    description: ''
+    required: true
+  tag-suffix-type:
+    description: ''
+    required: false
+    default: auto
+  ecr-repository:
+    description: ''
+    required: true
+  codebuild-project:
+    description: ''
+    required: true
+  buildspec-override:
+    description: ''
+    required: false
+    default: buildspec.yaml
+  env-vars-for-codebuild:
+    description: ''
+    required: false
+    default: ''
+outputs:
+  codebuild-id:
+    description: ''
+    value: ${{ steps.build.outputs.aws-build-id }}
+runs:
+  using: composite
+  steps:
+    - name: Notify that job has started
+      uses: globis-org/sre-actions/deploybot@v1
+      with:
+        status: Started
+        type: ${{ inputs.slack-notification-type }}
+        token: ${{ inputs.slack-oauth-token }}
+        channel: ${{ inputs.slack-channel }}
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: ${{ inputs.role-to-assume }}
+        aws-region: ${{ inputs.aws-region }}
+
+    - name: Generate image tags
+      id: tags
+      uses: globis-org/sre-actions/docker-image-tag@v1
+      with:
+        env: ${{ inputs.tag-env }}
+        suffix_type: ${{ inputs.tag-suffix-type }}
+
+    - name: Run CodeBuild
+      id: build
+      uses: aws-actions/aws-codebuild-run-project@v1
+      with:
+        project-name: ${{ inputs.codebuild-project }}
+        buildspec-override: ${{ inputs.buildspec-override }}
+        env-vars-for-codebuild: ECR_REPOSITORY,IMAGE_TAG,LATEST_TAG,${{ inputs.env-vars-for-codebuild }}
+      env:
+        ECR_REPOSITORY: ${{ inputs.ecr-repository }}
+        IMAGE_TAG: ${{ steps.tags.outputs.image_tag }}
+        LATEST_TAG: ${{ steps.tags.outputs.latest_tag }}
+
+    - name: Notify job status
+      uses: globis-org/sre-actions/deploybot@v1
+      with:
+        status: ${{ job.status }}
+        type: ${{ inputs.slack-notification-type }}
+        token: ${{ inputs.slack-oauth-token }}
+        channel: ${{ inputs.slack-channel }}
+        custom_fields: |
+          - title: ECR Repository
+            value: "```${{ inputs.ecr-repository }}```"
+          - title: Tags
+            value: "```${{ steps.tags.outputs.image_tag }}\n${{ steps.tags.outputs.latest_tag }}```"
+      if: always()
