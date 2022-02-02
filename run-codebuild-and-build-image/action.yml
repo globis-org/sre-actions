@@ -86,4 +86,9 @@ runs:
         type: ${{ inputs.slack-notification-type }}
         token: ${{ inputs.slack-oauth-token }}
         channel: ${{ inputs.slack-channel }}
+        custom_fields: |
+          - title: ECR Repository
+            value: "```${{ inputs.ecr_repository }}```"
+          - title: Tags
+            value: "```${{ steps.tags.outputs.image_tag }}\n${{ steps.tags.outputs.latest_tag }}```"
       if: always()
