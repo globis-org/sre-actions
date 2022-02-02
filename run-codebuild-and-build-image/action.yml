@@ -88,7 +88,7 @@ runs:
         channel: ${{ inputs.slack-channel }}
         custom_fields: |
           - title: ECR Repository
-            value: "```${{ inputs.ecr_repository }}```"
+            value: "```${{ inputs.ecr-repository }}```"
           - title: Tags
             value: "```${{ steps.tags.outputs.image_tag }}\n${{ steps.tags.outputs.latest_tag }}```"
       if: always()
