@@ -82,7 +82,7 @@ runs:
     - name: Notify job status
       uses: globis-org/sre-actions/deploybot@v1
       with:
-        status: ${{ job.status }}
+        status: ${{ github.action_status }}
         type: ${{ inputs.slack-notification-type }}
         token: ${{ inputs.slack-oauth-token }}
         channel: ${{ inputs.slack-channel }}
