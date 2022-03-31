@@ -5,7 +5,7 @@ inputs:
   type:
     description: Job type (docker or spa or ansible)
     required: false
-    default: docker
+    default: unknown
   status:
     description: Job status
     required: true
