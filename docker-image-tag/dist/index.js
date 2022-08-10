@@ -87,7 +87,7 @@ const suffix = (type, ref, sha) => {
                 ? ref.substring(10)
                 : sha.substring(0, 7);
         default:
-            throw new Error('[Error] invalid tag type');
+            throw new Error('invalid tag type');
     }
 };
 exports.suffix = suffix;
@@ -95,10 +95,11 @@ const generateTag = (env, type) => __awaiter(void 0, void 0, void 0, function* (
     const { ref, sha } = github_1.context;
     const { stdout } = yield (0, exec_1.getExecOutput)('date', ['+%Y%m%d-%H%M%S']);
     const timestamp = stdout.trim();
-    return {
-        imageTag: `${env}-${timestamp}-${(0, exports.suffix)(type, ref, sha)}`,
-        latestTag: `${env}-latest`,
-    };
+    const imageTag = env
+        ? `${env}-${timestamp}-${(0, exports.suffix)(type, ref, sha)}`
+        : `${timestamp}-${(0, exports.suffix)(type, ref, sha)}`;
+    const latestTag = env ? `${env}-latest` : 'latest';
+    return { imageTag, latestTag };
 });
 exports.generateTag = generateTag;
 

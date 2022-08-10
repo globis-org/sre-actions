@@ -25,8 +25,9 @@ export const generateTag = async (env: string, type: string): Promise<Tags> => {
   const { ref, sha } = context
   const { stdout } = await getExecOutput('date', ['+%Y%m%d-%H%M%S'])
   const timestamp = stdout.trim()
-  return {
-    imageTag: `${env}-${timestamp}-${suffix(type, ref, sha)}`,
-    latestTag: `${env}-latest`,
-  }
+  const imageTag = env
+    ? `${env}-${timestamp}-${suffix(type, ref, sha)}`
+    : `${timestamp}-${suffix(type, ref, sha)}`
+  const latestTag = env ? `${env}-latest` : 'latest'
+  return { imageTag, latestTag }
 }
