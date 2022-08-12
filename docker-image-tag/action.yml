@@ -4,7 +4,7 @@ author: sys-gdp
 inputs:
   env:
     description: Environment value for docker image tag
-    required: true
+    required: false
   suffix_type:
     description: Suffix for docker image tag ('hash' or 'tag' or 'auto')
     required: false
