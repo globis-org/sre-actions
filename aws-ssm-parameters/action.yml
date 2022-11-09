@@ -1,0 +1,10 @@
+name: sre-actions/aws-ssm-parameter
+description: Get AWS SSM parameter and set to environment variables
+author: sys-gdp
+inputs:
+  data:
+    description: Parameter keys and env var names (YAML)
+    required: true
+runs:
+  using: 'node16'
+  main: 'dist/index.js'
