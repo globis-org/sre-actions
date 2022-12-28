@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "main": "index.js",
+  "engines": {
+    "node": "16"
+  },
   "scripts": {
     "format": "prettier --write '**/*.{js,ts}'",
     "format-check": "prettier --check '**/*.{js,ts}'",
