@@ -4,6 +4,7 @@
     "github>globis-org/renovate-config:sre"
   ],
   "prConcurrentLimit": 10,
+  "prHourlyLimit": 0,
   "enabledManagers": [
     "github-actions"
   ]
