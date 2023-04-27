@@ -3,7 +3,6 @@
   "extends": [
     "github>globis-org/renovate-config:sre"
   ],
-  "rebaseWhen": "never",
   "prConcurrentLimit": 10,
   "enabledManagers": [
     "github-actions"
