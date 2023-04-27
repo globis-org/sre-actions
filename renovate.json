@@ -1,6 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "github>globis-org/renovate-config:sre"
+  ],
+  "rebaseWhen": "never",
+  "prConcurrentLimit": 10,
+  "enabledManagers": [
+    "github-actions"
   ]
 }
