@@ -7,11 +7,11 @@ jobs:
   test-and-build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v3.5.2
         with:
           ref: ${{ github.event.pull_request.head.ref }}
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3.6.0
         with:
           node-version-file: package.json
           cache: yarn
