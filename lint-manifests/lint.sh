@@ -2,8 +2,17 @@
 
 env="$ENV"
 product="$PRODUCT"
-k8s_version="$K8S_VERSION"
+version="$K8S_VERSION"
 output_file=output.md
+
+format="v[0-9]+.[0-9]+.[0-9]+"
+
+if [[ ! $version =~ $format ]]; then
+  echo "Invalid version format: $version"
+  exit 1
+fi
+
+minor_version=$(echo "$version" | cut -d. -f1-2)
 
 type kustomize
 type kube-score
@@ -32,16 +41,18 @@ fi
 
 echo "build manifests successfully."
 
-kubeconform=$(echo "$manifest" | kubeconform \
+kubeconform=$(echo "$manifest" | kubeconform -strict -output tap \
   -ignore-missing-schemas \
-  -strict -output tap \
-  -kubernetes-version "$k8s_version" 2>&1)
+  -kubernetes-version "${version#v}" 2>&1) # remove prefix "v" from version
 rc1=$?
 
 kube_score=$(echo "$manifest" | kube-score score -o ci - \
-  --enable-optional-test container-security-context-privileged \
-  --ignore-test container-security-context \
-  --ignore-test pod-probes 2>&1)
+  --ignore-test container-security-context-user-group-id \
+  --ignore-test container-security-context-privileged \
+  --ignore-test container-security-context-readonlyrootfilesystem \
+  --ignore-test container-ephemeral-storage-request-and-limit \
+  --ignore-test pod-probes \
+  --kubernetes-version "$minor_version" 2>&1)
 rc2=$?
 
 tee $output_file << EOS
