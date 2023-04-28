@@ -1,0 +1,45 @@
+name: sre-actions/lint-manifests
+description: Lint kubernetes manifests
+author: sys-gdp
+inputs:
+  env:
+    description: Environment to lint
+    required: true
+  product:
+    description: Product to lint
+    required: false
+    default: ''
+  k8s-version:
+    description: Kubernetes version
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - uses: asdf-vm/actions/install@v2.1.0
+      with:
+        tool_versions: |
+          kustomize 4.5.7
+          helm 3.10.1
+          kube-score 1.16.1
+          kubeconform 0.6.1
+          pluto 5.16.1
+
+    - run: ${{ github.action_path }}/lint.sh
+      shell: bash
+      env:
+        ENV: ${{ inputs.env }}
+        PRODUCT: ${{ inputs.product }}
+        K8S_VERSION: ${{ inputs.k8s-version }}
+
+    - uses: actions/github-script@v6.4.1
+      with:
+        script: |
+          const { promises: fs } = require('fs');
+          await github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: await fs.readFile('output.md', 'utf8'),
+          });
+      if: failure() && github.event_name == 'pull_request'
