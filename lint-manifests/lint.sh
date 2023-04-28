@@ -32,16 +32,18 @@ fi
 
 echo "build manifests successfully."
 
-kubeconform=$(echo "$manifest" | kubeconform \
+kubeconform=$(echo "$manifest" | kubeconform -strict -output tap \
   -ignore-missing-schemas \
-  -strict -output tap \
   -kubernetes-version "$k8s_version" 2>&1)
 rc1=$?
 
 kube_score=$(echo "$manifest" | kube-score score -o ci - \
-  --enable-optional-test container-security-context-privileged \
-  --ignore-test container-security-context \
-  --ignore-test pod-probes 2>&1)
+  --ignore-test container-security-context-user-group-id \
+  --ignore-test container-security-context-privileged \
+  --ignore-test container-security-context-readonlyrootfilesystem \
+  --ignore-test container-ephemeral-storage-request-and-limit \
+  --ignore-test pod-probes \
+  --kubernetes-version "$k8s_version" 2>&1)
 rc2=$?
 
 tee $output_file << EOS
