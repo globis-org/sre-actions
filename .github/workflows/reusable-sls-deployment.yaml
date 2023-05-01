@@ -1,0 +1,49 @@
+name: Reusable workflow for sls deployment
+on:
+  workflow_call:
+    inputs:
+      role-to-assume:
+        required: true
+        type: string
+      workspace:
+        required: true
+        type: string
+      env:
+        required: true
+        type: string
+      python-version:
+        required: false
+        type: string
+        default: ""
+
+jobs:
+  sls-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.5.2
+      - uses: actions/setup-node@v3.6.0
+        with:
+          node-version: "18"
+          cache: yarn
+          cache-dependency-path: ./serverless/yarn.lock
+
+      - uses: actions/setup-python@v4.6.0
+        if: inputs.python-version != ''
+        with:
+          python-version: ${{ inputs.python-version }}
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2.0.0
+        with:
+          aws-region: ap-northeast-1
+          role-to-assume: ${{ inputs.role-to-assume }}
+
+      - name: Install dependencies
+        working-directory: ./serverless
+        run: yarn install --frozen-lockfile
+
+      - name: Deploy serverless
+        working-directory: ./serverless
+        run: |
+          yarn workspace ${{ inputs.workspace }} run deploy:${{ inputs.env }}
+          yarn workspace ${{ inputs.workspace }} run info:${{ inputs.env }}
