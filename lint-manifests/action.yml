@@ -36,10 +36,6 @@ runs:
       with:
         script: |
           const { promises: fs } = require('fs');
-          await github.rest.issues.createComment({
-            issue_number: context.issue.number,
-            owner: context.repo.owner,
-            repo: context.repo.repo,
-            body: await fs.readFile('output.md', 'utf8'),
-          });
-      if: failure() && github.event_name == 'pull_request'
+          const output = await fs.readFile('output.md', 'utf8');
+          await core.summary.addRaw(output).write();
+      if: always()
