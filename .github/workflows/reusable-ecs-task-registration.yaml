@@ -1,0 +1,70 @@
+name: Reusable workflow for ECS task definition registration
+on:
+  workflow_call:
+    inputs:
+      env:
+        required: true
+        type: string
+      role-to-assume:
+        required: true
+        type: string
+      task-definition-template-path:
+        required: false
+        type: string
+        default: task_definition/db_dump_backup/template.json.j2
+      task-variables:
+        required: false
+        type: string
+        default: ''
+      slack-channel:
+        required: true
+        type: string
+      ecs-cluster:
+        required: true
+        type: string
+    secrets:
+      slack-oauth-token:
+        required: true
+
+env:
+  TASK_DEFINITION_OUTPUT_FILE_NAME: task-definition.json
+
+jobs:
+  deploy:
+    name: Register task definition
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v3.5.2
+
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2.0.0
+        with:
+          role-to-assume: ${{ inputs.role-to-assume }}
+          role-session-name: github-actions
+          aws-region: ap-northeast-1
+
+      - name: Setup task definition
+        uses: cuchi/jinja2-action@v1.2.1
+        with:
+          template: ${{ inputs.task-definition-template-path }}
+          output_file: ${{ env.TASK_DEFINITION_OUTPUT_FILE_NAME }}
+          variables: ${{ inputs.task-variables }}
+
+      # 登録するtask definitionの状態をログ出力しておく
+      - name: Show the new task definition
+        run: cat ./${{ env.TASK_DEFINITION_OUTPUT_FILE_NAME }}
+
+      - name: Register new task definition family
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1.4.11
+        with:
+          task-definition: ${{ env.TASK_DEFINITION_OUTPUT_FILE_NAME }}
+          cluster: ${{ inputs.ecs-cluster }}
+
+      - name: Notify job status
+        uses: globis-org/sre-actions/deploybot@v1
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.slack-oauth-token }}
+          channel: ${{ inputs.slack-channel }}
+        if: ${{ failure() }}
