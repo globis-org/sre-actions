@@ -5,6 +5,14 @@ product="$PRODUCT"
 version="$K8S_VERSION"
 output_file=output.md
 
+function get_emoji() {
+  if [ $1 -eq 0 ]; then
+    echo ✅
+  else
+    echo 💥
+  fi
+}
+
 format="v[0-9]+.[0-9]+.[0-9]+"
 
 if [[ ! $version =~ $format ]]; then
@@ -56,7 +64,7 @@ kube_score=$(echo "$manifest" | kube-score score -o ci - \
 rc2=$?
 
 tee $output_file << EOS
-### kubeconform [$kustomize_path]
+### $(get_emoji $rc1) kubeconform [$kustomize_path]
 
 <details><summary>show outputs</summary>
 
@@ -66,7 +74,7 @@ $kubeconform
 
 </details>
 
-### kube-score [$kustomize_path]
+### $(get_emoji $rc2) kube-score [$kustomize_path]
 
 <details><summary>show outputs</summary>
 
