@@ -63,6 +63,11 @@ kube_score=$(echo "$manifest" | kube-score score -o ci - \
   --kubernetes-version "$minor_version" 2>&1)
 rc2=$?
 
+pluto=$(echo "$manifest" | pluto detect - -o custom \
+    --columns 'name,kind,version,replacement,deprecated in,removed in' \
+    --target-versions k8s="$version" 2>&1)
+rc3=$?
+
 tee $output_file << EOS
 ### $(get_emoji $rc1) kubeconform [$kustomize_path]
 
@@ -83,10 +88,20 @@ $kube_score
 \`\`\`
 
 </details>
+
+### $(get_emoji $rc3) pluto [$kustomize_path]
+
+<details><summary>show outputs</summary>
+
+\`\`\`
+$pluto
+\`\`\`
+
+</details>
 EOS
 
-if [[ $rc1 -ne 0 || $rc2 -ne 0 ]]; then
+if [[ $rc1 -ne 0 || $rc2 -ne 0 || $rc3 -ne 0 ]]; then
   exit 1
 fi
 
-echo "kubeconform and kube-score passed."
+echo "kubeconform, kube-score and pluto passed."
