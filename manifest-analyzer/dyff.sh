@@ -9,12 +9,20 @@ head_manifest=head.yaml
 output_file=dyff.md
 
 function get_emoji() {
-  if [[ $1 -eq 0 ]]; then
+  if [[ $1 -eq 0 || $1 -eq 1 ]]; then
     echo ✅
-  elif [[ $1 -eq 1 ]]; then
-    echo 💡
   else
     echo 💥
+  fi
+}
+
+function get_message() {
+  if [[ $1 -eq 0 ]]; then
+    echo "no changes detected 🎉"
+  elif [[ $1 -eq 1 ]]; then
+    echo "some changes detected 👀"
+  else
+    echo "dyff failed"
   fi
 }
 
@@ -30,6 +38,10 @@ rc=$?
 
 tee "$output_file" << EOS
 ### $(get_emoji $rc) dyff [$head_dir]
+
+\`\`\`
+$(get_message $rc)
+\`\`\`
 
 <details><summary>show outputs</summary>
 

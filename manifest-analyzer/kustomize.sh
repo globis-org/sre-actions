@@ -12,13 +12,15 @@ echo "kustomize head directory: $head_dir"
 echo "working directory: $(pwd)"
 
 if [[ -d "$base_dir" ]]; then
-  kustomize build "$base_dir" > "$base_manifest"
+  echo "kustomize build $base_dir"
+  kustomize build "$base_dir" -o "$base_manifest"
 else
   touch "$base_manifest"
 fi
 
 if [[ -d "$head_dir" ]]; then
-  kustomize build "$head_dir" > "$head_manifest"
+  echo "kustomize build $head_dir"
+  kustomize build "$head_dir" -o "$head_manifest"
 else
   echo "head directory not found: $head_dir"
   exit 1
