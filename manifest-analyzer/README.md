@@ -17,5 +17,5 @@ This action performs diff detection and static analysis of the manifest configur
         with:
           base-dir: main/overlays/dev
           head-dir: overlays/dev
-          k8s-version: v1.24.0
+          k8s-version: v1.26.0
 ```
