@@ -15,7 +15,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: asdf-vm/actions/install@6a442392015fbbdd8b48696d41e0051b2698b2e4 # v2.2.0
+    - uses: asdf-vm/actions/install@05e0d2ed97b598bfce82fd30daf324ae0c4570e6 # v3.0.2
       with:
         tool_versions: |
           kustomize 5.0.1 # Argo CD v2.7.0
@@ -46,7 +46,7 @@ runs:
         HEAD_DIR: ${{ inputs.head-dir }}
         K8S_VERSION: ${{ inputs.k8s-version }}
 
-    - uses: actions/github-script@d7906e4ad0b1822421a7e6a35d5ca353c962f410 # v6.4.1
+    - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
       with:
         script: |
           const { promises: fs } = require('fs');
