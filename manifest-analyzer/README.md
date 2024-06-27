@@ -13,7 +13,7 @@ This action performs diff detection and static analysis of the manifest configur
           ref: main
 
       - name: Lint manifests
-        uses: globis-org/sre-actions/manifest-analyzer@v1
+        uses: globis-org/sre-actions/manifest-analyzer@6ba129bd5600ddc8365a235c9737fcbf125b758d # v1
         with:
           base-dir: main/overlays/dev
           head-dir: overlays/dev

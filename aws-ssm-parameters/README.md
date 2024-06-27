@@ -13,7 +13,7 @@ This action gets ssm parameters and set them as environment variables in workflo
           aws-region: ap-northeast-1
 
       - name: Set parameters to env vars
-          uses: globis-org/sre-actions/aws-ssm-parameters@v1
+          uses: globis-org/sre-actions/aws-ssm-parameters@6ba129bd5600ddc8365a235c9737fcbf125b758d # v1
           with:
             data: |
               - key: /dev/parameter-a
