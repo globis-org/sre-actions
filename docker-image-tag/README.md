@@ -8,7 +8,7 @@ This action generates opinionated Docker image tags.
     steps:
       - name: Generate image tags
         id: tags
-        uses: globis-org/sre-actions/docker-image-tag@v1
+        uses: globis-org/sre-actions/docker-image-tag@6ba129bd5600ddc8365a235c9737fcbf125b758d # v1
         with:
           env: ${{ env.ENV }}
         env:
