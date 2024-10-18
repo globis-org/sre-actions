@@ -7,7 +7,14 @@ ignore_pattern="$IGNORE_PATTERN"
 
 # 変更が入ったファイルの一覧からディレクトリ名だけをユニークに取り出して配列化する
 # module など特定パターンのディレクトリは grep で除外する
-echo "$files_json" | jq -r 'map(split("/")[:-1] | join("/")) | unique | .[]' | grep -v -E "$ignore_pattern" > dirs.txt
+echo "$files_json" | \
+  jq -r 'map(split("/")[:-1] | join("/")) | unique | .[]' | \
+  grep -v -E "$ignore_pattern" > dirs.txt || [[ $? == 1 ]] # grep がマッチしなくてもエラーにしない
+
+if [[ ! -s dirs.txt ]]; then
+  echo "No dirs to check"
+  exit 0
+fi
 
 echo '以下のパスに `.terraform.lock.hcl` が存在しません。' > comment_body.md
 
