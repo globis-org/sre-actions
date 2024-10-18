@@ -1,5 +1,5 @@
 name: sre-actions/terraform-lockfile-checker
-description: Check if Terraform lockfile is commited
+description: Check if Terraform lockfile is committed
 author: sys-gdp
 inputs:
   pull-request-number:
@@ -12,6 +12,10 @@ inputs:
     default: |
       terraform:
         - 'terraform/**'
+  ignore-pattern:
+    description: Ignore path pattern as regex
+    required: true
+    default: modules
 
 runs:
   using: composite
@@ -33,4 +37,5 @@ runs:
         GH_TOKEN: ${{ github.token }}
         FILES_JSON: ${{ steps.filter.outputs.terraform_files }}
         PR_NUMBER: ${{ inputs.pull-request-number }}
+        IGNORE_PATTERN: ${{ inputs.ignore-pattern }}
       if: steps.filter.outputs.terraform == 'true' && github.event_name == 'pull_request'
