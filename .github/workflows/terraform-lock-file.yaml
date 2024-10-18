@@ -1,0 +1,48 @@
+name: Terraform Lock File Checker
+on:
+  workflow_call:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Filter changed path
+        id: filter
+        uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+        with:
+          list-files: json
+          filters: |
+            terraform:
+              - 'terraform/**'
+
+      - name: Check .terraform.lock.hcl is commited
+        if: github.event_name == 'pull_request' && steps.filter.outputs.terraform == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # 変更が入ったファイルの一覧からディレクトリ名だけをユニークに取り出して配列化する
+          # moduleディレクトリは除外する
+          workdirs="$(echo '${{ steps.filter.outputs.terraform_files }}' | jq -r 'map(split("/")[:-1] | join("/") | select(contains("module") | not)) | unique | join(" ")')"
+
+          echo '以下のパスに `.terraform.lock.hcl` が存在しません。' > comment_body.md
+
+          committed=true
+          for dir in $workdirs; do
+            echo -n "Checking $dir ... "
+            # ディレクトリが存在し、かつ .terraform.lock.hcl が存在しない場合はコミットされていないと判断
+            if [[ -d "$dir" && ! -f "$dir/.terraform.lock.hcl" ]]; then
+              committed=false
+              echo "- $dir" >> comment_body.md
+              echo "not found"
+            else
+              echo "ok"
+            fi
+          done
+
+          if [[ $committed == false ]]; then
+            cat comment_body.md
+            gh pr comment ${{ github.event.pull_request.number }} --body-file comment_body.md
+            exit 1
+          fi
