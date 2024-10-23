@@ -1,15 +1,11 @@
 #!/bin/bash
 set -euo pipefail
 
-files_json="$FILES_JSON"
 pr_number="$PR_NUMBER"
-ignore_pattern="$IGNORE_PATTERN"
+json_path="$JSON_PATH"
 
-# 変更が入ったファイルの一覧からディレクトリ名だけをユニークに取り出して配列化する
-# module など特定パターンのディレクトリは grep で除外する
-echo "$files_json" | \
-  jq -r 'map(split("/")[:-1] | join("/")) | unique | .[]' | \
-  grep -v -E "$ignore_pattern" > dirs.txt || [[ $? == 1 ]] # grep がマッチしなくてもエラーにしない
+# JSON 配列から改行区切りのテキストを生成する
+cat "$json_path" | jq -r '.[]' | tee dirs.txt
 
 if [[ ! -s dirs.txt ]]; then
   echo "No dirs to check"

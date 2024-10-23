@@ -6,16 +6,16 @@ inputs:
     description: Pull request number
     required: true
     default: ${{ github.event.pull_request.number }}
-  path-filters:
-    description: Path filters to check (use `terraform` as key)
+  files:
+    description: Files to check
     required: true
     default: |
-      terraform:
-        - 'terraform/**'
-  ignore-pattern:
-    description: Ignore path pattern as regex
+      terraform/**
+  files-ignore:
+    description: Files to ignore
     required: true
-    default: modules
+    default: |
+      **/modules/**
 
 runs:
   using: composite
@@ -23,19 +23,21 @@ runs:
     - name: Checkout repository
       uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4.2.1
 
-    - name: Filter changed path
+    - name: Filter changed files
       id: filter
-      uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36 # v3.0.2
+      uses: tj-actions/changed-files@v45.0.3
       with:
-        list-files: json
-        filters: ${{ inputs.path-filters }}
+        json: true
+        write_output_files: true
+        dir_names: true
+        files: ${{ inputs.files }}
+        files_ignore: ${{ inputs.files-ignore }}
 
-    - name: Check .terraform.lock.hcl is commited
+    - name: Check .terraform.lock.hcl is committed
       run: ${{ github.action_path }}/check.sh
       shell: bash
       env:
         GH_TOKEN: ${{ github.token }}
-        FILES_JSON: ${{ steps.filter.outputs.terraform_files }}
         PR_NUMBER: ${{ inputs.pull-request-number }}
-        IGNORE_PATTERN: ${{ inputs.ignore-pattern }}
-      if: steps.filter.outputs.terraform == 'true' && github.event_name == 'pull_request'
+        JSON_PATH: .github/outputs/all_changed_and_modified_files.json
+      if: steps.filter.outputs.all_changed_and_modified_files_count != '0' && github.event_name == 'pull_request'
