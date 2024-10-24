@@ -1,0 +1,15 @@
+name: sre-actions/codeowners-validator
+description:
+author: sys-gdp
+inputs:
+  token:
+    description: GitHub Token
+    required: true
+    default: ${{ github.token }}
+  codeowners:
+    description: Codeowners file
+    required: true
+
+runs:
+  using: node20
+  main: dist/index.js
