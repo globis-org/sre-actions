@@ -1,0 +1,16 @@
+{
+  "name": "codeowners-validator",
+  "version": "1.0.0",
+  "main": "dist/main.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "package": "ncc build src/main.ts -o dist --source-map --license licenses.txt",
+    "all": "yarn package"
+  },
+  "dependencies": {
+    "@actions/core": "1.11.1",
+    "@actions/github": "6.0.0",
+    "minimatch": "10.0.1"
+  }
+}
