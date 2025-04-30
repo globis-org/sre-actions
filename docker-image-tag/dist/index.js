@@ -1,105 +1,6 @@
 require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 5503:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core = __importStar(__nccwpck_require__(6618));
-const tag_1 = __nccwpck_require__(6552);
-async function run() {
-    try {
-        const env = core.getInput('env');
-        const suffixType = core.getInput('suffix_type');
-        const { imageTag, latestTag } = await (0, tag_1.generateTag)(env, suffixType);
-        core.setOutput('image_tag', imageTag);
-        core.setOutput('latest_tag', latestTag);
-    }
-    catch (error) {
-        if (error instanceof Error) {
-            core.setFailed(error.message);
-        }
-    }
-}
-void run();
-
-
-/***/ }),
-
-/***/ 6552:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.generateTag = exports.suffix = void 0;
-const github_1 = __nccwpck_require__(2146);
-const exec_1 = __nccwpck_require__(3274);
-const suffix = (type, ref, sha) => {
-    switch (type) {
-        case 'hash':
-            return sha.substring(0, 7); // short commit hash
-        case 'tag':
-            return ref.substring(10); // tag value
-        case 'auto':
-            return new RegExp('^refs/tags/').test(ref)
-                ? ref.substring(10)
-                : sha.substring(0, 7);
-        default:
-            throw new Error('invalid tag type');
-    }
-};
-exports.suffix = suffix;
-const generateTag = async (env, type) => {
-    const { ref, sha } = github_1.context;
-    const { stdout } = await (0, exec_1.getExecOutput)('date', ['+%Y%m%d-%H%M%S']);
-    const timestamp = stdout.trim();
-    const imageTag = env
-        ? `${env}-${timestamp}-${(0, exports.suffix)(type, ref, sha)}`
-        : `${timestamp}-${(0, exports.suffix)(type, ref, sha)}`;
-    const latestTag = env ? `${env}-latest` : 'latest';
-    return { imageTag, latestTag };
-};
-exports.generateTag = generateTag;
-
-
-/***/ }),
-
 /***/ 7980:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -10873,6 +10774,105 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 396:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const core = __importStar(__nccwpck_require__(6618));
+const tag_1 = __nccwpck_require__(8502);
+async function run() {
+    try {
+        const env = core.getInput('env');
+        const suffixType = core.getInput('suffix_type');
+        const { imageTag, latestTag } = await (0, tag_1.generateTag)(env, suffixType);
+        core.setOutput('image_tag', imageTag);
+        core.setOutput('latest_tag', latestTag);
+    }
+    catch (error) {
+        if (error instanceof Error) {
+            core.setFailed(error.message);
+        }
+    }
+}
+void run();
+
+
+/***/ }),
+
+/***/ 8502:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.generateTag = exports.suffix = void 0;
+const github_1 = __nccwpck_require__(2146);
+const exec_1 = __nccwpck_require__(3274);
+const suffix = (type, ref, sha) => {
+    switch (type) {
+        case 'hash':
+            return sha.substring(0, 7); // short commit hash
+        case 'tag':
+            return ref.substring(10); // tag value
+        case 'auto':
+            return new RegExp('^refs/tags/').test(ref)
+                ? ref.substring(10)
+                : sha.substring(0, 7);
+        default:
+            throw new Error('invalid tag type');
+    }
+};
+exports.suffix = suffix;
+const generateTag = async (env, type) => {
+    const { ref, sha } = github_1.context;
+    const { stdout } = await (0, exec_1.getExecOutput)('date', ['+%Y%m%d-%H%M%S']);
+    const timestamp = stdout.trim();
+    const imageTag = env
+        ? `${env}-${timestamp}-${(0, exports.suffix)(type, ref, sha)}`
+        : `${timestamp}-${(0, exports.suffix)(type, ref, sha)}`;
+    const latestTag = env ? `${env}-latest` : 'latest';
+    return { imageTag, latestTag };
+};
+exports.generateTag = generateTag;
+
+
+/***/ }),
+
 /***/ 9872:
 /***/ ((module) => {
 
@@ -11075,7 +11075,7 @@ module.exports = /*#__PURE__*/JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(5503);
+/******/ 	var __webpack_exports__ = __nccwpck_require__(396);
 /******/ 	module.exports = __webpack_exports__;
 /******/ 	
 /******/ })()
