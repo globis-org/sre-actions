@@ -14,9 +14,9 @@ const isNotNullish = (obj: unknown): obj is Record<string, unknown> =>
 
 const isField = (obj: unknown): obj is Fields[number] =>
   isNotNullish(obj) &&
-  typeof obj.title === 'string' &&
-  typeof obj.value === 'string' &&
-  (typeof obj.short === 'boolean' || typeof obj.short === 'undefined')
+  typeof obj['title'] === 'string' &&
+  typeof obj['value'] === 'string' &&
+  (typeof obj['short'] === 'boolean' || typeof obj['short'] === 'undefined')
 
 const isFields = (obj: unknown): obj is Fields =>
   Array.isArray(obj) && obj.every(isField)

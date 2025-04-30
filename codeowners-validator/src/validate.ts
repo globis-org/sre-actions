@@ -32,7 +32,9 @@ export const validateCodeOwners = async (inputs: Inputs) => {
 
   if (context.eventName === 'merge_group') {
     // library has no type for merge_group event
-    const { head_sha: sha } = context.payload.merge_group as MergeGroupPayload
+    const { head_sha: sha } = context.payload[
+      'merge_group'
+    ] as MergeGroupPayload
     await octokit.rest.repos.createCommitStatus({
       owner: context.repo.owner,
       repo: context.repo.repo,

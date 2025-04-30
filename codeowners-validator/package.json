@@ -5,6 +5,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "type-check": "tsc --noEmit",
     "package": "ncc build src/main.ts -o dist --source-map --license licenses.txt",
     "all": "yarn package"
   },

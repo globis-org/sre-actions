@@ -60,17 +60,21 @@ export const parseCodeOwners = (codeowners: string): CodeOwnersRule[] => {
 
   return lines.flatMap(line => {
     const [pattern, ...rawOwners] = line.split(/\s+/)
+    if (!pattern) {
+      throw new Error('Invalid CODEOWNERS line format.')
+    }
+
     const globs = replaceCodeOwnersPatternToGlobs(pattern)
 
     const ownerRegex = /^@(.+)$/
     const owners = rawOwners.map((rawOwner): User | Team => {
-      const match = rawOwner.match(ownerRegex)
-      if (!match) {
+      const owner = rawOwner.match(ownerRegex)?.[1]
+      if (!owner) {
         throw new Error('Invalid owner format.')
       }
-      const owner = match[1]
+
       if (owner.includes('/')) {
-        const [org, team] = owner.split('/')
+        const [org, team] = owner.split('/') as [string, string]
         return { kind: 'team', org, team, name: owner }
       } else {
         return { kind: 'user', name: owner }

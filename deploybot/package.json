@@ -5,9 +5,9 @@
   "license": "MIT",
   "main": "lib/main.js",
   "scripts": {
-    "build": "tsc",
-    "package": "ncc build --source-map --license licenses.txt",
-    "all": "yarn build && yarn package"
+    "type-check": "tsc --noEmit",
+    "package": "ncc build src/main.ts -o dist --source-map --license licenses.txt",
+    "all": "yarn package"
   },
   "dependencies": {
     "@actions/core": "^1.10.0",
