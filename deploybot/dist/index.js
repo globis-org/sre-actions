@@ -1,342 +1,6 @@
 require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 8395:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.getURL = void 0;
-const getURL = ({ id, region }) => {
-    const split = id.split(':');
-    if (split.length !== 2) {
-        return {};
-    }
-    const project = split[0];
-    const uuid = split[1];
-    const url = `https://${region}.console.aws.amazon.com/codesuite/codebuild/projects/${project}/build/${project}%3A${uuid}/log?region=${region}`;
-    return {
-        raw: url,
-        markdown: `<${url}|${project}>`,
-    };
-};
-exports.getURL = getURL;
-
-
-/***/ }),
-
-/***/ 6268:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.baseTexts = exports.colors = exports.usernames = exports.icons = exports.getPhase = exports.getType = exports.githubIconURL = exports.actionRepoURL = void 0;
-exports.actionRepoURL = 'https://github.com/globis-org/sre-actions';
-exports.githubIconURL = 'https://images.zenhubusercontent.com/5ddf7e4a70febb0001f9d903/a95e1c1a-0a7f-4957-9fc5-75e8bec081f0';
-const getType = (raw) => {
-    switch (raw) {
-        case 'docker':
-            return 'docker';
-        case 'spa':
-            return 'spa';
-        case 'ansible':
-            return 'ansible';
-        default:
-            return 'unknown';
-    }
-};
-exports.getType = getType;
-const getPhase = (status) => {
-    switch (status.toLowerCase()) {
-        case 'started':
-            return 'started';
-        case 'success':
-        case 'succeeded':
-            return 'success';
-        case 'failure':
-        case 'failed':
-            return 'failure';
-        case 'cancelled':
-            return 'cancelled';
-        default:
-            return 'unknown';
-    }
-};
-exports.getPhase = getPhase;
-exports.icons = {
-    started: '',
-    success: '',
-    failure: '',
-    cancelled: '',
-    unknown: '',
-};
-exports.usernames = {
-    started: 'Deploy Bot (started)',
-    success: 'Deploy Bot (success)',
-    failure: 'Deploy Bot (failure)',
-    cancelled: 'Deploy Bot (cancelled)',
-    unknown: 'Deploy Bot (unknown)',
-};
-exports.colors = {
-    started: '#e9e9e9',
-    success: '#18be52',
-    failure: '#E96D76',
-    cancelled: '#3b3b82',
-    unknown: '#e9e9e9',
-};
-exports.baseTexts = {
-    docker: {
-        started: `:docker: ビルドが始まったよ`,
-        success: `:white_check_mark: :docker: ビルドが成功したよ`,
-        failure: `:exclamation: :docker: ビルドが失敗したよ`,
-        cancelled: `:exclamation: :docker: ビルドがキャンセルされたよ`,
-        unknown: `:exclamation: :docker: ビルドが...？`,
-    },
-    spa: {
-        started: `:react: デプロイが始まったよ`,
-        success: `:white_check_mark: :react: デプロイが成功したよ`,
-        failure: `:exclamation: :react: デプロイが失敗したよ`,
-        cancelled: `:exclamation: :react: デプロイがキャンセルされたよ`,
-        unknown: `:exclamation: :react: デプロイが...？`,
-    },
-    ansible: {
-        started: `:ansible: デプロイが始まったよ`,
-        success: `:white_check_mark: :ansible: デプロイが成功したよ`,
-        failure: `:exclamation: :ansible: デプロイが失敗したよ`,
-        cancelled: `:exclamation: :ansible: デプロイがキャンセルされたよ`,
-        unknown: `:exclamation: :ansible: デプロイが...？`,
-    },
-    unknown: {
-        started: `ワークフローが始まったよ`,
-        success: `:white_check_mark: ワークフローが成功したよ`,
-        failure: `:exclamation: ワークフローが失敗したよ`,
-        cancelled: `:exclamation: ワークフローがキャンセルされたよ`,
-        unknown: `:exclamation: ワークフローが...？`,
-    },
-};
-
-
-/***/ }),
-
-/***/ 5398:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.messageFactory = void 0;
-const github_1 = __nccwpck_require__(2146);
-const config = __importStar(__nccwpck_require__(6268));
-const parse_1 = __nccwpck_require__(4043);
-const codebuild_1 = __nccwpck_require__(8395);
-const quote = (value) => '```' + value + '```';
-const messageFactory = async ({ type: rawType, status, githubToken, channel, codebuild, customFields, suffixOnFailure, }) => {
-    const octokit = (0, github_1.getOctokit)(githubToken);
-    const { sha, runId, workflow } = github_1.context;
-    const { owner, repo } = github_1.context.repo;
-    const { data } = await octokit.rest.repos.getCommit({ owner, repo, ref: sha });
-    const commitMessage = data.commit.message;
-    const githubRepo = `${owner}/${repo}`;
-    const githubRepoURL = `https://github.com/${owner}/${repo}`;
-    const githubActionsRunURL = `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
-    const phase = config.getPhase(status);
-    const type = config.getType(rawType);
-    const suffix = [];
-    if (phase === 'failure') {
-        suffix.push('\u{2500}\u{2500}', `ログは *<${githubActionsRunURL}|こちら>*`, suffixOnFailure);
-    }
-    const text = [config.baseTexts[type][phase], ...suffix].join(' ');
-    const fields = (0, parse_1.parse)(customFields);
-    const attachment = {
-        color: config.colors[phase],
-        fields: [
-            ...fields,
-            {
-                title: 'Commit Message',
-                value: quote(commitMessage),
-                short: false,
-            },
-            {
-                title: 'Repository',
-                value: [
-                    `<${githubRepoURL}|${githubRepo}>`,
-                    `(<${githubRepoURL}/commit/${sha}|${sha.substring(0, 7)}>)`,
-                ].join(' '),
-                short: true,
-            },
-            {
-                title: 'Workflow',
-                value: `<${githubActionsRunURL}|${workflow}>`,
-                short: true,
-            },
-        ],
-        footer_icon: config.githubIconURL,
-        footer: `<${config.actionRepoURL}|GitHub Actions - SRE>`,
-        ts: `${Math.floor(Date.now() / 1000)}`,
-        mrkdwn_in: ['fields', 'text'],
-    };
-    const url = (0, codebuild_1.getURL)(codebuild);
-    if (url.markdown) {
-        attachment.fields?.push({
-            title: 'CodeBuild',
-            value: url.markdown,
-            short: true,
-        });
-    }
-    return {
-        channel,
-        text,
-        attachments: [attachment],
-        icon_url: config.icons[phase],
-        username: config.usernames[phase],
-    };
-};
-exports.messageFactory = messageFactory;
-
-
-/***/ }),
-
-/***/ 5503:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core = __importStar(__nccwpck_require__(6618));
-const web_api_1 = __nccwpck_require__(9043);
-const factory_1 = __nccwpck_require__(5398);
-async function run() {
-    try {
-        const token = core.getInput('token');
-        const web = new web_api_1.WebClient(token);
-        core.info('[Info] Slack client has been initialized.');
-        const channel = core.getInput('channel');
-        const githubToken = core.getInput('github_token');
-        const status = core.getInput('status');
-        const type = core.getInput('type');
-        const codebuildID = core.getInput('codebuild_id');
-        const codebuildRegion = core.getInput('codebuild_region');
-        const customFields = core.getInput('custom_fields');
-        const suffixOnFailure = core.getInput('suffix_on_failure');
-        const message = await (0, factory_1.messageFactory)({
-            type,
-            status,
-            githubToken,
-            channel,
-            customFields,
-            codebuild: { id: codebuildID, region: codebuildRegion },
-            suffixOnFailure,
-        });
-        core.debug(`[Info] Request body \n${JSON.stringify(message, undefined, 4)}`);
-        const { ok, error } = await web.chat.postMessage(message);
-        core.info(`[Info] Request result is ${ok.toString()}`);
-        if (error) {
-            throw new Error(error);
-        }
-    }
-    catch (error) {
-        if (error instanceof Error) {
-            core.setFailed(error.message);
-        }
-    }
-}
-void run();
-
-
-/***/ }),
-
-/***/ 4043:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.parse = void 0;
-const js_yaml_1 = __nccwpck_require__(2235);
-// https://blog.uhy.ooo/entry/2021-04-09/typescript-is-any-as/
-const isNotNullish = (obj) => obj != null;
-const isField = (obj) => isNotNullish(obj) &&
-    typeof obj.title === 'string' &&
-    typeof obj.value === 'string' &&
-    (typeof obj.short === 'boolean' || typeof obj.short === 'undefined');
-const isFields = (obj) => Array.isArray(obj) && obj.every(isField);
-const parse = (value) => {
-    const fields = (0, js_yaml_1.load)(value);
-    return isFields(fields) ? fields : [];
-};
-exports.parse = parse;
-
-
-/***/ }),
-
 /***/ 7980:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -22586,6 +22250,341 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
+/***/ 5458:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.getURL = void 0;
+const getURL = ({ id, region }) => {
+    const split = id.split(':');
+    const [project, uuid] = split;
+    if (!project || !uuid) {
+        return {};
+    }
+    const url = `https://${region}.console.aws.amazon.com/codesuite/codebuild/projects/${project}/build/${project}%3A${uuid}/log?region=${region}`;
+    return {
+        raw: url,
+        markdown: `<${url}|${project}>`,
+    };
+};
+exports.getURL = getURL;
+
+
+/***/ }),
+
+/***/ 319:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.baseTexts = exports.colors = exports.usernames = exports.icons = exports.getPhase = exports.getType = exports.githubIconURL = exports.actionRepoURL = void 0;
+exports.actionRepoURL = 'https://github.com/globis-org/sre-actions';
+exports.githubIconURL = 'https://images.zenhubusercontent.com/5ddf7e4a70febb0001f9d903/a95e1c1a-0a7f-4957-9fc5-75e8bec081f0';
+const getType = (raw) => {
+    switch (raw) {
+        case 'docker':
+            return 'docker';
+        case 'spa':
+            return 'spa';
+        case 'ansible':
+            return 'ansible';
+        default:
+            return 'unknown';
+    }
+};
+exports.getType = getType;
+const getPhase = (status) => {
+    switch (status.toLowerCase()) {
+        case 'started':
+            return 'started';
+        case 'success':
+        case 'succeeded':
+            return 'success';
+        case 'failure':
+        case 'failed':
+            return 'failure';
+        case 'cancelled':
+            return 'cancelled';
+        default:
+            return 'unknown';
+    }
+};
+exports.getPhase = getPhase;
+exports.icons = {
+    started: '',
+    success: '',
+    failure: '',
+    cancelled: '',
+    unknown: '',
+};
+exports.usernames = {
+    started: 'Deploy Bot (started)',
+    success: 'Deploy Bot (success)',
+    failure: 'Deploy Bot (failure)',
+    cancelled: 'Deploy Bot (cancelled)',
+    unknown: 'Deploy Bot (unknown)',
+};
+exports.colors = {
+    started: '#e9e9e9',
+    success: '#18be52',
+    failure: '#E96D76',
+    cancelled: '#3b3b82',
+    unknown: '#e9e9e9',
+};
+exports.baseTexts = {
+    docker: {
+        started: `:docker: ビルドが始まったよ`,
+        success: `:white_check_mark: :docker: ビルドが成功したよ`,
+        failure: `:exclamation: :docker: ビルドが失敗したよ`,
+        cancelled: `:exclamation: :docker: ビルドがキャンセルされたよ`,
+        unknown: `:exclamation: :docker: ビルドが...？`,
+    },
+    spa: {
+        started: `:react: デプロイが始まったよ`,
+        success: `:white_check_mark: :react: デプロイが成功したよ`,
+        failure: `:exclamation: :react: デプロイが失敗したよ`,
+        cancelled: `:exclamation: :react: デプロイがキャンセルされたよ`,
+        unknown: `:exclamation: :react: デプロイが...？`,
+    },
+    ansible: {
+        started: `:ansible: デプロイが始まったよ`,
+        success: `:white_check_mark: :ansible: デプロイが成功したよ`,
+        failure: `:exclamation: :ansible: デプロイが失敗したよ`,
+        cancelled: `:exclamation: :ansible: デプロイがキャンセルされたよ`,
+        unknown: `:exclamation: :ansible: デプロイが...？`,
+    },
+    unknown: {
+        started: `ワークフローが始まったよ`,
+        success: `:white_check_mark: ワークフローが成功したよ`,
+        failure: `:exclamation: ワークフローが失敗したよ`,
+        cancelled: `:exclamation: ワークフローがキャンセルされたよ`,
+        unknown: `:exclamation: ワークフローが...？`,
+    },
+};
+
+
+/***/ }),
+
+/***/ 175:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.messageFactory = void 0;
+const github_1 = __nccwpck_require__(2146);
+const config = __importStar(__nccwpck_require__(319));
+const parse_1 = __nccwpck_require__(3614);
+const codebuild_1 = __nccwpck_require__(5458);
+const quote = (value) => '```' + value + '```';
+const messageFactory = async ({ type: rawType, status, githubToken, channel, codebuild, customFields, suffixOnFailure, }) => {
+    const octokit = (0, github_1.getOctokit)(githubToken);
+    const { sha, runId, workflow } = github_1.context;
+    const { owner, repo } = github_1.context.repo;
+    const { data } = await octokit.rest.repos.getCommit({ owner, repo, ref: sha });
+    const commitMessage = data.commit.message;
+    const githubRepo = `${owner}/${repo}`;
+    const githubRepoURL = `https://github.com/${owner}/${repo}`;
+    const githubActionsRunURL = `https://github.com/${owner}/${repo}/actions/runs/${runId}`;
+    const phase = config.getPhase(status);
+    const type = config.getType(rawType);
+    const suffix = [];
+    if (phase === 'failure') {
+        suffix.push('\u{2500}\u{2500}', `ログは *<${githubActionsRunURL}|こちら>*`, suffixOnFailure);
+    }
+    const text = [config.baseTexts[type][phase], ...suffix].join(' ');
+    const fields = (0, parse_1.parse)(customFields);
+    const attachment = {
+        color: config.colors[phase],
+        fields: [
+            ...fields,
+            {
+                title: 'Commit Message',
+                value: quote(commitMessage),
+                short: false,
+            },
+            {
+                title: 'Repository',
+                value: [
+                    `<${githubRepoURL}|${githubRepo}>`,
+                    `(<${githubRepoURL}/commit/${sha}|${sha.substring(0, 7)}>)`,
+                ].join(' '),
+                short: true,
+            },
+            {
+                title: 'Workflow',
+                value: `<${githubActionsRunURL}|${workflow}>`,
+                short: true,
+            },
+        ],
+        footer_icon: config.githubIconURL,
+        footer: `<${config.actionRepoURL}|GitHub Actions - SRE>`,
+        ts: `${Math.floor(Date.now() / 1000)}`,
+        mrkdwn_in: ['fields', 'text'],
+    };
+    const url = (0, codebuild_1.getURL)(codebuild);
+    if (url.markdown) {
+        attachment.fields?.push({
+            title: 'CodeBuild',
+            value: url.markdown,
+            short: true,
+        });
+    }
+    return {
+        channel,
+        text,
+        attachments: [attachment],
+        icon_url: config.icons[phase],
+        username: config.usernames[phase],
+    };
+};
+exports.messageFactory = messageFactory;
+
+
+/***/ }),
+
+/***/ 396:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const core = __importStar(__nccwpck_require__(6618));
+const web_api_1 = __nccwpck_require__(9043);
+const factory_1 = __nccwpck_require__(175);
+async function run() {
+    try {
+        const token = core.getInput('token');
+        const web = new web_api_1.WebClient(token);
+        core.info('[Info] Slack client has been initialized.');
+        const channel = core.getInput('channel');
+        const githubToken = core.getInput('github_token');
+        const status = core.getInput('status');
+        const type = core.getInput('type');
+        const codebuildID = core.getInput('codebuild_id');
+        const codebuildRegion = core.getInput('codebuild_region');
+        const customFields = core.getInput('custom_fields');
+        const suffixOnFailure = core.getInput('suffix_on_failure');
+        const message = await (0, factory_1.messageFactory)({
+            type,
+            status,
+            githubToken,
+            channel,
+            customFields,
+            codebuild: { id: codebuildID, region: codebuildRegion },
+            suffixOnFailure,
+        });
+        core.debug(`[Info] Request body \n${JSON.stringify(message, undefined, 4)}`);
+        const { ok, error } = await web.chat.postMessage(message);
+        core.info(`[Info] Request result is ${ok.toString()}`);
+        if (error) {
+            throw new Error(error);
+        }
+    }
+    catch (error) {
+        if (error instanceof Error) {
+            core.setFailed(error.message);
+        }
+    }
+}
+void run();
+
+
+/***/ }),
+
+/***/ 3614:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.parse = void 0;
+const js_yaml_1 = __nccwpck_require__(2235);
+// https://blog.uhy.ooo/entry/2021-04-09/typescript-is-any-as/
+const isNotNullish = (obj) => obj != null;
+const isField = (obj) => isNotNullish(obj) &&
+    typeof obj['title'] === 'string' &&
+    typeof obj['value'] === 'string' &&
+    (typeof obj['short'] === 'boolean' || typeof obj['short'] === 'undefined');
+const isFields = (obj) => Array.isArray(obj) && obj.every(isField);
+const parse = (value) => {
+    const fields = (0, js_yaml_1.load)(value);
+    return isFields(fields) ? fields : [];
+};
+exports.parse = parse;
+
+
+/***/ }),
+
 /***/ 9872:
 /***/ ((module) => {
 
@@ -22796,7 +22795,7 @@ module.exports = /*#__PURE__*/JSON.parse('[[[0,44],"disallowed_STD3_valid"],[[45
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(5503);
+/******/ 	var __webpack_exports__ = __nccwpck_require__(396);
 /******/ 	module.exports = __webpack_exports__;
 /******/ 	
 /******/ })()

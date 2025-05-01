@@ -1,106 +1,6 @@
 require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 55503:
-/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
-
-"use strict";
-
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core = __importStar(__nccwpck_require__(66618));
-const client_ssm_1 = __nccwpck_require__(21686);
-const parse_1 = __nccwpck_require__(94043);
-async function run() {
-    try {
-        const dataMap = (0, parse_1.parse)(core.getInput('data'));
-        const keys = [...dataMap.keys()];
-        const client = new client_ssm_1.SSMClient({});
-        const { Parameters, InvalidParameters } = await client.send(new client_ssm_1.GetParametersCommand({
-            Names: keys,
-            WithDecryption: true,
-        }));
-        if (!Parameters || !InvalidParameters) {
-            throw Error('Parameters or InvalidParameters is undefined');
-        }
-        if (InvalidParameters.length > 0 || Parameters.length !== keys.length) {
-            throw new Error(`Some parameters are invalid: ${InvalidParameters.toString()}`);
-        }
-        Parameters.forEach(({ Name: key, Value: value }) => {
-            if (!key || !value) {
-                throw Error('Parameter name or value is empty.');
-            }
-            const envVar = dataMap.get(key)?.toUpperCase(); // Always exists
-            core.setSecret(value);
-            core.exportVariable(envVar, value);
-            core.info(`Set ${envVar} as an environment variable.`);
-        });
-    }
-    catch (error) {
-        if (error instanceof Error) {
-            core.setFailed(error.message);
-        }
-    }
-}
-void run();
-
-
-/***/ }),
-
-/***/ 94043:
-/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.parse = void 0;
-const js_yaml_1 = __nccwpck_require__(82235);
-const zod_1 = __nccwpck_require__(82107);
-const dataSchema = zod_1.z.array(zod_1.z.object({
-    key: zod_1.z.string().min(1),
-    name: zod_1.z.string().min(1),
-}));
-const parse = (value) => {
-    const data = dataSchema.parse((0, js_yaml_1.load)(value));
-    return new Map(data.map(d => [d.key, d.name]));
-};
-exports.parse = parse;
-
-
-/***/ }),
-
 /***/ 97980:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -56995,6 +56895,106 @@ exports.NEVER = parseUtil_1.INVALID;
 
 /***/ }),
 
+/***/ 396:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const core = __importStar(__nccwpck_require__(66618));
+const client_ssm_1 = __nccwpck_require__(21686);
+const parse_1 = __nccwpck_require__(53614);
+async function run() {
+    try {
+        const dataMap = (0, parse_1.parse)(core.getInput('data'));
+        const keys = [...dataMap.keys()];
+        const client = new client_ssm_1.SSMClient({});
+        const { Parameters, InvalidParameters } = await client.send(new client_ssm_1.GetParametersCommand({
+            Names: keys,
+            WithDecryption: true,
+        }));
+        if (!Parameters || !InvalidParameters) {
+            throw Error('Parameters or InvalidParameters is undefined');
+        }
+        if (InvalidParameters.length > 0 || Parameters.length !== keys.length) {
+            throw new Error(`Some parameters are invalid: ${InvalidParameters.toString()}`);
+        }
+        Parameters.forEach(({ Name: key, Value: value }) => {
+            if (!key || !value) {
+                throw Error('Parameter name or value is empty.');
+            }
+            const envVar = dataMap.get(key)?.toUpperCase(); // Always exists
+            core.setSecret(value);
+            core.exportVariable(envVar, value);
+            core.info(`Set ${envVar} as an environment variable.`);
+        });
+    }
+    catch (error) {
+        if (error instanceof Error) {
+            core.setFailed(error.message);
+        }
+    }
+}
+void run();
+
+
+/***/ }),
+
+/***/ 53614:
+/***/ ((__unused_webpack_module, exports, __nccwpck_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.parse = void 0;
+const js_yaml_1 = __nccwpck_require__(82235);
+const zod_1 = __nccwpck_require__(82107);
+const dataSchema = zod_1.z.array(zod_1.z.object({
+    key: zod_1.z.string().min(1),
+    name: zod_1.z.string().min(1),
+}));
+const parse = (value) => {
+    const data = dataSchema.parse((0, js_yaml_1.load)(value));
+    return new Map(data.map(d => [d.key, d.name]));
+};
+exports.parse = parse;
+
+
+/***/ }),
+
 /***/ 36200:
 /***/ ((module) => {
 
@@ -57213,7 +57213,7 @@ module.exports = /*#__PURE__*/JSON.parse('{"version":"1.1","partitions":[{"id":"
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __nccwpck_require__(55503);
+/******/ 	var __webpack_exports__ = __nccwpck_require__(396);
 /******/ 	module.exports = __webpack_exports__;
 /******/ 	
 /******/ })()
