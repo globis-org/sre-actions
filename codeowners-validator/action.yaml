@@ -1,6 +1,6 @@
 name: sre-actions/codeowners-validator
 description:
-author: sys-gdp
+author: globis-org
 inputs:
   token:
     description: GitHub Token

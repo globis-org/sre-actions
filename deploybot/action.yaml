@@ -1,6 +1,6 @@
 name: sre-actions/deploybot
 description: Notify workflow status
-author: sys-gdp
+author: globis-org
 inputs:
   type:
     description: Job type (docker or spa or ansible)

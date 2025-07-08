@@ -1,6 +1,6 @@
 name: sre-actions/manifest-analyzer
 description: Analyze kubernetes manifests
-author: sys-gdp
+author: globis-org
 inputs:
   base-dir:
     description: Base directory to analyze

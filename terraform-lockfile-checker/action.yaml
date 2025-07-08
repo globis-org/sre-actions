@@ -1,6 +1,6 @@
 name: sre-actions/terraform-lockfile-checker
 description: Check if Terraform lockfile is committed
-author: sys-gdp
+author: globis-org
 inputs:
   pull-request-number:
     description: Pull request number
