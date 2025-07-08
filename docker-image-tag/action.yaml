@@ -1,6 +1,6 @@
 name: sre-actions/docker-image-tag
 description: Generate docker image tag
-author: sys-gdp
+author: globis-org
 inputs:
   env:
     description: Environment value for docker image tag
