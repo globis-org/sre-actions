@@ -11,6 +11,14 @@ inputs:
   k8s-version:
     description: Kubernetes version
     required: true
+  artifact-name:
+    description: Name of the artifact to upload (if specified, results will be uploaded)
+    required: false
+    default: ''
+  artifact-retention-days:
+    description: Number of days to retain the artifact
+    required: false
+    default: '7'
 
 runs:
   using: composite
@@ -54,3 +62,12 @@ runs:
           const lint = await fs.readFile('${{ steps.lint.outputs.file }}', 'utf8');
           await core.summary.addRaw(dyff).addEOL().addRaw(lint).write();
       if: always()
+
+    - uses: actions/upload-artifact@50769540e7f4bd5e21e526ee35c689e35e0d6874 # v4.6.2
+      with:
+        name: ${{ inputs.artifact-name }}
+        path: |
+          ${{ steps.dyff.outputs.file }}
+          ${{ steps.lint.outputs.file }}
+        retention-days: ${{ inputs.artifact-retention-days }}
+      if: always() && inputs.artifact-name != ''
