@@ -23,9 +23,9 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: jdx/mise-action@v2
-      with:
-        working_directory: ${{ github.action_path }}
+    - uses: jdx/mise-action@v2.3.1
+      env:
+        MISE_GLOBAL_CONFIG_FILE: ${{ github.action_path }}/mise.toml
 
     - id: kustomize
       run: ${{ github.action_path }}/kustomize.sh
@@ -33,6 +33,7 @@ runs:
       env:
         BASE_DIR: ${{ inputs.base-dir }}
         HEAD_DIR: ${{ inputs.head-dir }}
+        MISE_GLOBAL_CONFIG_FILE: ${{ github.action_path }}/mise.toml
 
     - id: dyff
       run: ${{ github.action_path }}/dyff.sh
@@ -40,6 +41,7 @@ runs:
       env:
         BASE_DIR: ${{ inputs.base-dir }}
         HEAD_DIR: ${{ inputs.head-dir }}
+        MISE_GLOBAL_CONFIG_FILE: ${{ github.action_path }}/mise.toml
 
     - id: lint
       run: ${{ github.action_path }}/lint.sh
@@ -48,6 +50,7 @@ runs:
         BASE_DIR: ${{ inputs.base-dir }}
         HEAD_DIR: ${{ inputs.head-dir }}
         K8S_VERSION: ${{ inputs.k8s-version }}
+        MISE_GLOBAL_CONFIG_FILE: ${{ github.action_path }}/mise.toml
 
     - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
       with:
