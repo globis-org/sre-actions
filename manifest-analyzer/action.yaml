@@ -23,9 +23,9 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: asdf-vm/actions/install@1902764435ca0dd2f3388eea723a4f92a4eb8302 # v4.0.0
+    - uses: jdx/mise-action@v2
       with:
-        before_install: pwd; ls -la; cd ${{ github.action_path }}
+        working_directory: ${{ github.action_path }}
 
     - id: kustomize
       run: ${{ github.action_path }}/kustomize.sh
