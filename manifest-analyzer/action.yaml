@@ -23,14 +23,9 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: asdf-vm/actions/install@05e0d2ed97b598bfce82fd30daf324ae0c4570e6 # v3.0.2
-      with:
-        tool_versions: |
-          kustomize 5.2.1 # Argo CD v2.11.3
-          kube-score 1.18.0
-          kubeconform 0.6.7
-          pluto 5.20.2
-          dyff 1.9.0
+    - uses: asdf-vm/actions/install@1902764435ca0dd2f3388eea723a4f92a4eb8302 # v4.0.0
+      env:
+        ASDF_TOOL_VERSIONS_FILENAME: ${{ github.action_path }}/.tool-versions
 
     - id: kustomize
       run: ${{ github.action_path }}/kustomize.sh
@@ -38,6 +33,7 @@ runs:
       env:
         BASE_DIR: ${{ inputs.base-dir }}
         HEAD_DIR: ${{ inputs.head-dir }}
+        ASDF_TOOL_VERSIONS_FILENAME: ${{ github.action_path }}/.tool-versions
 
     - id: dyff
       run: ${{ github.action_path }}/dyff.sh
@@ -45,6 +41,7 @@ runs:
       env:
         BASE_DIR: ${{ inputs.base-dir }}
         HEAD_DIR: ${{ inputs.head-dir }}
+        ASDF_TOOL_VERSIONS_FILENAME: ${{ github.action_path }}/.tool-versions
 
     - id: lint
       run: ${{ github.action_path }}/lint.sh
@@ -53,6 +50,7 @@ runs:
         BASE_DIR: ${{ inputs.base-dir }}
         HEAD_DIR: ${{ inputs.head-dir }}
         K8S_VERSION: ${{ inputs.k8s-version }}
+        ASDF_TOOL_VERSIONS_FILENAME: ${{ github.action_path }}/.tool-versions
 
     - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
       with:
