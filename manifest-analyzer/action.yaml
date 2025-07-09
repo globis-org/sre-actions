@@ -23,7 +23,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: jdx/mise-action@v2.3.1
+    - uses: jdx/mise-action@5cb1df66ed5e1fb3c670ea0b62fd17a76979826a # v2.3.1
       env:
         MISE_GLOBAL_CONFIG_FILE: ${{ github.action_path }}/mise.toml
 
