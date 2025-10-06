@@ -1,0 +1,85 @@
+name: Wait for Atlantis Plan
+description: Wait for atlantis/plan check to complete before proceeding
+inputs:
+  check-name:
+    description: 'Name of the check to wait for'
+    required: false
+    default: 'atlantis/plan'
+  max-wait-time:
+    description: 'Maximum wait time in minutes'
+    required: false
+    default: '60'
+  poll-interval:
+    description: 'Polling interval in seconds'
+    required: false
+    default: '10'
+
+runs:
+  using: composite
+  steps:
+    - name: Wait for atlantis/plan
+      uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+      with:
+        script: |
+          const checkName = '${{ inputs.check-name }}';
+          const maxWaitTime = ${{ inputs.max-wait-time }} * 60 * 1000; // 分をミリ秒に変換
+          const pollInterval = ${{ inputs.poll-interval }} * 1000; // 秒をミリ秒に変換
+          const startTime = Date.now();
+
+          console.log(`Waiting for check: ${checkName}`);
+
+          // Pull Requestコンテキストの存在確認
+          if (!context.payload.pull_request) {
+            throw new Error('This action can only be used in pull_request events');
+          }
+
+          while (true) {
+            // タイムアウトチェック
+            if (Date.now() - startTime >= maxWaitTime) {
+              throw new Error(`Timeout waiting for check: ${checkName}`);
+            }
+
+            // Status API でコミットステータスを取得
+            const { data: statuses } = await github.rest.repos.listCommitStatusesForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.payload.pull_request.head.sha,
+            });
+
+            // デバッグ用：全結果をログ出力
+            console.log(`Found ${statuses.length} commit statuses:`);
+            statuses.forEach(status => {
+              console.log(`  - Status: ${status.context}: state=${status.state}, description=${status.description}`);
+            });
+
+            // Status API でターゲットを検索
+            const targetStatus = statuses.find(status => status.context === checkName);
+            if (!targetStatus) {
+              console.log(`${checkName} not found in Status API`);
+              // sleep してから次のポーリングへ
+              await new Promise(resolve => setTimeout(resolve, pollInterval));
+              continue;
+            }
+
+            // state の取りうる値: pending, success, failure, error
+            switch (targetStatus.state) {
+              case 'success':
+                console.log(`${checkName} completed successfully`);
+                return; // 正常完了、ループを抜けて次のステップへ
+              case 'failure':
+                console.log(`${checkName} completed with failure`);
+                return; // 失敗完了、ループを抜けて次のステップへ
+              case 'error':
+                console.log(`${checkName} completed with error`);
+                return; // エラー完了、ループを抜けて次のステップへ
+              case 'pending':
+                console.log(`${checkName} is still pending, continuing to wait...`);
+                break; // switch を抜ける
+              default:
+                console.log(`${checkName} has unexpected state: ${targetStatus.state}`);
+                break; // switch を抜ける
+            }
+
+            // pending または未知の状態の場合、sleep してから次のポーリングへ
+            await new Promise(resolve => setTimeout(resolve, pollInterval));
+          }
