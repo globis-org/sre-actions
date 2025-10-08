@@ -1,10 +1,9 @@
-name: Wait for Atlantis Plan
-description: Wait for atlantis/plan check to complete before proceeding
+name: Wait for Commit Status
+description: Wait for a specific commit status check to complete before proceeding
 inputs:
   check-name:
-    description: 'Name of the check to wait for'
-    required: false
-    default: 'atlantis/plan'
+    description: 'Name of the commit status check to wait for (e.g., atlantis/plan, ci/test)'
+    required: true
   max-wait-time:
     description: 'Maximum wait time in seconds'
     required: false
@@ -25,14 +24,14 @@ outputs:
   description:
     description: 'Description of the check status'
     value: ${{ steps.wait.outputs.description }}
-  timed_out:
+  timed-out:
     description: 'Whether the wait timed out (true/false)'
-    value: ${{ steps.wait.outputs.timed_out }}
+    value: ${{ steps.wait.outputs.timed-out }}
 
 runs:
   using: composite
   steps:
-    - name: Wait for atlantis/plan
+    - name: Wait for commit status
       id: wait
       uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
       with:
@@ -43,7 +42,8 @@ runs:
           const failOnTimeout = '${{ inputs.fail-on-timeout }}' === 'true';
           const startTime = Date.now();
 
-          console.log(`Waiting for check: ${checkName}`);
+          console.log(`Waiting for commit status check: ${checkName}`);
+          console.log(`Max wait time: ${maxWaitTime / 1000}s, Poll interval: ${pollInterval / 1000}s`);
 
           // Pull Requestコンテキストの存在確認
           if (!context.payload.pull_request) {
@@ -53,13 +53,13 @@ runs:
           // output の初期値を設定
           core.setOutput('status', 'unknown');
           core.setOutput('description', '');
-          core.setOutput('timed_out', 'false');
+          core.setOutput('timed-out', 'false');
 
           while (true) {
             // タイムアウトチェック
             if (Date.now() - startTime >= maxWaitTime) {
               const lastStatus = core.getOutput('status');
-              core.setOutput('timed_out', 'true');
+              core.setOutput('timed-out', 'true');
               console.log(`Timeout waiting for check: ${checkName} (last status: ${lastStatus})`);
               if (failOnTimeout) {
                 throw new Error(`Timeout waiting for check: ${checkName} (last status: ${lastStatus})`);
@@ -77,14 +77,14 @@ runs:
             // デバッグ用：全結果をログ出力
             console.log(`Found ${statuses.length} commit statuses:`);
             statuses.forEach(status => {
-              console.log(`  - Status: ${status.context}: state=${status.state}, description=${status.description}`);
+              console.log(`  - ${status.context}: state=${status.state}, description=${status.description}`);
             });
 
             // Status API でターゲットを検索
             // API レスポンスは逆時系列順（最新が最初）なので、最初にマッチしたものが最新
             const targetStatus = statuses.find(status => status.context === checkName);
             if (!targetStatus) {
-              console.log(`${checkName} not found in Status API`);
+              console.log(`${checkName} not found in commit statuses`);
               // output を設定（not found）
               core.setOutput('status', 'not_found');
               core.setOutput('description', 'Check not found in commit statuses');
@@ -100,16 +100,16 @@ runs:
             // state の取りうる値: pending, success, failure, error
             switch (targetStatus.state) {
               case 'success':
-                console.log(`${checkName} completed successfully`);
+                console.log(`✓ ${checkName} completed successfully`);
                 return; // 正常完了、ループを抜けて次のステップへ
               case 'failure':
-                console.log(`${checkName} completed with failure`);
+                console.log(`✗ ${checkName} completed with failure`);
                 return; // 失敗完了、ループを抜けて次のステップへ
               case 'error':
-                console.log(`${checkName} completed with error`);
+                console.log(`✗ ${checkName} completed with error`);
                 return; // エラー完了、ループを抜けて次のステップへ
               case 'pending':
-                console.log(`${checkName} is still pending, continuing to wait...`);
+                console.log(`⏳ ${checkName} is still pending, continuing to wait...`);
                 break; // switch を抜ける
               default:
                 console.log(`${checkName} has unexpected state: ${targetStatus.state}`);
