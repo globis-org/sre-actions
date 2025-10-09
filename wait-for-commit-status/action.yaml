@@ -1,0 +1,121 @@
+name: Wait for Commit Status
+description: Wait for a specific commit status check to complete before proceeding
+inputs:
+  check-name:
+    description: 'Name of the commit status check to wait for (e.g., atlantis/plan, ci/test)'
+    required: true
+  max-wait-time:
+    description: 'Maximum wait time in seconds'
+    required: false
+    default: '3600'
+  poll-interval:
+    description: 'Polling interval in seconds'
+    required: false
+    default: '10'
+  fail-on-timeout:
+    description: 'Whether to fail the action when timeout occurs'
+    required: false
+    default: 'true'
+
+outputs:
+  status:
+    description: 'Final status of the check (success, failure, error, pending, not_found, or unknown)'
+    value: ${{ steps.wait.outputs.status }}
+  description:
+    description: 'Description of the check status'
+    value: ${{ steps.wait.outputs.description }}
+  timed-out:
+    description: 'Whether the wait timed out (true/false)'
+    value: ${{ steps.wait.outputs.timed-out }}
+
+runs:
+  using: composite
+  steps:
+    - name: Wait for commit status
+      id: wait
+      uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+      with:
+        script: |
+          const checkName = '${{ inputs.check-name }}';
+          const maxWaitTime = ${{ inputs.max-wait-time }} * 1000; // 秒をミリ秒に変換
+          const pollInterval = ${{ inputs.poll-interval }} * 1000; // 秒をミリ秒に変換
+          const failOnTimeout = '${{ inputs.fail-on-timeout }}' === 'true';
+          const startTime = Date.now();
+
+          console.log(`Waiting for commit status check: ${checkName}`);
+          console.log(`Max wait time: ${maxWaitTime / 1000}s, Poll interval: ${pollInterval / 1000}s`);
+
+          // Pull Requestコンテキストの存在確認
+          if (!context.payload.pull_request) {
+            throw new Error('This action can only be used in pull_request events');
+          }
+
+          // output の初期値を設定
+          core.setOutput('status', 'unknown');
+          core.setOutput('description', '');
+          core.setOutput('timed-out', 'false');
+
+          while (true) {
+            // タイムアウトチェック
+            if (Date.now() - startTime >= maxWaitTime) {
+              const lastStatus = core.getOutput('status');
+              core.setOutput('timed-out', 'true');
+              console.log(`Timeout waiting for check: ${checkName} (last status: ${lastStatus})`);
+              if (failOnTimeout) {
+                throw new Error(`Timeout waiting for check: ${checkName} (last status: ${lastStatus})`);
+              }
+              return; // タイムアウトだがエラーを投げずに終了
+            }
+
+            // Status API でコミットステータスを取得
+            const { data: statuses } = await github.rest.repos.listCommitStatusesForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.payload.pull_request.head.sha,
+            });
+
+            // デバッグ用：全結果をログ出力
+            console.log(`Found ${statuses.length} commit statuses:`);
+            statuses.forEach(status => {
+              console.log(`  - ${status.context}: state=${status.state}, description=${status.description}`);
+            });
+
+            // Status API でターゲットを検索
+            // API レスポンスは逆時系列順（最新が最初）なので、最初にマッチしたものが最新
+            const targetStatus = statuses.find(status => status.context === checkName);
+            if (!targetStatus) {
+              console.log(`${checkName} not found in commit statuses`);
+              // output を設定（not found）
+              core.setOutput('status', 'not_found');
+              core.setOutput('description', 'Check not found in commit statuses');
+              // sleep してから次のポーリングへ
+              await new Promise(resolve => setTimeout(resolve, pollInterval));
+              continue;
+            }
+
+            // output を設定（ポーリング中も常に最新の状態を反映）
+            core.setOutput('status', targetStatus.state);
+            core.setOutput('description', targetStatus.description || '');
+
+            // state の取りうる値: pending, success, failure, error
+            switch (targetStatus.state) {
+              case 'success':
+                console.log(`✓ ${checkName} completed successfully`);
+                return; // 正常完了、ループを抜けて次のステップへ
+              case 'failure':
+                console.log(`✗ ${checkName} completed with failure`);
+                return; // 失敗完了、ループを抜けて次のステップへ
+              case 'error':
+                console.log(`✗ ${checkName} completed with error`);
+                return; // エラー完了、ループを抜けて次のステップへ
+              case 'pending':
+                console.log(`⏳ ${checkName} is still pending, continuing to wait...`);
+                break; // switch を抜ける
+              default:
+                console.log(`${checkName} has unexpected state: ${targetStatus.state}`);
+                break; // switch を抜ける
+            }
+
+            // pending または未知の状態の場合、sleep してから次のポーリングへ
+            await new Promise(resolve => setTimeout(resolve, pollInterval));
+          }
