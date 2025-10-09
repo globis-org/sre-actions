@@ -51,18 +51,19 @@ runs:
           }
 
           // output の初期値を設定
-          core.setOutput('status', 'unknown');
-          core.setOutput('description', '');
+          let currentStatus = 'unknown';
+          let currentDescription = '';
+          core.setOutput('status', currentStatus);
+          core.setOutput('description', currentDescription);
           core.setOutput('timed-out', 'false');
 
           while (true) {
             // タイムアウトチェック
             if (Date.now() - startTime >= maxWaitTime) {
-              const lastStatus = core.getOutput('status');
               core.setOutput('timed-out', 'true');
-              console.log(`Timeout waiting for check: ${checkName} (last status: ${lastStatus})`);
+              console.log(`Timeout waiting for check: ${checkName} (last status: ${currentStatus})`);
               if (failOnTimeout) {
-                throw new Error(`Timeout waiting for check: ${checkName} (last status: ${lastStatus})`);
+                throw new Error(`Timeout waiting for check: ${checkName} (last status: ${currentStatus})`);
               }
               return; // タイムアウトだがエラーを投げずに終了
             }
@@ -86,16 +87,20 @@ runs:
             if (!targetStatus) {
               console.log(`${checkName} not found in commit statuses`);
               // output を設定（not found）
-              core.setOutput('status', 'not_found');
-              core.setOutput('description', 'Check not found in commit statuses');
+              currentStatus = 'not_found';
+              currentDescription = 'Check not found in commit statuses';
+              core.setOutput('status', currentStatus);
+              core.setOutput('description', currentDescription);
               // sleep してから次のポーリングへ
               await new Promise(resolve => setTimeout(resolve, pollInterval));
               continue;
             }
 
             // output を設定（ポーリング中も常に最新の状態を反映）
-            core.setOutput('status', targetStatus.state);
-            core.setOutput('description', targetStatus.description || '');
+            currentStatus = targetStatus.state;
+            currentDescription = targetStatus.description || '';
+            core.setOutput('status', currentStatus);
+            core.setOutput('description', currentDescription);
 
             // state の取りうる値: pending, success, failure, error
             switch (targetStatus.state) {
