@@ -31045,6 +31045,30 @@ exports.listUniqueOwners = listUniqueOwners;
 
 /***/ }),
 
+/***/ 4212:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.collectApprovers = exports.listAllReviews = void 0;
+const listAllReviews = async (octokit, params) => {
+    // GitHub REST API は per_page のデフォルトが 30 かつ 1 ページ目のみの返却なので
+    // ページネーションを明示指定して全レビューを回収する。
+    return octokit.paginate(octokit.rest.pulls.listReviews, {
+        ...params,
+        per_page: 100,
+    });
+};
+exports.listAllReviews = listAllReviews;
+const collectApprovers = (reviews) => reviews
+    .filter(review => review.state === 'APPROVED')
+    .flatMap(review => review.user?.login ?? []);
+exports.collectApprovers = collectApprovers;
+
+
+/***/ }),
+
 /***/ 4839:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -31088,6 +31112,7 @@ exports.validateCodeOwners = void 0;
 const core = __importStar(__nccwpck_require__(8992));
 const github_1 = __nccwpck_require__(8576);
 const parse_1 = __nccwpck_require__(3614);
+const reviews_1 = __nccwpck_require__(4212);
 const CommitContext = 'CODEOWNERS Validator';
 const targetEvents = ['pull_request', 'pull_request_review', 'merge_group'];
 const validateCodeOwners = async (inputs) => {
@@ -31141,14 +31166,13 @@ const validateCodeOwners = async (inputs) => {
     });
     const requiredUsers = await Promise.all(requiredUsersPromise).then(members => members.flat());
     core.info(`Required codeowners user: ${requiredUsers.join(', ')}`);
-    const { data: reviews } = await octokit.rest.pulls.listReviews({
+    const reviews = await (0, reviews_1.listAllReviews)(octokit, {
         owner: github_1.context.repo.owner,
         repo: github_1.context.repo.repo,
         pull_number: github_1.context.payload.pull_request.number,
     });
-    const approvers = reviews
-        .filter(review => review.state === 'APPROVED')
-        .flatMap(review => review.user?.login ?? []);
+    core.info(`Fetched ${reviews.length} reviews for this PR.`);
+    const approvers = (0, reviews_1.collectApprovers)(reviews);
     core.info(`Approvers: ${approvers.join(', ')}`);
     const approvedOwners = approvers.filter(approver => requiredUsers.includes(approver));
     const sha = github_1.context.payload.pull_request.head.sha;
