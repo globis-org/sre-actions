@@ -1,4 +1,4 @@
-import { collectApprovers, listAllReviews } from '../reviews'
+import { collectApprovers, listAllReviews } from '../src/reviews'
 
 type ListReviewsParams = Parameters<typeof listAllReviews>[1]
 type OctokitListReviewsClient = Parameters<typeof listAllReviews>[0]
