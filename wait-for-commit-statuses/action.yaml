@@ -39,7 +39,7 @@ runs:
       uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
       with:
         script: |
-          const contextNamesInput = '${{ inputs.context-names }}';
+          const contextNamesInput = `${{ inputs.context-names }}`;
           const maxWaitTime = ${{ inputs.max-wait-time }} * 1000; // 秒をミリ秒に変換
           const pollInterval = ${{ inputs.poll-interval }} * 1000; // 秒をミリ秒に変換
           const failOnTimeout = '${{ inputs.fail-on-timeout }}' === 'true';
