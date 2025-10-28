@@ -1,0 +1,167 @@
+name: Wait for Commit Statuses
+description: Wait for one or more commit status checks to complete before proceeding
+inputs:
+  context-names:
+    description: 'Commit status context names to wait for, comma or newline-separated (e.g., "atlantis/plan, ci/test" or multiline format)'
+    required: true
+  max-wait-time:
+    description: 'Maximum wait time in seconds'
+    required: false
+    default: '3600'
+  poll-interval:
+    description: 'Polling interval in seconds'
+    required: false
+    default: '10'
+  fail-on-timeout:
+    description: 'Whether to fail the action when timeout occurs'
+    required: false
+    default: 'true'
+
+outputs:
+  status:
+    description: 'Final combined status (success, failure, or pending)'
+    value: ${{ steps.wait.outputs.status }}
+  pending-count:
+    description: 'Number of pending statuses'
+    value: ${{ steps.wait.outputs.pending-count }}
+  failed-count:
+    description: 'Number of failed statuses'
+    value: ${{ steps.wait.outputs.failed-count }}
+  succeeded-count:
+    description: 'Number of succeeded statuses'
+    value: ${{ steps.wait.outputs.succeeded-count }}
+
+runs:
+  using: composite
+  steps:
+    - name: Wait for commit statuses
+      id: wait
+      uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+      with:
+        script: |
+          const contextNamesInput = '${{ inputs.context-names }}';
+          const maxWaitTime = ${{ inputs.max-wait-time }} * 1000; // 秒をミリ秒に変換
+          const pollInterval = ${{ inputs.poll-interval }} * 1000; // 秒をミリ秒に変換
+          const failOnTimeout = '${{ inputs.fail-on-timeout }}' === 'true';
+          const startTime = Date.now();
+
+          // カンマ区切りまたは改行区切りの文字列をパースして配列に変換
+          // 1. まず改行で分割
+          // 2. 各行でカンマ区切りがあればさらに分割
+          // 3. 空白を除去し、空の要素を除外
+          const contextNames = contextNamesInput
+            .split(/\r?\n/)
+            .flatMap(line => line.split(','))
+            .map(name => name.trim())
+            .filter(name => name.length > 0);
+
+          console.log(`Waiting for commit statuses: ${contextNames.join(', ')}`);
+          console.log(`Max wait time: ${maxWaitTime / 1000}s, Poll interval: ${pollInterval / 1000}s`);
+
+          // Pull Requestコンテキストの存在確認
+          if (!context.payload.pull_request) {
+            throw new Error('This action can only be used in pull_request events');
+          }
+
+          // output の初期値を設定
+          core.setOutput('status', 'pending');
+          core.setOutput('pending-count', '0');
+          core.setOutput('failed-count', '0');
+          core.setOutput('succeeded-count', '0');
+
+          while (true) {
+            // タイムアウトチェック
+            if (Date.now() - startTime >= maxWaitTime) {
+              console.log('Timeout waiting for commit statuses');
+              if (failOnTimeout) {
+                throw new Error('Timeout waiting for commit statuses');
+              }
+              return; // タイムアウトだがエラーを投げずに終了
+            }
+
+            // Status API でコミットステータスを取得
+            const { data: statuses } = await github.rest.repos.listCommitStatusesForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.payload.pull_request.head.sha,
+            });
+
+            // デバッグ用：全結果をログ出力
+            console.log(`Found ${statuses.length} commit statuses`);
+
+            // コンテキストごとの最新ステータスを取得
+            const commitStatuses = new Map();
+            for (const status of statuses) {
+              if (contextNames.includes(status.context)) {
+                if (!commitStatuses.has(status.context)) {
+                  commitStatuses.set(status.context, status);
+                }
+              }
+            }
+
+            console.log(`Found ${commitStatuses.size}/${contextNames.length} statuses`);
+            for (const [context, status] of commitStatuses) {
+              console.log(`  - ${context}: ${status.state} - ${status.description}`);
+            }
+
+            // GitHub公式のcombined statusに従って判定:
+            // https://docs.github.com/ja/rest/commits/statuses?apiVersion=2022-11-28#get-the-combined-status-for-a-specific-reference
+            // - failure: いずれかが error または failure
+            // - pending: ステータスが存在しないか、いずれかが pending
+            // - success: すべての最新ステータスが success
+
+            // ステータスが存在しない場合は pending
+            if (commitStatuses.size < contextNames.length) {
+              const missingContexts = contextNames.filter(name => !commitStatuses.has(name));
+              console.log(`Not all statuses found yet. Missing: ${missingContexts.join(', ')}`);
+              core.setOutput('status', 'pending');
+              await new Promise(resolve => setTimeout(resolve, pollInterval));
+              continue;
+            }
+
+            // すべてのコミットステータスを分類
+            const pending = [];
+            const failed = [];
+            const succeeded = [];
+
+            for (const [context, status] of commitStatuses) {
+              if (status.state === 'pending') {
+                pending.push({ context, description: status.description });
+              } else if (status.state === 'failure' || status.state === 'error') {
+                failed.push({ context, description: status.description, url: status.target_url });
+              } else if (status.state === 'success') {
+                succeeded.push({ context, description: status.description, url: status.target_url });
+              }
+            }
+
+            // カウントを出力
+            core.setOutput('pending-count', pending.length.toString());
+            core.setOutput('failed-count', failed.length.toString());
+            core.setOutput('succeeded-count', succeeded.length.toString());
+
+            // Combined status を判定
+            let combinedStatus;
+            if (failed.length > 0) {
+              // いずれかが error または failure の場合
+              combinedStatus = 'failure';
+              console.log(`✗ Combined status: failure (${failed.map(f => f.context).join(', ')})`);
+            } else if (pending.length > 0) {
+              // いずれかが pending の場合
+              combinedStatus = 'pending';
+              console.log(`⏳ Combined status: pending (${pending.map(p => p.context).join(', ')})`);
+            } else {
+              // すべてが success の場合
+              combinedStatus = 'success';
+              console.log('✓ Combined status: success');
+            }
+
+            core.setOutput('status', combinedStatus);
+
+            // success または failure の場合は完了
+            if (combinedStatus === 'success' || combinedStatus === 'failure') {
+              return;
+            }
+
+            // pending の場合は待機を続ける
+            await new Promise(resolve => setTimeout(resolve, pollInterval));
+          }
