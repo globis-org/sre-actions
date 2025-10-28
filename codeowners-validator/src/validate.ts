@@ -3,6 +3,7 @@ import { context, getOctokit } from '@actions/github'
 import { WebhookPayload } from '@actions/github/lib/interfaces'
 
 import { parseCodeOwners, getFileOwners, listUniqueOwners } from './parse'
+import { collectApprovers, listAllReviews } from './reviews'
 
 type Inputs = {
   token: string
@@ -88,14 +89,13 @@ export const validateCodeOwners = async (inputs: Inputs) => {
   )
   core.info(`Required codeowners user: ${requiredUsers.join(', ')}`)
 
-  const { data: reviews } = await octokit.rest.pulls.listReviews({
+  const reviews = await listAllReviews(octokit, {
     owner: context.repo.owner,
     repo: context.repo.repo,
     pull_number: context.payload.pull_request.number,
   })
-  const approvers = reviews
-    .filter(review => review.state === 'APPROVED')
-    .flatMap(review => review.user?.login ?? [])
+  core.info(`Fetched ${reviews.length} reviews for this PR.`)
+  const approvers = collectApprovers(reviews)
   core.info(`Approvers: ${approvers.join(', ')}`)
 
   const approvedOwners = approvers.filter(approver =>
