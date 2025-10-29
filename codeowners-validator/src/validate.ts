@@ -88,10 +88,12 @@ export const validateCodeOwners = async (inputs: Inputs) => {
   )
   core.info(`Required codeowners user: ${requiredUsers.join(', ')}`)
 
-  const { data: reviews } = await octokit.rest.pulls.listReviews({
+  // GitHub REST API は per_page のデフォルトが 30 件なので、paginate で全件取得する。
+  const reviews = await octokit.paginate(octokit.rest.pulls.listReviews, {
     owner: context.repo.owner,
     repo: context.repo.repo,
     pull_number: context.payload.pull_request.number,
+    per_page: 100,
   })
   const approvers = reviews
     .filter(review => review.state === 'APPROVED')

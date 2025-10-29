@@ -31141,10 +31141,12 @@ const validateCodeOwners = async (inputs) => {
     });
     const requiredUsers = await Promise.all(requiredUsersPromise).then(members => members.flat());
     core.info(`Required codeowners user: ${requiredUsers.join(', ')}`);
-    const { data: reviews } = await octokit.rest.pulls.listReviews({
+    // GitHub REST API は per_page のデフォルトが 30 件なので、paginate で全件取得する。
+    const reviews = await octokit.paginate(octokit.rest.pulls.listReviews, {
         owner: github_1.context.repo.owner,
         repo: github_1.context.repo.repo,
         pull_number: github_1.context.payload.pull_request.number,
+        per_page: 100,
     });
     const approvers = reviews
         .filter(review => review.state === 'APPROVED')
