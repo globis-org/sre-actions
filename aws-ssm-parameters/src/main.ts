@@ -14,6 +14,9 @@ async function run(): Promise<void> {
     const allParameters: Parameter[] = []
     const allInvalidParameters: string[] = []
 
+    // 本来複数のパラメータを取ってくるにはpaginateGetParametersByPathを使った方がいいが、
+    // 現状のパラメータ側がそういう設計思想になっていない。
+    // 取得数がせいぜい10超程度なのでGetParametersCommandのループ処理で済ませる。
     for (let i = 0; i < keys.length; i += BATCH_SIZE) {
       const batch = keys.slice(i, i + BATCH_SIZE)
       const { Parameters, InvalidParameters } = await client.send(
