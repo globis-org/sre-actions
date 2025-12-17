@@ -1,5 +1,5 @@
 import * as core from '@actions/core'
-import { SSMClient, GetParametersCommand, Parameter } from '@aws-sdk/client-ssm'
+import { SSMClient, GetParametersCommand } from '@aws-sdk/client-ssm'
 
 import { parse } from './parse'
 
@@ -11,27 +11,27 @@ async function run(): Promise<void> {
     const keys = [...dataMap.keys()]
     const client = new SSMClient({})
 
-    const allParameters: Parameter[] = []
-    const allInvalidParameters: string[] = []
-
     // 本来複数のパラメータを取ってくるにはpaginateGetParametersByPathを使った方がいいが、
     // 現状のパラメータ側がそういう設計思想になっていない。
     // 取得数がせいぜい10超程度なのでGetParametersCommandのループ処理で済ませる。
+    const batches: string[][] = []
     for (let i = 0; i < keys.length; i += BATCH_SIZE) {
-      const batch = keys.slice(i, i + BATCH_SIZE)
-      const { Parameters, InvalidParameters } = await client.send(
-        new GetParametersCommand({
-          Names: batch,
-          WithDecryption: true,
-        })
-      )
-      if (Parameters) {
-        allParameters.push(...Parameters)
-      }
-      if (InvalidParameters) {
-        allInvalidParameters.push(...InvalidParameters)
-      }
+      batches.push(keys.slice(i, i + BATCH_SIZE))
     }
+
+    const results = await Promise.all(
+      batches.map(batch =>
+        client.send(
+          new GetParametersCommand({
+            Names: batch,
+            WithDecryption: true,
+          })
+        )
+      )
+    )
+
+    const allParameters = results.flatMap(r => r.Parameters ?? [])
+    const allInvalidParameters = results.flatMap(r => r.InvalidParameters ?? [])
 
     if (
       allInvalidParameters.length > 0 ||
