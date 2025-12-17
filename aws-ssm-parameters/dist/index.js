@@ -56937,22 +56937,30 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__nccwpck_require__(66618));
 const client_ssm_1 = __nccwpck_require__(21686);
 const parse_1 = __nccwpck_require__(53614);
+const BATCH_SIZE = 10;
 async function run() {
     try {
         const dataMap = (0, parse_1.parse)(core.getInput('data'));
         const keys = [...dataMap.keys()];
         const client = new client_ssm_1.SSMClient({});
-        const { Parameters, InvalidParameters } = await client.send(new client_ssm_1.GetParametersCommand({
-            Names: keys,
+        // 本来複数のパラメータを取ってくるにはpaginateGetParametersByPathを使った方がいいが、
+        // 現状のパラメータ側がそういう設計思想になっていない。
+        // 取得数がせいぜい10超程度なのでGetParametersCommandのループ処理で済ませる。
+        const batches = [];
+        for (let i = 0; i < keys.length; i += BATCH_SIZE) {
+            batches.push(keys.slice(i, i + BATCH_SIZE));
+        }
+        const results = await Promise.all(batches.map(batch => client.send(new client_ssm_1.GetParametersCommand({
+            Names: batch,
             WithDecryption: true,
-        }));
-        if (!Parameters || !InvalidParameters) {
-            throw Error('Parameters or InvalidParameters is undefined');
+        }))));
+        const allParameters = results.flatMap(r => r.Parameters ?? []);
+        const allInvalidParameters = results.flatMap(r => r.InvalidParameters ?? []);
+        if (allInvalidParameters.length > 0 ||
+            allParameters.length !== keys.length) {
+            throw new Error(`Some parameters are invalid: ${allInvalidParameters.toString()}`);
         }
-        if (InvalidParameters.length > 0 || Parameters.length !== keys.length) {
-            throw new Error(`Some parameters are invalid: ${InvalidParameters.toString()}`);
-        }
-        Parameters.forEach(({ Name: key, Value: value }) => {
+        allParameters.forEach(({ Name: key, Value: value }) => {
             if (!key || !value) {
                 throw Error('Parameter name or value is empty.');
             }

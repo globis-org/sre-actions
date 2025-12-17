@@ -3,27 +3,46 @@ import { SSMClient, GetParametersCommand } from '@aws-sdk/client-ssm'
 
 import { parse } from './parse'
 
+const BATCH_SIZE = 10
+
 async function run(): Promise<void> {
   try {
     const dataMap = parse(core.getInput('data'))
     const keys = [...dataMap.keys()]
     const client = new SSMClient({})
-    const { Parameters, InvalidParameters } = await client.send(
-      new GetParametersCommand({
-        Names: keys,
-        WithDecryption: true,
-      })
-    )
-    if (!Parameters || !InvalidParameters) {
-      throw Error('Parameters or InvalidParameters is undefined')
+
+    // 本来複数のパラメータを取ってくるにはpaginateGetParametersByPathを使った方がいいが、
+    // 現状のパラメータ側がそういう設計思想になっていない。
+    // 取得数がせいぜい10超程度なのでGetParametersCommandのループ処理で済ませる。
+    const batches: string[][] = []
+    for (let i = 0; i < keys.length; i += BATCH_SIZE) {
+      batches.push(keys.slice(i, i + BATCH_SIZE))
     }
-    if (InvalidParameters.length > 0 || Parameters.length !== keys.length) {
+
+    const results = await Promise.all(
+      batches.map(batch =>
+        client.send(
+          new GetParametersCommand({
+            Names: batch,
+            WithDecryption: true,
+          })
+        )
+      )
+    )
+
+    const allParameters = results.flatMap(r => r.Parameters ?? [])
+    const allInvalidParameters = results.flatMap(r => r.InvalidParameters ?? [])
+
+    if (
+      allInvalidParameters.length > 0 ||
+      allParameters.length !== keys.length
+    ) {
       throw new Error(
-        `Some parameters are invalid: ${InvalidParameters.toString()}`
+        `Some parameters are invalid: ${allInvalidParameters.toString()}`
       )
     }
 
-    Parameters.forEach(({ Name: key, Value: value }) => {
+    allParameters.forEach(({ Name: key, Value: value }) => {
       if (!key || !value) {
         throw Error('Parameter name or value is empty.')
       }
