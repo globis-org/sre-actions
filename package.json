@@ -6,12 +6,13 @@
   "engines": {
     "node": "20"
   },
+  "packageManager": "pnpm@10.27.0",
   "scripts": {
     "format": "prettier --write '**/*.{js,ts}'",
     "format-check": "prettier --check '**/*.{js,ts}'",
     "lint": "eslint **/*.ts",
     "test": "jest",
-    "all": "yarn format-check && yarn lint && yarn jest"
+    "all": "pnpm format-check && pnpm lint && pnpm test"
   },
   "repository": {
     "type": "git",
@@ -41,8 +42,5 @@
     "ts-jest": "29.3.2",
     "typescript": "5.8.3",
     "typescript-eslint": "8.31.1"
-  },
-  "workspaces": [
-    "*"
-  ]
+  }
 }
