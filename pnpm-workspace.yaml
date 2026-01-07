@@ -3,6 +3,8 @@ minimumReleaseAge: 10080 # 1 week
 packages:
   - '*'
 
+savePrefix: ''
+
 # preinstall/install/postinstall スクリプトの実行を許可するかどうか
 # デフォルトは false
 allowBuilds:

@@ -14,5 +14,8 @@
     "@aws-sdk/client-ssm": "3.205.0",
     "js-yaml": "4.1.0",
     "zod": "3.19.1"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "4.0.9"
   }
 }
