@@ -1,13 +1,13 @@
 {
   "name": "codeowners-validator",
   "version": "1.0.0",
-  "main": "dist/main.js",
-  "license": "MIT",
   "private": true,
+  "license": "MIT",
+  "main": "dist/main.js",
   "scripts": {
-    "type-check": "tsc --noEmit",
-    "package": "ncc build src/main.ts -o dist --source-map --license licenses.txt",
-    "all": "pnpm package"
+    "type-check": "tsc",
+    "package": "esbuild src/main.ts --bundle --platform=node --target=node20 --outdir=dist --sourcemap",
+    "all": "pnpm type-check && pnpm package"
   },
   "dependencies": {
     "@actions/core": "1.11.1",
