@@ -4,7 +4,7 @@
   "private": true,
   "main": "index.js",
   "engines": {
-    "node": "20"
+    "node": "24"
   },
   "packageManager": "pnpm@10.27.0",
   "scripts": {
@@ -27,7 +27,7 @@
   "license": "MIT",
   "devDependencies": {
     "@eslint/js": "9.25.1",
-    "@tsconfig/node20": "20.1.5",
+    "@tsconfig/node24": "24.0.3",
     "@tsconfig/strictest": "2.0.5",
     "@types/jest": "29.5.14",
     "@types/node": "22.15.3",

@@ -11,9 +11,9 @@ importers:
       '@eslint/js':
         specifier: 9.25.1
         version: 9.25.1
-      '@tsconfig/node20':
-        specifier: 20.1.5
-        version: 20.1.5
+      '@tsconfig/node24':
+        specifier: 24.0.3
+        version: 24.0.3
       '@tsconfig/strictest':
         specifier: 2.0.5
         version: 2.0.5
@@ -956,8 +956,8 @@ packages:
     resolution: {integrity: sha512-dv65crIgdh9ZYHrevLU6XFHTQwTyDmNqEqzuIrV+Vqe/vgiG6w37oex5ePDU1RGm2IJ90H8iOvHFvzdEO/vB+g==}
     engines: {node: '>= 12.13.0', npm: '>= 6.12.0'}
 
-  '@tsconfig/node20@20.1.5':
-    resolution: {integrity: sha512-Vm8e3WxDTqMGPU4GATF9keQAIy1Drd7bPwlgzKJnZtoOsTm1tduUTbDjg0W5qERvGuxPI2h9RbMufH0YdfBylA==}
+  '@tsconfig/node24@24.0.3':
+    resolution: {integrity: sha512-vcERKtKQKHgzt/vfS3Gjasd8SUI2a0WZXpgJURdJsMySpS5+ctgbPfuLj2z/W+w4lAfTWxoN4upKfu2WzIRYnw==}
 
   '@tsconfig/strictest@2.0.5':
     resolution: {integrity: sha512-ec4tjL2Rr0pkZ5hww65c+EEPYwxOi4Ryv+0MtjeaSQRJyq322Q27eOQiFbuNgw2hpL4hB1/W/HBGk3VKS43osg==}
@@ -3552,7 +3552,7 @@ snapshots:
     transitivePeerDependencies:
       - debug
 
-  '@tsconfig/node20@20.1.5': {}
+  '@tsconfig/node24@24.0.3': {}
 
   '@tsconfig/strictest@2.0.5': {}
 
