@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
-  "main": "lib/main.js",
+  "main": "dist/main.js",
   "scripts": {
-    "type-check": "tsc --noEmit",
-    "package": "ncc build src/main.ts -o dist --source-map --license licenses.txt",
-    "all": "pnpm package"
+    "type-check": "tsc",
+    "package": "esbuild src/main.ts --bundle --platform=node --target=node20 --outdir=dist --sourcemap",
+    "all": "pnpm type-check && pnpm package"
   },
   "dependencies": {
     "@actions/core": "1.10.0",
