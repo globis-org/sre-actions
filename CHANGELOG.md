@@ -1,8 +1,6 @@
 # Changelog
 
-## [v1.0.1](https://github.com/globis-org/sre-actions/compare/v1...v1.0.1) - 2026-01-09
-
-## [v1.0.0](https://github.com/globis-org/sre-actions/compare/v1.0.0...v1) - 2026-01-09
+## [v1.0.1](https://github.com/globis-org/sre-actions/compare/v1.0.0...v1.0.1) - 2026-01-09
 - feat: migrate node20 to node24 by @yukin01 in https://github.com/globis-org/sre-actions/pull/78
 - feat: add tagpr action by @yukin01 in https://github.com/globis-org/sre-actions/pull/79
 
