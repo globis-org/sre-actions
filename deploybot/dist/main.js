@@ -31157,9 +31157,9 @@ var require_ms = __commonJS({
   }
 });
 
-// ../node_modules/.pnpm/debug@4.4.0/node_modules/debug/src/common.js
+// ../node_modules/.pnpm/debug@4.4.3/node_modules/debug/src/common.js
 var require_common = __commonJS({
-  "../node_modules/.pnpm/debug@4.4.0/node_modules/debug/src/common.js"(exports2, module2) {
+  "../node_modules/.pnpm/debug@4.4.3/node_modules/debug/src/common.js"(exports2, module2) {
     function setup(env) {
       createDebug.debug = createDebug;
       createDebug.default = createDebug;
@@ -31260,7 +31260,7 @@ var require_common = __commonJS({
         createDebug.namespaces = namespaces;
         createDebug.names = [];
         createDebug.skips = [];
-        const split = (typeof namespaces === "string" ? namespaces : "").trim().replace(" ", ",").split(",").filter(Boolean);
+        const split = (typeof namespaces === "string" ? namespaces : "").trim().replace(/\s+/g, ",").split(",").filter(Boolean);
         for (const ns of split) {
           if (ns[0] === "-") {
             createDebug.skips.push(ns.slice(1));
@@ -31334,9 +31334,9 @@ var require_common = __commonJS({
   }
 });
 
-// ../node_modules/.pnpm/debug@4.4.0/node_modules/debug/src/browser.js
+// ../node_modules/.pnpm/debug@4.4.3/node_modules/debug/src/browser.js
 var require_browser = __commonJS({
-  "../node_modules/.pnpm/debug@4.4.0/node_modules/debug/src/browser.js"(exports2, module2) {
+  "../node_modules/.pnpm/debug@4.4.3/node_modules/debug/src/browser.js"(exports2, module2) {
     exports2.formatArgs = formatArgs;
     exports2.save = save;
     exports2.load = load2;
@@ -31478,7 +31478,7 @@ var require_browser = __commonJS({
     function load2() {
       let r;
       try {
-        r = exports2.storage.getItem("debug");
+        r = exports2.storage.getItem("debug") || exports2.storage.getItem("DEBUG");
       } catch (error) {
       }
       if (!r && typeof process !== "undefined" && "env" in process) {
@@ -31619,9 +31619,9 @@ var require_supports_color = __commonJS({
   }
 });
 
-// ../node_modules/.pnpm/debug@4.4.0/node_modules/debug/src/node.js
+// ../node_modules/.pnpm/debug@4.4.3/node_modules/debug/src/node.js
 var require_node = __commonJS({
-  "../node_modules/.pnpm/debug@4.4.0/node_modules/debug/src/node.js"(exports2, module2) {
+  "../node_modules/.pnpm/debug@4.4.3/node_modules/debug/src/node.js"(exports2, module2) {
     var tty = require("tty");
     var util = require("util");
     exports2.init = init;
@@ -31793,9 +31793,9 @@ var require_node = __commonJS({
   }
 });
 
-// ../node_modules/.pnpm/debug@4.4.0/node_modules/debug/src/index.js
+// ../node_modules/.pnpm/debug@4.4.3/node_modules/debug/src/index.js
 var require_src = __commonJS({
-  "../node_modules/.pnpm/debug@4.4.0/node_modules/debug/src/index.js"(exports2, module2) {
+  "../node_modules/.pnpm/debug@4.4.3/node_modules/debug/src/index.js"(exports2, module2) {
     if (typeof process === "undefined" || process.type === "renderer" || process.browser === true || process.__nwjs) {
       module2.exports = require_browser();
     } else {
