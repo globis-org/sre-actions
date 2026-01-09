@@ -1,0 +1,76 @@
+# Changelog
+
+## [v1.0.1](https://github.com/globis-org/sre-actions/compare/v1...v1.0.1) - 2026-01-09
+
+## [v1.0.0](https://github.com/globis-org/sre-actions/compare/v1.0.0...v1) - 2026-01-09
+- feat: migrate node20 to node24 by @yukin01 in https://github.com/globis-org/sre-actions/pull/78
+- feat: add tagpr action by @yukin01 in https://github.com/globis-org/sre-actions/pull/79
+
+## [v1.0.0](https://github.com/globis-org/sre-actions/commits/v1.0.0) - 2026-01-07
+- Develop by @yukin01 in https://github.com/globis-org/sre-actions/pull/2
+- Create LICENSE by @yukin01 in https://github.com/globis-org/sre-actions/pull/3
+- feat: migrate deploybot action from private repo by @yukin01 in https://github.com/globis-org/sre-actions/pull/4
+- feat: add docker-image-tag action by @yukin01 in https://github.com/globis-org/sre-actions/pull/5
+- Add run-codebuild composite action by @yukin01 in https://github.com/globis-org/sre-actions/pull/6
+- docker build 用の composite action 追加 by @yukin01 in https://github.com/globis-org/sre-actions/pull/7
+- fix: update expression to evaluate job status by @yukin01 in https://github.com/globis-org/sre-actions/pull/8
+- chore(deploybot): change default input by @yukin01 in https://github.com/globis-org/sre-actions/pull/9
+- refactor: prepare for empty parameter by @yukin01 in https://github.com/globis-org/sre-actions/pull/10
+- feat: add aws-ssm-parameter action by @yukin01 in https://github.com/globis-org/sre-actions/pull/11
+- Update deploybot (Deprecated 対応) by @chroju in https://github.com/globis-org/sre-actions/pull/12
+- Update docker-image-tag action by @yukin01 in https://github.com/globis-org/sre-actions/pull/13
+- feat: add release workflow by @yukin01 in https://github.com/globis-org/sre-actions/pull/14
+- chore: udpate ci by @yukin01 in https://github.com/globis-org/sre-actions/pull/15
+- refactor: README.md 整備と使っていない action の削除 by @yukin01 in https://github.com/globis-org/sre-actions/pull/16
+- refactor: CI 上でビルド結果をコミットする by @yukin01 in https://github.com/globis-org/sre-actions/pull/17
+- GitHub Actions を自動更新する by @yukin01 in https://github.com/globis-org/sre-actions/pull/18
+- Configure Renovate - abandoned by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/1
+- chore(deps): pin dependencies by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/22
+- chore(deps): update actions/checkout action to v3.5.2 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/23
+- feat: add lint-manifests action by @yukin01 in https://github.com/globis-org/sre-actions/pull/24
+- chore(deps): pin dependencies by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/26
+- feat: update kube-score options by @yukin01 in https://github.com/globis-org/sre-actions/pull/27
+- refactor: lint の結果を job summary で通知するように変更 by @yukin01 in https://github.com/globis-org/sre-actions/pull/29
+- lint-manifests アクションで pluto を実行する by @yukin01 in https://github.com/globis-org/sre-actions/pull/30
+- chore(deps): update asdf-vm/actions action to v2.2.0 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/31
+- feat: add manifest-analyzer action by @yukin01 in https://github.com/globis-org/sre-actions/pull/34
+- del: 使わなくなった action を削除する by @yukin01 in https://github.com/globis-org/sre-actions/pull/35
+- chore(deps): update github-actions (major) by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/33
+- chore: manifest-analyzer に関するドキュメントを追加 by @yukin01 in https://github.com/globis-org/sre-actions/pull/36
+- deprecatedになってたのでnode versionを上げる by @imaharu in https://github.com/globis-org/sre-actions/pull/38
+- chore: コミットハッシュで指定を促すようにREADME修正 by @imaharu in https://github.com/globis-org/sre-actions/pull/39
+- chore: update tool versions by @yukin01 in https://github.com/globis-org/sre-actions/pull/40
+- chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/37
+- feat(workflow): add new reusable workflow for terraform lock file by @yukin01 in https://github.com/globis-org/sre-actions/pull/42
+- chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/41
+- feat: add terraform-lockfile-checker action by @yukin01 in https://github.com/globis-org/sre-actions/pull/43
+- fix: grep を使って除外パターンを可変にする by @yukin01 in https://github.com/globis-org/sre-actions/pull/44
+- refactor: paths-filter を tj-action/changed-files に置き換える by @yukin01 in https://github.com/globis-org/sre-actions/pull/45
+- feat: add codeowners validator action by @yukin01 in https://github.com/globis-org/sre-actions/pull/47
+- chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/46
+- chore(deps): update tj-actions/changed-files action to v45.0.4 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/48
+- chore(deps): update tj-actions/changed-files action to v45.0.5 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/50
+- chore(deps): update tj-actions/changed-files action to v45.0.6 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/51
+- Update README.md by @yukin01 in https://github.com/globis-org/sre-actions/pull/54
+- chore(deps): update tj-actions/changed-files action to v46 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/53
+- chore(deps): update actions/setup-node action to v4.4.0 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/52
+- feat: eslint v9 の flat config に移行する by @yukin01 in https://github.com/globis-org/sre-actions/pull/55
+- feat: manifest-analyzerの解析結果をartifactに保存する機能を追加 by @yukin01 in https://github.com/globis-org/sre-actions/pull/58
+- feat: Add GitHub Pull Request template and standardize action files by @yukin01 in https://github.com/globis-org/sre-actions/pull/59
+- chore(deps): update actions/upload-artifact digest to ea165f8 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/60
+- feat: manifest-analyzerをasdfからmiseに移行し外部設定ファイルを使用 by @yukin01 in https://github.com/globis-org/sre-actions/pull/61
+- chore(deps): pin jdx/mise-action action to 5cb1df6 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/63
+- chore(deps): update jdx/mise-action action to v2.4.0 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/64
+- chore(deps): update jdx/mise-action action to v2.4.2 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/65
+- chore(deps): update jdx/mise-action action to v2.4.4 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/66
+- feat: wait-for-atlantis action を composite action として追加する by @yukin01 in https://github.com/globis-org/sre-actions/pull/69
+- fix: core.getOutput を変数による状態管理に修正 by @yukin01 in https://github.com/globis-org/sre-actions/pull/70
+- feat: add wait-for-commit-statuses action by @yukin01 in https://github.com/globis-org/sre-actions/pull/71
+- fix: テンプレートリテラルを使って複数行の input に対応する by @yukin01 in https://github.com/globis-org/sre-actions/pull/72
+- feat: CODEOWNERS Validatorでレビューをページネーション対応 by @matchan26 in https://github.com/globis-org/sre-actions/pull/73
+- chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/67
+- fix(aws-ssm-parameters): batch GetParameters requests to handle >10 params by @reiichii in https://github.com/globis-org/sre-actions/pull/75
+- refactor: yarn から pnpm に移行 by @yukin01 in https://github.com/globis-org/sre-actions/pull/76
+- chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/74
+- chore(deps): update github-actions (major) by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/68
+- refactor: バンドルツールを ncc から esbuild に移行 by @yukin01 in https://github.com/globis-org/sre-actions/pull/77
