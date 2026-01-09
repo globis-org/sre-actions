@@ -17,3 +17,17 @@ For stability and security reasons, we recommend pinning actions to a specific c
 ```
 
 Major version tags (`v1`, `v2`) are available but commit SHAs are preferred for production use.
+
+## Development
+
+### Build Artifacts
+
+You don't need to commit `dist/` build artifacts during development.
+
+[tagpr](https://github.com/Songmu/tagpr) automatically builds all actions and includes the artifacts when creating a release PR.
+
+```bash
+pnpm install
+pnpm all          # lint, format, test
+pnpm -r run all   # build each action (for local testing, no commit needed)
+```
