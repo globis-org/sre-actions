@@ -58,3 +58,4 @@
 	vPrefix = true
 	releaseBranch = main
 	versionFile = package.json
+	command = pnpm install --frozen-lockfile && pnpm -r run all

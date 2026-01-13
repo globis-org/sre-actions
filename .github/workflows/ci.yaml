@@ -25,20 +25,3 @@ jobs:
 
       - name: Test all actions
         run: pnpm all
-
-      - name: Build all actions
-        run: pnpm -r run all
-
-      - name: Set git config
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-      - name: Commit and push
-        run: |
-          git add -N . # 新規ファイルを含める
-          if ! git diff --exit-code --quiet; then
-            git add .
-            git commit -m "feat: build all actions"
-            git push
-          fi
