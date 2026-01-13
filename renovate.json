@@ -5,6 +5,7 @@
   ],
   "prConcurrentLimit": 10,
   "prHourlyLimit": 0,
+  "rangeStrategy": "pin",
   "enabledManagers": [
     "github-actions",
     "npm"
