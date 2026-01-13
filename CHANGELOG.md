@@ -1,5 +1,12 @@
 # Changelog
 
+## [v1.0.2](https://github.com/globis-org/sre-actions/compare/v1.0.1...v1.0.2) - 2026-01-13
+- chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/82
+- feat: tagpr PR作成時にactionsをビルドする by @yukin01 in https://github.com/globis-org/sre-actions/pull/81
+- 不要なワークフローの削除と依存関係の更新 by @yukin01 in https://github.com/globis-org/sre-actions/pull/84
+- chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/85
+- tagprをv1.11.1にアップデートして.github/release.yamlの認識問題を修正 by @yukin01 in https://github.com/globis-org/sre-actions/pull/86
+
 ## [v1.0.1](https://github.com/globis-org/sre-actions/compare/v1.0.0...v1.0.1) - 2026-01-09
 - feat: migrate node20 to node24 by @yukin01 in https://github.com/globis-org/sre-actions/pull/78
 - feat: add tagpr action by @yukin01 in https://github.com/globis-org/sre-actions/pull/79
