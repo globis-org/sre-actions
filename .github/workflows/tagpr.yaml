@@ -6,11 +6,19 @@ on:
 jobs:
   tagpr:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-      issues: read
     steps:
+    - name: Generate a token
+      id: app-token
+      uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2.2.1
+      with:
+        app-id: ${{ secrets.APP_ID }}
+        private-key: ${{ secrets.PRIVATE_KEY }}
+        owner: globis-org
+        repositories: sre-actions
+        permission-contents: write
+        permission-pull-requests: write
+        permission-issues: read
+
     - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
       with:
         persist-credentials: false
@@ -25,8 +33,10 @@ jobs:
     - id: tagpr
       uses: Songmu/tagpr@fa7d23a4aada5ab0d15a76277a7e0b70d107a9c3 # v1.11.1
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
     - uses: haya14busa/action-update-semver@7d2c558640ea49e798d46539536190aff8c18715 # v1.5.1
       if: steps.tagpr.outputs.tag != ''
       with:
         tag: ${{ steps.tagpr.outputs.tag }}
+      env:
+        GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
