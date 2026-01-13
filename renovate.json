@@ -6,6 +6,15 @@
   "prConcurrentLimit": 10,
   "prHourlyLimit": 0,
   "enabledManagers": [
-    "github-actions"
+    "github-actions",
+    "npm"
+  ],
+  "packageRules": [
+    {
+      "description": "Group all non-major npm updates together",
+      "matchManagers": ["npm"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "groupName": "npm dependencies (non-major)"
+    }
   ]
 }
