@@ -88,20 +88,20 @@ importers:
   deploybot:
     dependencies:
       '@actions/core':
-        specifier: ^2.0.0
+        specifier: 2.0.1
         version: 2.0.1
       '@actions/github':
-        specifier: ^6.0.0
+        specifier: 6.0.1
         version: 6.0.1
       '@slack/web-api':
-        specifier: ^7.0.0
+        specifier: 7.13.0
         version: 7.13.0
       js-yaml:
-        specifier: ^4.1.0
+        specifier: 4.1.1
         version: 4.1.1
     devDependencies:
       '@types/js-yaml':
-        specifier: ^4.0.5
+        specifier: 4.0.9
         version: 4.0.9
 
   docker-image-tag:
