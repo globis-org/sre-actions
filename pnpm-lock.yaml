@@ -57,8 +57,8 @@ importers:
   aws-ssm-parameters:
     dependencies:
       '@actions/core':
-        specifier: 1.11.1
-        version: 1.11.1
+        specifier: 2.0.1
+        version: 2.0.1
       '@aws-sdk/client-ssm':
         specifier: 3.962.0
         version: 3.962.0
@@ -88,8 +88,8 @@ importers:
   deploybot:
     dependencies:
       '@actions/core':
-        specifier: ^1.10.0
-        version: 1.11.1
+        specifier: ^2.0.0
+        version: 2.0.1
       '@actions/github':
         specifier: ^5.1.1
         version: 5.1.1
@@ -107,8 +107,8 @@ importers:
   docker-image-tag:
     dependencies:
       '@actions/core':
-        specifier: 1.11.1
-        version: 1.11.1
+        specifier: 2.0.1
+        version: 2.0.1
       '@actions/exec':
         specifier: 1.1.1
         version: 1.1.1
@@ -117,9 +117,6 @@ importers:
         version: 5.1.1
 
 packages:
-
-  '@actions/core@1.11.1':
-    resolution: {integrity: sha512-hXJCSrkwfA46Vd9Z3q4cpEpHB1rL5NG04+/rbqW9d3+CSvtB1tYe8UTpAlixa1vj0m/ULglfEK2UKxMGxCxv5A==}
 
   '@actions/core@2.0.1':
     resolution: {integrity: sha512-oBfqT3GwkvLlo1fjvhQLQxuwZCGTarTE5OuZ2Wg10hvhBj7LRIlF611WT4aZS6fDhO5ZKlY7lCAZTlpmyaHaeg==}
@@ -2637,11 +2634,6 @@ packages:
     resolution: {integrity: sha512-LYjZsEDhCdYET9ikFu6dVPGp2YH9DegXjdJToSzD9rO6fy4qiRYFoyEYwps88OseJlPyl2NOe2iJuhEhL7IpEA==}
 
 snapshots:
-
-  '@actions/core@1.11.1':
-    dependencies:
-      '@actions/exec': 1.1.1
-      '@actions/http-client': 2.2.3
 
   '@actions/core@2.0.1':
     dependencies:
