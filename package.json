@@ -4,7 +4,7 @@
   "private": true,
   "main": "index.js",
   "engines": {
-    "node": "v24.13.0"
+    "node": ">=24"
   },
   "packageManager": "pnpm@10.27.0",
   "scripts": {
