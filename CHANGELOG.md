@@ -1,5 +1,21 @@
 # Changelog
 
+## [v1.0.3](https://github.com/globis-org/sre-actions/compare/v1.0.2...v1.0.3) - 2026-01-14
+- docs: update README and improve Renovate configuration by @yukin01 in https://github.com/globis-org/sre-actions/pull/87
+- fix(deps): update npm dependencies (non-major) by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/91
+- chore(deps): update dependency globals to v17 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/92
+- fix(deps): update dependency @actions/core to v2 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/93
+- fix(deps): update dependency @actions/exec to v2 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/94
+- fix(deps): update dependency @actions/github to v6 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/95
+- fix(deps): update dependency @slack/web-api to v7 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/96
+- fix(deps): update dependency js-yaml to v4.1.1 [security] by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/89
+- fix(deps): update dependency zod to v3.22.3 [security] by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/90
+- fix(deps): update dependency zod to v3.25.76 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/97
+- fix(deps): update dependency zod to v4 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/99
+- chore(renovate): pin dependency versions and add GitHub App auth to tagpr by @yukin01 in https://github.com/globis-org/sre-actions/pull/100
+- fix(deps): pin dependencies by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/101
+- chore: engines.node の Renovate 自動更新を無効化 by @yukin01 in https://github.com/globis-org/sre-actions/pull/103
+
 ## [v1.0.2](https://github.com/globis-org/sre-actions/compare/v1.0.1...v1.0.2) - 2026-01-13
 - chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/82
 - feat: tagpr PR作成時にactionsをビルドする by @yukin01 in https://github.com/globis-org/sre-actions/pull/81
