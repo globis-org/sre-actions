@@ -16,6 +16,12 @@
       "matchManagers": ["npm"],
       "matchUpdateTypes": ["patch", "minor"],
       "groupName": "npm dependencies (non-major)"
+    },
+    {
+      "description": "Disable updates for engines.node (managed manually based on GitHub Actions runtime support)",
+      "matchDepTypes": ["engines"],
+      "matchDepNames": ["node"],
+      "enabled": false
     }
   ]
 }
