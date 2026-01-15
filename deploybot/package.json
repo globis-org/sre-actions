@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@actions/core": "2.0.1",
-    "@actions/github": "6.0.1",
+    "@actions/github": "7.0.0",
     "@slack/web-api": "7.13.0",
     "js-yaml": "4.1.1"
   },
