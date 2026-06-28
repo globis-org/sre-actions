@@ -9,3 +9,6 @@ savePrefix: ''
 # デフォルトは false
 allowBuilds:
   esbuild: true
+minimumReleaseAgeExclude:
+  # Renovate security update: js-yaml@4.2.0
+  - js-yaml@4.2.0
