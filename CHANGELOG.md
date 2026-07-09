@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.0.4](https://github.com/globis-org/sre-actions/compare/v1.0.3...v1.0.4) - 2026-07-09
+
+- chore: TypeScript 7・oxlint・oxfmt へ移行 by @yukin01 in https://github.com/globis-org/sre-actions/pull/117
+- chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/104
+- fix(deps): update npm dependencies (non-major) by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/102
+- chore(deps): update github-actions (major) by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/111
+- chore: 依存パッケージの一括更新と codeowners-validator テスト追加 by @yukin01 in https://github.com/globis-org/sre-actions/pull/119
+
 ## [v1.0.3](https://github.com/globis-org/sre-actions/compare/v1.0.2...v1.0.3) - 2026-01-14
 - docs: update README and improve Renovate configuration by @yukin01 in https://github.com/globis-org/sre-actions/pull/87
 - fix(deps): update npm dependencies (non-major) by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/91
