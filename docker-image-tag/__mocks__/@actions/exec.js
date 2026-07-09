@@ -1,1 +1,2 @@
-module.exports = { getExecOutput: () => Promise.resolve({ stdout: '', stderr: '', exitCode: 0 }) }
+const getExecOutput = jest.fn()
+module.exports = { getExecOutput }

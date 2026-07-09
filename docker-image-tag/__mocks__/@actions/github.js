@@ -1,1 +1,2 @@
-module.exports = { context: { ref: '', sha: '' } }
+const context = { ref: '', sha: '' }
+module.exports = { context }
