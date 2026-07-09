@@ -32,9 +32,7 @@ export const validateCodeOwners = async (inputs: Inputs) => {
 
   if (context.eventName === 'merge_group') {
     // library has no type for merge_group event
-    const { head_sha: sha } = context.payload[
-      'merge_group'
-    ] as MergeGroupPayload
+    const { head_sha: sha } = context.payload['merge_group'] as MergeGroupPayload
     await octokit.rest.repos.createCommitStatus({
       owner: context.repo.owner,
       repo: context.repo.repo,
@@ -64,9 +62,7 @@ export const validateCodeOwners = async (inputs: Inputs) => {
   core.debug(`Parsed codeowners:\n${JSON.stringify(codeOwnersRule, null, 2)}`)
 
   const matchedOwnersByFile = getFileOwners(filenames, codeOwnersRule)
-  core.debug(
-    `Matched owners by file:\n${JSON.stringify(matchedOwnersByFile, null, 2)}`
-  )
+  core.debug(`Matched owners by file:\n${JSON.stringify(matchedOwnersByFile, null, 2)}`)
 
   const requiredOwners = listUniqueOwners(matchedOwnersByFile)
   core.debug(`Required owners:\n${JSON.stringify(requiredOwners, null, 2)}`)
@@ -83,9 +79,7 @@ export const validateCodeOwners = async (inputs: Inputs) => {
       return members.map(member => member.login)
     }
   })
-  const requiredUsers = await Promise.all(requiredUsersPromise).then(members =>
-    members.flat()
-  )
+  const requiredUsers = await Promise.all(requiredUsersPromise).then(members => members.flat())
   core.info(`Required codeowners user: ${requiredUsers.join(', ')}`)
 
   // GitHub REST API は per_page のデフォルトが 30 件なので、paginate で全件取得する。
@@ -100,13 +94,10 @@ export const validateCodeOwners = async (inputs: Inputs) => {
     .flatMap(review => review.user?.login ?? [])
   core.info(`Approvers: ${approvers.join(', ')}`)
 
-  const approvedOwners = approvers.filter(approver =>
-    requiredUsers.includes(approver)
-  )
+  const approvedOwners = approvers.filter(approver => requiredUsers.includes(approver))
 
   const sha = (context.payload.pull_request as PullRequestPayload).head.sha
-  const noOwnerRequiredButApproved =
-    requiredUsers.length === 0 && approvers.length > 0
+  const noOwnerRequiredButApproved = requiredUsers.length === 0 && approvers.length > 0
   const someOwnerApproved = approvedOwners.length > 0
 
   if (noOwnerRequiredButApproved || someOwnerApproved) {

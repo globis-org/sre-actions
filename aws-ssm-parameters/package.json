@@ -6,7 +6,7 @@
   "main": "dist/main.js",
   "scripts": {
     "type-check": "tsc",
-    "package": "esbuild src/main.ts --bundle --platform=node --target=node20 --outdir=dist --sourcemap",
+    "package": "esbuild src/main.ts --bundle --platform=node --target=node24 --outdir=dist --sourcemap",
     "all": "pnpm type-check && pnpm package"
   },
   "dependencies": {

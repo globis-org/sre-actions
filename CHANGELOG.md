@@ -1,6 +1,7 @@
 # Changelog
 
 ## [v1.0.3](https://github.com/globis-org/sre-actions/compare/v1.0.2...v1.0.3) - 2026-01-14
+
 - docs: update README and improve Renovate configuration by @yukin01 in https://github.com/globis-org/sre-actions/pull/87
 - fix(deps): update npm dependencies (non-major) by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/91
 - chore(deps): update dependency globals to v17 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/92
@@ -17,6 +18,7 @@
 - chore: engines.node の Renovate 自動更新を無効化 by @yukin01 in https://github.com/globis-org/sre-actions/pull/103
 
 ## [v1.0.2](https://github.com/globis-org/sre-actions/compare/v1.0.1...v1.0.2) - 2026-01-13
+
 - chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/82
 - feat: tagpr PR作成時にactionsをビルドする by @yukin01 in https://github.com/globis-org/sre-actions/pull/81
 - 不要なワークフローの削除と依存関係の更新 by @yukin01 in https://github.com/globis-org/sre-actions/pull/84
@@ -24,10 +26,12 @@
 - tagprをv1.11.1にアップデートして.github/release.yamlの認識問題を修正 by @yukin01 in https://github.com/globis-org/sre-actions/pull/86
 
 ## [v1.0.1](https://github.com/globis-org/sre-actions/compare/v1.0.0...v1.0.1) - 2026-01-09
+
 - feat: migrate node20 to node24 by @yukin01 in https://github.com/globis-org/sre-actions/pull/78
 - feat: add tagpr action by @yukin01 in https://github.com/globis-org/sre-actions/pull/79
 
 ## [v1.0.0](https://github.com/globis-org/sre-actions/commits/v1.0.0) - 2026-01-07
+
 - Develop by @yukin01 in https://github.com/globis-org/sre-actions/pull/2
 - Create LICENSE by @yukin01 in https://github.com/globis-org/sre-actions/pull/3
 - feat: migrate deploybot action from private repo by @yukin01 in https://github.com/globis-org/sre-actions/pull/4

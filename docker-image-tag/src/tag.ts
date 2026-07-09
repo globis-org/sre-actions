@@ -13,9 +13,7 @@ export const suffix = (type: string, ref: string, sha: string): string => {
     case 'tag':
       return ref.substring(10) // tag value
     case 'auto':
-      return new RegExp('^refs/tags/').test(ref)
-        ? ref.substring(10)
-        : sha.substring(0, 7)
+      return new RegExp('^refs/tags/').test(ref) ? ref.substring(10) : sha.substring(0, 7)
     default:
       throw new Error('invalid tag type')
   }

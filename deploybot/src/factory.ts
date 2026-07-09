@@ -40,11 +40,7 @@ export const messageFactory = async ({
   const type = config.getType(rawType)
   const suffix: string[] = []
   if (phase === 'failure') {
-    suffix.push(
-      '\u{2500}\u{2500}',
-      `ログは *<${githubActionsRunURL}|こちら>*`,
-      suffixOnFailure
-    )
+    suffix.push('\u{2500}\u{2500}', `ログは *<${githubActionsRunURL}|こちら>*`, suffixOnFailure)
   }
   const text = [config.baseTexts[type][phase], ...suffix].join(' ')
 

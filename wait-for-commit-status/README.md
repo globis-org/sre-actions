@@ -34,9 +34,9 @@ Atlantis、CI/CD パイプライン、外部チェックなど、あらゆるコ
   uses: globis-org/sre-actions/wait-for-commit-status@main
   with:
     check-name: 'ci/test'
-    max-wait-time: '1800'  # 30分
-    poll-interval: '5'     # 5秒ごとにチェック
-    fail-on-timeout: 'false'  # タイムアウトしてもエラーにしない
+    max-wait-time: '1800' # 30分
+    poll-interval: '5' # 5秒ごとにチェック
+    fail-on-timeout: 'false' # タイムアウトしてもエラーにしない
 
 - name: Check result
   run: |
@@ -47,20 +47,20 @@ Atlantis、CI/CD パイプライン、外部チェックなど、あらゆるコ
 
 ## Inputs
 
-| Name | Description | Required | Default |
-|------|-------------|----------|---------|
-| `check-name` | 待機するコミットステータスチェックの名前（例: `atlantis/plan`, `ci/test`） | Yes | - |
-| `max-wait-time` | 最大待機時間（秒） | No | `3600` (1時間) |
-| `poll-interval` | ポーリング間隔（秒） | No | `10` |
-| `fail-on-timeout` | タイムアウト時にアクションを失敗させるか | No | `true` |
+| Name              | Description                                                                | Required | Default        |
+| ----------------- | -------------------------------------------------------------------------- | -------- | -------------- |
+| `check-name`      | 待機するコミットステータスチェックの名前（例: `atlantis/plan`, `ci/test`） | Yes      | -              |
+| `max-wait-time`   | 最大待機時間（秒）                                                         | No       | `3600` (1時間) |
+| `poll-interval`   | ポーリング間隔（秒）                                                       | No       | `10`           |
+| `fail-on-timeout` | タイムアウト時にアクションを失敗させるか                                   | No       | `true`         |
 
 ## Outputs
 
-| Name | Description | Example |
-|------|-------------|---------|
-| `status` | チェックの最終ステータス | `success`, `failure`, `error`, `pending`, `not_found`, `unknown` |
-| `description` | ステータスの説明文 | チェックが提供する説明文 |
-| `timed-out` | タイムアウトしたかどうか | `true` または `false` |
+| Name          | Description              | Example                                                          |
+| ------------- | ------------------------ | ---------------------------------------------------------------- |
+| `status`      | チェックの最終ステータス | `success`, `failure`, `error`, `pending`, `not_found`, `unknown` |
+| `description` | ステータスの説明文       | チェックが提供する説明文                                         |
+| `timed-out`   | タイムアウトしたかどうか | `true` または `false`                                            |
 
 ### ステータスの種類
 

@@ -25,21 +25,21 @@
 
 ## Inputs
 
-| Name | Description | Required | Default |
-|------|-------------|----------|---------|
-| `context-names` | 待機するコンテキスト名（カンマ区切りまたは改行区切り） | Yes | - |
-| `max-wait-time` | 最大待機時間（秒） | No | `3600` |
-| `poll-interval` | ポーリング間隔（秒） | No | `10` |
-| `fail-on-timeout` | タイムアウト時にエラーにするか | No | `true` |
+| Name              | Description                                            | Required | Default |
+| ----------------- | ------------------------------------------------------ | -------- | ------- |
+| `context-names`   | 待機するコンテキスト名（カンマ区切りまたは改行区切り） | Yes      | -       |
+| `max-wait-time`   | 最大待機時間（秒）                                     | No       | `3600`  |
+| `poll-interval`   | ポーリング間隔（秒）                                   | No       | `10`    |
+| `fail-on-timeout` | タイムアウト時にエラーにするか                         | No       | `true`  |
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| `status` | `success`, `failure`, または `pending` |
-| `pending-count` | pending 状態のステータス数 |
-| `failed-count` | 失敗したステータス数 |
-| `succeeded-count` | 成功したステータス数 |
+| Name              | Description                            |
+| ----------------- | -------------------------------------- |
+| `status`          | `success`, `failure`, または `pending` |
+| `pending-count`   | pending 状態のステータス数             |
+| `failed-count`    | 失敗したステータス数                   |
+| `succeeded-count` | 成功したステータス数                   |
 
 ## 注意事項
 
