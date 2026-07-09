@@ -10,9 +10,9 @@
     "all": "pnpm type-check && pnpm package"
   },
   "dependencies": {
-    "@actions/core": "2.0.3",
+    "@actions/core": "3.0.1",
     "@aws-sdk/client-ssm": "3.1078.0",
-    "js-yaml": "4.1.1",
+    "js-yaml": "4.2.0",
     "zod": "4.4.3"
   },
   "devDependencies": {
