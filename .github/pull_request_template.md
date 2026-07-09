@@ -4,8 +4,8 @@
 
 ## Changes / 変更内容
 
-- 
-- 
+-
+-
 
 ## Type of Change / 変更タイプ
 
@@ -13,4 +13,3 @@
 - [ ] New feature / 新機能
 - [ ] Breaking change / 破壊的変更
 - [ ] Documentation update / ドキュメント更新
-

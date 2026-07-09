@@ -85,15 +85,10 @@ export const parseCodeOwners = (codeowners: string): CodeOwnersRule[] => {
   })
 }
 
-export const getFileOwners = (
-  diffFiles: string[],
-  rules: CodeOwnersRule[]
-): FileOwners[] => {
+export const getFileOwners = (diffFiles: string[], rules: CodeOwnersRule[]): FileOwners[] => {
   const reversedRules = rules.reverse()
   const fileOwners = diffFiles.map(filename => {
-    const matchedRule = reversedRules.find(rule =>
-      minimatch(filename, rule.glob, { dot: true })
-    )
+    const matchedRule = reversedRules.find(rule => minimatch(filename, rule.glob, { dot: true }))
     const owners = matchedRule?.owners || []
     return { filename, owners }
   })

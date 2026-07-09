@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "unicorn", "oxc"],
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn"
+  },
+  "rules": {
+    "unicorn/require-post-message-target-origin": "off"
+  },
+  "ignorePatterns": ["dist", "lib"],
+  "env": {
+    "node": true
+  }
+}

@@ -33,13 +33,8 @@ async function run(): Promise<void> {
     const allParameters = results.flatMap(r => r.Parameters ?? [])
     const allInvalidParameters = results.flatMap(r => r.InvalidParameters ?? [])
 
-    if (
-      allInvalidParameters.length > 0 ||
-      allParameters.length !== keys.length
-    ) {
-      throw new Error(
-        `Some parameters are invalid: ${allInvalidParameters.toString()}`
-      )
+    if (allInvalidParameters.length > 0 || allParameters.length !== keys.length) {
+      throw new Error(`Some parameters are invalid: ${allInvalidParameters.toString()}`)
     }
 
     allParameters.forEach(({ Name: key, Value: value }) => {

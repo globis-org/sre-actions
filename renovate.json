@@ -1,15 +1,10 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "github>globis-org/renovate-config:sre"
-  ],
+  "extends": ["github>globis-org/renovate-config:sre"],
   "prConcurrentLimit": 10,
   "prHourlyLimit": 0,
   "rangeStrategy": "pin",
-  "enabledManagers": [
-    "github-actions",
-    "npm"
-  ],
+  "enabledManagers": ["github-actions", "npm"],
   "packageRules": [
     {
       "description": "Group all non-major npm updates together",

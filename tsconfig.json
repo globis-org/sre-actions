@@ -1,9 +1,6 @@
 {
-  "extends": [
-    "@tsconfig/strictest/tsconfig.json",
-    "@tsconfig/node24/tsconfig.json"
-  ],
+  "extends": ["@tsconfig/strictest/tsconfig.json", "@tsconfig/node24/tsconfig.json"],
   "compilerOptions": {
-    "noEmit": true,
+    "noEmit": true
   }
 }
