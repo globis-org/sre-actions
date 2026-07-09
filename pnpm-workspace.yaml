@@ -1,3 +1,4 @@
+engineStrict: true
 minimumReleaseAge: 10080 # 1 week
 minimumReleaseAgeExclude:
   - typescript
@@ -11,4 +12,6 @@ savePrefix: ''
 # preinstall/install/postinstall スクリプトの実行を許可するかどうか
 # デフォルトは false
 allowBuilds:
+  '@swc/core': true
   esbuild: true
+  unrs-resolver: true

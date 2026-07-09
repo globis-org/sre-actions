@@ -1,6 +1,5 @@
 import * as core from '@actions/core'
 import { context, getOctokit } from '@actions/github'
-import { WebhookPayload } from '@actions/github/lib/interfaces'
 
 import { parseCodeOwners, getFileOwners, listUniqueOwners } from './parse'
 
@@ -14,7 +13,8 @@ const CommitContext = 'CODEOWNERS Validator'
 type MergeGroupPayload = {
   head_sha: string
 }
-type PullRequestPayload = WebhookPayload['pull_request'] & {
+type PullRequestPayload = {
+  number: number
   head: {
     sha: string
   }
