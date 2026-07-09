@@ -10,9 +10,9 @@
     "all": "pnpm type-check && pnpm package"
   },
   "dependencies": {
-    "@actions/core": "2.0.1",
+    "@actions/core": "2.0.3",
     "@actions/github": "6.0.1",
-    "@slack/web-api": "7.13.0",
+    "@slack/web-api": "7.18.0",
     "js-yaml": "4.1.1"
   },
   "devDependencies": {
