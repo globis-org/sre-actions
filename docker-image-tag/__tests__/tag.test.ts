@@ -43,10 +43,10 @@ describe('generateTag', () => {
   })
 
   test('generates tag with env prefix', async () => {
-    const result = await generateTag('production', 'hash')
+    const result = await generateTag('prod', 'hash')
     expect(result).toEqual({
-      imageTag: 'production-20260709-120000-e78ab41',
-      latestTag: 'production-latest',
+      imageTag: 'prod-20260709-120000-e78ab41',
+      latestTag: 'prod-latest',
     })
   })
 
@@ -60,10 +60,10 @@ describe('generateTag', () => {
 
   test('generates tag with tag ref in auto mode', async () => {
     context.ref = 'refs/tags/v1.0.0'
-    const result = await generateTag('staging', 'auto')
+    const result = await generateTag('stg', 'auto')
     expect(result).toEqual({
-      imageTag: 'staging-20260709-120000-v1.0.0',
-      latestTag: 'staging-latest',
+      imageTag: 'stg-20260709-120000-v1.0.0',
+      latestTag: 'stg-latest',
     })
   })
 })
