@@ -2,6 +2,8 @@ minimumReleaseAge: 10080 # 1 week
 minimumReleaseAgeExclude:
   - typescript
   - '@typescript/*'
+  # Renovate security update: minimatch@10.2.3
+  - minimatch@10.2.3
 
 packages:
   - '*'
