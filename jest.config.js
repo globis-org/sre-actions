@@ -5,6 +5,7 @@ module.exports = {
     '<rootDir>/codeowners-validator',
     '<rootDir>/deploybot',
     '<rootDir>/docker-image-tag',
+    '<rootDir>/skill-frontmatter-linter',
   ],
   verbose: true,
 }

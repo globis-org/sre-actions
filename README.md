@@ -12,6 +12,7 @@ Custom GitHub Actions for GLOBIS SRE team.
 - [deploybot](deploybot)
 - [docker-image-tag](docker-image-tag)
 - [manifest-analyzer](manifest-analyzer)
+- [skill-frontmatter-linter](skill-frontmatter-linter)
 - [terraform-lockfile-checker](terraform-lockfile-checker)
 - [wait-for-commit-status](wait-for-commit-status)
 - [wait-for-commit-statuses](wait-for-commit-statuses)
