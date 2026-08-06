@@ -294,11 +294,7 @@ export function checkUnclosedCodeFences(content: string, relPath: string): Findi
   return findings
 }
 
-function normalizeAllowedTools(
-  value: unknown,
-  relPath: string,
-  findings: Finding[],
-): string {
+function normalizeAllowedTools(value: unknown, relPath: string, findings: Finding[]): string {
   if (Array.isArray(value)) {
     return value.map(String).join(', ')
   }

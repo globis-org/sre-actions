@@ -423,7 +423,7 @@ describe('checkFile (command)', () => {
   it('warns on block scalar allowed-tools', () => {
     const target = makeCommand(
       'deploy.md',
-      '---\ndescription: Deploys\nallowed-tools: |\n  Bash(git:*)\n  Read\n---\n',
+      '---\ndescription: Deploys\nallowed-tools: |\n  Bash(git:*)\n  Read\n---\n'
     )
     const warnings = checkFile(target, tmp, defaultConfig()).filter(f => f.level === 'warning')
     expect(warnings.some(f => f.message.includes('block scalar'))).toBe(true)
