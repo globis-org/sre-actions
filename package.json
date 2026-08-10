@@ -22,7 +22,7 @@
     "all": "pnpm format-check && pnpm lint && pnpm test"
   },
   "devDependencies": {
-    "@swc/core": "1.15.46",
+    "@swc/core": "1.15.47",
     "@swc/jest": "0.2.39",
     "@tsconfig/node24": "24.0.4",
     "@tsconfig/strictest": "2.0.8",
@@ -37,5 +37,5 @@
   "engines": {
     "node": ">=24"
   },
-  "packageManager": "pnpm@11.18.0"
+  "packageManager": "pnpm@11.19.0+sha512.7881f3ed590d472c4a955e2b88b2121791116066dcc88cbca3849ec9b60f1bbaa6d2ccb221fa91da4e1c65bef2bcbe379365aea7ac539c7bf86dedc3a1b22dce"
 }
