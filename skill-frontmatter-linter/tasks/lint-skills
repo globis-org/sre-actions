@@ -1,0 +1,11 @@
+#!/usr/bin/env node
+// mise file task: lint-skills
+const { join, dirname } = require('node:path')
+const { execFileSync } = require('node:child_process')
+
+const cliPath = join(dirname(__filename), '..', 'dist', 'cli.js')
+try {
+  execFileSync(process.execPath, [cliPath, ...process.argv.slice(2)], { stdio: 'inherit' })
+} catch (e) {
+  process.exit(e.status ?? 1)
+}

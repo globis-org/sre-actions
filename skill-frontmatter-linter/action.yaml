@@ -1,0 +1,21 @@
+name: sre-actions/skill-frontmatter-linter
+description: Validate Claude skills and commands with GLOBIS SRE policy
+author: globis-org
+
+inputs:
+  path:
+    description: Root path to search skills and commands
+    required: false
+    default: '.'
+  config:
+    description: Policy config path
+    required: false
+    default: '.skill-policy.yaml'
+  strict:
+    description: Treat warnings as errors
+    required: false
+    default: 'false'
+
+runs:
+  using: 'node24'
+  main: 'dist/main.js'
