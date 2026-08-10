@@ -1,5 +1,16 @@
 # Changelog
 
+## [v1.1.0](https://github.com/globis-org/sre-actions/compare/v1.0.4...v1.1.0) - 2026-08-10
+
+- chore(deps): update dorny/paths-filter action to v4.0.2 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/120
+- chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/124
+- fix(deps): update npm dependencies (non-major) by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/121
+- chore(deps): update jdx/mise-action action to v4.2.3 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/128
+- chore(deps): update jdx/mise-action action to v4.2.4 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/131
+- feat: skill-frontmatter-linter を追加 by @yukin01 in https://github.com/globis-org/sre-actions/pull/130
+- chore(deps): update actions/setup-node action to v7 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/125
+- chore(deps): merge Renovate PRs #126, #127, #129 by @yukin01 in https://github.com/globis-org/sre-actions/pull/132
+
 ## [v1.0.4](https://github.com/globis-org/sre-actions/compare/v1.0.3...v1.0.4) - 2026-07-09
 
 - chore: TypeScript 7・oxlint・oxfmt へ移行 by @yukin01 in https://github.com/globis-org/sre-actions/pull/117
