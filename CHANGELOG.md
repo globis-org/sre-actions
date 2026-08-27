@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.1.1](https://github.com/globis-org/sre-actions/compare/v1.1...v1.1.1) - 2026-08-27
+
+- chore: disable e2e deployment tracking and add explicit minimumReleaseAge by @yukin01 in https://github.com/globis-org/sre-actions/pull/137
+
 ## [v1.1.0](https://github.com/globis-org/sre-actions/compare/v1.0.4...v1.1.0) - 2026-08-10
 
 - chore(deps): update dorny/paths-filter action to v4.0.2 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/120
