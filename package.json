@@ -22,20 +22,20 @@
     "all": "pnpm format-check && pnpm lint && pnpm test"
   },
   "devDependencies": {
-    "@swc/core": "1.15.47",
+    "@swc/core": "1.16.1",
     "@swc/jest": "0.2.39",
-    "@tsconfig/node24": "24.0.4",
+    "@tsconfig/node24": "24.0.5",
     "@tsconfig/strictest": "2.0.8",
     "@types/jest": "30.0.0",
     "@types/node": "25.9.5",
-    "esbuild": "0.28.1",
-    "jest": "30.4.2",
-    "oxfmt": "0.61.0",
-    "oxlint": "1.76.0",
+    "esbuild": "0.28.2",
+    "jest": "30.5.0",
+    "oxfmt": "0.65.0",
+    "oxlint": "1.80.0",
     "typescript": "7.0.2"
   },
   "engines": {
     "node": ">=24"
   },
-  "packageManager": "pnpm@11.19.0"
+  "packageManager": "pnpm@11.25.0"
 }
