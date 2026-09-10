@@ -51,10 +51,13 @@ export const validateCodeOwners = async (inputs: Inputs) => {
     throw new Error('This event does not contain a pull request payload.')
   }
 
-  const { data: files } = await octokit.rest.pulls.listFiles({
+  // GitHub REST API は per_page のデフォルトが 30 件なので、paginate で全件取得する。
+  // ファイル単位で判定するため、取りこぼすとそのファイルのオーナー承認を要求できず fail-open になる。
+  const files = await octokit.paginate(octokit.rest.pulls.listFiles, {
     owner: context.repo.owner,
     repo: context.repo.repo,
     pull_number: context.payload.pull_request.number,
+    per_page: 100,
   })
   const filenames = files.map(file => file.filename)
   core.info(`Files in this PR:\n${filenames.join('\n')}`)
