@@ -39,7 +39,7 @@ You don't need to commit `dist/` build artifacts during development.
 
 ```bash
 pnpm install
-pnpm all          # lint, format, test
+pnpm all          # format, lint, type-check, test
 pnpm -r run all   # build each action (for local testing, no commit needed)
 ```
 
