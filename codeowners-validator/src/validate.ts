@@ -1,6 +1,7 @@
 import * as core from '@actions/core'
 import { context, getOctokit } from '@actions/github'
 
+import { evaluateApprovals } from './approval'
 import { parseCodeOwners, getFileOwners, listUniqueOwners } from './parse'
 
 type Inputs = {
@@ -64,23 +65,32 @@ export const validateCodeOwners = async (inputs: Inputs) => {
   const matchedOwnersByFile = getFileOwners(filenames, codeOwnersRule)
   core.debug(`Matched owners by file:\n${JSON.stringify(matchedOwnersByFile, null, 2)}`)
 
-  const requiredOwners = listUniqueOwners(matchedOwnersByFile)
-  core.debug(`Required owners:\n${JSON.stringify(requiredOwners, null, 2)}`)
-
-  // Extract members from teams
-  const requiredUsersPromise = requiredOwners.map(async owner => {
+  // Extract members from teams (同じオーナーを複数ファイルで参照するため 1 回だけ解決する)
+  const uniqueOwners = listUniqueOwners(matchedOwnersByFile)
+  const usersByOwnerPromise = uniqueOwners.map(async (owner): Promise<[string, string[]]> => {
     if (owner.kind === 'user') {
-      return owner.name
+      return [owner.name, [owner.name]]
     } else {
       const { data: members } = await octokit.rest.teams.listMembersInOrg({
         org: owner.org,
         team_slug: owner.team,
       })
-      return members.map(member => member.login)
+      return [owner.name, members.map(member => member.login)]
     }
   })
-  const requiredUsers = await Promise.all(requiredUsersPromise).then(members => members.flat())
-  core.info(`Required codeowners user: ${requiredUsers.join(', ')}`)
+  const usersByOwner = new Map(await Promise.all(usersByOwnerPromise))
+
+  const requiredUsersByFile = matchedOwnersByFile.map(fileOwner => ({
+    filename: fileOwner.filename,
+    requiredUsers: [
+      ...new Set(fileOwner.owners.flatMap(owner => usersByOwner.get(owner.name) ?? [])),
+    ],
+  }))
+  core.info(
+    `Required codeowners user by file:\n${requiredUsersByFile
+      .map(file => `${file.filename}: ${file.requiredUsers.join(', ')}`)
+      .join('\n')}`
+  )
 
   // GitHub REST API は per_page のデフォルトが 30 件なので、paginate で全件取得する。
   const reviews = await octokit.paginate(octokit.rest.pulls.listReviews, {
@@ -94,13 +104,10 @@ export const validateCodeOwners = async (inputs: Inputs) => {
     .flatMap(review => review.user?.login ?? [])
   core.info(`Approvers: ${approvers.join(', ')}`)
 
-  const approvedOwners = approvers.filter(approver => requiredUsers.includes(approver))
-
+  const result = evaluateApprovals(requiredUsersByFile, approvers)
   const sha = (context.payload.pull_request as PullRequestPayload).head.sha
-  const noOwnerRequiredButApproved = requiredUsers.length === 0 && approvers.length > 0
-  const someOwnerApproved = approvedOwners.length > 0
 
-  if (noOwnerRequiredButApproved || someOwnerApproved) {
+  if (result.approved) {
     core.info('Approved by CODEOWNERS.')
     await octokit.rest.repos.createCommitStatus({
       owner: context.repo.owner,
@@ -108,17 +115,24 @@ export const validateCodeOwners = async (inputs: Inputs) => {
       sha,
       state: 'success',
       context: CommitContext,
-      description: `Approved by ${approvedOwners.join(', ')}.`,
+      description:
+        result.approvedBy.length > 0
+          ? `Approved by ${result.approvedBy.join(', ')}.`
+          : 'No CODEOWNERS required.',
     })
   } else {
-    core.warning('Require review by CODEOWNERS.')
+    core.warning(`Require review by CODEOWNERS for:\n${result.unapprovedFiles.join('\n')}`)
     await octokit.rest.repos.createCommitStatus({
       owner: context.repo.owner,
       repo: context.repo.repo,
       sha,
       state: 'pending',
       context: CommitContext,
-      description: 'Require review by CODEOWNERS.',
+      // commit status の description は 140 文字制限
+      description: `Require review by CODEOWNERS for: ${result.unapprovedFiles.join(', ')}`.slice(
+        0,
+        140
+      ),
     })
   }
 }
