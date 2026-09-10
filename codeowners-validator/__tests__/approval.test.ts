@@ -5,8 +5,8 @@ describe('evaluateApprovals', () => {
   test('approved when an owner of every owned file approved', () => {
     const result = evaluateApprovals(
       [
-        { filename: 'infra/core/main.tf', requiredUsers: ['alice', 'bob'] },
-        { filename: 'infra/app/settings.yaml', requiredUsers: ['alice', 'carol'] },
+        { filename: 'src/main.ts', requiredUsers: ['alice', 'bob'] },
+        { filename: 'docs/guide.md', requiredUsers: ['alice', 'carol'] },
       ],
       ['alice']
     )
@@ -16,17 +16,17 @@ describe('evaluateApprovals', () => {
   test('not approved when a file lacks approval from its own owners', () => {
     const result = evaluateApprovals(
       [
-        { filename: 'infra/core/main.tf', requiredUsers: ['alice', 'bob'] },
-        { filename: 'infra/app/settings.yaml', requiredUsers: ['alice', 'carol'] },
+        { filename: 'src/main.ts', requiredUsers: ['alice', 'bob'] },
+        { filename: 'docs/guide.md', requiredUsers: ['alice', 'carol'] },
       ],
       ['carol']
     )
-    expect(result).toEqual({ approved: false, unapprovedFiles: ['infra/core/main.tf'] })
+    expect(result).toEqual({ approved: false, unapprovedFiles: ['src/main.ts'] })
   })
 
   test('approved when the only owned file is approved by its owner', () => {
     const result = evaluateApprovals(
-      [{ filename: 'infra/app/settings.yaml', requiredUsers: ['alice', 'carol'] }],
+      [{ filename: 'docs/guide.md', requiredUsers: ['alice', 'carol'] }],
       ['carol']
     )
     expect(result).toEqual({ approved: true, approvedBy: ['carol'] })
@@ -36,7 +36,7 @@ describe('evaluateApprovals', () => {
     const result = evaluateApprovals(
       [
         { filename: 'README.md', requiredUsers: [] },
-        { filename: 'infra/core/main.tf', requiredUsers: ['alice'] },
+        { filename: 'src/main.ts', requiredUsers: ['alice'] },
       ],
       ['alice']
     )
@@ -44,7 +44,7 @@ describe('evaluateApprovals', () => {
   })
 
   test('approved by anyone when no file has owners', () => {
-    expect(evaluateApprovals([{ filename: 'README.md', requiredUsers: [] }], ['someone'])).toEqual({
+    expect(evaluateApprovals([{ filename: 'README.md', requiredUsers: [] }], ['dave'])).toEqual({
       approved: true,
       approvedBy: [],
     })
@@ -59,15 +59,15 @@ describe('evaluateApprovals', () => {
 
   test('approvers not owning any file are ignored', () => {
     const result = evaluateApprovals(
-      [{ filename: 'infra/core/main.tf', requiredUsers: ['alice'] }],
-      ['outsider', 'alice']
+      [{ filename: 'src/main.ts', requiredUsers: ['alice'] }],
+      ['dave', 'alice']
     )
     expect(result).toEqual({ approved: true, approvedBy: ['alice'] })
   })
 
   test('deduplicates approvers who reviewed multiple times', () => {
     const result = evaluateApprovals(
-      [{ filename: 'infra/core/main.tf', requiredUsers: ['alice'] }],
+      [{ filename: 'src/main.ts', requiredUsers: ['alice'] }],
       ['alice', 'alice']
     )
     expect(result).toEqual({ approved: true, approvedBy: ['alice'] })
@@ -76,20 +76,20 @@ describe('evaluateApprovals', () => {
 
 describe('resolveRequiredUsers', () => {
   const usersByOwner = new Map([
-    ['org/core', ['alice', 'bob']],
-    ['org/app', ['carol']],
-    ['dave', ['dave']],
+    ['org/team-a', ['alice', 'bob']],
+    ['org/team-b', ['carol']],
+    ['bob', ['bob']],
   ])
 
   test('expands owners into a deduplicated user list per file', () => {
     const result = resolveRequiredUsers(
       [
         {
-          filename: 'infra/app/settings.yaml',
+          filename: 'docs/guide.md',
           owners: [
-            { kind: 'team', name: 'org/core', org: 'org', team: 'core' },
-            { kind: 'team', name: 'org/app', org: 'org', team: 'app' },
-            { kind: 'user', name: 'dave' },
+            { kind: 'team', name: 'org/team-a', org: 'org', team: 'team-a' },
+            { kind: 'team', name: 'org/team-b', org: 'org', team: 'team-b' },
+            { kind: 'user', name: 'bob' },
           ],
         },
         { filename: 'README.md', owners: [] },
@@ -98,8 +98,8 @@ describe('resolveRequiredUsers', () => {
     )
     expect(result).toEqual([
       {
-        filename: 'infra/app/settings.yaml',
-        requiredUsers: ['alice', 'bob', 'carol', 'dave'],
+        filename: 'docs/guide.md',
+        requiredUsers: ['alice', 'bob', 'carol'],
       },
       { filename: 'README.md', requiredUsers: [] },
     ])
@@ -110,7 +110,7 @@ describe('resolveRequiredUsers', () => {
       resolveRequiredUsers(
         [
           {
-            filename: 'infra/core/main.tf',
+            filename: 'src/main.ts',
             owners: [{ kind: 'team', name: 'org/empty', org: 'org', team: 'empty' }],
           },
         ],
@@ -122,7 +122,7 @@ describe('resolveRequiredUsers', () => {
   test('throws when a matched owner is missing from the map', () => {
     expect(() =>
       resolveRequiredUsers(
-        [{ filename: 'infra/core/main.tf', owners: [{ kind: 'user', name: 'unknown' }] }],
+        [{ filename: 'src/main.ts', owners: [{ kind: 'user', name: 'unknown' }] }],
         usersByOwner
       )
     ).toThrow('Owner "unknown" has no users to approve.')
@@ -175,12 +175,12 @@ describe('listApprovers', () => {
 
 describe('end-to-end from CODEOWNERS text', () => {
   const codeowners = `
-    * @org/core @approve-bot[bot]
-    infra/app/settings.yaml @org/core @org/app
+    * @org/team-a @approve-bot[bot]
+    docs/guide.md @org/team-a @org/team-b
   `
   const usersByOwner = new Map([
-    ['org/core', ['alice', 'bob']],
-    ['org/app', ['carol']],
+    ['org/team-a', ['alice', 'bob']],
+    ['org/team-b', ['carol']],
     ['approve-bot[bot]', ['approve-bot[bot]']],
   ])
   const evaluate = (files: string[], approvers: string[]) =>
@@ -190,32 +190,32 @@ describe('end-to-end from CODEOWNERS text', () => {
     )
 
   test('the specific rule alone is satisfied by its own owner', () => {
-    expect(evaluate(['infra/app/settings.yaml'], ['carol'])).toEqual({
+    expect(evaluate(['docs/guide.md'], ['carol'])).toEqual({
       approved: true,
       approvedBy: ['carol'],
     })
   })
 
   test('a file matched by the specific rule and one by the wildcard need the wildcard owner too', () => {
-    expect(evaluate(['infra/app/settings.yaml', 'infra/core/main.tf'], ['carol'])).toEqual({
+    expect(evaluate(['docs/guide.md', 'src/main.ts'], ['carol'])).toEqual({
       approved: false,
-      unapprovedFiles: ['infra/core/main.tf'],
+      unapprovedFiles: ['src/main.ts'],
     })
   })
 
   test('the wildcard owner covers both files', () => {
-    expect(evaluate(['infra/app/settings.yaml', 'infra/core/main.tf'], ['bob'])).toEqual({
+    expect(evaluate(['docs/guide.md', 'src/main.ts'], ['bob'])).toEqual({
       approved: true,
       approvedBy: ['bob'],
     })
   })
 
   test('an owner listed only on the wildcard does not cover the specific rule', () => {
-    expect(evaluate(['infra/app/settings.yaml'], ['approve-bot[bot]'])).toEqual({
+    expect(evaluate(['docs/guide.md'], ['approve-bot[bot]'])).toEqual({
       approved: false,
-      unapprovedFiles: ['infra/app/settings.yaml'],
+      unapprovedFiles: ['docs/guide.md'],
     })
-    expect(evaluate(['infra/core/main.tf'], ['approve-bot[bot]'])).toEqual({
+    expect(evaluate(['src/main.ts'], ['approve-bot[bot]'])).toEqual({
       approved: true,
       approvedBy: ['approve-bot[bot]'],
     })
