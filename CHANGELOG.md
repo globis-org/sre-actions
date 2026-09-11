@@ -1,5 +1,16 @@
 # Changelog
 
+## [v1.1.1](https://github.com/globis-org/sre-actions/compare/v1.1...v1.1.1) - 2026-09-11
+
+- chore: disable e2e deployment tracking and add explicit minimumReleaseAge by @yukin01 in https://github.com/globis-org/sre-actions/pull/137
+- bugfix(codeowners-validator): オーナー承認の判定をファイル単位に修正 by @reiichii in https://github.com/globis-org/sre-actions/pull/140
+- chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/133
+- chore(deps): update pnpm to v12 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/139
+- bugfix(codeowners-validator): 承認判定の fail-open と API の取りこぼしを修正 by @yukin01 in https://github.com/globis-org/sre-actions/pull/143
+- chore(deps): update songmu/tagpr action to v1.20.3 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/144
+- refactor: テストランナーを vitest に、YAML パーサーを yaml に移行 by @yukin01 in https://github.com/globis-org/sre-actions/pull/145
+- fix(deps): update npm dependencies (non-major) by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/134
+
 ## [v1.1.0](https://github.com/globis-org/sre-actions/compare/v1.0.4...v1.1.0) - 2026-08-10
 
 - chore(deps): update dorny/paths-filter action to v4.0.2 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/120

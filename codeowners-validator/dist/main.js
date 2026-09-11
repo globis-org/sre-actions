@@ -23856,6 +23856,46 @@ function getOctokit(token, options, ...additionalPlugins) {
   return new GitHubWithPlugins(getOctokitOptions(token, options));
 }
 
+// src/approval.ts
+var evaluateApprovals = (files, approvers) => {
+  const ownedFiles = files.filter((file) => file.requiredUsers.length > 0);
+  const unapprovedFiles = ownedFiles.filter((file) => !file.requiredUsers.some((user) => approvers.includes(user))).map((file) => file.filename);
+  if (unapprovedFiles.length > 0) {
+    return { approved: false, unapprovedFiles };
+  }
+  if (ownedFiles.length === 0 && approvers.length === 0) {
+    return { approved: false, unapprovedFiles: [] };
+  }
+  const approvedBy = approvers.filter(
+    (approver) => ownedFiles.some((file) => file.requiredUsers.includes(approver))
+  );
+  return { approved: true, approvedBy: [...new Set(approvedBy)] };
+};
+var resolveRequiredUsers = (fileOwners, usersByOwner) => fileOwners.map((fileOwner) => ({
+  filename: fileOwner.filename,
+  requiredUsers: [
+    ...new Set(
+      fileOwner.owners.flatMap((owner) => {
+        const users = usersByOwner.get(owner.name);
+        if (!users || users.length === 0) {
+          throw new Error(`Owner "${owner.name}" has no users to approve.`);
+        }
+        return users;
+      })
+    )
+  ]
+}));
+var listApprovers = (reviews) => {
+  const latestStateByUser = /* @__PURE__ */ new Map();
+  for (const review of reviews) {
+    if (!review.user || review.state === "COMMENTED" || review.state === "PENDING") {
+      continue;
+    }
+    latestStateByUser.set(review.user.login, review.state);
+  }
+  return [...latestStateByUser].filter(([, state]) => state === "APPROVED").map(([login]) => login);
+};
+
 // ../node_modules/.pnpm/balanced-match@4.0.4/node_modules/balanced-match/dist/esm/index.js
 var balanced = (a, b, str) => {
   const ma = a instanceof RegExp ? maybeMatch(a, str) : a;
@@ -25755,6 +25795,8 @@ var listUniqueOwners = (fileOwners) => {
 
 // src/validate.ts
 var CommitContext = "CODEOWNERS Validator";
+var DescriptionMaxLength = 140;
+var truncateDescription = (description) => description.length > DescriptionMaxLength ? `${description.slice(0, DescriptionMaxLength - 1)}\u2026` : description;
 var targetEvents = ["pull_request", "pull_request_review", "merge_group"];
 var validateCodeOwners = async (inputs) => {
   const octokit = getOctokit(inputs.token);
@@ -25779,10 +25821,11 @@ ${JSON.stringify(context2, null, 2)}`);
   if (!context2.payload.pull_request) {
     throw new Error("This event does not contain a pull request payload.");
   }
-  const { data: files } = await octokit.rest.pulls.listFiles({
+  const files = await octokit.paginate(octokit.rest.pulls.listFiles, {
     owner: context2.repo.owner,
     repo: context2.repo.repo,
-    pull_number: context2.payload.pull_request.number
+    pull_number: context2.payload.pull_request.number,
+    per_page: 100
   });
   const filenames = files.map((file) => file.filename);
   info(`Files in this PR:
@@ -25793,35 +25836,36 @@ ${JSON.stringify(codeOwnersRule, null, 2)}`);
   const matchedOwnersByFile = getFileOwners(filenames, codeOwnersRule);
   debug(`Matched owners by file:
 ${JSON.stringify(matchedOwnersByFile, null, 2)}`);
-  const requiredOwners = listUniqueOwners(matchedOwnersByFile);
-  debug(`Required owners:
-${JSON.stringify(requiredOwners, null, 2)}`);
-  const requiredUsersPromise = requiredOwners.map(async (owner) => {
+  const uniqueOwners = listUniqueOwners(matchedOwnersByFile);
+  const usersByOwnerPromise = uniqueOwners.map(async (owner) => {
     if (owner.kind === "user") {
-      return owner.name;
+      return [owner.name, [owner.name]];
     } else {
-      const { data: members } = await octokit.rest.teams.listMembersInOrg({
+      const members = await octokit.paginate(octokit.rest.teams.listMembersInOrg, {
         org: owner.org,
-        team_slug: owner.team
+        team_slug: owner.team,
+        per_page: 100
       });
-      return members.map((member) => member.login);
+      return [owner.name, members.map((member) => member.login)];
     }
   });
-  const requiredUsers = await Promise.all(requiredUsersPromise).then((members) => members.flat());
-  info(`Required codeowners user: ${requiredUsers.join(", ")}`);
+  const usersByOwner = new Map(await Promise.all(usersByOwnerPromise));
+  const requiredUsersByFile = resolveRequiredUsers(matchedOwnersByFile, usersByOwner);
+  info(
+    `Required codeowners user by file:
+${requiredUsersByFile.map((file) => `${file.filename}: ${file.requiredUsers.join(", ")}`).join("\n")}`
+  );
   const reviews = await octokit.paginate(octokit.rest.pulls.listReviews, {
     owner: context2.repo.owner,
     repo: context2.repo.repo,
     pull_number: context2.payload.pull_request.number,
     per_page: 100
   });
-  const approvers = reviews.filter((review) => review.state === "APPROVED").flatMap((review) => review.user?.login ?? []);
+  const approvers = listApprovers(reviews);
   info(`Approvers: ${approvers.join(", ")}`);
-  const approvedOwners = approvers.filter((approver) => requiredUsers.includes(approver));
+  const result = evaluateApprovals(requiredUsersByFile, approvers);
   const sha = context2.payload.pull_request.head.sha;
-  const noOwnerRequiredButApproved = requiredUsers.length === 0 && approvers.length > 0;
-  const someOwnerApproved = approvedOwners.length > 0;
-  if (noOwnerRequiredButApproved || someOwnerApproved) {
+  if (result.approved) {
     info("Approved by CODEOWNERS.");
     await octokit.rest.repos.createCommitStatus({
       owner: context2.repo.owner,
@@ -25829,17 +25873,22 @@ ${JSON.stringify(requiredOwners, null, 2)}`);
       sha,
       state: "success",
       context: CommitContext,
-      description: `Approved by ${approvedOwners.join(", ")}.`
+      description: truncateDescription(
+        result.approvedBy.length > 0 ? `Approved by ${result.approvedBy.join(", ")}.` : "No CODEOWNERS required."
+      )
     });
   } else {
-    warning("Require review by CODEOWNERS.");
+    warning(`Require review by CODEOWNERS for:
+${result.unapprovedFiles.join("\n")}`);
     await octokit.rest.repos.createCommitStatus({
       owner: context2.repo.owner,
       repo: context2.repo.repo,
       sha,
       state: "pending",
       context: CommitContext,
-      description: "Require review by CODEOWNERS."
+      description: truncateDescription(
+        `Require review by CODEOWNERS for: ${result.unapprovedFiles.join(", ")}`
+      )
     });
   }
 };
