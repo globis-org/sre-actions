@@ -3,6 +3,8 @@ minimumReleaseAge: 10080 # 1 week
 minimumReleaseAgeExclude:
   - typescript
   - '@typescript/*'
+  # Renovate security update: js-yaml@4.3.2
+  - js-yaml@4.3.2
 
 packages:
   - '*'
