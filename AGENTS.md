@@ -5,7 +5,6 @@
 
 ## 作業時の注意
 
-- Node action を新設したらルートの `jest.config.js` の `projects` に追加する。
 - corepack は使わない。pnpm のバージョンは `package.json` の `packageManager` を直接編集する。
 
 ## public リポジトリ

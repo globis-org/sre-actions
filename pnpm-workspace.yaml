@@ -12,6 +12,4 @@ savePrefix: ''
 # preinstall/install/postinstall スクリプトの実行を許可するかどうか
 # デフォルトは false
 allowBuilds:
-  '@swc/core': true
   esbuild: true
-  unrs-resolver: true

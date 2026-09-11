@@ -1,5 +1,5 @@
 import { MessageAttachment } from '@slack/web-api'
-import { load } from 'js-yaml'
+import { parse as parseYaml } from 'yaml'
 
 // type Fields = {
 //   title: string;
@@ -20,6 +20,6 @@ const isField = (obj: unknown): obj is Fields[number] =>
 const isFields = (obj: unknown): obj is Fields => Array.isArray(obj) && obj.every(isField)
 
 export const parse = (value: string): Fields => {
-  const fields = load(value)
+  const fields = parseYaml(value)
   return isFields(fields) ? fields : []
 }

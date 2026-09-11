@@ -1,9 +1,13 @@
+import { describe, test, expect, beforeEach, vi } from 'vitest'
 import { context } from '@actions/github'
 import { getExecOutput } from '@actions/exec'
 
 import { suffix, generateTag } from '../src/tag'
 
-const mockGetExecOutput = getExecOutput as jest.Mock
+vi.mock('@actions/exec', () => ({ getExecOutput: vi.fn() }))
+vi.mock('@actions/github', () => ({ context: { ref: '', sha: '' } }))
+
+const mockGetExecOutput = vi.mocked(getExecOutput)
 
 describe('suffix', () => {
   test('hash type returns short commit hash', () => {
