@@ -1,3 +1,4 @@
+import { test, expect } from 'vitest'
 import { parse, Fields } from '../src/parse'
 
 test('Parse valid yaml string to Fields', () => {

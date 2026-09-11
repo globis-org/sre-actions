@@ -1,3 +1,4 @@
+import { describe, test, expect } from 'vitest'
 import { evaluateApprovals, listApprovers, resolveRequiredUsers } from '../src/approval'
 import { getFileOwners, parseCodeOwners } from '../src/parse'
 

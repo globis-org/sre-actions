@@ -112,6 +112,6 @@ tools:
 ```bash
 pnpm install
 pnpm type-check
-pnpm test                                    # jest (run from repo root)
+pnpm test                                    # vitest (run from repo root)
 pnpm --filter skill-frontmatter-linter package   # build dist/
 ```
