@@ -142,16 +142,12 @@ importers:
       '@aws-sdk/client-ssm':
         specifier: 3.1101.0
         version: 3.1101.0
-      js-yaml:
-        specifier: 4.3.1
-        version: 4.3.1
+      yaml:
+        specifier: 2.9.0
+        version: 2.9.0
       zod:
         specifier: 4.4.3
         version: 4.4.3
-    devDependencies:
-      '@types/js-yaml':
-        specifier: 4.0.9
-        version: 4.0.9
 
   codeowners-validator:
     dependencies:
@@ -176,13 +172,9 @@ importers:
       '@slack/web-api':
         specifier: 8.0.0
         version: 8.0.0
-      js-yaml:
-        specifier: 4.3.1
-        version: 4.3.1
-    devDependencies:
-      '@types/js-yaml':
-        specifier: 4.0.9
-        version: 4.0.9
+      yaml:
+        specifier: 2.9.0
+        version: 2.9.0
 
   docker-image-tag:
     dependencies:
@@ -901,9 +893,6 @@ packages:
   '@types/estree@1.0.9':
     resolution: {integrity: sha512-GhdPgy1el4/ImP05X05Uw4cw2/M93BCUmnEvWZNStlCzEKME4Fkk+YpoA5OiHNQmoS7Cafb8Xa3Pya8m1Qrzeg==}
 
-  '@types/js-yaml@4.0.9':
-    resolution: {integrity: sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==}
-
   '@types/node@25.9.5':
     resolution: {integrity: sha512-OScDchr2fwuUmWdf4kZ9h7PcJiYDVInhJizG/biAq3cAvqwYktuy/TYGGdZNMtNTFUP7rnb0NU4TUdm82kt4Rg==}
 
@@ -1044,9 +1033,6 @@ packages:
   '@vitest/spy@5.0.0':
     resolution: {integrity: sha512-uy+luWBAPw9XfthoHi5AkfHUnuPYEESjl0p/r+meoBnU8bxg5GDQ3Ey8MjcJ6sqahkL4PFyrvfMJJBw7LbU06g==}
 
-  argparse@2.0.1:
-    resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
-
   assertion-error@2.0.1:
     resolution: {integrity: sha512-Izi8RQcffqCeNVgFigKli1ssklIbpHnCYc6AknXGYoB6grJqyeby7jv12JUQgmTAnIDnbck1uxksT4dzN3PWBA==}
     engines: {node: '>=12'}
@@ -1111,10 +1097,6 @@ packages:
     resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
-
-  js-yaml@4.3.1:
-    resolution: {integrity: sha512-CY6crGq313MX8GkwvB7tzgp99vjQxY1++5y10/BKN/GUfHqWaOGQMNZkBvqSzsZKWk/ijwHlWzzkLulsGHhjWQ==}
-    hasBin: true
 
   json-with-bigint@3.5.8:
     resolution: {integrity: sha512-eq/4KP6K34kwa7TcFdtvnftvHCD9KvHOGGICWwMFc4dOOKF5t4iYqnfLK8otCRCRv06FXOzGGyqE8h8ElMvvdw==}
@@ -1962,8 +1944,6 @@ snapshots:
 
   '@types/estree@1.0.9': {}
 
-  '@types/js-yaml@4.0.9': {}
-
   '@types/node@25.9.5':
     dependencies:
       undici-types: 7.24.6
@@ -2041,8 +2021,6 @@ snapshots:
 
   '@vitest/spy@5.0.0': {}
 
-  argparse@2.0.1: {}
-
   assertion-error@2.0.1: {}
 
   balanced-match@4.0.4: {}
@@ -2108,10 +2086,6 @@ snapshots:
 
   fsevents@2.3.3:
     optional: true
-
-  js-yaml@4.3.1:
-    dependencies:
-      argparse: 2.0.1
 
   json-with-bigint@3.5.8: {}
 
