@@ -1,7 +1,7 @@
 import * as core from '@actions/core'
 import { context, getOctokit } from '@actions/github'
 
-import { evaluateApprovals } from './approval'
+import { evaluateApprovals, listApprovers, resolveRequiredUsers } from './approval'
 import { parseCodeOwners, getFileOwners, listUniqueOwners } from './parse'
 
 type Inputs = {
@@ -10,6 +10,13 @@ type Inputs = {
 }
 
 const CommitContext = 'CODEOWNERS Validator'
+
+// commit status の description は 140 文字制限
+const DescriptionMaxLength = 140
+const truncateDescription = (description: string): string =>
+  description.length > DescriptionMaxLength
+    ? `${description.slice(0, DescriptionMaxLength - 1)}…`
+    : description
 
 type MergeGroupPayload = {
   head_sha: string
@@ -74,21 +81,18 @@ export const validateCodeOwners = async (inputs: Inputs) => {
     if (owner.kind === 'user') {
       return [owner.name, [owner.name]]
     } else {
-      const { data: members } = await octokit.rest.teams.listMembersInOrg({
+      // 30 件を超えるチームでもメンバーを取りこぼさないよう paginate で全件取得する
+      const members = await octokit.paginate(octokit.rest.teams.listMembersInOrg, {
         org: owner.org,
         team_slug: owner.team,
+        per_page: 100,
       })
       return [owner.name, members.map(member => member.login)]
     }
   })
   const usersByOwner = new Map(await Promise.all(usersByOwnerPromise))
 
-  const requiredUsersByFile = matchedOwnersByFile.map(fileOwner => ({
-    filename: fileOwner.filename,
-    requiredUsers: [
-      ...new Set(fileOwner.owners.flatMap(owner => usersByOwner.get(owner.name) ?? [])),
-    ],
-  }))
+  const requiredUsersByFile = resolveRequiredUsers(matchedOwnersByFile, usersByOwner)
   core.info(
     `Required codeowners user by file:\n${requiredUsersByFile
       .map(file => `${file.filename}: ${file.requiredUsers.join(', ')}`)
@@ -102,9 +106,7 @@ export const validateCodeOwners = async (inputs: Inputs) => {
     pull_number: context.payload.pull_request.number,
     per_page: 100,
   })
-  const approvers = reviews
-    .filter(review => review.state === 'APPROVED')
-    .flatMap(review => review.user?.login ?? [])
+  const approvers = listApprovers(reviews)
   core.info(`Approvers: ${approvers.join(', ')}`)
 
   const result = evaluateApprovals(requiredUsersByFile, approvers)
@@ -118,10 +120,11 @@ export const validateCodeOwners = async (inputs: Inputs) => {
       sha,
       state: 'success',
       context: CommitContext,
-      description:
+      description: truncateDescription(
         result.approvedBy.length > 0
           ? `Approved by ${result.approvedBy.join(', ')}.`
-          : 'No CODEOWNERS required.',
+          : 'No CODEOWNERS required.'
+      ),
     })
   } else {
     core.warning(`Require review by CODEOWNERS for:\n${result.unapprovedFiles.join('\n')}`)
@@ -131,10 +134,8 @@ export const validateCodeOwners = async (inputs: Inputs) => {
       sha,
       state: 'pending',
       context: CommitContext,
-      // commit status の description は 140 文字制限
-      description: `Require review by CODEOWNERS for: ${result.unapprovedFiles.join(', ')}`.slice(
-        0,
-        140
+      description: truncateDescription(
+        `Require review by CODEOWNERS for: ${result.unapprovedFiles.join(', ')}`
       ),
     })
   }

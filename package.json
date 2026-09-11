@@ -19,7 +19,7 @@
     "format-check": "oxfmt --check .",
     "lint": "oxlint .",
     "test": "jest",
-    "all": "pnpm format-check && pnpm lint && pnpm test"
+    "all": "pnpm format-check && pnpm lint && pnpm -r run type-check && pnpm test"
   },
   "devDependencies": {
     "@swc/core": "1.15.47",
