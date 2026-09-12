@@ -11,6 +11,7 @@ Custom GitHub Actions for GLOBIS SRE team.
 - [codeowners-validator](codeowners-validator)
 - [deploybot](deploybot)
 - [docker-image-tag](docker-image-tag)
+- [hcp-terraform-plan](hcp-terraform-plan)
 - [manifest-analyzer](manifest-analyzer)
 - [skill-frontmatter-linter](skill-frontmatter-linter)
 - [terraform-lockfile-checker](terraform-lockfile-checker)

@@ -1,0 +1,84 @@
+name: sre-actions/hcp-terraform-plan
+description: Wait for HCP Terraform speculative plans on a pull request and post the results as a sticky PR comment
+author: globis-org
+inputs:
+  token:
+    description: HCP Terraform API token (team token with read access to runs and workspaces)
+    required: true
+  organization:
+    description: HCP Terraform organization name
+    required: true
+  hostname:
+    description: HCP Terraform / Terraform Enterprise hostname
+    required: false
+    default: app.terraform.io
+  workspaces:
+    description: |
+      Workspace names to wait for, comma or newline-separated.
+      When omitted, workspaces connected to this repository are discovered via the HCP Terraform API.
+    required: false
+    default: ''
+  github-token:
+    description: GitHub token used to read commit statuses and write the PR comment
+    required: false
+    default: ${{ github.token }}
+  pull-request-number:
+    description: Pull request number
+    required: false
+    default: ${{ github.event.pull_request.number }}
+  max-wait-time:
+    description: Maximum time to wait for all runs to finish, in seconds
+    required: false
+    default: '900'
+  poll-interval:
+    description: Polling interval in seconds
+    required: false
+    default: '10'
+  fail-on-timeout:
+    description: Fail the step when not all runs finished within max-wait-time
+    required: false
+    default: 'true'
+  fail-on-error:
+    description: Fail the step when any run errored
+    required: false
+    default: 'true'
+  comment:
+    description: Post (or update) the sticky PR comment
+    required: false
+    default: 'true'
+  show-untriggered:
+    description: Include workspaces whose run was not triggered ("working directories did not change") in the comment
+    required: false
+    default: 'false'
+  hcp-status-prefix:
+    description: |
+      Prefix of the commit statuses that HCP Terraform itself posts on the PR ("<prefix><organization>/<workspace>").
+      This action only reads those statuses; change it only if HashiCorp renames the context.
+    required: false
+    default: 'Terraform Cloud/'
+  status-context:
+    description: |
+      When set, create a commit status with this context name on the head commit:
+      success when no plan has changes (or a non-bot review approved the changes), pending when changes await approval,
+      failure when a run errored or timed out. Register it as a required status check to gate merges.
+      Requires "statuses: write". Empty disables the status.
+    required: false
+    default: ''
+
+outputs:
+  status:
+    description: Combined status of all runs (success, failure, or pending)
+  has-changes:
+    description: Whether any plan has changes (true or false)
+  results:
+    description: |
+      JSON array of per-workspace results:
+      [{ "workspace", "status", "runId", "runUrl", "hasChanges", "add", "change", "destroy", "import" }]
+  comment-id:
+    description: ID of the created or updated PR comment (empty when comment is disabled)
+  gate-state:
+    description: State of the gate commit status (success, pending, or failure; empty when status-context is not set)
+
+runs:
+  using: 'node24'
+  main: 'dist/main.js'
