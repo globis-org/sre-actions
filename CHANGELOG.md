@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.2.0](https://github.com/globis-org/sre-actions/compare/v1.1.1...v1.2.0) - 2026-09-14
+
+- feat(hcp-terraform-plan): HCP Terraform の speculative plan を PR に集約する action を追加 by @yukin01 in https://github.com/globis-org/sre-actions/pull/147
+- chore(deps): update pnpm/action-setup action to v6.1.0 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/148
+
 ## [v1.1.1](https://github.com/globis-org/sre-actions/compare/v1.1...v1.1.1) - 2026-09-11
 
 - chore: disable e2e deployment tracking and add explicit minimumReleaseAge by @yukin01 in https://github.com/globis-org/sre-actions/pull/137
