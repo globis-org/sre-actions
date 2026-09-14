@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.2.1](https://github.com/globis-org/sre-actions/compare/v1.2...v1.2.1) - 2026-09-14
+
+- chore(hcp-terraform-plan): dist を追加 by @yukin01 in https://github.com/globis-org/sre-actions/pull/150
+
 ## [v1.2.0](https://github.com/globis-org/sre-actions/compare/v1.1.1...v1.2.0) - 2026-09-14
 
 - feat(hcp-terraform-plan): HCP Terraform の speculative plan を PR に集約する action を追加 by @yukin01 in https://github.com/globis-org/sre-actions/pull/147
