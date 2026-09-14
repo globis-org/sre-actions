@@ -23,7 +23,7 @@ inputs:
     required: false
     default: ${{ github.token }}
   pull-request-number:
-    description: Pull request number
+    description: Pull request number (defaults to the pull request in the event payload)
     required: false
     default: ${{ github.event.pull_request.number }}
   max-wait-time:

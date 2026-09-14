@@ -2,6 +2,7 @@ import * as core from '@actions/core'
 import { context, getOctokit } from '@actions/github'
 
 import { upsertComment } from './comment'
+import { decideEvent, SUPPORTED_EVENTS } from './event'
 import { evaluateGate, filterApproversWithWriteAccess, listHumanApprovers } from './gate'
 import { getInputs } from './inputs'
 import { parsePlanLog } from './log'
@@ -44,19 +45,58 @@ async function collectResult(
   return result
 }
 
+function setEmptyOutputs(): void {
+  core.setOutput('status', '')
+  core.setOutput('has-changes', '')
+  core.setOutput('results', '[]')
+  core.setOutput('comment-id', '')
+  core.setOutput('gate-state', '')
+}
+
 async function run(): Promise<void> {
   try {
     const inputs = getInputs()
-    const pullRequest = context.payload.pull_request
-    if (pullRequest === undefined) {
-      throw new Error('This action can only be used in pull_request events')
-    }
-    const sha = String(pullRequest['head']?.sha ?? '')
     const octokit = getOctokit(inputs.githubToken)
+
+    const decision = decideEvent(context.eventName, context.payload as Record<string, unknown>)
+    if (decision.kind === 'unsupported') {
+      throw new Error(
+        `Unsupported event: ${decision.reason}. This action supports: ${SUPPORTED_EVENTS.join(', ')}`
+      )
+    }
+    if (decision.kind === 'skip') {
+      core.info(`Skipped: ${decision.reason}`)
+      setEmptyOutputs()
+      return
+    }
+    if (decision.kind === 'merge-group') {
+      // merge queue の commit では speculative plan が走らないので評価できない。PR 側の gate で判定済み
+      core.info(
+        'merge_group event: plans are evaluated on the pull request, not on the merge group commit'
+      )
+      if (inputs.statusContext !== '') {
+        await octokit.rest.repos.createCommitStatus({
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          sha: decision.headSha,
+          state: 'success',
+          context: inputs.statusContext,
+          description: 'Not evaluated for merge_group (checked on the pull request)',
+        })
+        core.info(`Commit status "${inputs.statusContext}": success (merge_group)`)
+      }
+      setEmptyOutputs()
+      core.setOutput('status', 'success')
+      core.setOutput('gate-state', inputs.statusContext === '' ? '' : 'success')
+      return
+    }
+
+    const sha = decision.headSha
+    const baseRef = decision.baseRef
+    const pullRequestNumber = inputs.pullRequestNumber ?? decision.pullRequestNumber
     const tfc = new TfcClient(inputs.hostname, inputs.token)
 
     const repository = `${context.repo.owner}/${context.repo.repo}`
-    const baseRef = String(pullRequest['base']?.ref ?? '')
     let workspaces = inputs.workspaces
     // speculative plan が無効で status が付かない workspace。gate 有効時は fail-closed で failure にする
     let unobservable: string[] = []
@@ -177,7 +217,7 @@ async function run(): Promise<void> {
       const comment = await upsertComment(octokit, {
         owner: context.repo.owner,
         repo: context.repo.repo,
-        issueNumber: inputs.pullRequestNumber,
+        issueNumber: pullRequestNumber,
         marker: COMMENT_MARKER,
         body,
       })
@@ -193,7 +233,7 @@ async function run(): Promise<void> {
       const reviews = await octokit.paginate(octokit.rest.pulls.listReviews, {
         owner: context.repo.owner,
         repo: context.repo.repo,
-        pull_number: inputs.pullRequestNumber,
+        pull_number: pullRequestNumber,
         per_page: 100,
       })
       const humanApprovers = await filterApproversWithWriteAccess(
