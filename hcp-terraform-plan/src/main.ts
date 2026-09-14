@@ -153,10 +153,27 @@ async function run(): Promise<void> {
       )
     )
 
+    const workflowRunUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+    // job summary には上限 (1 MiB) の範囲で全文を出す。PR コメントが打ち切られたときの参照先になる
+    if (process.env['GITHUB_STEP_SUMMARY']) {
+      await core.summary
+        .addRaw(
+          renderComment(results, { sha, showUntriggered: true, maxLength: 1_000_000 }).replace(
+            COMMENT_MARKER,
+            ''
+          )
+        )
+        .write()
+    }
+
     let commentId = ''
     let commentUrl: string | null = null
     if (inputs.comment) {
-      const body = renderComment(results, { sha, showUntriggered: inputs.showUntriggered })
+      const body = renderComment(results, {
+        sha,
+        showUntriggered: inputs.showUntriggered,
+        fullOutputUrl: workflowRunUrl,
+      })
       const comment = await upsertComment(octokit, {
         owner: context.repo.owner,
         repo: context.repo.repo,
@@ -209,9 +226,7 @@ async function run(): Promise<void> {
         state: gate.state,
         context: inputs.statusContext,
         description: gate.description,
-        target_url:
-          commentUrl ??
-          `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
+        target_url: commentUrl ?? workflowRunUrl,
       })
       gateState = gate.state
       core.info(`Commit status "${inputs.statusContext}": ${gate.state} - ${gate.description}`)

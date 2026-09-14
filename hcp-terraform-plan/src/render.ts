@@ -22,24 +22,35 @@ export type RenderOptions = {
   sha: string
   showUntriggered: boolean
   maxLength?: number
+  // 打ち切り時に全文の参照先として案内する URL (workflow run の summary など)
+  fullOutputUrl?: string
 }
 
 export function renderComment(results: WorkspaceResult[], options: RenderOptions): string {
   const maxLength = options.maxLength ?? DEFAULT_MAX_LENGTH
   const visible = results.filter(result => options.showUntriggered || result.kind !== 'untriggered')
-  const hidden = results.length - visible.length
+  const hidden = results.filter(result => !visible.includes(result))
 
-  const head = [
-    COMMENT_MARKER,
-    '## HCP Terraform Plan',
-    '',
-    '| Workspace | Status | Changes | Run |',
-    '| --- | --- | --- | --- |',
-    ...visible.map(renderTableRow),
-    '',
-  ]
-  if (hidden > 0) {
-    head.push(`<sub>${hidden} workspace(s) not triggered by this change are hidden.</sub>`, '')
+  const head = [COMMENT_MARKER, '## HCP Terraform Plan', '']
+  if (visible.length === 0) {
+    // 全 workspace が trigger されなかった (Terraform の working directory に変更がない) 場合は表を出さない
+    head.push(
+      `✅ No HCP Terraform runs were triggered by this change (${results.length} workspace(s) checked).`,
+      ''
+    )
+  } else {
+    head.push(
+      '| Workspace | Status | Changes | Run |',
+      '| --- | --- | --- | --- |',
+      ...visible.map(renderTableRow),
+      ''
+    )
+  }
+  if (hidden.length > 0) {
+    head.push(
+      renderWorkspaceList(`${hidden.length} workspace(s) not triggered by this change`, hidden),
+      ''
+    )
   }
   const footer = [
     '',
@@ -50,11 +61,27 @@ export function renderComment(results: WorkspaceResult[], options: RenderOptions
     .filter(result => result.kind === 'finished' || result.kind === 'errored')
     .map(renderDetails)
   const budget = maxLength - head.join('\n').length - footer.join('\n').length
-  return [...head, ...fitBlocks(blocks, budget), ...footer].join('\n')
+  return [...head, ...fitBlocks(blocks, budget, options.fullOutputUrl), ...footer].join('\n')
+}
+
+// workspace 名を折りたたみリストで表示する
+function renderWorkspaceList(summary: string, results: WorkspaceResult[]): string {
+  return [
+    '<details>',
+    `<summary><sub>${summary}</sub></summary>`,
+    '',
+    ...results.map(result => `- \`${result.workspace}\``),
+    '',
+    '</details>',
+  ].join('\n')
 }
 
 // 予算に収まるように details ブロックを詰める。収まらないブロックは本文を打ち切り、以降は省略する
-function fitBlocks(blocks: { workspace: string; text: string }[], budget: number): string[] {
+function fitBlocks(
+  blocks: { workspace: string; text: string }[],
+  budget: number,
+  fullOutputUrl?: string
+): string[] {
   const output: string[] = []
   const omitted: string[] = []
   let used = 0
@@ -79,7 +106,11 @@ function fitBlocks(blocks: { workspace: string; text: string }[], budget: number
       if ((truncated.match(/```/g)?.length ?? 0) % 2 === 1) {
         truncated += '\n```'
       }
-      output.push(`${truncated}\n\n… (truncated, see the run link)\n\n</details>`)
+      const note =
+        fullOutputUrl === undefined
+          ? '… (truncated, see the run link)'
+          : `… (truncated, [full output](${fullOutputUrl}))`
+      output.push(`${truncated}\n\n${note}\n\n</details>`)
     } else {
       omitted.push(block.workspace)
     }
@@ -87,7 +118,7 @@ function fitBlocks(blocks: { workspace: string; text: string }[], budget: number
   if (omitted.length > 0) {
     output.push(
       '',
-      `<sub>Details omitted for ${omitted.join(', ')} due to the comment size limit. See the run links above.</sub>`
+      `<sub>Details omitted for ${omitted.join(', ')} due to the comment size limit. See the run links above${fullOutputUrl === undefined ? '' : ` or the [full output](${fullOutputUrl})`}.</sub>`
     )
   }
   return output

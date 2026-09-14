@@ -85,7 +85,8 @@ with:
 - workspace ごとの結果を表にまとめる (status, add / change / destroy / import の件数, HCP Terraform の run へのリンク)
 - workspace ごとに `<details>` で plan の詳細を折りたたんで表示
 - errored の run は診断メッセージ (diagnostic) を表示
-- GitHub のコメント上限 (65,536 文字) を超える場合は詳細を打ち切り、run へのリンクのみ残す
+- 全 workspace が trigger されなかった場合は表を出さず、1 行の案内と workspace 一覧 (折りたたみ) だけを表示する
+- GitHub のコメント上限 (65,536 文字) を超える場合は詳細を打ち切り、run へのリンクと workflow run の job summary への導線を残す。job summary には上限 (1 MiB) の範囲で全文を出力する
 
 ### plan 詳細の粒度
 

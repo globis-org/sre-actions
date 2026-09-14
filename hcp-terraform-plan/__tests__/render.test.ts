@@ -64,11 +64,36 @@ describe('renderComment', () => {
       },
     ]
     const hidden = renderComment(results, { sha: 'abcdef1', showUntriggered: false })
-    expect(hidden).not.toContain('infra-app-stg')
-    expect(hidden).toContain('1 workspace(s) not triggered by this change are hidden')
+    expect(hidden).toContain(
+      '<summary><sub>1 workspace(s) not triggered by this change</sub></summary>'
+    )
+    expect(hidden).toContain('- `infra-app-stg`')
+    expect(hidden).not.toContain('| `infra-app-stg` |')
 
     const shown = renderComment(results, { sha: 'abcdef1', showUntriggered: true })
     expect(shown).toContain('| `infra-app-stg` | ⚪ Not triggered | - | - |')
+    expect(shown).not.toContain('not triggered by this change</sub></summary>')
+  })
+
+  test('replaces the table with a one-line note when nothing was triggered', () => {
+    const results: WorkspaceResult[] = ['a', 'b'].map(workspace => ({
+      workspace,
+      kind: 'untriggered' as const,
+      runId: null,
+      runUrl: null,
+      description: 'Run not triggered',
+      plan: null,
+      log: null,
+    }))
+    const body = renderComment(results, { sha: 'abcdef1', showUntriggered: false })
+    expect(body).toContain(
+      '✅ No HCP Terraform runs were triggered by this change (2 workspace(s) checked).'
+    )
+    expect(body).not.toContain('| Workspace |')
+    expect(body).toContain(
+      '<summary><sub>2 workspace(s) not triggered by this change</sub></summary>'
+    )
+    expect(body).toContain('- `a`')
   })
 
   test('renders diagnostics and trailer messages for errored runs', () => {
