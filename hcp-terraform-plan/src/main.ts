@@ -45,9 +45,10 @@ async function collectResult(
   return result
 }
 
-function setEmptyOutputs(): void {
-  core.setOutput('status', '')
-  core.setOutput('has-changes', '')
+// 評価しなかったときの outputs。status は success / failure / pending と区別できるよう skipped にする
+function setSkippedOutputs(): void {
+  core.setOutput('status', 'skipped')
+  core.setOutput('has-changes', 'false')
   core.setOutput('results', '[]')
   core.setOutput('comment-id', '')
   core.setOutput('gate-state', '')
@@ -66,7 +67,7 @@ async function run(): Promise<void> {
     }
     if (decision.kind === 'skip') {
       core.info(`Skipped: ${decision.reason}`)
-      setEmptyOutputs()
+      setSkippedOutputs()
       return
     }
     if (decision.kind === 'merge-group') {
@@ -85,7 +86,7 @@ async function run(): Promise<void> {
         })
         core.info(`Commit status "${inputs.statusContext}": success (merge_group)`)
       }
-      setEmptyOutputs()
+      setSkippedOutputs()
       core.setOutput('status', 'success')
       core.setOutput('gate-state', inputs.statusContext === '' ? '' : 'success')
       return

@@ -67,7 +67,9 @@ inputs:
 
 outputs:
   status:
-    description: Combined status of all runs (success, failure, or pending)
+    description: |
+      Combined status of all runs (success, failure, or pending).
+      "skipped" when the event did not require an evaluation (see README "対応イベント").
   has-changes:
     description: Whether any plan has changes (true or false)
   results:
