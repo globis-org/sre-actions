@@ -11,9 +11,9 @@ HCP Terraform は PR の head commit に `Terraform Cloud/<org>/<workspace>` と
 ```yaml
 on:
   pull_request:
-  pull_request_review: # gate を使う場合。types を絞らないこと (submitted / edited / dismissed すべてで再評価が必要)
+  pull_request_review: # gate を使う場合。types は絞らない (dismissed も必要)
 
-# 同じ PR の run が並行すると、古い run が新しい判定を上書きしうる (approve 直後の dismiss など) ので必ず直列化する
+# 同じ PR の run が並行すると古い判定が新しい判定を上書きしうるため直列化する
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
   cancel-in-progress: true
@@ -24,7 +24,11 @@ permissions:
 
 jobs:
   plan:
-    runs-on: ubuntu-latest
+    # COMMENTED (approve でも request changes でもない review) は gate の判定を変えないので job を起動しない。
+    # action 側でも no-op になるが、runner が起動した時点で 1 分課金されるため job レベルで止める。
+    # dismissed イベント (approve の取り消し) もこの条件を通る必要があるので、approved だけに絞らないこと
+    if: github.event_name != 'pull_request_review' || github.event.review.state != 'commented'
+    runs-on: ubuntu-slim # status のポーリングと API 呼び出しだけなので 1 vCPU で足りる
     timeout-minutes: 20
     steps:
       - name: Wait for HCP Terraform plans and comment
@@ -51,6 +55,16 @@ with:
     infra-app-prod
     infra-app-stg
 ```
+
+## 対応イベント
+
+| イベント              | 条件                                                                                                                                                                                                 | 動作                                                                                                                                                                                                                                                                                                                                |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pull_request`        | どの type で呼ばれても評価する。`types` を省略した default (`opened` / `synchronize` / `reopened`) で十分で、head が変わらない type (`labeled` / `edited` など) を足しても結果は同じで課金だけ増える | plan を待ち、コメントと gate を評価する                                                                                                                                                                                                                                                                                             |
+| `pull_request_review` | `action: submitted` かつ `review.state` が `approved` / `changes_requested`、または `action: dismissed`                                                                                              | gate を再評価する (コメントも同じ内容で更新される)                                                                                                                                                                                                                                                                                  |
+| `pull_request_review` | 上記以外 (`state: commented` の submit、本文の `edited`)                                                                                                                                             | approve の状態が変わらないため何もしない (`status` は `skipped`、`has-changes` は `false`)。課金を避けるには job レベルの `if` で起動自体を止める (使用例を参照)                                                                                                                                                                    |
+| `merge_group`         | -                                                                                                                                                                                                    | merge queue の commit には speculative plan が走らないため評価しない。`status-context` が指定されていれば gate を `success` にして queue を止めない。コメントは出さない。**PR 側で gate が required check として評価済みであることが前提**で、required に登録しないまま merge queue を有効にすると、この `success` は何も保証しない |
+| その他                | -                                                                                                                                                                                                    | エラー                                                                                                                                                                                                                                                                                                                              |
 
 ## Inputs
 
@@ -114,7 +128,7 @@ action はログの形式を自動判別するため、属性レベルの差分�
 - PR の author は見ません。見るのは「approve したのが bot でなく、repository に write 権限以上を持つ人か」だけです (branch protection が数える approve と同じ条件)。Renovate PR でも人間が approve すれば `success` になります
 - Terraform の workspace を 1 つも trigger しない PR (workflow ファイルだけの変更など) は `success` になります。この gate が守るのは Terraform の diff だけです
 - approve した人に資格があるか (CODEOWNERS) は判定しません。それは branch protection や [codeowners-validator](../codeowners-validator) の責務で、両方を required にして組み合わせる前提です
-- review の追加・取り消しで再評価するために、`pull_request` に加えて `pull_request_review` イベントでも実行してください
+- review の追加・取り消しで再評価するために、`pull_request` に加えて `pull_request_review` イベントでも実行してください (どの review で再評価するかは [対応イベント](#対応イベント) を参照)
 - HCP Terraform の workspace が auto-apply の場合、この status の登録漏れは「diff のある Renovate PR が自動 merge → apply される」ことを意味します。Renovate の automerge を有効にする前に required check の登録を確認してください
 - `target_url` は PR コメント (コメント無効時は workflow run) を指します
 
@@ -124,5 +138,5 @@ action はログの形式を自動判別するため、属性レベルの差分�
 - 自動検出は VCS 連携先リポジトリが一致し、追跡ブランチが未設定または PR の base と一致する workspace を対象にする。token から見えない project の workspace は検出できないが、その workspace の status が commit に付いていれば gate は `failure` にする
 - HCP Terraform 側の VCS 設定で **Non-aggregated status checks** が有効であること (aggregated の場合は workspace 単位の status が付かず、run へのリンクも得られない)
 - `token` には HCP Terraform の team token を使う。必要な権限は run の read と、`workspaces` を省略する場合は workspace の read
-- `pull_request` / `pull_request_review` イベントでのみ使用可能
+- 対応イベントは [対応イベント](#対応イベント) を参照
 - fork からの PR では secrets を参照できないため動作しない

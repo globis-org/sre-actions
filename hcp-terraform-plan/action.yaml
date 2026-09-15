@@ -23,7 +23,7 @@ inputs:
     required: false
     default: ${{ github.token }}
   pull-request-number:
-    description: Pull request number
+    description: Pull request number (defaults to the pull request in the event payload)
     required: false
     default: ${{ github.event.pull_request.number }}
   max-wait-time:
@@ -67,7 +67,9 @@ inputs:
 
 outputs:
   status:
-    description: Combined status of all runs (success, failure, or pending)
+    description: |
+      Combined status of all runs (success, failure, or pending).
+      "skipped" when the event did not require an evaluation (see README "対応イベント").
   has-changes:
     description: Whether any plan has changes (true or false)
   results:

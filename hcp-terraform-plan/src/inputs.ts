@@ -6,7 +6,8 @@ export type Inputs = {
   hostname: string
   workspaces: string[]
   githubToken: string
-  pullRequestNumber: number
+  // 省略時はイベントの payload から取る
+  pullRequestNumber: number | null
   maxWaitTime: number
   pollInterval: number
   failOnTimeout: boolean
@@ -41,10 +42,10 @@ export function getInputs(): Inputs {
     hostname: core.getInput('hostname') || 'app.terraform.io',
     workspaces: splitList(core.getInput('workspaces')),
     githubToken: core.getInput('github-token', { required: true }),
-    pullRequestNumber: parsePositiveInt(
-      'pull-request-number',
-      core.getInput('pull-request-number')
-    ),
+    pullRequestNumber:
+      core.getInput('pull-request-number') === ''
+        ? null
+        : parsePositiveInt('pull-request-number', core.getInput('pull-request-number')),
     maxWaitTime: parsePositiveInt('max-wait-time', core.getInput('max-wait-time')),
     pollInterval: parsePositiveInt('poll-interval', core.getInput('poll-interval')),
     failOnTimeout: core.getBooleanInput('fail-on-timeout'),
