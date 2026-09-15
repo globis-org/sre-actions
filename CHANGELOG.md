@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.2.2](https://github.com/globis-org/sre-actions/compare/v1.2.1...v1.2.2) - 2026-09-15
+
+- modify(hcp-terraform-plan): 対応イベントを明確にし、merge_group と判定に影響しない review を扱う by @yukin01 in https://github.com/globis-org/sre-actions/pull/152
+- fix(deps): update npm dependencies (non-major) by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/146
+
 ## [v1.2.1](https://github.com/globis-org/sre-actions/compare/v1.2...v1.2.1) - 2026-09-14
 
 - chore(hcp-terraform-plan): dist を追加 by @yukin01 in https://github.com/globis-org/sre-actions/pull/150
