@@ -23928,6 +23928,60 @@ async function upsertComment(octokit, params) {
   return { id: data.id, htmlUrl: data.html_url };
 }
 
+// src/event.ts
+var SUPPORTED_EVENTS = ["pull_request", "pull_request_review", "merge_group"];
+var REVIEW_STATES_AFFECTING_APPROVAL = /* @__PURE__ */ new Set(["approved", "changes_requested"]);
+function decideEvent(eventName, payload) {
+  switch (eventName) {
+    case "pull_request": {
+      const pullRequest = payload["pull_request"];
+      if (pullRequest === void 0) {
+        return { kind: "unsupported", reason: "pull_request event without a pull_request payload" };
+      }
+      return evaluate(pullRequest);
+    }
+    case "pull_request_review": {
+      const pullRequest = payload["pull_request"];
+      if (pullRequest === void 0) {
+        return {
+          kind: "unsupported",
+          reason: "pull_request_review event without a pull_request payload"
+        };
+      }
+      const action = String(payload["action"] ?? "");
+      const review = payload["review"];
+      const state = String(review?.state ?? "").toLowerCase();
+      if (action === "dismissed" || action === "submitted" && REVIEW_STATES_AFFECTING_APPROVAL.has(state)) {
+        return evaluate(pullRequest);
+      }
+      return {
+        kind: "skip",
+        reason: `review ${action}${state === "" ? "" : ` (${state})`} does not change the approval state`
+      };
+    }
+    case "merge_group": {
+      const mergeGroup = payload["merge_group"];
+      if (mergeGroup?.head_sha === void 0) {
+        return { kind: "unsupported", reason: "merge_group event without a head_sha" };
+      }
+      return { kind: "merge-group", headSha: mergeGroup.head_sha };
+    }
+    default:
+      return {
+        kind: "unsupported",
+        reason: `event "${eventName}" is not supported (supported: ${SUPPORTED_EVENTS.join(", ")})`
+      };
+  }
+}
+function evaluate(pullRequest) {
+  return {
+    kind: "evaluate",
+    headSha: pullRequest.head.sha,
+    baseRef: pullRequest.base.ref,
+    pullRequestNumber: pullRequest.number
+  };
+}
+
 // src/gate.ts
 var DESCRIPTION_MAX_LENGTH = 140;
 function truncateDescription(description) {
@@ -24032,10 +24086,7 @@ function getInputs() {
     hostname: getInput("hostname") || "app.terraform.io",
     workspaces: splitList(getInput("workspaces")),
     githubToken: getInput("github-token", { required: true }),
-    pullRequestNumber: parsePositiveInt(
-      "pull-request-number",
-      getInput("pull-request-number")
-    ),
+    pullRequestNumber: getInput("pull-request-number") === "" ? null : parsePositiveInt("pull-request-number", getInput("pull-request-number")),
     maxWaitTime: parsePositiveInt("max-wait-time", getInput("max-wait-time")),
     pollInterval: parsePositiveInt("poll-interval", getInput("poll-interval")),
     failOnTimeout: getBooleanInput("fail-on-timeout"),
@@ -24551,18 +24602,53 @@ async function collectResult(tfc, workspace, status) {
   }
   return result;
 }
+function setSkippedOutputs() {
+  setOutput("status", "skipped");
+  setOutput("has-changes", "false");
+  setOutput("results", "[]");
+  setOutput("comment-id", "");
+  setOutput("gate-state", "");
+}
 async function run() {
   try {
     const inputs = getInputs();
-    const pullRequest = context2.payload.pull_request;
-    if (pullRequest === void 0) {
-      throw new Error("This action can only be used in pull_request events");
-    }
-    const sha = String(pullRequest["head"]?.sha ?? "");
     const octokit = getOctokit(inputs.githubToken);
+    const decision = decideEvent(context2.eventName, context2.payload);
+    if (decision.kind === "unsupported") {
+      throw new Error(
+        `Unsupported event: ${decision.reason}. This action supports: ${SUPPORTED_EVENTS.join(", ")}`
+      );
+    }
+    if (decision.kind === "skip") {
+      info(`Skipped: ${decision.reason}`);
+      setSkippedOutputs();
+      return;
+    }
+    if (decision.kind === "merge-group") {
+      info(
+        "merge_group event: plans are evaluated on the pull request, not on the merge group commit"
+      );
+      if (inputs.statusContext !== "") {
+        await octokit.rest.repos.createCommitStatus({
+          owner: context2.repo.owner,
+          repo: context2.repo.repo,
+          sha: decision.headSha,
+          state: "success",
+          context: inputs.statusContext,
+          description: "Not evaluated for merge_group (checked on the pull request)"
+        });
+        info(`Commit status "${inputs.statusContext}": success (merge_group)`);
+      }
+      setSkippedOutputs();
+      setOutput("status", "success");
+      setOutput("gate-state", inputs.statusContext === "" ? "" : "success");
+      return;
+    }
+    const sha = decision.headSha;
+    const baseRef = decision.baseRef;
+    const pullRequestNumber = inputs.pullRequestNumber ?? decision.pullRequestNumber;
     const tfc = new TfcClient(inputs.hostname, inputs.token);
     const repository = `${context2.repo.owner}/${context2.repo.repo}`;
-    const baseRef = String(pullRequest["base"]?.ref ?? "");
     let workspaces = inputs.workspaces;
     let unobservable = [];
     if (workspaces.length === 0) {
@@ -24667,7 +24753,7 @@ async function run() {
       const comment = await upsertComment(octokit, {
         owner: context2.repo.owner,
         repo: context2.repo.repo,
-        issueNumber: inputs.pullRequestNumber,
+        issueNumber: pullRequestNumber,
         marker: COMMENT_MARKER,
         body
       });
@@ -24681,7 +24767,7 @@ async function run() {
       const reviews = await octokit.paginate(octokit.rest.pulls.listReviews, {
         owner: context2.repo.owner,
         repo: context2.repo.repo,
-        pull_number: inputs.pullRequestNumber,
+        pull_number: pullRequestNumber,
         per_page: 100
       });
       const humanApprovers = await filterApproversWithWriteAccess(
