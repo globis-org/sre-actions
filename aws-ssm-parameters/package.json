@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@actions/core": "3.0.1",
-    "@aws-sdk/client-ssm": "3.1127.0",
-    "yaml": "2.9.0",
-    "zod": "4.5.4"
+    "@aws-sdk/client-ssm": "3.1131.0",
+    "yaml": "2.9.1",
+    "zod": "4.6.2"
   }
 }
