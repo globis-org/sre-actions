@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.2.3](https://github.com/globis-org/sre-actions/compare/v1.2.2...v1.2.3) - 2026-10-01
+
+- chore(deps): update songmu/tagpr action to v1.21.0 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/155
+
 ## [v1.2.2](https://github.com/globis-org/sre-actions/compare/v1.2.1...v1.2.2) - 2026-09-15
 
 - modify(hcp-terraform-plan): 対応イベントを明確にし、merge_group と判定に影響しない review を扱う by @yukin01 in https://github.com/globis-org/sre-actions/pull/152
