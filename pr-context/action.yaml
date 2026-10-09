@@ -1,5 +1,5 @@
 name: sre-actions/pr-context
-description: Collect a deterministic snapshot of a pull request (metadata, diff, and Terraform plan results) for AI-assisted reviews
+description: Collect a pull request snapshot (metadata, diff, and Atlantis plan results) as files for AI-assisted reviews
 author: globis-org
 inputs:
   github-token:
@@ -7,41 +7,35 @@ inputs:
     required: false
     default: ${{ github.token }}
   pull-request-number:
-    description: Pull request number (defaults to the pull request in the event payload)
+    description: Pull request number
     required: false
-    default: ''
+    default: ${{ github.event.pull_request.number }}
   output-dir:
     description: Directory to write the context files into, relative to the working directory
     required: false
     default: .claude-review
   atlantis-comment-author:
     description: |
-      Login of the account Atlantis posts plan comments as (e.g. "my-atlantis-bot").
+      Login of the GitHub App that Atlantis posts plan comments as (with or without the "[bot]" suffix).
       When empty, Atlantis plans are not collected and plan-state is "disabled".
     required: false
     default: ''
-  atlantis-status-context:
-    description: Commit status context that Atlantis sets for plans
-    required: false
-    default: atlantis/plan
 
 outputs:
   output-dir:
     description: Absolute path of the directory the context files were written into
   head-sha:
     description: Head commit SHA the context was collected for
-  diff-truncated:
-    description: Whether pr-diff.patch was rebuilt from per-file patches because the full diff was unavailable (true or false)
   plan-state:
     description: |
-      Overall plan state: disabled, pending, none, unknown, failed, changes, or no-changes.
+      disabled, pending, none, no-projects, failed, incomplete, changes, or no-changes.
       See README for the meaning of each state.
   resource-count:
-    description: Number of changed resources in the plan (deduplicated by address and action)
+    description: Number of changed resources (deduplicated by address and action)
   destroy-or-replace:
     description: |
       Whether any resource will be destroyed or replaced: true, false, or unknown
-      (unknown when the plan is not available, failed, or its resource list could not be verified).
+      (unknown unless the plan is changes, no-changes, or no-projects).
 
 runs:
   using: 'node24'

@@ -1,98 +1,192 @@
 import { describe, expect, test } from 'vitest'
 import {
+  aggregateStatus,
+  buildPlan,
   countsMatch,
-  verifyWithStatuses,
   failureReason,
-  parsePlanComments,
+  lastSections,
   parseResourceLine,
   selectPlanComments,
+  type StatusRecord,
 } from '../src/atlantis'
 
-const BOT = 'atlantis-bot'
+// 実際の Atlantis コメントの構造を写したもの (パスや値は汎用のものに置き換えている)
+const multiHead = `Ran Plan for 2 projects:
 
-const singleProject = `Ran Plan for dir: \`infra/app\` workspace: \`default\`
+1. dir: \`infra/prod\` workspace: \`default\`
+1. dir: \`infra/stg\` workspace: \`default\`
+---
 
+### 1. dir: \`infra/prod\` workspace: \`default\`
 <details><summary>Show Output</summary>
 
 \`\`\`diff
-
-Terraform used the selected providers to generate the following execution
-plan. Resource actions are indicated with the following symbols:
-+ create
-~ update in-place
-- destroy
--/+ destroy and then create replacement
-
 Terraform will perform the following actions:
 
-  # aws_s3_bucket.logs will be created
-+ resource "aws_s3_bucket" "logs" {
-+     bucket = "example-logs"
-    }
+  # aws_iam_role.a will be destroyed
+  # (because aws_iam_role.a is not in configuration)
+- resource "aws_iam_role" "a" {
+\`\`\`
+</details>
 
-  # aws_iam_role.app will be updated in-place
-! resource "aws_iam_role" "app" {
-        name = "app"
-    }
+**Warning**: Output length greater than max comment size. Continued in next comment.`
 
-  # aws_instance.old will be destroyed
-  # (because aws_instance.old is not in configuration)
-- resource "aws_instance" "old" {
+const multiTail = `Continued plan output from previous comment.
+<details><summary>Show Output</summary>
+
+\`\`\`diff
     }
 
   # module.db.aws_db_instance.this["primary"] must be replaced
 -/+ resource "aws_db_instance" "this" {
     }
 
-Plan: 2 to add, 1 to change, 2 to destroy.
+Plan: 1 to add, 0 to change, 2 to destroy.
 \`\`\`
-
-* :arrow_forward: To **apply** this plan, comment:
-    * \`atlantis apply -d infra/app\`
 </details>
-Plan: 2 to add, 1 to change, 2 to destroy.`
-
-const multiProject = `Ran Plan for 2 projects:
-
-1. dir: \`infra/a\` workspace: \`default\`
-1. dir: \`infra/b\` workspace: \`default\`
-
-### 1. dir: \`infra/a\` workspace: \`default\`
-\`\`\`diff
-
-No changes. Your infrastructure matches the configuration.
-\`\`\`
+Plan: 1 to add, 0 to change, 2 to destroy.
 
 ---
-### 2. dir: \`infra/b\` workspace: \`default\`
-**Plan Error**
-\`\`\`
-Error: Invalid reference
-\`\`\`
+### 2. dir: \`infra/stg\` workspace: \`default\`
+**Plan Failed**: This project is currently locked by an unapplied plan from pull #1. To continue, delete the lock from #1 or apply that plan and merge the pull request.
 
 ---
-`
+### Plan Summary
+
+2 projects, 1 with changes, 0 unchanged, 1 failed`
+
+const single = (dir: string, body: string): string =>
+  `Ran Plan for dir: \`${dir}\` workspace: \`default\`\n\`\`\`diff\n${body}\n\`\`\``
+
+const status = (
+  context: string,
+  state: string,
+  description: string,
+  at = '2026-01-01T00:00:00Z'
+): StatusRecord => ({
+  context,
+  state,
+  description,
+  created_at: at,
+})
+
+const settled = {
+  kind: 'settled',
+  state: 'success',
+  description: '2/2 projects planned successfully.',
+  since: '2026-01-01T00:00:00Z',
+} as const
+
+describe('aggregateStatus', () => {
+  test('uses the latest aggregate status and the time it first appeared', () => {
+    expect(
+      aggregateStatus([
+        status(
+          'atlantis/plan',
+          'success',
+          '1/1 projects planned successfully.',
+          '2026-01-01T00:02:00Z'
+        ),
+        status(
+          'atlantis/plan: infra/prod/default',
+          'success',
+          'No changes.',
+          '2026-01-01T00:01:30Z'
+        ),
+        status('atlantis/plan', 'pending', 'Plan in progress...', '2026-01-01T00:01:00Z'),
+      ])
+    ).toStrictEqual({
+      kind: 'settled',
+      state: 'success',
+      description: '1/1 projects planned successfully.',
+      since: '2026-01-01T00:01:00Z',
+    })
+  })
+
+  test.each([
+    [[], 'none'],
+    [[status('atlantis/plan', 'pending', 'Plan in progress...')], 'pending'],
+  ])('%#', (statuses, kind) => {
+    expect(aggregateStatus(statuses).kind).toBe(kind)
+  })
+})
+
+describe('selectPlanComments', () => {
+  const comment = (login: string, type: string, createdAt: string, body: string) => ({
+    login,
+    type,
+    createdAt,
+    body,
+  })
+
+  test('keeps bot plan comments after since in order and joins continued output', () => {
+    expect(
+      selectPlanComments(
+        [
+          comment('atlantis-bot[bot]', 'Bot', '2026-01-01T00:00:02Z', multiTail),
+          comment('atlantis-bot[bot]', 'Bot', '2026-01-01T00:00:01Z', multiHead),
+          comment('atlantis-bot[bot]', 'Bot', '2025-12-31T00:00:00Z', single('old', 'No changes.')),
+          comment(
+            'atlantis-bot[bot]',
+            'Bot',
+            '2026-01-01T00:00:03Z',
+            'Ran Apply for dir: `infra/prod` workspace: `default`'
+          ),
+          comment(
+            'atlantis-bot[bot]',
+            'Bot',
+            '2026-01-01T00:00:04Z',
+            'Continued apply output from previous comment.'
+          ),
+          comment('atlantis-bot', 'User', '2026-01-01T00:00:05Z', single('fake', 'No changes.')),
+          comment('someone', 'User', '2026-01-01T00:00:06Z', single('quoted', 'No changes.')),
+        ],
+        'atlantis-bot',
+        '2026-01-01T00:00:00Z'
+      )
+    ).toStrictEqual([`${multiHead}\n${multiTail}`])
+  })
+
+  test('drops continued output whose head comment is older than since', () => {
+    expect(
+      selectPlanComments(
+        [comment('atlantis-bot[bot]', 'Bot', '2026-01-01T00:00:01Z', multiTail)],
+        'atlantis-bot[bot]',
+        '2026-01-01T00:00:00Z'
+      )
+    ).toStrictEqual([])
+  })
+})
+
+describe('lastSections', () => {
+  test('splits by project, ignoring the table of contents, and keeps the last plan of each', () => {
+    const sections = lastSections([
+      `${multiHead}\n${multiTail}`,
+      single('infra/stg', 'No changes.'),
+    ])
+    expect([...sections.keys()]).toStrictEqual(['infra/prod/default', 'infra/stg/default'])
+    expect(sections.get('infra/prod/default')).toContain('must be replaced')
+    expect(sections.get('infra/stg/default')).toContain('No changes.')
+  })
+
+  test('named projects are keyed by name like their statuses', () => {
+    const sections = lastSections([
+      'Ran Plan for project: `app` dir: `.` workspace: `prod`\nNo changes.',
+    ])
+    expect([...sections.keys()]).toStrictEqual(['app'])
+  })
+})
 
 describe('parseResourceLine', () => {
   test.each([
-    ['  # aws_s3_bucket.logs will be created', 'aws_s3_bucket.logs', 'create'],
-    ['  # aws_iam_role.app will be updated in-place', 'aws_iam_role.app', 'update'],
-    ['! # aws_iam_role.app will be updated in-place', 'aws_iam_role.app', 'update'],
-    ['  # aws_instance.old will be destroyed', 'aws_instance.old', 'delete'],
-    [
-      '  # aws_instance.old (deposed object 1a2b3c) will be destroyed',
-      'aws_instance.old',
-      'delete',
-    ],
-    ['-/+ # aws_instance.web must be replaced', 'aws_instance.web', 'replace'],
-    ['  # aws_instance.web is tainted, so must be replaced', 'aws_instance.web', 'replace'],
-    ['  # aws_instance.web will be replaced, as requested', 'aws_instance.web', 'replace'],
-    ['  # aws_s3_bucket.imported will be imported', 'aws_s3_bucket.imported', 'import'],
-    [
-      '  # aws_s3_bucket.kept will no longer be managed by Terraform',
-      'aws_s3_bucket.kept',
-      'forget',
-    ],
+    ['  # aws_s3_bucket.a will be created', 'aws_s3_bucket.a', 'create'],
+    ['! # aws_iam_role.a will be updated in-place', 'aws_iam_role.a', 'update'],
+    ['  # aws_instance.a (deposed object 1a2b) will be destroyed', 'aws_instance.a', 'delete'],
+    ['-/+ # aws_instance.a must be replaced', 'aws_instance.a', 'replace'],
+    ['  # aws_instance.a is tainted, so must be replaced', 'aws_instance.a', 'replace'],
+    ['  # aws_instance.a will be replaced, as requested', 'aws_instance.a', 'replace'],
+    ['  # aws_s3_bucket.a will be imported', 'aws_s3_bucket.a', 'import'],
+    ['  # aws_s3_bucket.a will no longer be managed by Terraform', 'aws_s3_bucket.a', 'forget'],
     [
       '  # module.a["key with space"].aws_s3_bucket.this will be created',
       'module.a["key with space"].aws_s3_bucket.this',
@@ -103,327 +197,20 @@ describe('parseResourceLine', () => {
   })
 
   test('moved resources keep the previous address', () => {
-    expect(parseResourceLine('  # aws_s3_bucket.old has moved to aws_s3_bucket.new')).toStrictEqual(
-      {
-        address: 'aws_s3_bucket.new',
-        action: 'move',
-        previousAddress: 'aws_s3_bucket.old',
-      }
-    )
+    expect(parseResourceLine('  # aws_s3_bucket.a has moved to aws_s3_bucket.b')).toStrictEqual({
+      address: 'aws_s3_bucket.b',
+      action: 'move',
+      previousAddress: 'aws_s3_bucket.a',
+    })
   })
 
   test.each([
-    '  # data.aws_iam_policy_document.this will be read during apply',
-    '  # (because aws_instance.old is not in configuration)',
-    '  # (moved from aws_s3_bucket.old)',
-    '+ resource "aws_s3_bucket" "logs" {',
+    '  # data.aws_iam_policy_document.a will be read during apply',
+    '  # (because aws_instance.a is not in configuration)',
+    '  # (moved from aws_s3_bucket.a)',
+    '+ resource "aws_s3_bucket" "a" {',
   ])('ignores %s', line => {
     expect(parseResourceLine(line)).toBeNull()
-  })
-})
-
-describe('selectPlanComments', () => {
-  const since = '2026-01-01T00:10:00Z'
-
-  test('keeps plan comments from the bot after the head commit was planned, in order', () => {
-    const comments = [
-      {
-        author: BOT,
-        authorType: 'Bot',
-        createdAt: '2026-01-01T00:12:00Z',
-        body: 'Ran Plan for dir: `b` workspace: `default`',
-      },
-      {
-        author: BOT,
-        authorType: 'Bot',
-        createdAt: '2026-01-01T00:11:00Z',
-        body: 'Ran Plan for dir: `a` workspace: `default`',
-      },
-      {
-        author: BOT,
-        authorType: 'Bot',
-        createdAt: '2026-01-01T00:05:00Z',
-        body: 'Ran Plan for dir: `old` workspace: `default`',
-      },
-      {
-        author: 'someone',
-        authorType: 'User',
-        createdAt: '2026-01-01T00:13:00Z',
-        body: 'Ran Plan for dir: `fake` workspace: `default`',
-      },
-      {
-        author: BOT,
-        authorType: 'Bot',
-        createdAt: '2026-01-01T00:14:00Z',
-        body: 'Ran Apply for dir: `a` workspace: `default`',
-      },
-    ]
-    expect(selectPlanComments(comments, { author: BOT, since })).toStrictEqual([
-      'Ran Plan for dir: `a` workspace: `default`',
-      'Ran Plan for dir: `b` workspace: `default`',
-    ])
-  })
-
-  test('joins continued output to the previous comment', () => {
-    const comments = [
-      {
-        author: BOT,
-        authorType: 'Bot',
-        createdAt: '2026-01-01T00:11:00Z',
-        body: 'Ran Plan for dir: `a` workspace: `default`\npart 1',
-      },
-      {
-        author: BOT,
-        authorType: 'Bot',
-        createdAt: '2026-01-01T00:11:01Z',
-        body: 'Continued plan output from previous comment.\npart 2',
-      },
-    ]
-    expect(selectPlanComments(comments, { author: BOT, since })).toStrictEqual([
-      'Ran Plan for dir: `a` workspace: `default`\npart 1\nContinued plan output from previous comment.\npart 2',
-    ])
-  })
-
-  test('drops continued output whose head comment is older than since', () => {
-    const comments = [
-      {
-        author: BOT,
-        authorType: 'Bot',
-        createdAt: '2026-01-01T00:11:00Z',
-        body: 'Continued plan output from previous comment.\npart 2',
-      },
-    ]
-    expect(selectPlanComments(comments, { author: BOT, since })).toStrictEqual([])
-  })
-})
-
-describe('parsePlanComments', () => {
-  test('no comments means no plan', () => {
-    expect(parsePlanComments([]).state).toBe('none')
-  })
-
-  test('zero projects is distinguished from no plan', () => {
-    expect(parsePlanComments(['Ran Plan for 0 projects:\n\n\n']).state).toBe('no-projects')
-  })
-
-  test('single project with changes', () => {
-    const plan = parsePlanComments([singleProject])
-    expect(plan.state).toBe('changes')
-    expect(plan.projects).toStrictEqual([
-      {
-        project: 'dir: infra/app workspace: default',
-        state: 'changes',
-        summary: 'Plan: 2 to add, 1 to change, 2 to destroy.',
-        resources: [
-          { address: 'aws_s3_bucket.logs', action: 'create' },
-          { address: 'aws_iam_role.app', action: 'update' },
-          { address: 'aws_instance.old', action: 'delete' },
-          { address: 'module.db.aws_db_instance.this["primary"]', action: 'replace' },
-        ],
-      },
-    ])
-  })
-
-  test('multiple projects: the table of contents is not a section', () => {
-    const plan = parsePlanComments([multiProject])
-    expect(plan.state).toBe('failed')
-    expect(plan.projects.map(p => [p.project, p.state])).toStrictEqual([
-      ['dir: infra/a workspace: default', 'no-changes'],
-      ['dir: infra/b workspace: default', 'failed'],
-    ])
-  })
-
-  test('a later plan of the same project overrides an earlier failure', () => {
-    const retried = 'Ran Plan for dir: `infra/b` workspace: `default`\n```diff\nNo changes.\n```'
-    const plan = parsePlanComments([multiProject, retried])
-    expect(plan.state).toBe('no-changes')
-    expect(plan.projects.find(p => p.project.includes('infra/b'))?.state).toBe('no-changes')
-  })
-
-  test('a command-level failure is cleared by a later plan', () => {
-    const failed = '**Plan Failed**: This project is currently locked by #1'
-    expect(parsePlanComments([failed]).state).toBe('failed')
-    expect(parsePlanComments([failed]).errors).toStrictEqual([
-      'Plan Failed: This project is currently locked by #1',
-    ])
-    expect(parsePlanComments([failed, singleProject]).state).toBe('changes')
-  })
-
-  test('named projects', () => {
-    const plan = parsePlanComments([
-      'Ran Plan for project: `app` dir: `.` workspace: `prod`\n```diff\nNo changes.\n```',
-    ])
-    expect(plan.projects[0]?.project).toBe('project: app dir: . workspace: prod')
-  })
-
-  test('unrecognized format is reported as unknown', () => {
-    expect(parsePlanComments(['Ran Plan for something new']).state).toBe('unknown')
-    expect(parsePlanComments(['Ran Plan for dir: `a` workspace: `default`\n(empty)']).state).toBe(
-      'unknown'
-    )
-  })
-
-  test('resources are deduplicated across projects', () => {
-    const a =
-      'Ran Plan for dir: `a` workspace: `default`\n  # aws_s3_bucket.x will be created\nPlan: 1 to add, 0 to change, 0 to destroy.'
-    const b =
-      'Ran Plan for dir: `b` workspace: `default`\n  # aws_s3_bucket.x will be created\nPlan: 1 to add, 0 to change, 0 to destroy.'
-    expect(parsePlanComments([a, b]).resources).toStrictEqual([
-      { address: 'aws_s3_bucket.x', action: 'create' },
-    ])
-  })
-})
-
-// 実際の Atlantis コメントの構造を写したもの (パスや値は汎用のものに置き換えている)
-const splitHead = `Ran Plan for 2 projects:
-
-1. dir: \`terraform/app/prod\` workspace: \`default\`
-1. dir: \`terraform/app/stg\` workspace: \`default\`
----
-
-### 1. dir: \`terraform/app/prod\` workspace: \`default\`
-<details><summary>Show Output</summary>
-
-\`\`\`diff
-Terraform will perform the following actions:
-
-  # aws_iam_role.a will be destroyed
-  # (because aws_iam_role.a is not in configuration)
-- resource "aws_iam_role" "a" {
-      - name = "a" -> null
-\`\`\`
-</details>
-
-<br>
-
-**Warning**: Output length greater than max comment size. Continued in next comment.`
-
-const splitTail = `Continued plan output from previous comment.
-<details><summary>Show Output</summary>
-
-\`\`\`diff
-    }
-
-  # aws_iam_role_policy.b will be destroyed
-- resource "aws_iam_role_policy" "b" {
-    }
-
-Plan: 0 to add, 0 to change, 2 to destroy.
-╷
-│ Warning: Argument is deprecated
-╵
-\`\`\`
-
-* :arrow_forward: To **apply** this plan, comment:
-    \`\`\`shell
-    atlantis apply -d terraform/app/prod
-    \`\`\`
-</details>
-Plan: 0 to add, 0 to change, 2 to destroy.
-
----
-### 2. dir: \`terraform/app/stg\` workspace: \`default\`
-**Plan Failed**: This project is currently locked by an unapplied plan from pull #1. To continue, delete the lock from #1 or apply that plan and merge the pull request.
-
-Once the lock is released, comment \`atlantis plan\` here to re-plan.
-
----
-### Plan Summary
-
-2 projects, 1 with changes, 0 unchanged, 1 failed`
-
-const concurrentError = `**Plan Error**
-\`\`\`
-cannot run "plan": the default workspace at path . is currently locked for this pull request by "plan".
-Wait until the previous command is complete and try again
-\`\`\``
-
-describe('real-world comment structure', () => {
-  test('split comments are joined and every section is parsed', () => {
-    const comments = selectPlanComments(
-      [
-        {
-          author: 'atlantis-bot[bot]',
-          authorType: 'Bot',
-          createdAt: '2026-01-01T00:00:01Z',
-          body: splitHead,
-        },
-        {
-          author: 'atlantis-bot[bot]',
-          authorType: 'Bot',
-          createdAt: '2026-01-01T00:00:02Z',
-          body: splitTail,
-        },
-      ],
-      { author: 'atlantis-bot', since: '2026-01-01T00:00:00Z' }
-    )
-    expect(comments).toHaveLength(1)
-    const plan = parsePlanComments(comments)
-    expect(plan.state).toBe('failed')
-    expect(plan.projects).toStrictEqual([
-      {
-        project: 'dir: terraform/app/prod workspace: default',
-        state: 'changes',
-        summary: 'Plan: 0 to add, 0 to change, 2 to destroy.',
-        resources: [
-          { address: 'aws_iam_role.a', action: 'delete' },
-          { address: 'aws_iam_role_policy.b', action: 'delete' },
-        ],
-      },
-      {
-        project: 'dir: terraform/app/stg workspace: default',
-        state: 'failed',
-        summary:
-          'Plan Failed: This project is currently locked by an unapplied plan from pull #1. To continue, delete the lock from #1 or apply that plan and merge the pull request.',
-        resources: [],
-      },
-    ])
-  })
-
-  test('a concurrent-run error before the result does not stick', () => {
-    const result =
-      'Ran Plan for dir: `terraform/app/stg` workspace: `default`\n```diff\nNo changes.\n```'
-    expect(parsePlanComments([concurrentError, result]).state).toBe('no-changes')
-    expect(parsePlanComments([concurrentError]).errors).toStrictEqual([
-      'Plan Error: cannot run "plan": the default workspace at path . is currently locked for this pull request by "plan".',
-    ])
-  })
-
-  test('apply comments and their continuations are ignored', () => {
-    const comments = selectPlanComments(
-      [
-        {
-          author: 'atlantis-bot[bot]',
-          authorType: 'Bot',
-          createdAt: '2026-01-01T00:00:01Z',
-          body: 'Ran Apply for dir: `a` workspace: `default`',
-        },
-        {
-          author: 'atlantis-bot[bot]',
-          authorType: 'Bot',
-          createdAt: '2026-01-01T00:00:02Z',
-          body: 'Continued apply output from previous comment.',
-        },
-        {
-          author: 'atlantis-bot[bot]',
-          authorType: 'Bot',
-          createdAt: '2026-01-01T00:00:03Z',
-          body: 'Locks and plans deleted for the projects and workspaces modified in this pull request:',
-        },
-      ],
-      { author: 'atlantis-bot[bot]', since: '2026-01-01T00:00:00Z' }
-    )
-    expect(comments).toStrictEqual([])
-  })
-})
-
-describe('failureReason', () => {
-  test.each([
-    ['**Plan Failed**: locked by #1', 'Plan Failed: locked by #1'],
-    ['**Plan Error**\n```\nError: Invalid reference\n```', 'Plan Error: Error: Invalid reference'],
-    ['**Plan Error**', 'Plan Error'],
-  ])('%s', (text, expected) => {
-    expect(failureReason(text)).toBe(expected)
   })
 })
 
@@ -435,199 +222,123 @@ describe('countsMatch', () => {
     { address: 'd', action: 'delete' as const },
   ]
 
-  test('replace counts as both add and destroy', () => {
-    expect(countsMatch('Plan: 2 to add, 1 to change, 2 to destroy.', resources)).toBe(true)
-  })
-
-  test('import counts are not checked', () => {
-    expect(countsMatch('Plan: 5 to import, 2 to add, 1 to change, 2 to destroy.', resources)).toBe(
-      true
-    )
-  })
-
-  test('forget counts are checked', () => {
-    expect(
-      countsMatch('Plan: 0 to add, 0 to change, 0 to destroy, 1 to forget.', [
-        { address: 'a', action: 'forget' },
-      ])
-    ).toBe(true)
-    expect(countsMatch('Plan: 0 to add, 0 to change, 0 to destroy, 1 to forget.', [])).toBe(false)
-  })
-
-  test('missing resources are detected', () => {
-    expect(countsMatch('Plan: 2 to add, 1 to change, 3 to destroy.', resources)).toBe(false)
+  test.each([
+    ['Plan: 2 to add, 1 to change, 2 to destroy.', true],
+    ['Plan: 5 to import, 2 to add, 1 to change, 2 to destroy.', true],
+    ['Plan: 2 to add, 1 to change, 3 to destroy.', false],
+    ['Plan: 2 to add, 1 to change, 2 to destroy, 1 to forget.', false],
+  ])('%s', (line, expected) => {
+    expect(countsMatch(line, resources)).toBe(expected)
   })
 })
 
-describe('incomplete resource lists', () => {
-  const header = 'Ran Plan for dir: `a` workspace: `default`\n```diff\n'
-
-  test('fewer resources than the Plan line says', () => {
-    const plan = parsePlanComments([
-      `${header}  # aws_s3_bucket.x will be destroyed\nPlan: 0 to add, 0 to change, 2 to destroy.\n\`\`\``,
-    ])
-    expect(plan.projects[0]?.state).toBe('incomplete')
-    expect(plan.state).toBe('unknown')
-  })
-
-  test('output cut off before the Plan line', () => {
-    const plan = parsePlanComments([
-      `${header}  # aws_s3_bucket.x will be created\n+ resource "aws_s3_bucket" "x" {`,
-    ])
-    expect(plan.projects[0]?.state).toBe('incomplete')
-  })
-
-  test('changes to outputs only', () => {
-    const plan = parsePlanComments([
-      `${header}Changes to Outputs:\n  + url = "https://example.com"\n\`\`\``,
-    ])
-    expect(plan.projects[0]?.state).toBe('changes')
+describe('failureReason', () => {
+  test.each([
+    ['**Plan Failed**: locked by #1', 'locked by #1'],
+    ['**Plan Error**\n```\ncannot run "plan": locked\n```', 'cannot run "plan": locked'],
+    ['No changes.', undefined],
+  ])('%s', (text, expected) => {
+    expect(failureReason(text)).toBe(expected)
   })
 })
 
-test('plan output quoted by a person is ignored', () => {
-  const comments = selectPlanComments(
-    [
-      {
-        author: 'someone',
-        authorType: 'User',
-        createdAt: '2026-01-01T00:00:01Z',
-        body: 'Ran Plan for dir: `a` workspace: `default`\nquoted',
-      },
-      {
-        author: 'atlantis-bot',
-        authorType: 'Bot',
-        createdAt: '2026-01-01T00:00:02Z',
-        body: 'Ran Plan for dir: `a` workspace: `default`\nreal',
-      },
-    ],
-    { author: 'atlantis-bot', since: '2026-01-01T00:00:00Z' }
-  )
-  expect(comments).toStrictEqual(['Ran Plan for dir: `a` workspace: `default`\nreal'])
-})
+describe('buildPlan', () => {
+  const comments = [`${multiHead}\n${multiTail}`]
 
-test('a user account with the same login is not treated as Atlantis', () => {
-  expect(
-    selectPlanComments(
+  test('takes the state from statuses and the resources and reasons from comments', () => {
+    const plan = buildPlan(
+      settled,
       [
+        status(
+          'atlantis/plan: infra/prod/default',
+          'success',
+          'Plan: 1 to add, 0 to change, 2 to destroy.'
+        ),
+        status('atlantis/plan: infra/stg/default', 'failure', 'Plan failed.'),
+      ],
+      comments
+    )
+    expect(plan).toStrictEqual({
+      state: 'failed',
+      projects: [
         {
-          author: 'atlantis-bot',
-          authorType: 'User',
-          createdAt: '2026-01-01T00:00:01Z',
-          body: 'Ran Plan for dir: `a` workspace: `default`',
+          project: 'infra/prod/default',
+          state: 'changes',
+          status: 'Plan: 1 to add, 0 to change, 2 to destroy.',
+          resources: [
+            { address: 'aws_iam_role.a', action: 'delete' },
+            { address: 'module.db.aws_db_instance.this["primary"]', action: 'replace' },
+          ],
+        },
+        {
+          project: 'infra/stg/default',
+          state: 'failed',
+          status: 'Plan failed.',
+          reason:
+            'This project is currently locked by an unapplied plan from pull #1. To continue, delete the lock from #1 or apply that plan and merge the pull request.',
+          resources: [],
         },
       ],
-      { author: 'atlantis-bot', since: '2026-01-01T00:00:00Z' }
-    )
-  ).toStrictEqual([])
-})
-
-describe('verifyWithStatuses', () => {
-  const comment = (dir: string, body: string): string =>
-    `Ran Plan for dir: \`${dir}\` workspace: \`default\`\n\`\`\`diff\n${body}\n\`\`\``
-  const plan = parsePlanComments([
-    comment(
-      'infra/a',
-      '  # aws_s3_bucket.x will be created\nPlan: 1 to add, 0 to change, 0 to destroy.'
-    ),
-    comment('infra/b', 'No changes. Your infrastructure matches the configuration.'),
-  ])
-
-  test('matching statuses leave the result unchanged', () => {
-    const verified = verifyWithStatuses(
-      plan,
-      new Map([
-        [
-          'infra/a/default',
-          { state: 'success', description: 'Plan: 1 to add, 0 to change, 0 to destroy.' },
-        ],
-        [
-          'infra/b/default',
-          {
-            state: 'success',
-            description: 'No changes. Your infrastructure matches the configuration.',
-          },
-        ],
-      ])
-    )
-    expect(verified).toBe(plan)
-  })
-
-  test('a project with a status but no comment is reported as incomplete', () => {
-    const verified = verifyWithStatuses(
-      plan,
-      new Map([
-        [
-          'infra/a/default',
-          { state: 'success', description: 'Plan: 1 to add, 0 to change, 0 to destroy.' },
-        ],
-        ['infra/b/default', { state: 'success', description: 'No changes.' }],
-        [
-          'infra/c/default',
-          { state: 'success', description: 'Plan: 0 to add, 0 to change, 3 to destroy.' },
-        ],
-      ])
-    )
-    expect(verified.state).toBe('unknown')
-    expect(
-      verified.projects.find(p => p.project === 'dir: infra/c workspace: default')
-    ).toStrictEqual({
-      project: 'dir: infra/c workspace: default',
-      state: 'incomplete',
-      summary: null,
-      resources: [],
-      note: 'plan コメントが見つからない (status: Plan: 0 to add, 0 to change, 3 to destroy.)',
+      resources: [
+        { address: 'aws_iam_role.a', action: 'delete' },
+        { address: 'module.db.aws_db_instance.this["primary"]', action: 'replace' },
+      ],
     })
   })
 
-  test('a Plan line that differs from the status is reported as incomplete', () => {
-    const verified = verifyWithStatuses(
-      plan,
-      new Map([
-        [
-          'infra/a/default',
-          { state: 'success', description: 'Plan: 2 to add, 0 to change, 0 to destroy.' },
-        ],
-      ])
+  test('a later successful plan in the status overrides an earlier failure in the comments', () => {
+    const plan = buildPlan(
+      settled,
+      [
+        status(
+          'atlantis/plan: infra/stg/default',
+          'success',
+          'No changes. Your infrastructure matches the configuration.'
+        ),
+      ],
+      [...comments, single('infra/stg', 'No changes.')]
     )
-    const project = verified.projects.find(p => p.project === 'dir: infra/a workspace: default')
-    expect(project?.state).toBe('incomplete')
-    expect(project?.note).toContain('Plan 行が status と不一致')
+    expect(plan.state).toBe('no-changes')
   })
 
-  test('failure statuses must match failed comments', () => {
-    const failed = parsePlanComments([comment('infra/a', '**Plan Error**')])
-    expect(
-      verifyWithStatuses(
-        failed,
-        new Map([['infra/a/default', { state: 'failure', description: 'Plan failed.' }]])
-      )
-    ).toBe(failed)
-    expect(
-      verifyWithStatuses(
-        plan,
-        new Map([['infra/b/default', { state: 'failure', description: 'Plan failed.' }]])
-      ).state
-    ).toBe('unknown')
-  })
-
-  test('named projects use the project name', () => {
-    const named = parsePlanComments([
-      'Ran Plan for project: `app` dir: `.` workspace: `prod`\n```diff\nNo changes.\n```',
-    ])
-    expect(
-      verifyWithStatuses(
-        named,
-        new Map([['app', { state: 'success', description: 'No changes.' }]])
-      )
-    ).toBe(named)
-  })
-
-  test('statuses rescue a plan whose comments are all missing', () => {
-    const verified = verifyWithStatuses(
-      parsePlanComments([]),
-      new Map([['infra/a/default', { state: 'success', description: 'No changes.' }]])
+  test.each([
+    [
+      'resources missing from the comment',
+      'Plan: 1 to add, 0 to change, 3 to destroy.',
+      comments,
+      'リソース数が Plan 行と合わない',
+    ],
+    [
+      'no comment for the project',
+      'Plan: 1 to add, 0 to change, 0 to destroy.',
+      [],
+      'plan コメントが見つからない',
+    ],
+  ])('%s is incomplete', (_, description, planComments, reason) => {
+    const plan = buildPlan(
+      settled,
+      [status('atlantis/plan: infra/prod/default', 'success', description)],
+      planComments
     )
-    expect(verified.state).toBe('unknown')
+    expect(plan.state).toBe('incomplete')
+    expect(plan.projects[0]?.reason).toBe(reason)
+  })
+
+  test('aggregate states without project statuses', () => {
+    expect(buildPlan({ kind: 'pending' }, [], []).state).toBe('pending')
+    expect(buildPlan({ kind: 'none' }, [], []).state).toBe('none')
+    expect(
+      buildPlan({ ...settled, description: '0/0 projects planned successfully.' }, [], []).state
+    ).toBe('no-projects')
+  })
+
+  test('a command-level failure keeps its reason', () => {
+    const plan = buildPlan(
+      { ...settled, state: 'failure', description: 'Plan failed.' },
+      [],
+      ['**Plan Error**\n```\nparse error in atlantis.yaml\n```']
+    )
+    expect(plan.state).toBe('failed')
+    expect(plan.projects[0]?.reason).toBe('parse error in atlantis.yaml')
   })
 })

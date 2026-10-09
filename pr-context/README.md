@@ -1,16 +1,15 @@
 # PR Context
 
-Pull Request のレビューに必要なコンテキスト (PR のメタデータ、diff、Terraform plan の結果) を決定的に集め、ファイルに書き出す GitHub Action です。
+Pull Request のレビューに必要なコンテキスト (PR のメタデータ、diff、Atlantis plan の結果) を集め、ファイルに書き出す GitHub Action です。
 
-AI レビュー (claude-code-action など) の前段で実行し、レビューする側には「集める」作業をさせずに書き出したファイルを読ませる使い方を想定しています。
+AI レビュー (claude-code-action など) の前段で実行し、レビューする側には集める作業をさせずに、書き出したファイルを読ませる使い方を想定しています。
 
-- PR 情報と diff は同じ head commit に固定して取得する (取得途中の push で食い違わない)
-- plan の変更リソース一覧と状態の判定 (project ごとの最後の plan、失敗、destroy / replace の有無) をコードで行い、テストで固定する
-- レビューする側の sandbox や permission の制約 (パイプ・複合コマンドの禁止、`gh api` の allow 設定など) を気にしなくてよい
+- PR 情報と diff は同じ head commit に固定して取得する
+- plan の状態と変更リソース一覧はコードで決め、LLM に列挙・判定させない
 
 ## 使用例
 
-この action は plan の完了を待ちません。plan の完了は前段のジョブで [wait-for-commit-status](../wait-for-commit-status) などを使って待ちます。待機を軽い runner の前段ジョブに置くと、レビューする側の runner をアイドルさせずに済み、plan の結果でレビュー自体を skip する判断もレビューのジョブを起動する前にできます。
+この action は plan の完了を待ちません。前段のジョブで [wait-for-commit-status](../wait-for-commit-status) などを使って待ちます。待機を軽い runner に置け、plan の結果でレビュー自体を skip する判断もレビューのジョブを起動する前にできるためです。
 
 ```yaml
 on:
@@ -40,12 +39,9 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
-      - name: Collect PR context
-        id: context
-        uses: globis-org/sre-actions/pr-context@v1
+      - uses: globis-org/sre-actions/pr-context@v1
         with:
-          # Atlantis を使うリポジトリのみ。省略すると plan は収集しない
-          atlantis-comment-author: my-atlantis-bot
+          atlantis-comment-author: my-atlantis-app # Atlantis を使うリポジトリのみ
 
       - uses: anthropics/claude-code-action@v1
         with:
@@ -57,68 +53,62 @@ jobs:
 
 ## 書き出すファイル
 
-| ファイル           | 内容                                                                                                                                                                                                       |
-| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pr-info.json`     | PR のメタデータ。フィールド名は `gh pr view --json` に合わせる (`number`, `title`, `body`, `author.login`, `author.is_bot`, `headRefName`, `baseRefName`, `headRefOid`, `baseRefOid`, `files[].path` など) |
-| `pr-diff.patch`    | base と head の sha を固定した unified diff (`base...head`)。diff が大きすぎて取得できない場合はファイルごとの patch から組み立てる (`diff-truncated` が `true`)                                           |
-| `plan.json`        | plan の結果 (`state`, project ごとの状態と Plan 行と変更リソース、全体の変更リソース一覧)                                                                                                                  |
-| `plan-summary.md`  | `plan.json` を Markdown にしたもの。`plan:` / `destroy / replace:` の 2 行、project の表、変更リソース一覧。レビューの prompt やサマリーにそのまま貼る用途                                                 |
-| `atlantis-plan.md` | head commit に対する Atlantis の plan コメントの原文を時系列に結合したもの (Atlantis 有効時のみ)                                                                                                           |
+| ファイル           | 内容                                                                                                                                                   |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `pr-info.json`     | PR のメタデータ。フィールド名は `gh pr view --json` に合わせる (`number`, `title`, `body`, `author`, `headRefName`, `headRefOid`, `files[].path` など) |
+| `pr-diff.patch`    | base と head の SHA を固定した diff (`base...head`)                                                                                                    |
+| `plan.json`        | plan の状態、project ごとの状態・status・理由・変更リソース、全体の変更リソース一覧 (Atlantis 有効時のみ)                                              |
+| `plan-summary.md`  | `plan:` / `destroy / replace:` の 2 行、project の表、変更リソース一覧。レビューの prompt やサマリーにそのまま貼る用途 (Atlantis 有効時のみ)           |
+| `atlantis-plan.md` | 対象にした plan コメントの原文 (Atlantis 有効時のみ)                                                                                                   |
 
-### plan の状態 (`plan-state`)
+## plan の状態 (`plan-state`)
 
-| 値            | 意味                                                                                                                         | `destroy / replace:` |
-| ------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------- |
-| `disabled`    | plan の収集が無効 (`atlantis-comment-author` が空)                                                                           | 対象外               |
-| `pending`     | 実行時点で plan が終わっていない (前段で待っていない、または待機がタイムアウトした)                                          | 不明                 |
-| `none`        | head commit に対する plan が無い (status が付いていない、コメントが無い)                                                     | 不明                 |
-| `no-projects` | plan は実行されたが対象の project が無い (`0/0 projects planned`。Terraform に関係しない PR)                                 | なし                 |
-| `unknown`     | plan のコメントはあるが形式を解釈できない、またはリソース一覧の件数が Plan 行と合わない (出力の打ち切りなど)。手動で確認する | 不明                 |
-| `failed`      | いずれかの project の最後の plan が失敗、または project に紐づかない失敗 (ロックなど)                                        | 不明                 |
-| `changes`     | いずれかの project に変更がある                                                                                              | 列挙 / なし          |
-| `no-changes`  | 全 project が変更なし                                                                                                        | なし                 |
+| 値            | 意味                                                                    | `destroy-or-replace` |
+| ------------- | ----------------------------------------------------------------------- | -------------------- |
+| `disabled`    | `atlantis-comment-author` が空で、plan を収集していない                 | -                    |
+| `pending`     | plan が終わっていない                                                   | `unknown`            |
+| `none`        | head commit に `atlantis/plan` の status が無い                         | `unknown`            |
+| `no-projects` | 対象 project が無い (`0/0 projects planned`。Terraform に関係しない PR) | `false`              |
+| `failed`      | いずれかの project の plan が失敗した                                   | `unknown`            |
+| `incomplete`  | 変更リソース一覧を検証できない project がある (下記)。手動で確認する    | `unknown`            |
+| `changes`     | いずれかの project に変更がある                                         | `true` / `false`     |
+| `no-changes`  | 全 project が変更なし                                                   | `false`              |
 
-## Atlantis
+`failed` / `incomplete` でも、検証できた project の destroy / replace が見つかれば `destroy-or-replace` は `true` になります。
 
-`atlantis-comment-author` を指定すると、次の手順で plan を集めます。
+## Atlantis の結果の組み立て方
 
-1. head commit に付く `atlantis/plan` の commit status (project ごとの `atlantis/plan: <dir>/<workspace>` ではなく集約のもの) を 1 回読む。付いていなければ plan 無し (`none`)、`pending` なら `pending`、description が `0/0 ` で始まれば対象 project なし (`no-projects`) とする。コメントが見つからない場合は、投稿と status 更新の順序の揺れを考えて数秒おきに最大 3 回取り直す
-2. その status が head commit に最初に付いた時刻以降に `atlantis-comment-author` が投稿した plan コメントを集める。それより前のコメントは古い head に対する plan とみなして使わない
-3. 分割されたコメント (`Continued plan output from previous comment.`) は前のコメントにつなぐ
-4. project (`dir` / `workspace`、名前付き project は `project` も) ごとに最後の plan の結果を採用する。前の失敗は同じ project の後の plan で上書きされ、project に紐づかない失敗は後でいずれかの project の plan が出れば解消したものとする
-5. plan 出力の `# <address> will be created` などの行から変更リソースを抽出する (data source の `read` は含めない)
-6. project ごとに、`Plan: N to add, M to change, K to destroy.` の件数と抽出したリソースの件数 (add = create + replace、change = update、destroy = delete + replace) を突き合わせる。合わない場合や、リソースがあるのに Plan 行が無い場合は、その project を「リソース一覧が不完全」とし、全体を `unknown` にする (取りこぼしたまま「destroy なし」と報告しないため)
-7. Atlantis が project ごとに付ける commit status (`atlantis/plan: <dir>/<workspace>`、名前付き project は `atlantis/plan: <project>`) と突き合わせる。status があるのにコメントから結果が得られない project、status の Plan 行 (`No changes.` / 失敗) とコメントの結果が食い違う project は「リソース一覧が不完全」とし、全体を `unknown` にする。status はコメントと独立に付くので、コメントの欠落 (折りたたみ・削除・件数の上限など) で project ごと結果が抜けても黙って一覧から消えない
+状態は commit status から、変更リソースと失敗の理由はコメントから取ります。
 
-変更リソースの action は `terraform plan -json` の語彙 (`create`, `update`, `delete`, `replace`, `import`, `move`, `forget`) に揃えています。
+1. head commit の集約 status (`atlantis/plan`) を読む。無ければ `none`、`pending` なら `pending`、description が `0/0 ` で始まれば `no-projects`
+2. project ごとの status (`atlantis/plan: <dir>/<workspace>`、名前付き project は `atlantis/plan: <project>`) の最新を、その project の結果とする。description は Plan 行、`No changes.`、または失敗
+3. 集約 status が head に最初に付いた時刻以降に、`atlantis-comment-author` (GitHub App) が投稿した plan コメントを集める。それより前は古い head への plan として使わない。分割された続き (`Continued plan output ...`) は前のコメントにつなぐ
+4. コメントを project ごとの節に分け、project ごとに最後の節から次を取る
+   - 変更リソース: `# <address> will be created` などの行 (data source の `read` は含めない)。action は `terraform plan -json` の語彙 (`create` / `update` / `delete` / `replace` / `import` / `move` / `forget`)
+   - 失敗の理由: `**Plan Failed**: <理由>` の行、または `**Plan Error**` に続くエラーの最初の行
+5. 変更リソースの数を status の Plan 行と突き合わせる (add = create + replace、change = update、destroy = delete + replace)。合わない、またはコメントが見つからない project は `incomplete` にする。出力の打ち切り、コメントの欠落 (折りたたみ・削除)、未知の書式で、黙って「destroy なし」と報告しないため
 
-### 前提・注意事項
+### 注意事項
 
-- Atlantis 既定のコメントテンプレートを前提にしている。テンプレートをカスタマイズしている場合や Atlantis の更新で形式が変わった場合は `unknown` になる (誤って「変更なし」にはしない)
-- plan 出力が Atlantis 側で打ち切られた場合、打ち切られた部分のリソースは一覧に出ないが、手順 6 の突き合わせで `unknown` になる
-- import と同時に update されるリソースは `update` として一覧に出る (Terraform の表示が `will be updated in-place` に `(imported from ...)` を併記する形のため)。import の件数は突き合わせに使わない
-- Atlantis は GitHub App として動かしている前提。コメントの投稿者は login の一致に加えて `type: Bot` であることで判定する (同じ login のユーザーアカウントや、plan を引用した人のコメントを拾わないため)
-- Terraform に関係しない PR でも通常は `0/0 projects planned successfully.` の status がすぐ付くので `no-projects` になる。status がまったく付かない PR は `none` になる
-- Atlantis は plan を実行するたびに新しいコメントを投稿する (前のコメントは更新しない)。同じ head に対する再 plan (`atlantis plan -d <dir>` など) も手順 4 で project ごとに最後の結果が採用される
-- plan の実行中に重ねて plan が起動されると `**Plan Error**` (`cannot run "plan": ... currently locked for this pull request`) が投稿されるが、実行中の plan の結果が後から来るので手順 4 により解消される
+- import と同時に update されるリソースは `update` として一覧に出る (Terraform の表示が `(imported from ...)` を併記する形のため)。import の数は突き合わせに使わない
+- コメントが status より後に投稿された場合に備え、コメントが見つからない project があれば 5 秒おきに 3 回まで取り直す
+- Atlantis 既定のコメントテンプレートを前提にしている。カスタマイズしている場合はリソースを抽出できず `incomplete` になる
 
 ## Inputs
 
-| Name                      | Description                                                                                                                            | Required | Default               |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------- |
-| `github-token`            | PR・コメント・commit status の読み取りに使う GitHub token                                                                              | No       | `${{ github.token }}` |
-| `pull-request-number`     | Pull Request 番号。省略時は `pull_request` 系イベント、または PR 上の `issue_comment` から取る                                         | No       | -                     |
-| `output-dir`              | 書き出し先ディレクトリ (作業ディレクトリからの相対パス)                                                                                | No       | `.claude-review`      |
-| `atlantis-comment-author` | Atlantis が plan コメントを投稿するアカウントのログイン名 (GitHub App の `[bot]` は付けても付けなくてもよい)。空なら plan を収集しない | No       | -                     |
-| `atlantis-status-context` | Atlantis が plan に付ける commit status の context                                                                                     | No       | `atlantis/plan`       |
+| Name                      | Description                                                                                                      | Required | Default                                   |
+| ------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------- |
+| `github-token`            | PR・コメント・commit status の読み取りに使う GitHub token                                                        | No       | `${{ github.token }}`                     |
+| `pull-request-number`     | Pull Request 番号                                                                                                | No       | `${{ github.event.pull_request.number }}` |
+| `output-dir`              | 書き出し先ディレクトリ (作業ディレクトリからの相対パス)                                                          | No       | `.claude-review`                          |
+| `atlantis-comment-author` | Atlantis が plan コメントを投稿する GitHub App のログイン名 (`[bot]` の有無は問わない)。空なら plan を収集しない | No       | -                                         |
 
 ## Outputs
 
-| Name                 | Description                                                                                                                         |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `output-dir`         | 書き出し先ディレクトリの絶対パス                                                                                                    |
-| `head-sha`           | コンテキストを取得した head commit の SHA                                                                                           |
-| `diff-truncated`     | `pr-diff.patch` をファイルごとの patch から組み立てたか                                                                             |
-| `plan-state`         | plan の状態 ([plan の状態](#plan-の状態-plan-state) を参照)                                                                         |
-| `resource-count`     | 変更リソースの件数 (address と action で重複を除く)                                                                                 |
-| `destroy-or-replace` | destroy または replace されるリソースがあるか (`true` / `false` / `unknown`)。plan が無い・失敗・一覧を検証できないときは `unknown` |
+| Name                 | Description                                                                  |
+| -------------------- | ---------------------------------------------------------------------------- |
+| `output-dir`         | 書き出し先ディレクトリの絶対パス                                             |
+| `head-sha`           | コンテキストを取得した head commit の SHA                                    |
+| `plan-state`         | plan の状態 ([plan の状態](#plan-の状態-plan-state) を参照)                  |
+| `resource-count`     | 変更リソースの数 (address と action で重複を除く)                            |
+| `destroy-or-replace` | destroy または replace されるリソースがあるか (`true` / `false` / `unknown`) |
