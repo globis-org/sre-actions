@@ -1,0 +1,42 @@
+name: sre-actions/pr-context
+description: Collect a pull request snapshot (metadata, diff, and Atlantis plan results) as files for AI-assisted reviews
+author: globis-org
+inputs:
+  github-token:
+    description: GitHub token used to read the pull request, its comments, and commit statuses
+    required: false
+    default: ${{ github.token }}
+  pull-request-number:
+    description: Pull request number
+    required: false
+    default: ${{ github.event.pull_request.number }}
+  output-dir:
+    description: Directory to write the context files into, relative to the working directory
+    required: false
+    default: .claude-review
+  atlantis-comment-author:
+    description: |
+      Login of the GitHub App that Atlantis posts plan comments as (with or without the "[bot]" suffix).
+      When empty, Atlantis plans are not collected and plan-state is "disabled".
+    required: false
+    default: ''
+
+outputs:
+  output-dir:
+    description: Absolute path of the directory the context files were written into
+  head-sha:
+    description: Head commit SHA the context was collected for
+  plan-state:
+    description: |
+      disabled, pending, none, no-projects, failed, incomplete, changes, or no-changes.
+      See README for the meaning of each state.
+  resource-count:
+    description: Number of changed resources (counted per project)
+  destroy-or-replace:
+    description: |
+      Whether any resource will be destroyed or replaced: true, false, or unknown
+      (unknown unless the plan is changes, no-changes, or no-projects; also unknown when disabled).
+
+runs:
+  using: 'node24'
+  main: 'dist/main.js'
