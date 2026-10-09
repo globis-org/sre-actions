@@ -1,0 +1,60 @@
+name: sre-actions/pr-context
+description: Collect a deterministic snapshot of a pull request (metadata, diff, and Terraform plan results) for AI-assisted reviews
+author: globis-org
+inputs:
+  github-token:
+    description: GitHub token used to read the pull request, its comments, and commit statuses
+    required: false
+    default: ${{ github.token }}
+  pull-request-number:
+    description: Pull request number (defaults to the pull request in the event payload)
+    required: false
+    default: ''
+  output-dir:
+    description: Directory to write the context files into, relative to the working directory
+    required: false
+    default: .claude-review
+  atlantis-comment-author:
+    description: |
+      Login of the account Atlantis posts plan comments as (e.g. "my-atlantis-bot").
+      When empty, Atlantis plans are not collected and plan-state is "disabled".
+    required: false
+    default: ''
+  atlantis-status-context:
+    description: Commit status context that Atlantis sets for plans
+    required: false
+    default: atlantis/plan
+  max-wait-time:
+    description: Maximum time to wait for the plan to finish, in seconds (0 checks once without waiting)
+    required: false
+    default: '600'
+  start-timeout:
+    description: |
+      Time to wait for the plan status to appear on the head commit, in seconds.
+      When it does not appear in time, the pull request is treated as having no plan.
+    required: false
+    default: '120'
+  poll-interval:
+    description: Polling interval in seconds
+    required: false
+    default: '10'
+
+outputs:
+  output-dir:
+    description: Absolute path of the directory the context files were written into
+  head-sha:
+    description: Head commit SHA the context was collected for
+  diff-truncated:
+    description: Whether pr-diff.patch was rebuilt from per-file patches because the full diff was unavailable (true or false)
+  plan-state:
+    description: |
+      Overall plan state: disabled, pending, none, unknown, failed, changes, or no-changes.
+      See README for the meaning of each state.
+  resource-count:
+    description: Number of changed resources in the plan (deduplicated by address and action)
+  has-destructive-changes:
+    description: Whether any resource will be destroyed or replaced (true or false)
+
+runs:
+  using: 'node24'
+  main: 'dist/main.js'
