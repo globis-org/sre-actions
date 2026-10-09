@@ -1,5 +1,11 @@
 import { describe, expect, test } from 'vitest'
-import { disabledPlan, overallState, renderPlanSummary, type PlanResult } from '../src/plan'
+import {
+  destroyOrReplace,
+  disabledPlan,
+  overallState,
+  renderPlanSummary,
+  type PlanResult,
+} from '../src/plan'
 
 const base: PlanResult = {
   provider: 'atlantis',
@@ -102,4 +108,24 @@ describe('renderPlanSummary', () => {
   test('no destructive changes', () => {
     expect(renderPlanSummary({ ...base, state: 'no-changes' })).toContain('destroy / replace: なし')
   })
+})
+
+describe('destroyOrReplace', () => {
+  test.each([
+    [{ ...base, resources: [{ address: 'a', action: 'replace' as const }] }, 'true'],
+    [{ ...base, resources: [{ address: 'a', action: 'update' as const }] }, 'false'],
+    [{ ...base, state: 'no-changes' as const }, 'false'],
+    [{ ...base, state: 'no-projects' as const }, 'false'],
+    [{ ...base, state: 'unknown' as const }, 'unknown'],
+    [{ ...base, state: 'pending' as const }, 'unknown'],
+    [disabledPlan(), 'unknown'],
+  ])('%#', (plan, expected) => {
+    expect(destroyOrReplace(plan)).toBe(expected)
+  })
+})
+
+test('incomplete projects make the overall state unknown', () => {
+  expect(
+    overallState([{ project: 'a', state: 'incomplete', summary: null, resources: [] }], [])
+  ).toBe('unknown')
 })

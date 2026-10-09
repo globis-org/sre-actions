@@ -38,8 +38,10 @@ outputs:
       See README for the meaning of each state.
   resource-count:
     description: Number of changed resources in the plan (deduplicated by address and action)
-  has-destructive-changes:
-    description: Whether any resource will be destroyed or replaced (true or false)
+  destroy-or-replace:
+    description: |
+      Whether any resource will be destroyed or replaced: true, false, or unknown
+      (unknown when the plan is not available, failed, or its resource list could not be verified).
 
 runs:
   using: 'node24'

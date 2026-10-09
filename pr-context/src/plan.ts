@@ -19,7 +19,9 @@ export type ResourceChange = {
 }
 
 // project 単位 (Atlantis の dir / workspace、HCP Terraform の workspace) の最後の plan の結果
-export type ProjectState = 'changes' | 'no-changes' | 'failed' | 'unknown'
+// incomplete: 抽出したリソースの件数が Plan 行と合わない (plan 出力の打ち切りなど)。
+// 一覧に載らないリソースがありうるので、destroy / replace の有無も判断できない
+export type ProjectState = 'changes' | 'no-changes' | 'failed' | 'unknown' | 'incomplete'
 
 export type ProjectPlan = {
   project: string
@@ -82,7 +84,7 @@ export function overallState(projects: ProjectPlan[], errors: string[]): PlanSta
   if (projects.length === 0) {
     return 'unknown'
   }
-  if (projects.some(p => p.state === 'unknown')) {
+  if (projects.some(p => p.state === 'unknown' || p.state === 'incomplete')) {
     return 'unknown'
   }
   if (projects.some(p => p.state === 'changes')) {
@@ -111,11 +113,23 @@ const PROJECT_STATE_LABELS: Record<ProjectState, string> = {
   'no-changes': '変更なし',
   failed: '失敗',
   unknown: '形式不明',
+  incomplete: 'リソース一覧が Plan 行と不一致',
 }
 
 // 変更リソースがわからない状態。destroy / replace の有無も判断できない
 export function isIndeterminate(state: PlanState): boolean {
   return state === 'pending' || state === 'none' || state === 'unknown' || state === 'failed'
+}
+
+// action の output 用。destroy / replace が無いと言い切れないときは unknown にする
+export function destroyOrReplace(plan: PlanResult): 'true' | 'false' | 'unknown' {
+  if (plan.resources.some(isDestructive)) {
+    return 'true'
+  }
+  if (plan.state === 'disabled' || isIndeterminate(plan.state)) {
+    return 'unknown'
+  }
+  return 'false'
 }
 
 function escapeCell(text: string): string {

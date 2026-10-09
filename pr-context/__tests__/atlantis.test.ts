@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest'
 import {
+  countsMatch,
   failureReason,
   parsePlanComments,
   parseResourceLine,
@@ -402,4 +403,81 @@ describe('failureReason', () => {
   ])('%s', (text, expected) => {
     expect(failureReason(text)).toBe(expected)
   })
+})
+
+describe('countsMatch', () => {
+  const resources = [
+    { address: 'a', action: 'create' as const },
+    { address: 'b', action: 'replace' as const },
+    { address: 'c', action: 'update' as const },
+    { address: 'd', action: 'delete' as const },
+  ]
+
+  test('replace counts as both add and destroy', () => {
+    expect(countsMatch('Plan: 2 to add, 1 to change, 2 to destroy.', resources)).toBe(true)
+  })
+
+  test('import counts are not checked', () => {
+    expect(countsMatch('Plan: 5 to import, 2 to add, 1 to change, 2 to destroy.', resources)).toBe(
+      true
+    )
+  })
+
+  test('forget counts are checked', () => {
+    expect(
+      countsMatch('Plan: 0 to add, 0 to change, 0 to destroy, 1 to forget.', [
+        { address: 'a', action: 'forget' },
+      ])
+    ).toBe(true)
+    expect(countsMatch('Plan: 0 to add, 0 to change, 0 to destroy, 1 to forget.', [])).toBe(false)
+  })
+
+  test('missing resources are detected', () => {
+    expect(countsMatch('Plan: 2 to add, 1 to change, 3 to destroy.', resources)).toBe(false)
+  })
+})
+
+describe('incomplete resource lists', () => {
+  const header = 'Ran Plan for dir: `a` workspace: `default`\n```diff\n'
+
+  test('fewer resources than the Plan line says', () => {
+    const plan = parsePlanComments([
+      `${header}  # aws_s3_bucket.x will be destroyed\nPlan: 0 to add, 0 to change, 2 to destroy.\n\`\`\``,
+    ])
+    expect(plan.projects[0]?.state).toBe('incomplete')
+    expect(plan.state).toBe('unknown')
+  })
+
+  test('output cut off before the Plan line', () => {
+    const plan = parsePlanComments([
+      `${header}  # aws_s3_bucket.x will be created\n+ resource "aws_s3_bucket" "x" {`,
+    ])
+    expect(plan.projects[0]?.state).toBe('incomplete')
+  })
+
+  test('changes to outputs only', () => {
+    const plan = parsePlanComments([
+      `${header}Changes to Outputs:\n  + url = "https://example.com"\n\`\`\``,
+    ])
+    expect(plan.projects[0]?.state).toBe('changes')
+  })
+})
+
+test('plan output quoted by a person is ignored', () => {
+  const comments = selectPlanComments(
+    [
+      {
+        author: 'someone',
+        createdAt: '2026-01-01T00:00:01Z',
+        body: 'Ran Plan for dir: `a` workspace: `default`\nquoted',
+      },
+      {
+        author: 'atlantis-bot',
+        createdAt: '2026-01-01T00:00:02Z',
+        body: 'Ran Plan for dir: `a` workspace: `default`\nreal',
+      },
+    ],
+    { author: 'atlantis-bot', since: '2026-01-01T00:00:00Z' }
+  )
+  expect(comments).toStrictEqual(['Ran Plan for dir: `a` workspace: `default`\nreal'])
 })

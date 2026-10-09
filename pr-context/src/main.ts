@@ -6,7 +6,7 @@ import { context, getOctokit } from '@actions/github'
 
 import { parsePlanComments, selectPlanComments } from './atlantis'
 import { getInputs, pullRequestNumberFromPayload, type Inputs } from './inputs'
-import { disabledPlan, isDestructive, renderPlanSummary, type PlanResult } from './plan'
+import { destroyOrReplace, disabledPlan, renderPlanSummary, type PlanResult } from './plan'
 import { diffFromFiles, toPrInfo, type PullRequestFile } from './pull-request'
 import { summarizeStatus } from './status'
 
@@ -148,7 +148,7 @@ async function run(): Promise<void> {
     core.setOutput('diff-truncated', String(truncated))
     core.setOutput('plan-state', plan.state)
     core.setOutput('resource-count', String(plan.resources.length))
-    core.setOutput('has-destructive-changes', String(plan.resources.some(isDestructive)))
+    core.setOutput('destroy-or-replace', destroyOrReplace(plan))
 
     core.info(`Wrote PR context for #${pullRequestNumber} (${pr.head.sha}) to ${outputDir}`)
     core.info(summary)

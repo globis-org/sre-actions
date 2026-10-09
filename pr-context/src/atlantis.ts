@@ -126,8 +126,24 @@ export function parseResourceLine(line: string): ResourceChange | null {
 
 const FAILURE_PATTERN = /^\s*(?:\*\*)?Plan (?:Error|Failed)/m
 const NO_CHANGES_PATTERN = /^\s*No changes\./m
-const SUMMARY_PATTERN = /^\s*(Plan: .+? to destroy\.)/m
+const SUMMARY_PATTERN = /^\s*(Plan: \d[^\n]*?)\s*$/m
 const OUTPUTS_ONLY_PATTERN = /^\s*Changes to Outputs:/m
+
+// Plan 行の件数と抽出したリソースの件数を突き合わせる。打ち切りや未知の書式でリソースを
+// 取りこぼしたときに、黙って「destroy なし」と報告しないため。
+// import は "will be imported" 単独のものと update 等に併記されるものがあり件数が合わないので見ない
+export function countsMatch(summary: string, resources: ResourceChange[]): boolean {
+  const count = (kind: string): number =>
+    Number(new RegExp(`(\\d+) to ${kind}\\b`).exec(summary)?.[1] ?? 0)
+  const actual = (...actions: ResourceAction[]): number =>
+    resources.filter(r => actions.includes(r.action)).length
+  return (
+    count('add') === actual('create', 'replace') &&
+    count('change') === actual('update') &&
+    count('destroy') === actual('delete', 'replace') &&
+    count('forget') === actual('forget')
+  )
+}
 
 function parseSection(text: string): Omit<ProjectPlan, 'project'> {
   const resources = dedupeResources(
@@ -140,7 +156,12 @@ function parseSection(text: string): Omit<ProjectPlan, 'project'> {
   let state: ProjectState
   if (FAILURE_PATTERN.test(text)) {
     state = 'failed'
-  } else if (summary !== null || OUTPUTS_ONLY_PATTERN.test(text) || resources.length > 0) {
+  } else if (summary !== null) {
+    state = countsMatch(summary, resources) ? 'changes' : 'incomplete'
+  } else if (resources.length > 0) {
+    // リソースはあるのに Plan 行が無い = 出力の末尾が打ち切られている
+    state = 'incomplete'
+  } else if (OUTPUTS_ONLY_PATTERN.test(text)) {
     state = 'changes'
   } else if (NO_CHANGES_PATTERN.test(text)) {
     state = 'no-changes'
