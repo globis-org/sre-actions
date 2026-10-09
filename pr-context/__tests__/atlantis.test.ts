@@ -185,6 +185,11 @@ describe('parseResourceLine', () => {
     ['-/+ # aws_instance.a must be replaced', 'aws_instance.a', 'replace'],
     ['  # aws_instance.a is tainted, so must be replaced', 'aws_instance.a', 'replace'],
     ['  # aws_instance.a will be replaced, as requested', 'aws_instance.a', 'replace'],
+    [
+      '  # aws_instance.a will be replaced due to changes in replace_triggered_by',
+      'aws_instance.a',
+      'replace',
+    ],
     ['  # aws_s3_bucket.a will be imported', 'aws_s3_bucket.a', 'import'],
     ['  # aws_s3_bucket.a will no longer be managed by Terraform', 'aws_s3_bucket.a', 'forget'],
     [
@@ -280,8 +285,12 @@ describe('buildPlan', () => {
         },
       ],
       resources: [
-        { address: 'aws_iam_role.a', action: 'delete' },
-        { address: 'module.db.aws_db_instance.this["primary"]', action: 'replace' },
+        { address: 'aws_iam_role.a', action: 'delete', project: 'infra/prod/default' },
+        {
+          address: 'module.db.aws_db_instance.this["primary"]',
+          action: 'replace',
+          project: 'infra/prod/default',
+        },
       ],
     })
   })
@@ -340,5 +349,63 @@ describe('buildPlan', () => {
     )
     expect(plan.state).toBe('failed')
     expect(plan.projects[0]?.reason).toBe('parse error in atlantis.yaml')
+  })
+
+  test('a command-level failure is reported even when earlier project statuses succeeded', () => {
+    const plan = buildPlan(
+      { ...settled, state: 'failure', description: '0/1 projects planned successfully.' },
+      [status('atlantis/plan: infra/prod/default', 'success', 'No changes.')],
+      ['**Plan Error**\n```\npre-workflow hook failed\n```']
+    )
+    expect(plan.state).toBe('failed')
+    expect(plan.projects.map(p => [p.project, p.state, p.reason])).toStrictEqual([
+      ['infra/prod/default', 'no-changes', undefined],
+      ['(全体)', 'failed', 'pre-workflow hook failed'],
+    ])
+  })
+
+  test('the same address in different projects is kept for each project', () => {
+    const body =
+      '  # aws_instance.web will be destroyed\nPlan: 0 to add, 0 to change, 1 to destroy.'
+    const plan = buildPlan(
+      settled,
+      [
+        status(
+          'atlantis/plan: infra/default',
+          'success',
+          'Plan: 0 to add, 0 to change, 1 to destroy.'
+        ),
+        status(
+          'atlantis/plan: infra/prod',
+          'success',
+          'Plan: 0 to add, 0 to change, 1 to destroy.'
+        ),
+      ],
+      [
+        'Ran Plan for dir: `infra` workspace: `default`\n' + body,
+        'Ran Plan for dir: `infra` workspace: `prod`\n' + body,
+      ]
+    )
+    expect(plan.resources.map(r => r.project)).toStrictEqual(['infra/default', 'infra/prod'])
+  })
+
+  test('each deposed object counts toward destroy', () => {
+    const plan = buildPlan(
+      settled,
+      [
+        status(
+          'atlantis/plan: infra/prod/default',
+          'success',
+          'Plan: 0 to add, 0 to change, 2 to destroy.'
+        ),
+      ],
+      [
+        single(
+          'infra/prod',
+          '  # aws_instance.a (deposed object 1a) will be destroyed\n  # aws_instance.a (deposed object 2b) will be destroyed\nPlan: 0 to add, 0 to change, 2 to destroy.'
+        ),
+      ]
+    )
+    expect(plan.state).toBe('changes')
   })
 })

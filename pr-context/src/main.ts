@@ -37,30 +37,28 @@ async function collectPlan(
   if (aggregate.kind === 'pending') {
     core.warning('atlantis/plan is still pending. Run this action after the plan finishes.')
   }
+  if (aggregate.kind !== 'settled') {
+    return { plan: buildPlan(aggregate, statuses, []), raw: '' }
+  }
   for (let attempt = 0; ; attempt++) {
-    const comments =
-      aggregate.kind === 'settled'
-        ? selectPlanComments(
-            (
-              await octokit.paginate(octokit.rest.issues.listComments, {
-                ...repo,
-                issue_number: issueNumber,
-                since: aggregate.since,
-                per_page: 100,
-              })
-            ).map(c => ({
-              login: c.user?.login ?? '',
-              type: c.user?.type ?? '',
-              createdAt: c.created_at,
-              body: c.body ?? '',
-            })),
-            login,
-            aggregate.since
-          )
-        : []
+    const all = await octokit.paginate(octokit.rest.issues.listComments, {
+      ...repo,
+      issue_number: issueNumber,
+      since: aggregate.since,
+      per_page: 100,
+    })
+    const comments = selectPlanComments(
+      all.map(c => ({
+        login: c.user?.login ?? '',
+        type: c.user?.type ?? '',
+        createdAt: c.created_at,
+        body: c.body ?? '',
+      })),
+      login,
+      aggregate.since
+    )
     const plan = buildPlan(aggregate, statuses, comments)
-    const missing = plan.projects.some(p => p.reason === MISSING_COMMENT)
-    if (!missing || attempt >= COMMENT_RETRIES) {
+    if (attempt >= COMMENT_RETRIES || !plan.projects.some(p => p.reason === MISSING_COMMENT)) {
       return { plan, raw: comments.join('\n\n---\n\n') }
     }
     await new Promise(resolve => setTimeout(resolve, COMMENT_RETRY_MS))
@@ -79,10 +77,13 @@ async function run(): Promise<void> {
     pull_number: number,
     per_page: 100,
   })
-  // PR の diff API は呼んだ時点の head を返すので、sha を固定して pr-info.json と揃える
+  // 起動した時点の head に揃える。前段で plan を待つ間に push されると、API の PR はもう新しい
+  // head を指しているが、checkout したコードと待った plan は起動時の head のもの
+  const event = context.payload.pull_request
+  const headSha: string = event?.number === number ? event['head'].sha : pr.head.sha
   const { data: diff } = await octokit.rest.repos.compareCommitsWithBasehead({
     ...repo,
-    basehead: `${pr.base.sha}...${pr.head.sha}`,
+    basehead: `${pr.base.sha}...${headSha}`,
     mediaType: { format: 'diff' },
   })
 
@@ -97,7 +98,7 @@ async function run(): Promise<void> {
     author: { login: pr.user.login, is_bot: pr.user.type === 'Bot' },
     headRefName: pr.head.ref,
     baseRefName: pr.base.ref,
-    headRefOid: pr.head.sha,
+    headRefOid: headSha,
     baseRefOid: pr.base.sha,
     files: files.map(f => ({
       path: f.filename,
@@ -110,7 +111,7 @@ async function run(): Promise<void> {
   await write('pr-diff.patch', diff as unknown as string)
 
   core.setOutput('output-dir', outputDir)
-  core.setOutput('head-sha', pr.head.sha)
+  core.setOutput('head-sha', headSha)
   if (atlantisLogin === '') {
     core.setOutput('plan-state', 'disabled')
     core.setOutput('resource-count', '0')
@@ -118,7 +119,7 @@ async function run(): Promise<void> {
     return
   }
 
-  const { plan, raw } = await collectPlan(octokit, number, pr.head.sha, atlantisLogin)
+  const { plan, raw } = await collectPlan(octokit, number, headSha, atlantisLogin)
   const summary = renderSummary(plan)
   await write('plan.json', `${JSON.stringify(plan, null, 2)}\n`)
   await write('plan-summary.md', summary)

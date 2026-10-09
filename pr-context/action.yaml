@@ -31,7 +31,7 @@ outputs:
       disabled, pending, none, no-projects, failed, incomplete, changes, or no-changes.
       See README for the meaning of each state.
   resource-count:
-    description: Number of changed resources (deduplicated by address and action)
+    description: Number of changed resources (counted per project)
   destroy-or-replace:
     description: |
       Whether any resource will be destroyed or replaced: true, false, or unknown

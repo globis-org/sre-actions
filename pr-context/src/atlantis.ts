@@ -37,6 +37,9 @@ export type ResourceAction =
 
 export type Resource = { address: string; action: ResourceAction; previousAddress?: string }
 
+// project をまたぐ一覧では、同じ address が workspace 違いで複数の project に出うるので project を持つ
+export type ProjectResource = Resource & { project: string }
+
 export type ProjectState = 'changes' | 'no-changes' | 'failed' | 'incomplete'
 
 export type Project = {
@@ -57,8 +60,7 @@ export type PlanState = 'pending' | 'none' | 'no-projects' | ProjectState
 export type Plan = {
   state: PlanState
   projects: Project[]
-  // project をまたいで address と action で重複を除いた一覧
-  resources: Resource[]
+  resources: ProjectResource[]
 }
 
 export type Aggregate =
@@ -133,27 +135,21 @@ const HEADER =
 
 // project ごとに最後の節を返す。キーは project ごとの status と同じ名前
 export function lastSections(comments: string[]): Map<string, string> {
-  const sections = new Map<string, string>()
+  const sections = new Map<string, string[]>()
   for (const comment of comments) {
-    let current: { name: string; lines: string[] } | null = null
-    const flush = (): void => {
-      if (current !== null) {
-        sections.set(current.name, current.lines.join('\n'))
-      }
-    }
+    let lines: string[] | undefined
     for (const line of comment.split('\n')) {
       const match = HEADER.exec(line.trim())
       if (match === null) {
-        current?.lines.push(line)
+        lines?.push(line)
         continue
       }
-      flush()
       const [, name, dir, workspace] = match
-      current = { name: name ?? `${dir === '' ? '.' : dir}/${workspace}`, lines: [] }
+      lines = []
+      sections.set(name ?? `${dir}/${workspace}`, lines)
     }
-    flush()
   }
-  return sections
+  return new Map([...sections].map(([name, lines]) => [name, lines.join('\n')]))
 }
 
 const RESOURCE_PATTERNS: [RegExp, ResourceAction][] = [
@@ -161,7 +157,8 @@ const RESOURCE_PATTERNS: [RegExp, ResourceAction][] = [
   [/^(.+?) will be updated in-place$/, 'update'],
   [/^(.+?) will be destroyed$/, 'delete'],
   [/^(.+?) (?:is tainted, so )?must be replaced$/, 'replace'],
-  [/^(.+?) will be replaced, as requested$/, 'replace'],
+  // ", as requested" (-replace) や " due to changes in replace_triggered_by" が続く
+  [/^(.+?) will be replaced\b/, 'replace'],
   [/^(.+?) will be imported$/, 'import'],
   [/^(.+?) will no longer be managed by Terraform$/, 'forget'],
 ]
@@ -183,14 +180,6 @@ export function parseResourceLine(line: string): Resource | null {
     }
   }
   return null
-}
-
-function dedupe(resources: Resource[]): Resource[] {
-  const seen = new Set<string>()
-  return resources.filter(r => {
-    const key = `${r.action} ${r.address}`
-    return seen.has(key) ? false : (seen.add(key), true)
-  })
 }
 
 // add = create + replace、change = update、destroy = delete + replace。
@@ -243,12 +232,10 @@ function toProject(name: string, status: StatusRecord, section: string | undefin
   if (section === undefined) {
     return { ...project, reason: MISSING_COMMENT }
   }
-  const resources = dedupe(
-    section
-      .split('\n')
-      .map(parseResourceLine)
-      .filter(r => r !== null)
-  )
+  const resources = section
+    .split('\n')
+    .map(parseResourceLine)
+    .filter(r => r !== null)
   return countsMatch(description, resources)
     ? { ...project, state: 'changes', resources }
     : { ...project, resources, reason: 'リソース数が Plan 行と合わない' }
@@ -271,18 +258,23 @@ export function buildPlan(
   const projects = [...projectStatuses(statuses)]
     .map(([name, status]) => toProject(name, status, sections.get(name)))
     .toSorted((a, b) => a.project.localeCompare(b.project))
-  if (projects.length === 0) {
-    // atlantis.yaml の誤りなどコマンド全体の失敗では project ごとの status が付かない
+  // コマンド全体の失敗 (atlantis.yaml の誤り、hook の失敗など) は project ごとの status に
+  // 反映されず、前回の成功が残ることがある。集約 status の失敗は必ず結果に出す
+  const failed = aggregate.state !== 'success'
+  if (failed ? !projects.some(p => p.state === 'failed') : projects.length === 0) {
     const reason = failureReason(comments.at(-1) ?? '')
-    const project: Project = {
+    projects.push({
       project: '(全体)',
-      state: aggregate.state === 'success' ? 'incomplete' : 'failed',
+      state: failed ? 'failed' : 'incomplete',
       status: aggregate.description,
       ...(reason === undefined ? {} : { reason }),
       resources: [],
-    }
-    return { state: project.state, projects: [project], resources: [] }
+    })
   }
   const state = STATE_ORDER.find(s => projects.some(p => p.state === s)) ?? 'no-changes'
-  return { state, projects, resources: dedupe(projects.flatMap(p => p.resources)) }
+  return {
+    state,
+    projects,
+    resources: projects.flatMap(p => p.resources.map(r => ({ ...r, project: p.project }))),
+  }
 }

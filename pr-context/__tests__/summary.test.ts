@@ -13,9 +13,14 @@ const plan: Plan = {
     },
   ],
   resources: [
-    { address: 'aws_s3_bucket.new', action: 'create' },
-    { address: 'aws_s3_bucket.old', action: 'delete' },
-    { address: 'aws_s3_bucket.c', action: 'move', previousAddress: 'aws_s3_bucket.b' },
+    { address: 'aws_s3_bucket.new', action: 'create', project: 'infra/prod/default' },
+    { address: 'aws_s3_bucket.old', action: 'delete', project: 'infra/prod/default' },
+    {
+      address: 'aws_s3_bucket.c',
+      action: 'move',
+      previousAddress: 'aws_s3_bucket.b',
+      project: 'infra/prod/default',
+    },
   ],
 }
 
@@ -24,16 +29,16 @@ describe('renderSummary', () => {
     expect(renderSummary(plan)).toBe(
       [
         'plan: 変更あり',
-        'destroy / replace: `aws_s3_bucket.old` (delete)',
+        'destroy / replace: `aws_s3_bucket.old` (delete, infra/prod/default)',
         '',
         '| project | 状態 | status | 理由 |',
         '|---|---|---|---|',
         '| infra/prod/default | 変更あり | Plan: 1 to add, 0 to change, 1 to destroy. |  |',
         '',
         '変更リソース一覧（3 件）:',
-        '- `aws_s3_bucket.new` create',
-        '- `aws_s3_bucket.old` delete',
-        '- `aws_s3_bucket.c` move (moved from `aws_s3_bucket.b`)',
+        '- infra/prod/default: `aws_s3_bucket.new` create',
+        '- infra/prod/default: `aws_s3_bucket.old` delete',
+        '- infra/prod/default: `aws_s3_bucket.c` move (moved from `aws_s3_bucket.b`)',
         '',
       ].join('\n')
     )
@@ -52,7 +57,7 @@ describe('renderSummary', () => {
 describe('destroyOrReplace', () => {
   test.each([
     [plan, 'true'],
-    [{ ...plan, resources: [{ address: 'a', action: 'update' as const }] }, 'false'],
+    [{ ...plan, resources: [{ address: 'a', action: 'update' as const, project: 'p' }] }, 'false'],
     [{ ...plan, state: 'incomplete' as const, resources: [] }, 'unknown'],
     [{ ...plan, state: 'failed' as const, resources: [] }, 'unknown'],
     [{ ...plan, state: 'none' as const, resources: [] }, 'unknown'],

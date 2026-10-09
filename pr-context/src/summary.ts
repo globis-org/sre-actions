@@ -38,7 +38,7 @@ export function renderSummary(plan: Plan): string {
         ? `不明（${PLAN_LABELS[plan.state]}）`
         : verdict === 'false'
           ? 'なし'
-          : destructive.map(r => `\`${r.address}\` (${r.action})`).join(', ')
+          : destructive.map(r => `\`${r.address}\` (${r.action}, ${r.project})`).join(', ')
     }`,
   ]
   if (plan.projects.length > 0) {
@@ -51,7 +51,7 @@ export function renderSummary(plan: Plan): string {
     lines.push('', `変更リソース一覧（${plan.resources.length} 件）:`)
     for (const r of plan.resources) {
       const moved = r.previousAddress === undefined ? '' : ` (moved from \`${r.previousAddress}\`)`
-      lines.push(`- \`${r.address}\` ${r.action}${moved}`)
+      lines.push(`- ${r.project}: \`${r.address}\` ${r.action}${moved}`)
     }
   }
   return `${lines.join('\n')}\n`

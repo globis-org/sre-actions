@@ -110,5 +110,5 @@ jobs:
 | `output-dir`         | 書き出し先ディレクトリの絶対パス                                             |
 | `head-sha`           | コンテキストを取得した head commit の SHA                                    |
 | `plan-state`         | plan の状態 ([plan の状態](#plan-の状態-plan-state) を参照)                  |
-| `resource-count`     | 変更リソースの数 (address と action で重複を除く)                            |
+| `resource-count`     | 変更リソースの数 (project ごとに数える)                                      |
 | `destroy-or-replace` | destroy または replace されるリソースがあるか (`true` / `false` / `unknown`) |
