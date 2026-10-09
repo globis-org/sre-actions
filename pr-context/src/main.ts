@@ -4,7 +4,13 @@ import path from 'node:path'
 import * as core from '@actions/core'
 import { context, getOctokit } from '@actions/github'
 
-import { aggregateStatus, buildPlan, selectPlanComments, type Plan } from './atlantis'
+import {
+  aggregateStatus,
+  buildPlan,
+  MISSING_COMMENT,
+  selectPlanComments,
+  type Plan,
+} from './atlantis'
 import { destroyOrReplace, renderSummary } from './summary'
 
 type Octokit = ReturnType<typeof getOctokit>
@@ -53,7 +59,7 @@ async function collectPlan(
           )
         : []
     const plan = buildPlan(aggregate, statuses, comments)
-    const missing = plan.projects.some(p => p.reason === 'plan コメントが見つからない')
+    const missing = plan.projects.some(p => p.reason === MISSING_COMMENT)
     if (!missing || attempt >= COMMENT_RETRIES) {
       return { plan, raw: comments.join('\n\n---\n\n') }
     }
@@ -107,6 +113,8 @@ async function run(): Promise<void> {
   core.setOutput('head-sha', pr.head.sha)
   if (atlantisLogin === '') {
     core.setOutput('plan-state', 'disabled')
+    core.setOutput('resource-count', '0')
+    core.setOutput('destroy-or-replace', 'unknown')
     return
   }
 

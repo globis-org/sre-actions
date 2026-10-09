@@ -35,7 +35,7 @@ outputs:
   destroy-or-replace:
     description: |
       Whether any resource will be destroyed or replaced: true, false, or unknown
-      (unknown unless the plan is changes, no-changes, or no-projects).
+      (unknown unless the plan is changes, no-changes, or no-projects; also unknown when disabled).
 
 runs:
   using: 'node24'

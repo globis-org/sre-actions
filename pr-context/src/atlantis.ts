@@ -9,6 +9,9 @@
 
 export const STATUS_CONTEXT = 'atlantis/plan'
 
+// main.ts はこの理由を見てコメントを取り直す
+export const MISSING_COMMENT = 'plan コメントが見つからない'
+
 export type StatusRecord = {
   context: string
   state: string
@@ -237,7 +240,7 @@ function toProject(name: string, status: StatusRecord, section: string | undefin
     return { ...project, reason: '未知の status' }
   }
   if (section === undefined) {
-    return { ...project, reason: 'plan コメントが見つからない' }
+    return { ...project, reason: MISSING_COMMENT }
   }
   const resources = dedupe(
     section

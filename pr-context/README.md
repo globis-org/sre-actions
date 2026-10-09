@@ -65,7 +65,7 @@ jobs:
 
 | 値            | 意味                                                                    | `destroy-or-replace` |
 | ------------- | ----------------------------------------------------------------------- | -------------------- |
-| `disabled`    | `atlantis-comment-author` が空で、plan を収集していない                 | -                    |
+| `disabled`    | `atlantis-comment-author` が空で、plan を収集していない                 | `unknown`            |
 | `pending`     | plan が終わっていない                                                   | `unknown`            |
 | `none`        | head commit に `atlantis/plan` の status が無い                         | `unknown`            |
 | `no-projects` | 対象 project が無い (`0/0 projects planned`。Terraform に関係しない PR) | `false`              |
