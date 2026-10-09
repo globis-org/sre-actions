@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest'
 import {
   countsMatch,
+  verifyWithStatuses,
   failureReason,
   parsePlanComments,
   parseResourceLine,
@@ -519,4 +520,114 @@ test('a user account with the same login is not treated as Atlantis', () => {
       { author: 'atlantis-bot', since: '2026-01-01T00:00:00Z' }
     )
   ).toStrictEqual([])
+})
+
+describe('verifyWithStatuses', () => {
+  const comment = (dir: string, body: string): string =>
+    `Ran Plan for dir: \`${dir}\` workspace: \`default\`\n\`\`\`diff\n${body}\n\`\`\``
+  const plan = parsePlanComments([
+    comment(
+      'infra/a',
+      '  # aws_s3_bucket.x will be created\nPlan: 1 to add, 0 to change, 0 to destroy.'
+    ),
+    comment('infra/b', 'No changes. Your infrastructure matches the configuration.'),
+  ])
+
+  test('matching statuses leave the result unchanged', () => {
+    const verified = verifyWithStatuses(
+      plan,
+      new Map([
+        [
+          'infra/a/default',
+          { state: 'success', description: 'Plan: 1 to add, 0 to change, 0 to destroy.' },
+        ],
+        [
+          'infra/b/default',
+          {
+            state: 'success',
+            description: 'No changes. Your infrastructure matches the configuration.',
+          },
+        ],
+      ])
+    )
+    expect(verified).toBe(plan)
+  })
+
+  test('a project with a status but no comment is reported as incomplete', () => {
+    const verified = verifyWithStatuses(
+      plan,
+      new Map([
+        [
+          'infra/a/default',
+          { state: 'success', description: 'Plan: 1 to add, 0 to change, 0 to destroy.' },
+        ],
+        ['infra/b/default', { state: 'success', description: 'No changes.' }],
+        [
+          'infra/c/default',
+          { state: 'success', description: 'Plan: 0 to add, 0 to change, 3 to destroy.' },
+        ],
+      ])
+    )
+    expect(verified.state).toBe('unknown')
+    expect(
+      verified.projects.find(p => p.project === 'dir: infra/c workspace: default')
+    ).toStrictEqual({
+      project: 'dir: infra/c workspace: default',
+      state: 'incomplete',
+      summary: null,
+      resources: [],
+      note: 'plan コメントが見つからない (status: Plan: 0 to add, 0 to change, 3 to destroy.)',
+    })
+  })
+
+  test('a Plan line that differs from the status is reported as incomplete', () => {
+    const verified = verifyWithStatuses(
+      plan,
+      new Map([
+        [
+          'infra/a/default',
+          { state: 'success', description: 'Plan: 2 to add, 0 to change, 0 to destroy.' },
+        ],
+      ])
+    )
+    const project = verified.projects.find(p => p.project === 'dir: infra/a workspace: default')
+    expect(project?.state).toBe('incomplete')
+    expect(project?.note).toContain('Plan 行が status と不一致')
+  })
+
+  test('failure statuses must match failed comments', () => {
+    const failed = parsePlanComments([comment('infra/a', '**Plan Error**')])
+    expect(
+      verifyWithStatuses(
+        failed,
+        new Map([['infra/a/default', { state: 'failure', description: 'Plan failed.' }]])
+      )
+    ).toBe(failed)
+    expect(
+      verifyWithStatuses(
+        plan,
+        new Map([['infra/b/default', { state: 'failure', description: 'Plan failed.' }]])
+      ).state
+    ).toBe('unknown')
+  })
+
+  test('named projects use the project name', () => {
+    const named = parsePlanComments([
+      'Ran Plan for project: `app` dir: `.` workspace: `prod`\n```diff\nNo changes.\n```',
+    ])
+    expect(
+      verifyWithStatuses(
+        named,
+        new Map([['app', { state: 'success', description: 'No changes.' }]])
+      )
+    ).toBe(named)
+  })
+
+  test('statuses rescue a plan whose comments are all missing', () => {
+    const verified = verifyWithStatuses(
+      parsePlanComments([]),
+      new Map([['infra/a/default', { state: 'success', description: 'No changes.' }]])
+    )
+    expect(verified.state).toBe('unknown')
+  })
 })

@@ -32,3 +32,25 @@ export function summarizeStatus(statuses: StatusRecord[], context: string): Stat
   }
   return { kind: 'settled', state: latest.state, firstCreatedAt, description }
 }
+
+export type ProjectStatus = { state: string; description: string }
+
+// Atlantis は集約の status に加えて project ごとに "<context>: <project>" の status を付ける。
+// <project> は名前付き project なら project 名、それ以外は "<dir>/<workspace>"
+export function latestProjectStatuses(
+  statuses: StatusRecord[],
+  context: string
+): Map<string, ProjectStatus> {
+  const prefix = `${context}: `
+  const latest = new Map<string, ProjectStatus>()
+  for (const status of statuses) {
+    if (!status.context.startsWith(prefix)) {
+      continue
+    }
+    const name = status.context.slice(prefix.length)
+    if (!latest.has(name)) {
+      latest.set(name, { state: status.state, description: status.description ?? '' })
+    }
+  }
+  return latest
+}

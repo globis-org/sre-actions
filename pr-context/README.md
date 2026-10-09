@@ -88,6 +88,7 @@ jobs:
 4. project (`dir` / `workspace`、名前付き project は `project` も) ごとに最後の plan の結果を採用する。前の失敗は同じ project の後の plan で上書きされ、project に紐づかない失敗は後でいずれかの project の plan が出れば解消したものとする
 5. plan 出力の `# <address> will be created` などの行から変更リソースを抽出する (data source の `read` は含めない)
 6. project ごとに、`Plan: N to add, M to change, K to destroy.` の件数と抽出したリソースの件数 (add = create + replace、change = update、destroy = delete + replace) を突き合わせる。合わない場合や、リソースがあるのに Plan 行が無い場合は、その project を「リソース一覧が不完全」とし、全体を `unknown` にする (取りこぼしたまま「destroy なし」と報告しないため)
+7. Atlantis が project ごとに付ける commit status (`atlantis/plan: <dir>/<workspace>`、名前付き project は `atlantis/plan: <project>`) と突き合わせる。status があるのにコメントから結果が得られない project、status の Plan 行 (`No changes.` / 失敗) とコメントの結果が食い違う project は「リソース一覧が不完全」とし、全体を `unknown` にする。status はコメントと独立に付くので、コメントの欠落 (折りたたみ・削除・件数の上限など) で project ごと結果が抜けても黙って一覧から消えない
 
 変更リソースの action は `terraform plan -json` の語彙 (`create`, `update`, `delete`, `replace`, `import`, `move`, `forget`) に揃えています。
 

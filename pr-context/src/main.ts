@@ -4,11 +4,11 @@ import path from 'node:path'
 import * as core from '@actions/core'
 import { context, getOctokit } from '@actions/github'
 
-import { parsePlanComments, selectPlanComments } from './atlantis'
+import { parsePlanComments, selectPlanComments, verifyWithStatuses } from './atlantis'
 import { getInputs, pullRequestNumberFromPayload, type Inputs } from './inputs'
 import { destroyOrReplace, disabledPlan, renderPlanSummary, type PlanResult } from './plan'
 import { diffFromFiles, toPrInfo, type PullRequestFile } from './pull-request'
-import { summarizeStatus } from './status'
+import { latestProjectStatuses, summarizeStatus } from './status'
 
 type Octokit = ReturnType<typeof getOctokit>
 
@@ -47,7 +47,8 @@ async function collectAtlantisPlan(
   pullRequestNumber: number,
   headSha: string
 ): Promise<{ plan: PlanResult; raw: string }> {
-  const status = summarizeStatus(await listStatuses(octokit, headSha), inputs.atlantisStatusContext)
+  const statuses = await listStatuses(octokit, headSha)
+  const status = summarizeStatus(statuses, inputs.atlantisStatusContext)
   core.info(`${inputs.atlantisStatusContext} on ${headSha}: ${status.kind}`)
   const empty = { provider: 'atlantis', projects: [], resources: [], errors: [] }
   if (status.kind === 'missing') {
@@ -92,7 +93,11 @@ async function collectAtlantisPlan(
       break
     }
   }
-  return { plan: parsePlanComments(comments), raw: comments.join('\n\n---\n\n') }
+  const plan = verifyWithStatuses(
+    parsePlanComments(comments),
+    latestProjectStatuses(statuses, inputs.atlantisStatusContext)
+  )
+  return { plan, raw: comments.join('\n\n---\n\n') }
 }
 
 function listStatuses(octokit: Octokit, ref: string) {

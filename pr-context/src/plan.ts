@@ -29,6 +29,8 @@ export type ProjectPlan = {
   // `Plan: 1 to add, 0 to change, 0 to destroy.` などの要約行。無ければ null
   summary: string | null
   resources: ResourceChange[]
+  // 状態をそう判定した理由 (照合で不一致になったときなど)
+  note?: string
 }
 
 // - disabled:   プロバイダが無効 (この action の設定で対象外)
@@ -160,10 +162,10 @@ export function renderPlanSummary(plan: PlanResult): string {
   }
 
   if (plan.projects.length > 0) {
-    lines.push('', '| project | 状態 | Plan 行 |', '|---|---|---|')
+    lines.push('', '| project | 状態 | Plan 行 | 備考 |', '|---|---|---|---|')
     for (const project of plan.projects) {
       lines.push(
-        `| ${escapeCell(project.project)} | ${PROJECT_STATE_LABELS[project.state]} | ${escapeCell(project.summary ?? '-')} |`
+        `| ${escapeCell(project.project)} | ${PROJECT_STATE_LABELS[project.state]} | ${escapeCell(project.summary ?? '-')} | ${escapeCell(project.note ?? '')} |`
       )
     }
   }

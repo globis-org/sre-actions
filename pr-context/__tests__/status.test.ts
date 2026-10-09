@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { summarizeStatus, type StatusRecord } from '../src/status'
+import { latestProjectStatuses, summarizeStatus, type StatusRecord } from '../src/status'
 
 const CONTEXT = 'atlantis/plan'
 
@@ -28,5 +28,30 @@ describe('summarizeStatus', () => {
       firstCreatedAt: '2026-01-01T00:01:00Z',
       description: 'success description',
     })
+  })
+})
+
+describe('latestProjectStatuses', () => {
+  test('keeps the latest status of each project and ignores the aggregate one', () => {
+    expect(
+      latestProjectStatuses(
+        [
+          status('success', '2026-01-01T00:03:00Z', 'atlantis/plan'),
+          {
+            ...status('success', '2026-01-01T00:02:00Z', 'atlantis/plan: infra/a/default'),
+            description: 'No changes.',
+          },
+          status('pending', '2026-01-01T00:01:00Z', 'atlantis/plan: infra/a/default'),
+          status('failure', '2026-01-01T00:01:00Z', 'atlantis/plan: app'),
+          status('success', '2026-01-01T00:01:00Z', 'atlantis/apply: infra/a/default'),
+        ],
+        CONTEXT
+      )
+    ).toStrictEqual(
+      new Map([
+        ['infra/a/default', { state: 'success', description: 'No changes.' }],
+        ['app', { state: 'failure', description: 'failure description' }],
+      ])
+    )
   })
 })

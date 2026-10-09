@@ -7,6 +7,7 @@
 // - 失敗:       "**Plan Error**" / "**Plan Failed**" (project の節の中、またはコメント全体)
 // - 分割:       長い出力は "Continued plan output from previous comment." で始まる次のコメントに続く
 
+import type { ProjectStatus } from './status'
 import {
   dedupeResources,
   overallState,
@@ -243,5 +244,84 @@ export function parsePlanComments(comments: string[]): PlanResult {
     projects: projectList,
     resources: dedupeResources(projectList.flatMap(p => p.resources)),
     errors,
+  }
+}
+
+const PROJECT_KEY_PATTERN = /^(?:project: (\S+) )?dir: (.*) workspace: (\S+)$/
+
+// parsePlanComments の project 名から、Atlantis が project ごとの status に使う名前を求める
+function statusName(project: string): string {
+  const match = PROJECT_KEY_PATTERN.exec(project)
+  if (match === null) {
+    return project
+  }
+  const [, name, dir, workspace] = match
+  return name ?? `${dir}/${workspace}`
+}
+
+function projectFromStatusName(name: string): string {
+  const slash = name.lastIndexOf('/')
+  return slash === -1
+    ? `project: ${name}`
+    : `dir: ${name.slice(0, slash)} workspace: ${name.slice(slash + 1)}`
+}
+
+function statusMismatch(project: ProjectPlan, status: ProjectStatus): string | null {
+  if (status.state === 'pending') {
+    return 'plan が実行中'
+  }
+  if (status.state !== 'success') {
+    return project.state === 'failed' ? null : 'status は失敗'
+  }
+  if (status.description.startsWith('Plan:')) {
+    return project.summary === status.description.trim() ? null : 'Plan 行が status と不一致'
+  }
+  if (status.description.startsWith('No changes.')) {
+    return project.state === 'no-changes' ? null : 'status は変更なし'
+  }
+  // 形式を知らない description は照合しない
+  return null
+}
+
+// コメントから求めた結果を、project ごとの commit status と突き合わせる。
+// status はコメントと独立に付くので、コメントの欠落 (折りたたみ・削除・件数の上限など) や
+// 解釈の誤りで project ごと結果が抜けても、黙って一覧から消えないようにする
+export function verifyWithStatuses(
+  plan: PlanResult,
+  statuses: Map<string, ProjectStatus>
+): PlanResult {
+  if (statuses.size === 0) {
+    return plan
+  }
+  const projects = plan.projects.map(project => ({ ...project }))
+  let changed = false
+  for (const [name, status] of statuses) {
+    const project = projects.find(p => statusName(p.project) === name)
+    if (project === undefined) {
+      projects.push({
+        project: projectFromStatusName(name),
+        state: 'incomplete',
+        summary: null,
+        resources: [],
+        note: `plan コメントが見つからない (status: ${status.description || status.state})`,
+      })
+      changed = true
+      continue
+    }
+    const mismatch = statusMismatch(project, status)
+    if (mismatch !== null) {
+      project.state = 'incomplete'
+      project.note = `${mismatch} (status: ${status.description || status.state})`
+      changed = true
+    }
+  }
+  if (!changed) {
+    return plan
+  }
+  const projectList = projects.toSorted((a, b) => a.project.localeCompare(b.project))
+  return {
+    ...plan,
+    state: overallState(projectList, plan.errors),
+    projects: projectList,
   }
 }
