@@ -40,6 +40,13 @@ function isPlanComment(body: string): boolean {
   )
 }
 
+// REST API は GitHub App のログイン名に "[bot]" を付け、GraphQL (gh pr view) は付けない。
+// どちらで指定されても一致させる
+function sameLogin(a: string, b: string): boolean {
+  const normalize = (login: string): string => login.replace(/\[bot\]$/, '').toLowerCase()
+  return normalize(a) === normalize(b)
+}
+
 // since 以降に author が投稿した plan コメントを時系列で返す。分割コメントは前のコメントに連結する
 export function selectPlanComments(
   comments: IssueComment[],
@@ -47,7 +54,7 @@ export function selectPlanComments(
 ): string[] {
   const since = Date.parse(params.since)
   const selected = comments
-    .filter(c => c.author === params.author && Date.parse(c.createdAt) >= since)
+    .filter(c => sameLogin(c.author, params.author) && Date.parse(c.createdAt) >= since)
     .filter(c => isPlanComment(c.body))
     .toSorted((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt))
 
@@ -140,25 +147,28 @@ function parseSection(text: string): Omit<ProjectPlan, 'project'> {
   } else {
     state = 'unknown'
   }
+  if (state === 'failed') {
+    return { state, summary: failureReason(text), resources }
+  }
   return { state, summary: summary ?? (state === 'no-changes' ? 'No changes.' : null), resources }
 }
 
-// コメントが無い、または対象 project が無かった ("Ran Plan for 0 projects:") だけなら plan 無し
-function noPlan(comments: string[], projects: ProjectPlan[], errors: string[]): boolean {
-  return (
-    projects.length === 0 &&
-    errors.length === 0 &&
-    comments.every(comment => comment.trimStart().startsWith('Ran Plan for 0 projects'))
-  )
+function isZeroProjects(comment: string): boolean {
+  return comment.trimStart().startsWith('Ran Plan for 0 projects')
 }
 
-function firstLine(text: string): string {
-  return (
-    text
-      .split('\n')
-      .map(line => line.trim())
-      .find(line => line.length > 0) ?? ''
-  )
+// "**Plan Failed**: <理由>" はその行、"**Plan Error**" は次の行 (コードブロック内のエラー) を理由にする
+export function failureReason(text: string): string {
+  const lines = text.split('\n').map(line => line.trim())
+  const index = lines.findIndex(line => FAILURE_PATTERN.test(line))
+  const line = lines[index] ?? ''
+  const label = /Plan (?:Error|Failed)/.exec(line)?.[0] ?? 'Plan Error'
+  const rest = line.replace(/^.*?Plan (?:Error|Failed)(?:\*\*)?:?\s*/, '')
+  const detail =
+    rest !== ''
+      ? rest
+      : (lines.slice(index + 1).find(next => next !== '' && !next.startsWith('```')) ?? '')
+  return detail === '' ? label : `${label}: ${detail}`
 }
 
 // 時系列のコメントから project ごとの最後の plan の結果を求める。
@@ -182,7 +192,7 @@ export function parsePlanComments(comments: string[]): PlanResult {
     if (sections.length === 0) {
       const parsed = parseSection(comment)
       if (parsed.state === 'failed') {
-        errors.push(firstLine(comment))
+        errors.push(failureReason(comment))
       }
       continue
     }
@@ -196,7 +206,12 @@ export function parsePlanComments(comments: string[]): PlanResult {
   const projectList = [...projects.values()].toSorted((a, b) => a.project.localeCompare(b.project))
   return {
     provider: 'atlantis',
-    state: noPlan(comments, projectList, errors) ? 'none' : overallState(projectList, errors),
+    state:
+      comments.length === 0
+        ? 'none'
+        : projectList.length === 0 && errors.length === 0 && comments.every(isZeroProjects)
+          ? 'no-projects'
+          : overallState(projectList, errors),
     projects: projectList,
     resources: dedupeResources(projectList.flatMap(p => p.resources)),
     errors,

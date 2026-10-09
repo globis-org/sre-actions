@@ -52,21 +52,22 @@ jobs:
 
 ### plan の状態 (`plan-state`)
 
-| 値           | 意味                                                                                      | `destroy / replace:` |
-| ------------ | ----------------------------------------------------------------------------------------- | -------------------- |
-| `disabled`   | plan の収集が無効 (`atlantis-comment-author` が空)                                        | 対象外               |
-| `pending`    | `max-wait-time` 内に plan が終わらなかった                                                | 不明                 |
-| `none`       | head commit に対する plan が無い (`start-timeout` 内に status が付かない、コメントが無い) | 不明                 |
-| `unknown`    | plan のコメントはあるが形式を解釈できない。手動で確認する                                 | 不明                 |
-| `failed`     | いずれかの project の最後の plan が失敗、または project に紐づかない失敗 (ロックなど)     | 不明                 |
-| `changes`    | いずれかの project に変更がある                                                           | 列挙 / なし          |
-| `no-changes` | 全 project が変更なし                                                                     | なし                 |
+| 値            | 意味                                                                                         | `destroy / replace:` |
+| ------------- | -------------------------------------------------------------------------------------------- | -------------------- |
+| `disabled`    | plan の収集が無効 (`atlantis-comment-author` が空)                                           | 対象外               |
+| `pending`     | `max-wait-time` 内に plan が終わらなかった                                                   | 不明                 |
+| `none`        | head commit に対する plan が無い (`start-timeout` 内に status が付かない、コメントが無い)    | 不明                 |
+| `no-projects` | plan は実行されたが対象の project が無い (`0/0 projects planned`。Terraform に関係しない PR) | なし                 |
+| `unknown`     | plan のコメントはあるが形式を解釈できない。手動で確認する                                    | 不明                 |
+| `failed`      | いずれかの project の最後の plan が失敗、または project に紐づかない失敗 (ロックなど)        | 不明                 |
+| `changes`     | いずれかの project に変更がある                                                              | 列挙 / なし          |
+| `no-changes`  | 全 project が変更なし                                                                        | なし                 |
 
 ## Atlantis
 
 `atlantis-comment-author` を指定すると、次の手順で plan を集めます。
 
-1. head commit に付く `atlantis/plan` の commit status が `pending` 以外になるまで待つ。`start-timeout` 内に status が付かなければ plan 無し (`none`) とする
+1. head commit に付く `atlantis/plan` の commit status (project ごとの `atlantis/plan: <dir>/<workspace>` ではなく集約のもの) が `pending` 以外になるまで待つ。`start-timeout` 内に status が付かなければ plan 無し (`none`)、description が `0/0 ` で始まれば対象 project なし (`no-projects`) とする
 2. その status が head commit に最初に付いた時刻以降に `atlantis-comment-author` が投稿した plan コメントを集める。それより前のコメントは古い head に対する plan とみなして使わない
 3. 分割されたコメント (`Continued plan output from previous comment.`) は前のコメントにつなぐ
 4. project (`dir` / `workspace`、名前付き project は `project` も) ごとに最後の plan の結果を採用する。前の失敗は同じ project の後の plan で上書きされ、project に紐づかない失敗は後でいずれかの project の plan が出れば解消したものとする
@@ -78,20 +79,22 @@ jobs:
 
 - Atlantis 既定のコメントテンプレートを前提にしている。テンプレートをカスタマイズしている場合や Atlantis の更新で形式が変わった場合は `unknown` になる (誤って「変更なし」にはしない)
 - plan 出力が Atlantis 側で打ち切られた場合、打ち切られた部分のリソースは一覧に出ない
-- Atlantis が対象外と判断した PR で `atlantis/plan` の status が付くかどうかは Atlantis の設定に依存する。付かない場合は `start-timeout` 秒待ってから `none` になる
+- Terraform に関係しない PR でも通常は `0/0 projects planned successfully.` の status がすぐ付くので待たない。status がまったく付かない PR では `start-timeout` 秒待ってから `none` になる
+- Atlantis は plan を実行するたびに新しいコメントを投稿する (前のコメントは更新しない)。同じ head に対する再 plan (`atlantis plan -d <dir>` など) も手順 4 で project ごとに最後の結果が採用される
+- plan の実行中に重ねて plan が起動されると `**Plan Error**` (`cannot run "plan": ... currently locked for this pull request`) が投稿されるが、実行中の plan の結果が後から来るので手順 4 により解消される
 
 ## Inputs
 
-| Name                      | Description                                                                                    | Required | Default               |
-| ------------------------- | ---------------------------------------------------------------------------------------------- | -------- | --------------------- |
-| `github-token`            | PR・コメント・commit status の読み取りに使う GitHub token                                      | No       | `${{ github.token }}` |
-| `pull-request-number`     | Pull Request 番号。省略時は `pull_request` 系イベント、または PR 上の `issue_comment` から取る | No       | -                     |
-| `output-dir`              | 書き出し先ディレクトリ (作業ディレクトリからの相対パス)                                        | No       | `.claude-review`      |
-| `atlantis-comment-author` | Atlantis が plan コメントを投稿するアカウントのログイン名。空なら plan を収集しない            | No       | -                     |
-| `atlantis-status-context` | Atlantis が plan に付ける commit status の context                                             | No       | `atlantis/plan`       |
-| `max-wait-time`           | plan の完了を待つ最大時間 (秒)。`0` なら待たずに 1 回だけ確認する                              | No       | `600`                 |
-| `start-timeout`           | head commit に plan の status が付くまで待つ時間 (秒)                                          | No       | `120`                 |
-| `poll-interval`           | ポーリング間隔 (秒)                                                                            | No       | `10`                  |
+| Name                      | Description                                                                                                                            | Required | Default               |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------- | --------------------- |
+| `github-token`            | PR・コメント・commit status の読み取りに使う GitHub token                                                                              | No       | `${{ github.token }}` |
+| `pull-request-number`     | Pull Request 番号。省略時は `pull_request` 系イベント、または PR 上の `issue_comment` から取る                                         | No       | -                     |
+| `output-dir`              | 書き出し先ディレクトリ (作業ディレクトリからの相対パス)                                                                                | No       | `.claude-review`      |
+| `atlantis-comment-author` | Atlantis が plan コメントを投稿するアカウントのログイン名 (GitHub App の `[bot]` は付けても付けなくてもよい)。空なら plan を収集しない | No       | -                     |
+| `atlantis-status-context` | Atlantis が plan に付ける commit status の context                                                                                     | No       | `atlantis/plan`       |
+| `max-wait-time`           | plan の完了を待つ最大時間 (秒)。`0` なら待たずに 1 回だけ確認する                                                                      | No       | `600`                 |
+| `start-timeout`           | head commit に plan の status が付くまで待つ時間 (秒)                                                                                  | No       | `120`                 |
+| `poll-interval`           | ポーリング間隔 (秒)                                                                                                                    | No       | `10`                  |
 
 ## Outputs
 

@@ -64,9 +64,13 @@ async function collectAtlantisPlan(
     return { plan: { ...empty, state: 'pending' }, raw: '' }
   }
 
-  // status の更新とコメントの投稿の順序は保証されないので、plan があるはずなのにコメントが
-  // 見つからないときは少し待って取り直す
-  const expectsPlan = !status.description.startsWith('0/0 ')
+  // Terraform に関係しない PR では対象 project が 0 件で、plan コメントは投稿されない
+  if (status.description.startsWith('0/0 ')) {
+    return { plan: { ...empty, state: 'no-projects' }, raw: '' }
+  }
+
+  // 実測ではコメントが status の更新より先に投稿されるが、順序は保証されないので
+  // コメントが見つからないときは少し待って取り直す
   let comments: string[] = []
   for (let attempt = 0; attempt < 4; attempt++) {
     if (attempt > 0) {
@@ -83,7 +87,7 @@ async function collectAtlantisPlan(
       all.map(c => ({ author: c.user?.login ?? '', createdAt: c.created_at, body: c.body ?? '' })),
       { author: inputs.atlantisCommentAuthor, since: status.firstCreatedAt }
     )
-    if (comments.length > 0 || !expectsPlan) {
+    if (comments.length > 0) {
       break
     }
   }

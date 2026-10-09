@@ -32,6 +32,7 @@ export type ProjectPlan = {
 // - disabled:   プロバイダが無効 (この action の設定で対象外)
 // - pending:    待機時間内に plan が終わらなかった
 // - none:       head commit に対する plan が無い
+// - no-projects: plan は実行されたが対象の project が無い (Terraform に関係しない PR)
 // - unknown:    plan のコメントはあるが形式を解釈できない (要手動確認)
 // - failed:     いずれかの project の最後の plan が失敗
 // - changes:    いずれかの project に変更がある
@@ -40,6 +41,7 @@ export type PlanState =
   | 'disabled'
   | 'pending'
   | 'none'
+  | 'no-projects'
   | 'unknown'
   | 'failed'
   | 'changes'
@@ -97,6 +99,7 @@ const STATE_LABELS: Record<PlanState, string> = {
   disabled: '対象外',
   pending: 'plan 未完了',
   none: 'plan 無し',
+  'no-projects': 'plan 対象 project なし',
   unknown: 'plan 形式不明（要手動確認）',
   failed: 'plan 失敗',
   changes: '変更あり',

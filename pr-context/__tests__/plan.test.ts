@@ -93,6 +93,12 @@ describe('renderPlanSummary', () => {
     expect(summary).toContain('- （空）')
   })
 
+  test('no projects is not a warning', () => {
+    const summary = renderPlanSummary({ ...base, state: 'no-projects' })
+    expect(summary).toContain('plan: plan 対象 project なし')
+    expect(summary).toContain('destroy / replace: なし')
+  })
+
   test('no destructive changes', () => {
     expect(renderPlanSummary({ ...base, state: 'no-changes' })).toContain('destroy / replace: なし')
   })

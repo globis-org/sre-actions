@@ -1,5 +1,10 @@
 import { describe, expect, test } from 'vitest'
-import { parsePlanComments, parseResourceLine, selectPlanComments } from '../src/atlantis'
+import {
+  failureReason,
+  parsePlanComments,
+  parseResourceLine,
+  selectPlanComments,
+} from '../src/atlantis'
 
 const BOT = 'atlantis-bot'
 
@@ -187,8 +192,8 @@ describe('parsePlanComments', () => {
     expect(parsePlanComments([]).state).toBe('none')
   })
 
-  test('zero projects means no plan', () => {
-    expect(parsePlanComments(['Ran Plan for 0 projects:\n\n\n']).state).toBe('none')
+  test('zero projects is distinguished from no plan', () => {
+    expect(parsePlanComments(['Ran Plan for 0 projects:\n\n\n']).state).toBe('no-projects')
   })
 
   test('single project with changes', () => {
@@ -228,7 +233,9 @@ describe('parsePlanComments', () => {
   test('a command-level failure is cleared by a later plan', () => {
     const failed = '**Plan Failed**: This project is currently locked by #1'
     expect(parsePlanComments([failed]).state).toBe('failed')
-    expect(parsePlanComments([failed]).errors).toStrictEqual([failed])
+    expect(parsePlanComments([failed]).errors).toStrictEqual([
+      'Plan Failed: This project is currently locked by #1',
+    ])
     expect(parsePlanComments([failed, singleProject]).state).toBe('changes')
   })
 
@@ -254,5 +261,145 @@ describe('parsePlanComments', () => {
     expect(parsePlanComments([a, b]).resources).toStrictEqual([
       { address: 'aws_s3_bucket.x', action: 'create' },
     ])
+  })
+})
+
+// 実際の Atlantis コメントの構造を写したもの (パスや値は汎用のものに置き換えている)
+const splitHead = `Ran Plan for 2 projects:
+
+1. dir: \`terraform/app/prod\` workspace: \`default\`
+1. dir: \`terraform/app/stg\` workspace: \`default\`
+---
+
+### 1. dir: \`terraform/app/prod\` workspace: \`default\`
+<details><summary>Show Output</summary>
+
+\`\`\`diff
+Terraform will perform the following actions:
+
+  # aws_iam_role.a will be destroyed
+  # (because aws_iam_role.a is not in configuration)
+- resource "aws_iam_role" "a" {
+      - name = "a" -> null
+\`\`\`
+</details>
+
+<br>
+
+**Warning**: Output length greater than max comment size. Continued in next comment.`
+
+const splitTail = `Continued plan output from previous comment.
+<details><summary>Show Output</summary>
+
+\`\`\`diff
+    }
+
+  # aws_iam_role_policy.b will be destroyed
+- resource "aws_iam_role_policy" "b" {
+    }
+
+Plan: 0 to add, 0 to change, 2 to destroy.
+╷
+│ Warning: Argument is deprecated
+╵
+\`\`\`
+
+* :arrow_forward: To **apply** this plan, comment:
+    \`\`\`shell
+    atlantis apply -d terraform/app/prod
+    \`\`\`
+</details>
+Plan: 0 to add, 0 to change, 2 to destroy.
+
+---
+### 2. dir: \`terraform/app/stg\` workspace: \`default\`
+**Plan Failed**: This project is currently locked by an unapplied plan from pull #1. To continue, delete the lock from #1 or apply that plan and merge the pull request.
+
+Once the lock is released, comment \`atlantis plan\` here to re-plan.
+
+---
+### Plan Summary
+
+2 projects, 1 with changes, 0 unchanged, 1 failed`
+
+const concurrentError = `**Plan Error**
+\`\`\`
+cannot run "plan": the default workspace at path . is currently locked for this pull request by "plan".
+Wait until the previous command is complete and try again
+\`\`\``
+
+describe('real-world comment structure', () => {
+  test('split comments are joined and every section is parsed', () => {
+    const comments = selectPlanComments(
+      [
+        { author: 'atlantis-bot[bot]', createdAt: '2026-01-01T00:00:01Z', body: splitHead },
+        { author: 'atlantis-bot[bot]', createdAt: '2026-01-01T00:00:02Z', body: splitTail },
+      ],
+      { author: 'atlantis-bot', since: '2026-01-01T00:00:00Z' }
+    )
+    expect(comments).toHaveLength(1)
+    const plan = parsePlanComments(comments)
+    expect(plan.state).toBe('failed')
+    expect(plan.projects).toStrictEqual([
+      {
+        project: 'dir: terraform/app/prod workspace: default',
+        state: 'changes',
+        summary: 'Plan: 0 to add, 0 to change, 2 to destroy.',
+        resources: [
+          { address: 'aws_iam_role.a', action: 'delete' },
+          { address: 'aws_iam_role_policy.b', action: 'delete' },
+        ],
+      },
+      {
+        project: 'dir: terraform/app/stg workspace: default',
+        state: 'failed',
+        summary:
+          'Plan Failed: This project is currently locked by an unapplied plan from pull #1. To continue, delete the lock from #1 or apply that plan and merge the pull request.',
+        resources: [],
+      },
+    ])
+  })
+
+  test('a concurrent-run error before the result does not stick', () => {
+    const result =
+      'Ran Plan for dir: `terraform/app/stg` workspace: `default`\n```diff\nNo changes.\n```'
+    expect(parsePlanComments([concurrentError, result]).state).toBe('no-changes')
+    expect(parsePlanComments([concurrentError]).errors).toStrictEqual([
+      'Plan Error: cannot run "plan": the default workspace at path . is currently locked for this pull request by "plan".',
+    ])
+  })
+
+  test('apply comments and their continuations are ignored', () => {
+    const comments = selectPlanComments(
+      [
+        {
+          author: 'atlantis-bot[bot]',
+          createdAt: '2026-01-01T00:00:01Z',
+          body: 'Ran Apply for dir: `a` workspace: `default`',
+        },
+        {
+          author: 'atlantis-bot[bot]',
+          createdAt: '2026-01-01T00:00:02Z',
+          body: 'Continued apply output from previous comment.',
+        },
+        {
+          author: 'atlantis-bot[bot]',
+          createdAt: '2026-01-01T00:00:03Z',
+          body: 'Locks and plans deleted for the projects and workspaces modified in this pull request:',
+        },
+      ],
+      { author: 'atlantis-bot[bot]', since: '2026-01-01T00:00:00Z' }
+    )
+    expect(comments).toStrictEqual([])
+  })
+})
+
+describe('failureReason', () => {
+  test.each([
+    ['**Plan Failed**: locked by #1', 'Plan Failed: locked by #1'],
+    ['**Plan Error**\n```\nError: Invalid reference\n```', 'Plan Error: Error: Invalid reference'],
+    ['**Plan Error**', 'Plan Error'],
+  ])('%s', (text, expected) => {
+    expect(failureReason(text)).toBe(expected)
   })
 })
