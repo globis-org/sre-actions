@@ -121,7 +121,6 @@ async function run(): Promise<void> {
 
   const { plan, raw } = await collectPlan(octokit, number, headSha, atlantisLogin)
   const summary = renderSummary(plan)
-  await write('plan.json', `${JSON.stringify(plan, null, 2)}\n`)
   await write('plan-summary.md', summary)
   await write('atlantis-plan.md', raw)
 

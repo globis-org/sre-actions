@@ -57,7 +57,6 @@ jobs:
 | ------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `pr-info.json`     | PR のメタデータ。フィールド名は `gh pr view --json` に合わせる (`number`, `title`, `body`, `author`, `headRefName`, `headRefOid`, `files[].path` など)。`files` は API の上限で最大 3,000 件 |
 | `pr-diff.patch`    | base と head の SHA を固定した diff (`base...head`)                                                                                                                                          |
-| `plan.json`        | plan の状態、project ごとの状態・status・理由・変更リソース、全体の変更リソース一覧 (Atlantis 有効時のみ)                                                                                    |
 | `plan-summary.md`  | `plan:` / `destroy / replace:` の 2 行、project の表、変更リソース一覧。レビューの prompt やサマリーにそのまま貼る用途 (Atlantis 有効時のみ)                                                 |
 | `atlantis-plan.md` | 対象にした plan コメントの原文 (Atlantis 有効時のみ)                                                                                                                                         |
 
