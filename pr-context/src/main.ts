@@ -122,7 +122,7 @@ async function run(): Promise<void> {
   const { plan, raw } = await collectPlan(octokit, number, headSha, atlantisLogin)
   const summary = renderSummary(plan)
   await write('plan-summary.md', summary)
-  await write('atlantis-plan.md', raw)
+  await write('atlantis-plan-comments.md', raw)
 
   core.setOutput('plan-state', plan.state)
   core.setOutput('resource-count', String(plan.resources.length))
