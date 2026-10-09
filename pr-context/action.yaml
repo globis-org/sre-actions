@@ -24,20 +24,6 @@ inputs:
     description: Commit status context that Atlantis sets for plans
     required: false
     default: atlantis/plan
-  max-wait-time:
-    description: Maximum time to wait for the plan to finish, in seconds (0 checks once without waiting)
-    required: false
-    default: '600'
-  start-timeout:
-    description: |
-      Time to wait for the plan status to appear on the head commit, in seconds.
-      When it does not appear in time, the pull request is treated as having no plan.
-    required: false
-    default: '120'
-  poll-interval:
-    description: Polling interval in seconds
-    required: false
-    default: '10'
 
 outputs:
   output-dir:

@@ -8,23 +8,12 @@ export type Inputs = {
   // 空なら Atlantis プロバイダを無効にする
   atlantisCommentAuthor: string
   atlantisStatusContext: string
-  maxWaitTime: number
-  startTimeout: number
-  pollInterval: number
 }
 
 function parsePositiveInt(name: string, raw: string): number {
   const value = Number(raw)
   if (!Number.isInteger(value) || value <= 0) {
     throw new Error(`Input "${name}" must be a positive integer, got "${raw}"`)
-  }
-  return value
-}
-
-function parseNonNegativeInt(name: string, raw: string): number {
-  const value = Number(raw)
-  if (!Number.isInteger(value) || value < 0) {
-    throw new Error(`Input "${name}" must be a non-negative integer, got "${raw}"`)
   }
   return value
 }
@@ -38,9 +27,6 @@ export function getInputs(): Inputs {
     outputDir: core.getInput('output-dir') || '.claude-review',
     atlantisCommentAuthor: core.getInput('atlantis-comment-author'),
     atlantisStatusContext: core.getInput('atlantis-status-context') || 'atlantis/plan',
-    maxWaitTime: parseNonNegativeInt('max-wait-time', core.getInput('max-wait-time') || '600'),
-    startTimeout: parseNonNegativeInt('start-timeout', core.getInput('start-timeout') || '120'),
-    pollInterval: parsePositiveInt('poll-interval', core.getInput('poll-interval') || '10'),
   }
 }
 

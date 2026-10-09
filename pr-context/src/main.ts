@@ -8,9 +8,12 @@ import { parsePlanComments, selectPlanComments } from './atlantis'
 import { getInputs, pullRequestNumberFromPayload, type Inputs } from './inputs'
 import { disabledPlan, isDestructive, renderPlanSummary, type PlanResult } from './plan'
 import { diffFromFiles, toPrInfo, type PullRequestFile } from './pull-request'
-import { waitForStatus } from './wait'
+import { summarizeStatus } from './status'
 
 type Octokit = ReturnType<typeof getOctokit>
+
+// コメントの取り直しの間隔。投稿と status 更新の差は実測で数秒なので、最大 15 秒待てば足りる
+const COMMENT_RETRY_INTERVAL_MS = 5000
 
 const sleep = (ms: number): Promise<void> => new Promise(resolve => setTimeout(resolve, ms))
 
@@ -44,23 +47,16 @@ async function collectAtlantisPlan(
   pullRequestNumber: number,
   headSha: string
 ): Promise<{ plan: PlanResult; raw: string }> {
-  core.info(
-    `Waiting for "${inputs.atlantisStatusContext}" on ${headSha} (max ${inputs.maxWaitTime}s, start timeout ${inputs.startTimeout}s)`
-  )
-  const status = await waitForStatus({
-    fetchStatuses: () => listStatuses(octokit, headSha),
-    context: inputs.atlantisStatusContext,
-    maxWaitMs: inputs.maxWaitTime * 1000,
-    startTimeoutMs: inputs.startTimeout * 1000,
-    pollMs: inputs.pollInterval * 1000,
-    onPoll: result => core.info(`  ${inputs.atlantisStatusContext}: ${result.kind}`),
-  })
+  const status = summarizeStatus(await listStatuses(octokit, headSha), inputs.atlantisStatusContext)
+  core.info(`${inputs.atlantisStatusContext} on ${headSha}: ${status.kind}`)
   const empty = { provider: 'atlantis', projects: [], resources: [], errors: [] }
   if (status.kind === 'missing') {
     return { plan: { ...empty, state: 'none' }, raw: '' }
   }
   if (status.kind === 'pending') {
-    core.warning(`Timed out waiting for "${inputs.atlantisStatusContext}"`)
+    core.warning(
+      `"${inputs.atlantisStatusContext}" is still pending. Run this action after the plan finishes (e.g. after wait-for-commit-status).`
+    )
     return { plan: { ...empty, state: 'pending' }, raw: '' }
   }
 
@@ -74,7 +70,7 @@ async function collectAtlantisPlan(
   let comments: string[] = []
   for (let attempt = 0; attempt < 4; attempt++) {
     if (attempt > 0) {
-      await sleep(inputs.pollInterval * 1000)
+      await sleep(COMMENT_RETRY_INTERVAL_MS)
     }
     const all = await octokit.paginate(octokit.rest.issues.listComments, {
       owner: context.repo.owner,
