@@ -128,26 +128,31 @@ describe('selectPlanComments', () => {
     const comments = [
       {
         author: BOT,
+        authorType: 'Bot',
         createdAt: '2026-01-01T00:12:00Z',
         body: 'Ran Plan for dir: `b` workspace: `default`',
       },
       {
         author: BOT,
+        authorType: 'Bot',
         createdAt: '2026-01-01T00:11:00Z',
         body: 'Ran Plan for dir: `a` workspace: `default`',
       },
       {
         author: BOT,
+        authorType: 'Bot',
         createdAt: '2026-01-01T00:05:00Z',
         body: 'Ran Plan for dir: `old` workspace: `default`',
       },
       {
         author: 'someone',
+        authorType: 'User',
         createdAt: '2026-01-01T00:13:00Z',
         body: 'Ran Plan for dir: `fake` workspace: `default`',
       },
       {
         author: BOT,
+        authorType: 'Bot',
         createdAt: '2026-01-01T00:14:00Z',
         body: 'Ran Apply for dir: `a` workspace: `default`',
       },
@@ -162,11 +167,13 @@ describe('selectPlanComments', () => {
     const comments = [
       {
         author: BOT,
+        authorType: 'Bot',
         createdAt: '2026-01-01T00:11:00Z',
         body: 'Ran Plan for dir: `a` workspace: `default`\npart 1',
       },
       {
         author: BOT,
+        authorType: 'Bot',
         createdAt: '2026-01-01T00:11:01Z',
         body: 'Continued plan output from previous comment.\npart 2',
       },
@@ -180,6 +187,7 @@ describe('selectPlanComments', () => {
     const comments = [
       {
         author: BOT,
+        authorType: 'Bot',
         createdAt: '2026-01-01T00:11:00Z',
         body: 'Continued plan output from previous comment.\npart 2',
       },
@@ -333,8 +341,18 @@ describe('real-world comment structure', () => {
   test('split comments are joined and every section is parsed', () => {
     const comments = selectPlanComments(
       [
-        { author: 'atlantis-bot[bot]', createdAt: '2026-01-01T00:00:01Z', body: splitHead },
-        { author: 'atlantis-bot[bot]', createdAt: '2026-01-01T00:00:02Z', body: splitTail },
+        {
+          author: 'atlantis-bot[bot]',
+          authorType: 'Bot',
+          createdAt: '2026-01-01T00:00:01Z',
+          body: splitHead,
+        },
+        {
+          author: 'atlantis-bot[bot]',
+          authorType: 'Bot',
+          createdAt: '2026-01-01T00:00:02Z',
+          body: splitTail,
+        },
       ],
       { author: 'atlantis-bot', since: '2026-01-01T00:00:00Z' }
     )
@@ -375,16 +393,19 @@ describe('real-world comment structure', () => {
       [
         {
           author: 'atlantis-bot[bot]',
+          authorType: 'Bot',
           createdAt: '2026-01-01T00:00:01Z',
           body: 'Ran Apply for dir: `a` workspace: `default`',
         },
         {
           author: 'atlantis-bot[bot]',
+          authorType: 'Bot',
           createdAt: '2026-01-01T00:00:02Z',
           body: 'Continued apply output from previous comment.',
         },
         {
           author: 'atlantis-bot[bot]',
+          authorType: 'Bot',
           createdAt: '2026-01-01T00:00:03Z',
           body: 'Locks and plans deleted for the projects and workspaces modified in this pull request:',
         },
@@ -468,11 +489,13 @@ test('plan output quoted by a person is ignored', () => {
     [
       {
         author: 'someone',
+        authorType: 'User',
         createdAt: '2026-01-01T00:00:01Z',
         body: 'Ran Plan for dir: `a` workspace: `default`\nquoted',
       },
       {
         author: 'atlantis-bot',
+        authorType: 'Bot',
         createdAt: '2026-01-01T00:00:02Z',
         body: 'Ran Plan for dir: `a` workspace: `default`\nreal',
       },
@@ -480,4 +503,20 @@ test('plan output quoted by a person is ignored', () => {
     { author: 'atlantis-bot', since: '2026-01-01T00:00:00Z' }
   )
   expect(comments).toStrictEqual(['Ran Plan for dir: `a` workspace: `default`\nreal'])
+})
+
+test('a user account with the same login is not treated as Atlantis', () => {
+  expect(
+    selectPlanComments(
+      [
+        {
+          author: 'atlantis-bot',
+          authorType: 'User',
+          createdAt: '2026-01-01T00:00:01Z',
+          body: 'Ran Plan for dir: `a` workspace: `default`',
+        },
+      ],
+      { author: 'atlantis-bot', since: '2026-01-01T00:00:00Z' }
+    )
+  ).toStrictEqual([])
 })

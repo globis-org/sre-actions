@@ -19,6 +19,8 @@ import {
 
 export type IssueComment = {
   author: string
+  // GitHub の user.type。Atlantis は GitHub App (Bot) として動かす前提
+  authorType: string
   createdAt: string
   body: string
 }
@@ -47,14 +49,19 @@ function sameLogin(a: string, b: string): boolean {
   return normalize(a) === normalize(b)
 }
 
-// since 以降に author が投稿した plan コメントを時系列で返す。分割コメントは前のコメントに連結する
+// since 以降に author (Bot) が投稿した plan コメントを時系列で返す。分割コメントは前のコメントに連結する
 export function selectPlanComments(
   comments: IssueComment[],
   params: { author: string; since: string }
 ): string[] {
   const since = Date.parse(params.since)
   const selected = comments
-    .filter(c => sameLogin(c.author, params.author) && Date.parse(c.createdAt) >= since)
+    .filter(
+      c =>
+        c.authorType === 'Bot' &&
+        sameLogin(c.author, params.author) &&
+        Date.parse(c.createdAt) >= since
+    )
     .filter(c => isPlanComment(c.body))
     .toSorted((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt))
 

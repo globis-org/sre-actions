@@ -80,7 +80,12 @@ async function collectAtlantisPlan(
       per_page: 100,
     })
     comments = selectPlanComments(
-      all.map(c => ({ author: c.user?.login ?? '', createdAt: c.created_at, body: c.body ?? '' })),
+      all.map(c => ({
+        author: c.user?.login ?? '',
+        authorType: c.user?.type ?? '',
+        createdAt: c.created_at,
+        body: c.body ?? '',
+      })),
       { author: inputs.atlantisCommentAuthor, since: status.firstCreatedAt }
     )
     if (comments.length > 0) {

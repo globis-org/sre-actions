@@ -96,7 +96,7 @@ jobs:
 - Atlantis 既定のコメントテンプレートを前提にしている。テンプレートをカスタマイズしている場合や Atlantis の更新で形式が変わった場合は `unknown` になる (誤って「変更なし」にはしない)
 - plan 出力が Atlantis 側で打ち切られた場合、打ち切られた部分のリソースは一覧に出ないが、手順 6 の突き合わせで `unknown` になる
 - import と同時に update されるリソースは `update` として一覧に出る (Terraform の表示が `will be updated in-place` に `(imported from ...)` を併記する形のため)。import の件数は突き合わせに使わない
-- コメントの投稿者は login だけで判定する (GitHub App の `type: Bot` は見ない)。Atlantis を通常のユーザーアカウントで動かしている構成もあるため
+- Atlantis は GitHub App として動かしている前提。コメントの投稿者は login の一致に加えて `type: Bot` であることで判定する (同じ login のユーザーアカウントや、plan を引用した人のコメントを拾わないため)
 - Terraform に関係しない PR でも通常は `0/0 projects planned successfully.` の status がすぐ付くので `no-projects` になる。status がまったく付かない PR は `none` になる
 - Atlantis は plan を実行するたびに新しいコメントを投稿する (前のコメントは更新しない)。同じ head に対する再 plan (`atlantis plan -d <dir>` など) も手順 4 で project ごとに最後の結果が採用される
 - plan の実行中に重ねて plan が起動されると `**Plan Error**` (`cannot run "plan": ... currently locked for this pull request`) が投稿されるが、実行中の plan の結果が後から来るので手順 4 により解消される
