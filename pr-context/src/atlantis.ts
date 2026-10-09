@@ -99,17 +99,18 @@ function projectStatuses(statuses: StatusRecord[]): Map<string, StatusRecord> {
 const CONTINUED = 'Continued plan output from previous comment'
 const PLAN_COMMENT = /^(Ran Plan for|\*\*Plan (Error|Failed)\*\*)/
 
+// REST API は GitHub App のログイン名に "[bot]" を付け、GraphQL (gh pr view) は付けない
+const normalizeLogin = (name: string): string => name.replace(/\[bot\]$/, '').toLowerCase()
+
 // since 以降に Atlantis (Bot) が投稿した plan コメントを時系列に並べ、分割された続きを前につなぐ
 export function selectPlanComments(
   comments: IssueComment[],
   login: string,
   since: string
 ): string[] {
-  // REST API は GitHub App のログイン名に "[bot]" を付け、GraphQL (gh pr view) は付けない
-  const normalize = (name: string): string => name.replace(/\[bot\]$/, '').toLowerCase()
   const merged: string[] = []
   for (const comment of comments
-    .filter(c => c.type === 'Bot' && normalize(c.login) === normalize(login))
+    .filter(c => c.type === 'Bot' && normalizeLogin(c.login) === normalizeLogin(login))
     .filter(c => Date.parse(c.createdAt) >= Date.parse(since))
     .toSorted((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt))) {
     const body = comment.body.replace(/\r\n/g, '\n').trimStart()

@@ -111,14 +111,14 @@ describe('aggregateStatus', () => {
   })
 })
 
-describe('selectPlanComments', () => {
-  const comment = (login: string, type: string, createdAt: string, body: string) => ({
-    login,
-    type,
-    createdAt,
-    body,
-  })
+const comment = (login: string, type: string, createdAt: string, body: string) => ({
+  login,
+  type,
+  createdAt,
+  body,
+})
 
+describe('selectPlanComments', () => {
   test('keeps bot plan comments after since in order and joins continued output', () => {
     expect(
       selectPlanComments(
