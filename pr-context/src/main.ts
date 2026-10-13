@@ -7,11 +7,12 @@ import { context, getOctokit } from '@actions/github'
 import {
   aggregateStatus,
   buildPlan,
+  lastSections,
   MISSING_COMMENT,
   selectPlanComments,
   type Plan,
 } from './atlantis'
-import { destroyOrReplace, renderSummary } from './summary'
+import { destroyOrReplace, renderLatestPlans, renderSummary } from './summary'
 
 type Octokit = ReturnType<typeof getOctokit>
 
@@ -27,7 +28,7 @@ async function collectPlan(
   issueNumber: number,
   headSha: string,
   login: string
-): Promise<{ plan: Plan; raw: string }> {
+): Promise<{ plan: Plan; latest: string }> {
   const statuses = await octokit.paginate(octokit.rest.repos.listCommitStatusesForRef, {
     ...repo,
     ref: headSha,
@@ -38,7 +39,7 @@ async function collectPlan(
     core.warning('atlantis/plan is still pending. Run this action after the plan finishes.')
   }
   if (aggregate.kind !== 'settled') {
-    return { plan: buildPlan(aggregate, statuses, []), raw: '' }
+    return { plan: buildPlan(aggregate, statuses, []), latest: '' }
   }
   for (let attempt = 0; ; attempt++) {
     const all = await octokit.paginate(octokit.rest.issues.listComments, {
@@ -59,7 +60,7 @@ async function collectPlan(
     )
     const plan = buildPlan(aggregate, statuses, comments)
     if (attempt >= COMMENT_RETRIES || !plan.projects.some(p => p.reason === MISSING_COMMENT)) {
-      return { plan, raw: comments.join('\n\n---\n\n') }
+      return { plan, latest: renderLatestPlans(lastSections(comments)) }
     }
     await new Promise(resolve => setTimeout(resolve, COMMENT_RETRY_MS))
   }
@@ -119,10 +120,10 @@ async function run(): Promise<void> {
     return
   }
 
-  const { plan, raw } = await collectPlan(octokit, number, headSha, atlantisLogin)
+  const { plan, latest } = await collectPlan(octokit, number, headSha, atlantisLogin)
   const summary = renderSummary(plan)
   await write('plan-summary.md', summary)
-  await write('atlantis-plan-comments.md', raw)
+  await write('atlantis-plan-latest.md', latest)
 
   core.setOutput('plan-state', plan.state)
   core.setOutput('resource-count', String(plan.resources.length))

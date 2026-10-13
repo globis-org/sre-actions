@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
 import type { Plan } from '../src/atlantis'
-import { destroyOrReplace, renderSummary } from '../src/summary'
+import { destroyOrReplace, renderLatestPlans, renderSummary } from '../src/summary'
 
 const plan: Plan = {
   state: 'changes',
@@ -63,5 +63,37 @@ describe('destroyOrReplace', () => {
     [{ ...plan, state: 'none' as const, resources: [] }, 'unknown'],
   ])('%#', (input, expected) => {
     expect(destroyOrReplace(input)).toBe(expected)
+  })
+})
+
+describe('renderLatestPlans', () => {
+  test('one section per project, sorted, without trailing separators', () => {
+    expect(
+      renderLatestPlans(
+        new Map([
+          ['infra/stg/default', '```diff\nNo changes.\n```\n\n---\n'],
+          ['infra/prod/default', '\n```diff\nPlan: 1 to add, 0 to change, 0 to destroy.\n```\n'],
+        ])
+      )
+    ).toBe(
+      [
+        '## infra/prod/default',
+        '',
+        '```diff',
+        'Plan: 1 to add, 0 to change, 0 to destroy.',
+        '```',
+        '',
+        '## infra/stg/default',
+        '',
+        '```diff',
+        'No changes.',
+        '```',
+        '',
+      ].join('\n')
+    )
+  })
+
+  test('no sections', () => {
+    expect(renderLatestPlans(new Map())).toBe('')
   })
 })
