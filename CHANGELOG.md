@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.2.3](https://github.com/globis-org/sre-actions/compare/v1.2.2...v1.2.3) - 2026-10-13
+
+- chore(deps): update songmu/tagpr action to v1.21.0 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/155
+- chore(deps): update songmu/tagpr action to v1.21.1 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/157
+- feat(pr-context): AI レビュー向けに PR 情報と Terraform plan の結果を決定的に集める action を追加 by @yukin01 in https://github.com/globis-org/sre-actions/pull/159
+- chore(deps): update jdx/mise-action action to v5 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/158
+- fix(deps): update npm dependencies (non-major) by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/154
+
 ## [v1.2.2](https://github.com/globis-org/sre-actions/compare/v1.2.1...v1.2.2) - 2026-09-15
 
 - modify(hcp-terraform-plan): 対応イベントを明確にし、merge_group と判定に影響しない review を扱う by @yukin01 in https://github.com/globis-org/sre-actions/pull/152
