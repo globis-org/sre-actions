@@ -197,7 +197,11 @@ export function countsMatch(planLine: string, resources: Resource[]): boolean {
   )
 }
 
-// "**Plan Failed**: <理由>" はその行、"**Plan Error**" は続くコードブロックの最初の行
+// 失敗の理由を次の順で探す
+// 1. "**Plan Failed**: <理由>" の同じ行
+// 2. 後続の Terraform の診断行 ("│ Error: <summary>")。Atlantis の "**Plan Error**" の出力は
+//    "running 'sh -c' ... exit status 1" から始まり、最初の行だけでは原因がわからないため
+// 3. HTML タグだけの行 (<details> など) とコードフェンスを飛ばした最初の行
 export function failureReason(text: string): string | undefined {
   const lines = text.split('\n').map(line => line.trim())
   const index = lines.findIndex(line => /^(\*\*)?Plan (Error|Failed)/.test(line))
@@ -205,7 +209,12 @@ export function failureReason(text: string): string | undefined {
     return undefined
   }
   const rest = (lines[index] ?? '').replace(/^.*?Plan (Error|Failed)(\*\*)?:?\s*/, '')
-  return rest || lines.slice(index + 1).find(line => line !== '' && !line.startsWith('```'))
+  const after = lines.slice(index + 1)
+  return (
+    (rest ||
+      after.map(line => line.replace(/^│\s*/, '')).find(line => line.startsWith('Error: '))) ??
+    after.find(line => line !== '' && !line.startsWith('```') && !/^<.*>$/.test(line))
+  )
 }
 
 function toProject(name: string, status: StatusRecord, section: string | undefined): Project {

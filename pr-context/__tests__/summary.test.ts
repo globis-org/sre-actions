@@ -25,6 +25,25 @@ const plan: Plan = {
 }
 
 describe('renderSummary', () => {
+  test('reasons with HTML or pipes do not break the table', () => {
+    const summary = renderSummary({
+      state: 'failed',
+      projects: [
+        {
+          project: 'infra/prod/default',
+          state: 'failed',
+          status: 'Plan failed.',
+          reason: '<details><summary>Show Output</summary> a | b',
+          resources: [],
+        },
+      ],
+      resources: [],
+    })
+    expect(summary).toContain(
+      '| infra/prod/default | 失敗 | Plan failed. | &lt;details&gt;&lt;summary&gt;Show Output&lt;/summary&gt; a \\| b |'
+    )
+  })
+
   test('lists destructive changes, projects and every resource', () => {
     expect(renderSummary(plan)).toBe(
       [
