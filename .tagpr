@@ -58,4 +58,6 @@
 	vPrefix = true
 	releaseBranch = main
 	versionFile = package.json
-	command = pnpm install --frozen-lockfile && pnpm -r run all
+	# tagpr は command の後に `git diff HEAD` に出るファイルだけをコミットするので、新規 action の
+	# 未追跡の dist も入るよう stage しておく (glob の * は / をまたがず <action>/dist だけに当たる)
+	command = pnpm install --frozen-lockfile && pnpm -r run all && git add -- ':(glob)*/dist/**'
