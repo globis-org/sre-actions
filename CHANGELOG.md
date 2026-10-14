@@ -1,5 +1,11 @@
 # Changelog
 
+## [v1.3.0](https://github.com/globis-org/sre-actions/compare/v1.2.3...v1.3.0) - 2026-10-14
+
+- fix(pr-context): plan 失敗の理由を Terraform の診断行から取る by @yukin01 in https://github.com/globis-org/sre-actions/pull/161
+- feat(pr-context): plan コメントの原文の代わりに project ごとの最新の plan を書き出す by @yukin01 in https://github.com/globis-org/sre-actions/pull/162
+- fix(deps): update npm dependencies (non-major) by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/163
+
 ## [v1.2.3](https://github.com/globis-org/sre-actions/compare/v1.2.2...v1.2.3) - 2026-10-13
 
 - chore(deps): update songmu/tagpr action to v1.21.0 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/155

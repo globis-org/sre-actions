@@ -23948,6 +23948,10 @@ function lastSections(comments) {
   for (const comment of comments) {
     let lines;
     for (const line of comment.split("\n")) {
+      if (line.startsWith("### Plan Summary")) {
+        lines = void 0;
+        continue;
+      }
       const match = HEADER.exec(line.trim());
       if (match === null) {
         lines?.push(line);
@@ -23999,7 +24003,8 @@ function failureReason(text) {
     return void 0;
   }
   const rest = (lines[index] ?? "").replace(/^.*?Plan (Error|Failed)(\*\*)?:?\s*/, "");
-  return rest || lines.slice(index + 1).find((line) => line !== "" && !line.startsWith("```"));
+  const after = lines.slice(index + 1);
+  return (rest || after.map((line) => line.replace(/^│\s*/, "")).find((line) => line.startsWith("Error: "))) ?? after.find((line) => line !== "" && !line.startsWith("```") && !/^<.*>$/.test(line));
 }
 function toProject(name, status, section) {
   const description = status.description ?? "";
@@ -24079,7 +24084,13 @@ function destroyOrReplace(plan) {
   }
   return ["changes", "no-changes", "no-projects"].includes(plan.state) ? "false" : "unknown";
 }
-var cell = (text) => text.replace(/\|/g, "\\|").replace(/\r?\n/g, " ");
+function renderLatestPlans(sections) {
+  return [...sections].toSorted(([a], [b]) => a.localeCompare(b)).map(([project, text]) => `## ${project}
+
+${text.replace(/(\s*\n---)+\s*$/, "").trim()}
+`).join("\n");
+}
+var cell = (text) => text.replace(/\|/g, "\\|").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\r?\n/g, " ");
 function renderSummary(plan) {
   const destructive = plan.resources.filter((r) => r.action === "delete" || r.action === "replace");
   const verdict = destroyOrReplace(plan);
@@ -24119,7 +24130,7 @@ async function collectPlan(octokit, issueNumber, headSha, login) {
     warning("atlantis/plan is still pending. Run this action after the plan finishes.");
   }
   if (aggregate.kind !== "settled") {
-    return { plan: buildPlan(aggregate, statuses, []), raw: "" };
+    return { plan: buildPlan(aggregate, statuses, []), latest: "" };
   }
   for (let attempt = 0; ; attempt++) {
     const all = await octokit.paginate(octokit.rest.issues.listComments, {
@@ -24140,7 +24151,7 @@ async function collectPlan(octokit, issueNumber, headSha, login) {
     );
     const plan = buildPlan(aggregate, statuses, comments);
     if (attempt >= COMMENT_RETRIES || !plan.projects.some((p) => p.reason === MISSING_COMMENT)) {
-      return { plan, raw: comments.join("\n\n---\n\n") };
+      return { plan, latest: renderLatestPlans(lastSections(comments)) };
     }
     await new Promise((resolve) => setTimeout(resolve, COMMENT_RETRY_MS));
   }
@@ -24192,10 +24203,10 @@ async function run() {
     setOutput("destroy-or-replace", "unknown");
     return;
   }
-  const { plan, raw } = await collectPlan(octokit, number, headSha, atlantisLogin);
+  const { plan, latest } = await collectPlan(octokit, number, headSha, atlantisLogin);
   const summary2 = renderSummary(plan);
   await write("plan-summary.md", summary2);
-  await write("atlantis-plan-comments.md", raw);
+  await write("atlantis-plan-latest.md", latest);
   setOutput("plan-state", plan.state);
   setOutput("resource-count", String(plan.resources.length));
   setOutput("destroy-or-replace", destroyOrReplace(plan));
