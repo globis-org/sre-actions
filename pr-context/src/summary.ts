@@ -34,7 +34,9 @@ export function renderLatestPlans(sections: Map<string, string>): string {
     .join('\n')
 }
 
-const cell = (text: string): string => text.replace(/\|/g, '\\|').replace(/\r?\n/g, ' ')
+// 理由に <details> などが入っても GitHub で HTML として描画されて表が崩れないようにする
+const cell = (text: string): string =>
+  text.replace(/\|/g, '\\|').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\r?\n/g, ' ')
 
 // reviewer の prompt とサマリーにそのまま貼る。列挙を LLM にさせないため決定的に作る
 export function renderSummary(plan: Plan): string {

@@ -84,7 +84,7 @@ jobs:
 3. 集約 status が head に最初に付いた時刻以降に、`atlantis-comment-author` (GitHub App) が投稿した plan コメントを集める。それより前は古い head への plan として使わない。分割された続き (`Continued plan output ...`) は前のコメントにつなぐ
 4. コメントを project ごとの節に分け、project ごとに最後の節から次を取る
    - 変更リソース: `# <address> will be created` などの行 (data source の `read` は含めない)。action は `terraform plan -json` の語彙 (`create` / `update` / `delete` / `replace` / `import` / `move` / `forget`)
-   - 失敗の理由: `**Plan Failed**: <理由>` の行、または `**Plan Error**` に続くエラーの最初の行
+   - 失敗の理由: `**Plan Failed**: <理由>` の同じ行、無ければ後続の Terraform の診断行 (`│ Error: <summary>`)、それも無ければ HTML タグ行とコードフェンスを飛ばした最初の行
 5. 変更リソースの数を status の Plan 行と突き合わせる (add = create + replace、change = update、destroy = delete + replace)。合わない、またはコメントが見つからない project は `incomplete` にする。出力の打ち切り、コメントの欠落 (折りたたみ・削除)、未知の書式で、黙って「destroy なし」と報告しないため
 
 ### 注意事項
