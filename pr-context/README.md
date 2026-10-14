@@ -62,25 +62,25 @@ jobs:
 
 ## plan の状態 (`plan-state`)
 
-| 値            | 意味                                                                    | `destroy-or-replace` |
-| ------------- | ----------------------------------------------------------------------- | -------------------- |
-| `disabled`    | `atlantis-comment-author` が空で、plan を収集していない                 | `unknown`            |
-| `pending`     | plan が終わっていない                                                   | `unknown`            |
-| `none`        | head commit に `atlantis/plan` の status が無い                         | `unknown`            |
-| `no-projects` | 対象 project が無い (`0/0 projects planned`。Terraform に関係しない PR) | `false`              |
-| `failed`      | いずれかの project の plan が失敗した                                   | `unknown`            |
-| `incomplete`  | 変更リソース一覧を検証できない project がある (下記)。手動で確認する    | `unknown`            |
-| `changes`     | いずれかの project に変更がある                                         | `true` / `false`     |
-| `no-changes`  | 全 project が変更なし                                                   | `false`              |
+| 値            | 意味                                                                        | `destroy-or-replace` |
+| ------------- | --------------------------------------------------------------------------- | -------------------- |
+| `disabled`    | `atlantis-comment-author` が空で、plan を収集していない                     | `unknown`            |
+| `pending`     | plan が終わっていない (project の status に pending が残っている場合も含む) | `unknown`            |
+| `none`        | head commit に `atlantis/plan` の status が無い                             | `unknown`            |
+| `no-projects` | 対象 project が無い (`0/0 projects planned`。Terraform に関係しない PR)     | `false`              |
+| `failed`      | いずれかの project の plan が失敗した                                       | `unknown`            |
+| `incomplete`  | 変更リソース一覧を検証できない project がある (下記)。手動で確認する        | `unknown`            |
+| `changes`     | いずれかの project に変更がある                                             | `true` / `false`     |
+| `no-changes`  | 全 project が変更なし                                                       | `false`              |
 
-`failed` / `incomplete` でも、検証できた project の destroy / replace が見つかれば `destroy-or-replace` は `true` になります。
+`failed` / `incomplete` / `pending` (project の status が残っている場合) でも、検証できた project の destroy / replace が見つかれば `destroy-or-replace` は `true` になります。
 
 ## Atlantis の結果の組み立て方
 
 状態は commit status から、変更リソースと失敗の理由はコメントから取ります。
 
 1. head commit の集約 status (`atlantis/plan`) を読む。無ければ `none`、`pending` なら `pending`、description が `0/0 ` で始まれば `no-projects`
-2. project ごとの status (`atlantis/plan: <dir>/<workspace>`、名前付き project は `atlantis/plan: <project>`) の最新を、その project の結果とする。description は Plan 行、`No changes.`、または失敗
+2. project ごとの status (`atlantis/plan: <dir>/<workspace>`、名前付き project は `atlantis/plan: <project>`) の最新を、その project の結果とする。description は Plan 行、`No changes.`、または失敗。いずれかの最新が `pending` なら、集約 status が `failure` でも `pending` とする (同じ commit で plan が重なり、後の plan がロック衝突で先に失敗した場合など)。このときも project の表と `(全体)` 行 (失敗の理由) は出す
 3. 集約 status が head に最初に付いた時刻以降に、`atlantis-comment-author` (GitHub App) が投稿した plan コメントを集める。それより前は古い head への plan として使わない。分割された続き (`Continued plan output ...`) は前のコメントにつなぐ
 4. コメントを project ごとの節に分け、project ごとに最後の節から次を取る
    - 変更リソース: `# <address> will be created` などの行 (data source の `read` は含めない)。action は `terraform plan -json` の語彙 (`create` / `update` / `delete` / `replace` / `import` / `move` / `forget`)

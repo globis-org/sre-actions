@@ -121,6 +121,9 @@ async function run(): Promise<void> {
   }
 
   const { plan, latest } = await collectPlan(octokit, number, headSha, atlantisLogin)
+  if (plan.state === 'pending' && plan.projects.length > 0) {
+    core.warning('Some atlantis/plan project statuses are still pending.')
+  }
   const summary = renderSummary(plan)
   await write('plan-summary.md', summary)
   await write('atlantis-plan-latest.md', latest)
