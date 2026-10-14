@@ -25,6 +25,15 @@ export function destroyOrReplace(plan: Plan): 'true' | 'false' | 'unknown' {
   return ['changes', 'no-changes', 'no-projects'].includes(plan.state) ? 'false' : 'unknown'
 }
 
+// project ごとの最新の plan 出力。reviewer が属性の変更内容を確認するために読む。
+// コメントの原文は再 plan や前の失敗も含み、どれが最新かの判断を LLM に残すため渡さない
+export function renderLatestPlans(sections: Map<string, string>): string {
+  return [...sections]
+    .toSorted(([a], [b]) => a.localeCompare(b))
+    .map(([project, text]) => `## ${project}\n\n${text.replace(/(\s*\n---)+\s*$/, '').trim()}\n`)
+    .join('\n')
+}
+
 // 理由に <details> などが入っても GitHub で HTML として描画されて表が崩れないようにする
 const cell = (text: string): string =>
   text.replace(/\|/g, '\\|').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\r?\n/g, ' ')

@@ -169,6 +169,12 @@ describe('lastSections', () => {
     expect(sections.get('infra/stg/default')).toContain('No changes.')
   })
 
+  test('the overall Plan Summary is not part of the last project', () => {
+    const sections = lastSections([`${multiHead}\n${multiTail}`])
+    expect(sections.get('infra/stg/default')).toContain('Plan Failed')
+    expect(sections.get('infra/stg/default')).not.toContain('Plan Summary')
+  })
+
   test('named projects are keyed by name like their statuses', () => {
     const sections = lastSections([
       'Ran Plan for project: `app` dir: `.` workspace: `prod`\nNo changes.',

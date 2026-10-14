@@ -139,6 +139,11 @@ export function lastSections(comments: string[]): Map<string, string> {
   for (const comment of comments) {
     let lines: string[] | undefined
     for (const line of comment.split('\n')) {
+      // 複数 project のコメントの末尾にある全体の集計は、最後の project の節に含めない
+      if (line.startsWith('### Plan Summary')) {
+        lines = undefined
+        continue
+      }
       const match = HEADER.exec(line.trim())
       if (match === null) {
         lines?.push(line)
