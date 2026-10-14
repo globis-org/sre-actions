@@ -237,10 +237,39 @@ describe('countsMatch', () => {
   })
 })
 
+// terraform init が失敗したときの Atlantis の出力の構造を写したもの (パスや名前は汎用のものに置き換えている)
+const initFailure = `**Plan Error**
+<details><summary>Show Output</summary>
+
+\`\`\`
+running 'sh -c' '/home/atlantis/bin/terraform init -input=false' in '/home/atlantis/repos/org/repo/1/default/infra/app/prod': exit status 1
+Initializing the backend...
+
+Initializing modules...
+Downloading registry.terraform.io/example/iam/aws 5.60.0 for iam...
+- iam in .terraform/modules/iam
+╷
+│ Error: Unsupported Terraform Core version
+│
+│   on .terraform/modules/vpn/versions.tf line 2, in terraform:
+│    2:   required_version = "1.15.8"
+│
+│ Module module.vpn (from example.com/org/vpn/aws) does not support Terraform
+│ version 1.16.5.
+╵
+\`\`\`
+</details>`
+
 describe('failureReason', () => {
   test.each([
     ['**Plan Failed**: locked by #1', 'locked by #1'],
     ['**Plan Error**\n```\ncannot run "plan": locked\n```', 'cannot run "plan": locked'],
+    [initFailure, 'Error: Unsupported Terraform Core version'],
+    ['**Plan Error**\n```\nError: Invalid reference\n```', 'Error: Invalid reference'],
+    [
+      '**Plan Error**\n<details><summary>Show Output</summary>\n\n```\nexit status 1\n```\n</details>',
+      'exit status 1',
+    ],
     ['No changes.', undefined],
   ])('%s', (text, expected) => {
     expect(failureReason(text)).toBe(expected)
