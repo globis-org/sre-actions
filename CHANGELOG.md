@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.3.1](https://github.com/globis-org/sre-actions/compare/v1.3.0...v1.3.1) - 2026-10-15
+
+- chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/165
+- fix(wait-for-commit-statuses, pr-context): 同じ commit で Atlantis の plan が重なったときに途中で完了と判定しない by @yukin01 in https://github.com/globis-org/sre-actions/pull/166
+
 ## [v1.3.0](https://github.com/globis-org/sre-actions/compare/v1.2.3...v1.3.0) - 2026-10-14
 
 - fix(pr-context): plan 失敗の理由を Terraform の診断行から取る by @yukin01 in https://github.com/globis-org/sre-actions/pull/161
