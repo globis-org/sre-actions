@@ -52,7 +52,8 @@ export type Project = {
   resources: Resource[]
 }
 
-// - pending:     plan が終わっていない (この action は待たない。前段で待つ)
+// - pending:     plan が終わっていない (この action は待たない。前段で待つ)。
+//                集約 status が終わっていても、project の status に pending が残っていれば pending
 // - none:        head commit に plan の status が無い
 // - no-projects: plan は実行されたが対象 project が無い (Terraform に関係しない PR)
 export type PlanState = 'pending' | 'none' | 'no-projects' | ProjectState
@@ -269,7 +270,8 @@ export function buildPlan(
     return { state: 'no-projects', projects: [], resources: [] }
   }
   const sections = lastSections(comments)
-  const projects = [...projectStatuses(statuses)]
+  const latest = projectStatuses(statuses)
+  const projects = [...latest]
     .map(([name, status]) => toProject(name, status, sections.get(name)))
     .toSorted((a, b) => a.project.localeCompare(b.project))
   // コマンド全体の失敗 (atlantis.yaml の誤り、hook の失敗など) は project ごとの status に
@@ -285,7 +287,11 @@ export function buildPlan(
       resources: [],
     })
   }
-  const state = STATE_ORDER.find(s => projects.some(p => p.state === s)) ?? 'no-changes'
+  // 同じ commit で plan が重なると、後の plan がロック衝突で集約 status を failure にし、
+  // 先の plan の project がまだ pending のことがある。表と (全体) の理由は残して pending とする
+  const state = [...latest.values()].some(s => s.state === 'pending')
+    ? 'pending'
+    : (STATE_ORDER.find(s => projects.some(p => p.state === s)) ?? 'no-changes')
   return {
     state,
     projects,

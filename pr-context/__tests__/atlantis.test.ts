@@ -9,6 +9,7 @@ import {
   selectPlanComments,
   type StatusRecord,
 } from '../src/atlantis'
+import { destroyOrReplace } from '../src/summary'
 
 // 実際の Atlantis コメントの構造を写したもの (パスや値は汎用のものに置き換えている)
 const multiHead = `Ran Plan for 2 projects:
@@ -396,6 +397,31 @@ describe('buildPlan', () => {
     expect(plan.projects.map(p => [p.project, p.state, p.reason])).toStrictEqual([
       ['infra/prod/default', 'no-changes', undefined],
       ['(全体)', 'failed', 'pre-workflow hook failed'],
+    ])
+  })
+
+  test('pending projects keep the plan pending even after the aggregate status fails', () => {
+    // 同じ commit で plan が重なり、後の plan がロック衝突で集約 status を failure にした直後
+    const plan = buildPlan(
+      { ...settled, state: 'failure', description: 'Plan failed.' },
+      [
+        status('atlantis/plan: infra/prod/default', 'pending', 'Plan in progress...'),
+        status('atlantis/plan: infra/stg/default', 'pending', 'Plan in progress...'),
+      ],
+      [
+        '**Plan Error**\n```\ncannot run "plan": the default workspace at path . is currently locked for this pull request by "plan".\n```',
+      ]
+    )
+    expect(plan.state).toBe('pending')
+    expect(destroyOrReplace(plan)).toBe('unknown')
+    expect(plan.projects.map(p => [p.project, p.state, p.reason])).toStrictEqual([
+      ['infra/prod/default', 'incomplete', 'status が pending'],
+      ['infra/stg/default', 'incomplete', 'status が pending'],
+      [
+        '(全体)',
+        'failed',
+        'cannot run "plan": the default workspace at path . is currently locked for this pull request by "plan".',
+      ],
     ])
   })
 
