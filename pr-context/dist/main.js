@@ -24042,7 +24042,8 @@ function buildPlan(aggregate, statuses, comments) {
     return { state: "no-projects", projects: [], resources: [] };
   }
   const sections = lastSections(comments);
-  const projects = [...projectStatuses(statuses)].map(([name, status]) => toProject(name, status, sections.get(name))).toSorted((a, b) => a.project.localeCompare(b.project));
+  const latest = projectStatuses(statuses);
+  const projects = [...latest].map(([name, status]) => toProject(name, status, sections.get(name))).toSorted((a, b) => a.project.localeCompare(b.project));
   const failed = aggregate.state !== "success";
   if (failed ? !projects.some((p) => p.state === "failed") : projects.length === 0) {
     const reason = failureReason(comments.at(-1) ?? "");
@@ -24054,7 +24055,7 @@ function buildPlan(aggregate, statuses, comments) {
       resources: []
     });
   }
-  const state = STATE_ORDER.find((s) => projects.some((p) => p.state === s)) ?? "no-changes";
+  const state = [...latest.values()].some((s) => s.state === "pending") ? "pending" : STATE_ORDER.find((s) => projects.some((p) => p.state === s)) ?? "no-changes";
   return {
     state,
     projects,
@@ -24204,6 +24205,9 @@ async function run() {
     return;
   }
   const { plan, latest } = await collectPlan(octokit, number, headSha, atlantisLogin);
+  if (plan.state === "pending" && plan.projects.length > 0) {
+    warning("Some atlantis/plan project statuses are still pending.");
+  }
   const summary2 = renderSummary(plan);
   await write("plan-summary.md", summary2);
   await write("atlantis-plan-latest.md", latest);
