@@ -345,8 +345,8 @@ var require_errors = __commonJS({
     "use strict";
     var kUndiciError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR");
     var UndiciError = class extends Error {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "UndiciError";
         this.code = "UND_ERR";
       }
@@ -357,10 +357,10 @@ var require_errors = __commonJS({
     };
     var kConnectTimeoutError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_CONNECT_TIMEOUT");
     var ConnectTimeoutError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "ConnectTimeoutError";
-        this.message = message || "Connect Timeout Error";
+        this.message = message2 || "Connect Timeout Error";
         this.code = "UND_ERR_CONNECT_TIMEOUT";
       }
       static [Symbol.hasInstance](instance) {
@@ -370,10 +370,10 @@ var require_errors = __commonJS({
     };
     var kHeadersTimeoutError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_HEADERS_TIMEOUT");
     var HeadersTimeoutError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "HeadersTimeoutError";
-        this.message = message || "Headers Timeout Error";
+        this.message = message2 || "Headers Timeout Error";
         this.code = "UND_ERR_HEADERS_TIMEOUT";
       }
       static [Symbol.hasInstance](instance) {
@@ -383,10 +383,10 @@ var require_errors = __commonJS({
     };
     var kHeadersOverflowError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_HEADERS_OVERFLOW");
     var HeadersOverflowError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "HeadersOverflowError";
-        this.message = message || "Headers Overflow Error";
+        this.message = message2 || "Headers Overflow Error";
         this.code = "UND_ERR_HEADERS_OVERFLOW";
       }
       static [Symbol.hasInstance](instance) {
@@ -396,10 +396,10 @@ var require_errors = __commonJS({
     };
     var kBodyTimeoutError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_BODY_TIMEOUT");
     var BodyTimeoutError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "BodyTimeoutError";
-        this.message = message || "Body Timeout Error";
+        this.message = message2 || "Body Timeout Error";
         this.code = "UND_ERR_BODY_TIMEOUT";
       }
       static [Symbol.hasInstance](instance) {
@@ -409,10 +409,10 @@ var require_errors = __commonJS({
     };
     var kResponseStatusCodeError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_RESPONSE_STATUS_CODE");
     var ResponseStatusCodeError = class extends UndiciError {
-      constructor(message, statusCode, headers, body) {
-        super(message);
+      constructor(message2, statusCode, headers, body) {
+        super(message2);
         this.name = "ResponseStatusCodeError";
-        this.message = message || "Response Status Code Error";
+        this.message = message2 || "Response Status Code Error";
         this.code = "UND_ERR_RESPONSE_STATUS_CODE";
         this.body = body;
         this.status = statusCode;
@@ -426,10 +426,10 @@ var require_errors = __commonJS({
     };
     var kInvalidArgumentError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_INVALID_ARG");
     var InvalidArgumentError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "InvalidArgumentError";
-        this.message = message || "Invalid Argument Error";
+        this.message = message2 || "Invalid Argument Error";
         this.code = "UND_ERR_INVALID_ARG";
       }
       static [Symbol.hasInstance](instance) {
@@ -439,10 +439,10 @@ var require_errors = __commonJS({
     };
     var kInvalidReturnValueError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_INVALID_RETURN_VALUE");
     var InvalidReturnValueError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "InvalidReturnValueError";
-        this.message = message || "Invalid Return Value Error";
+        this.message = message2 || "Invalid Return Value Error";
         this.code = "UND_ERR_INVALID_RETURN_VALUE";
       }
       static [Symbol.hasInstance](instance) {
@@ -452,10 +452,10 @@ var require_errors = __commonJS({
     };
     var kAbortError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_ABORT");
     var AbortError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "AbortError";
-        this.message = message || "The operation was aborted";
+        this.message = message2 || "The operation was aborted";
         this.code = "UND_ERR_ABORT";
       }
       static [Symbol.hasInstance](instance) {
@@ -465,10 +465,10 @@ var require_errors = __commonJS({
     };
     var kRequestAbortedError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_ABORTED");
     var RequestAbortedError = class extends AbortError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "AbortError";
-        this.message = message || "Request aborted";
+        this.message = message2 || "Request aborted";
         this.code = "UND_ERR_ABORTED";
       }
       static [Symbol.hasInstance](instance) {
@@ -478,10 +478,10 @@ var require_errors = __commonJS({
     };
     var kInformationalError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_INFO");
     var InformationalError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "InformationalError";
-        this.message = message || "Request information";
+        this.message = message2 || "Request information";
         this.code = "UND_ERR_INFO";
       }
       static [Symbol.hasInstance](instance) {
@@ -491,10 +491,10 @@ var require_errors = __commonJS({
     };
     var kRequestContentLengthMismatchError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_REQ_CONTENT_LENGTH_MISMATCH");
     var RequestContentLengthMismatchError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "RequestContentLengthMismatchError";
-        this.message = message || "Request body length does not match content-length header";
+        this.message = message2 || "Request body length does not match content-length header";
         this.code = "UND_ERR_REQ_CONTENT_LENGTH_MISMATCH";
       }
       static [Symbol.hasInstance](instance) {
@@ -504,10 +504,10 @@ var require_errors = __commonJS({
     };
     var kResponseContentLengthMismatchError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_RES_CONTENT_LENGTH_MISMATCH");
     var ResponseContentLengthMismatchError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "ResponseContentLengthMismatchError";
-        this.message = message || "Response body length does not match content-length header";
+        this.message = message2 || "Response body length does not match content-length header";
         this.code = "UND_ERR_RES_CONTENT_LENGTH_MISMATCH";
       }
       static [Symbol.hasInstance](instance) {
@@ -517,10 +517,10 @@ var require_errors = __commonJS({
     };
     var kClientDestroyedError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_DESTROYED");
     var ClientDestroyedError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "ClientDestroyedError";
-        this.message = message || "The client is destroyed";
+        this.message = message2 || "The client is destroyed";
         this.code = "UND_ERR_DESTROYED";
       }
       static [Symbol.hasInstance](instance) {
@@ -530,10 +530,10 @@ var require_errors = __commonJS({
     };
     var kClientClosedError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_CLOSED");
     var ClientClosedError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "ClientClosedError";
-        this.message = message || "The client is closed";
+        this.message = message2 || "The client is closed";
         this.code = "UND_ERR_CLOSED";
       }
       static [Symbol.hasInstance](instance) {
@@ -543,10 +543,10 @@ var require_errors = __commonJS({
     };
     var kSocketError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_SOCKET");
     var SocketError = class extends UndiciError {
-      constructor(message, socket) {
-        super(message);
+      constructor(message2, socket) {
+        super(message2);
         this.name = "SocketError";
-        this.message = message || "Socket error";
+        this.message = message2 || "Socket error";
         this.code = "UND_ERR_SOCKET";
         this.socket = socket;
       }
@@ -557,10 +557,10 @@ var require_errors = __commonJS({
     };
     var kNotSupportedError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_NOT_SUPPORTED");
     var NotSupportedError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "NotSupportedError";
-        this.message = message || "Not supported error";
+        this.message = message2 || "Not supported error";
         this.code = "UND_ERR_NOT_SUPPORTED";
       }
       static [Symbol.hasInstance](instance) {
@@ -570,10 +570,10 @@ var require_errors = __commonJS({
     };
     var kBalancedPoolMissingUpstreamError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_BPL_MISSING_UPSTREAM");
     var BalancedPoolMissingUpstreamError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "MissingUpstreamError";
-        this.message = message || "No upstream has been added to the BalancedPool";
+        this.message = message2 || "No upstream has been added to the BalancedPool";
         this.code = "UND_ERR_BPL_MISSING_UPSTREAM";
       }
       static [Symbol.hasInstance](instance) {
@@ -583,8 +583,8 @@ var require_errors = __commonJS({
     };
     var kHTTPParserError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_HTTP_PARSER");
     var HTTPParserError = class extends Error {
-      constructor(message, code, data) {
-        super(message);
+      constructor(message2, code, data) {
+        super(message2);
         this.name = "HTTPParserError";
         this.code = code ? `HPE_${code}` : void 0;
         this.data = data ? data.toString() : void 0;
@@ -596,10 +596,10 @@ var require_errors = __commonJS({
     };
     var kResponseExceededMaxSizeError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_RES_EXCEEDED_MAX_SIZE");
     var ResponseExceededMaxSizeError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "ResponseExceededMaxSizeError";
-        this.message = message || "Response content exceeded max size";
+        this.message = message2 || "Response content exceeded max size";
         this.code = "UND_ERR_RES_EXCEEDED_MAX_SIZE";
       }
       static [Symbol.hasInstance](instance) {
@@ -609,10 +609,10 @@ var require_errors = __commonJS({
     };
     var kRequestRetryError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_REQ_RETRY");
     var RequestRetryError = class extends UndiciError {
-      constructor(message, code, { headers, data }) {
-        super(message);
+      constructor(message2, code, { headers, data }) {
+        super(message2);
         this.name = "RequestRetryError";
-        this.message = message || "Request retry error";
+        this.message = message2 || "Request retry error";
         this.code = "UND_ERR_REQ_RETRY";
         this.statusCode = code;
         this.data = data;
@@ -625,10 +625,10 @@ var require_errors = __commonJS({
     };
     var kResponseError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_RESPONSE");
     var ResponseError = class extends UndiciError {
-      constructor(message, code, { headers, data }) {
-        super(message);
+      constructor(message2, code, { headers, data }) {
+        super(message2);
         this.name = "ResponseError";
-        this.message = message || "Response error";
+        this.message = message2 || "Response error";
         this.code = "UND_ERR_RESPONSE";
         this.statusCode = code;
         this.data = data;
@@ -641,10 +641,10 @@ var require_errors = __commonJS({
     };
     var kSecureProxyConnectionError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_PRX_TLS");
     var SecureProxyConnectionError = class extends UndiciError {
-      constructor(cause, message, options) {
-        super(message, { cause, ...options ?? {} });
+      constructor(cause, message2, options) {
+        super(message2, { cause, ...options ?? {} });
         this.name = "SecureProxyConnectionError";
-        this.message = message || "Secure Proxy Connection failed";
+        this.message = message2 || "Secure Proxy Connection failed";
         this.code = "UND_ERR_PRX_TLS";
         this.cause = cause;
       }
@@ -655,10 +655,10 @@ var require_errors = __commonJS({
     };
     var kMessageSizeExceededError = /* @__PURE__ */ Symbol.for("undici.error.UND_ERR_WS_MESSAGE_SIZE_EXCEEDED");
     var MessageSizeExceededError = class extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         this.name = "MessageSizeExceededError";
-        this.message = message || "Max decompressed message size exceeded";
+        this.message = message2 || "Max decompressed message size exceeded";
         this.code = "UND_ERR_WS_MESSAGE_SIZE_EXCEEDED";
       }
       static [Symbol.hasInstance](instance) {
@@ -2598,14 +2598,14 @@ var require_connect = __commonJS({
       if (socket == null) {
         return;
       }
-      let message = "Connect Timeout Error";
+      let message2 = "Connect Timeout Error";
       if (Array.isArray(socket.autoSelectFamilyAttemptedAddresses)) {
-        message += ` (attempted addresses: ${socket.autoSelectFamilyAttemptedAddresses.join(", ")},`;
+        message2 += ` (attempted addresses: ${socket.autoSelectFamilyAttemptedAddresses.join(", ")},`;
       } else {
-        message += ` (attempted address: ${opts.hostname}:${opts.port},`;
+        message2 += ` (attempted address: ${opts.hostname}:${opts.port},`;
       }
-      message += ` timeout: ${opts.timeout}ms)`;
-      util.destroy(socket, new ConnectTimeoutError(message));
+      message2 += ` timeout: ${opts.timeout}ms)`;
+      util.destroy(socket, new ConnectTimeoutError(message2));
     }
     module2.exports = buildConnector;
   }
@@ -3587,15 +3587,15 @@ var require_webidl = __commonJS({
     webidl.converters = {};
     webidl.util = {};
     webidl.errors = {};
-    webidl.errors.exception = function(message) {
-      return new TypeError(`${message.header}: ${message.message}`);
+    webidl.errors.exception = function(message2) {
+      return new TypeError(`${message2.header}: ${message2.message}`);
     };
     webidl.errors.conversionFailed = function(context3) {
       const plural = context3.types.length === 1 ? "" : " one of";
-      const message = `${context3.argument} could not be converted to${plural}: ${context3.types.join(", ")}.`;
+      const message2 = `${context3.argument} could not be converted to${plural}: ${context3.types.join(", ")}.`;
       return webidl.errors.exception({
         header: context3.prefix,
-        message
+        message: message2
       });
     };
     webidl.errors.invalidArgument = function(context3) {
@@ -5919,12 +5919,12 @@ var require_client_h1 = __commonJS({
           return new ResponseContentLengthMismatchError();
         }
         const ptr = llhttp.llhttp_get_error_reason(this.ptr);
-        let message = "";
+        let message2 = "";
         if (ptr) {
           const len = new Uint8Array(llhttp.memory.buffer, ptr).indexOf(0);
-          message = "Response does not match the HTTP/1.1 protocol (" + Buffer.from(llhttp.memory.buffer, ptr, len).toString() + ")";
+          message2 = "Response does not match the HTTP/1.1 protocol (" + Buffer.from(llhttp.memory.buffer, ptr, len).toString() + ")";
         }
-        return new HTTPParserError(message, constants3.ERROR[ret], data);
+        return new HTTPParserError(message2, constants3.ERROR[ret], data);
       }
       destroy() {
         assert(this.ptr != null);
@@ -9581,9 +9581,9 @@ var require_util3 = __commonJS({
         chunks = [];
         length = 0;
       }
-      const message = `Response status code ${statusCode}${statusMessage ? `: ${statusMessage}` : ""}`;
+      const message2 = `Response status code ${statusCode}${statusMessage ? `: ${statusMessage}` : ""}`;
       if (statusCode === 204 || !contentType || !length) {
-        queueMicrotask(() => callback(new ResponseStatusCodeError(message, statusCode, headers)));
+        queueMicrotask(() => callback(new ResponseStatusCodeError(message2, statusCode, headers)));
         return;
       }
       const stackTraceLimit = Error.stackTraceLimit;
@@ -9599,7 +9599,7 @@ var require_util3 = __commonJS({
       } finally {
         Error.stackTraceLimit = stackTraceLimit;
       }
-      queueMicrotask(() => callback(new ResponseStatusCodeError(message, statusCode, headers, payload)));
+      queueMicrotask(() => callback(new ResponseStatusCodeError(message2, statusCode, headers, payload)));
     }
     var isContentTypeApplicationJson = (contentType) => {
       return contentType.length > 15 && contentType[11] === "/" && contentType[0] === "a" && contentType[1] === "p" && contentType[2] === "p" && contentType[3] === "l" && contentType[4] === "i" && contentType[5] === "c" && contentType[6] === "a" && contentType[7] === "t" && contentType[8] === "i" && contentType[9] === "o" && contentType[10] === "n" && contentType[12] === "j" && contentType[13] === "s" && contentType[14] === "o" && contentType[15] === "n";
@@ -10426,11 +10426,11 @@ var require_mock_errors = __commonJS({
     var { UndiciError } = require_errors();
     var kMockNotMatchedError = /* @__PURE__ */ Symbol.for("undici.error.UND_MOCK_ERR_MOCK_NOT_MATCHED");
     var MockNotMatchedError = class _MockNotMatchedError extends UndiciError {
-      constructor(message) {
-        super(message);
+      constructor(message2) {
+        super(message2);
         Error.captureStackTrace(this, _MockNotMatchedError);
         this.name = "MockNotMatchedError";
-        this.message = message || "The request does not match any registered mock dispatches";
+        this.message = message2 || "The request does not match any registered mock dispatches";
         this.code = "UND_MOCK_ERR_MOCK_NOT_MATCHED";
       }
       static [Symbol.hasInstance](instance) {
@@ -13428,7 +13428,7 @@ var require_fetch = __commonJS({
     function handleFetchDone(response) {
       finalizeAndReportTiming(response, "fetch");
     }
-    function fetch2(input, init = void 0) {
+    function fetch3(input, init = void 0) {
       webidl.argumentLengthCheck(arguments, 1, "globalThis.fetch");
       let p = createDeferredPromise();
       let requestObject;
@@ -14385,7 +14385,7 @@ var require_fetch = __commonJS({
       }
     }
     module2.exports = {
-      fetch: fetch2,
+      fetch: fetch3,
       Fetch,
       fetching,
       finalizeAndReportTiming
@@ -18032,15 +18032,15 @@ var require_websocket = __commonJS({
       this.ws[kResponse].socket.resume();
     }
     function onParserError(err) {
-      let message;
+      let message2;
       let code;
       if (err instanceof CloseEvent) {
-        message = err.reason;
+        message2 = err.reason;
         code = err.code;
       } else {
-        message = err.message;
+        message2 = err.message;
       }
-      fireEvent("error", this, () => new ErrorEvent("error", { error: err, message }));
+      fireEvent("error", this, () => new ErrorEvent("error", { error: err, message: message2 }));
       closeWebSocketConnection(this, code);
     }
     module2.exports = {
@@ -18696,7 +18696,7 @@ var require_undici = __commonJS({
     module2.exports.setGlobalDispatcher = setGlobalDispatcher;
     module2.exports.getGlobalDispatcher = getGlobalDispatcher;
     var fetchImpl = require_fetch().fetch;
-    module2.exports.fetch = async function fetch2(init, options = void 0) {
+    module2.exports.fetch = async function fetch3(init, options = void 0) {
       try {
         return await fetchImpl(init, options);
       } catch (err) {
@@ -18962,8 +18962,8 @@ var require_lib = __commonJS({
     var ExponentialBackoffCeiling = 10;
     var ExponentialBackoffTimeSlice = 5;
     var HttpClientError = class _HttpClientError extends Error {
-      constructor(message, statusCode) {
-        super(message);
+      constructor(message2, statusCode) {
+        super(message2);
         this.name = "HttpClientError";
         this.statusCode = statusCode;
         Object.setPrototypeOf(this, _HttpClientError.prototype);
@@ -18971,8 +18971,8 @@ var require_lib = __commonJS({
     };
     exports2.HttpClientError = HttpClientError;
     var HttpClientResponse = class {
-      constructor(message) {
-        this.message = message;
+      constructor(message2) {
+        this.message = message2;
       }
       readBody() {
         return __awaiter3(this, void 0, void 0, function* () {
@@ -19679,19 +19679,19 @@ function toCommandProperties(annotationProperties) {
 }
 
 // ../node_modules/.pnpm/@actions+core@3.0.1/node_modules/@actions/core/lib/command.js
-function issueCommand(command, properties, message) {
-  const cmd = new Command(command, properties, message);
+function issueCommand(command, properties, message2) {
+  const cmd = new Command(command, properties, message2);
   process.stdout.write(cmd.toString() + os.EOL);
 }
 var CMD_STRING = "::";
 var Command = class {
-  constructor(command, properties, message) {
+  constructor(command, properties, message2) {
     if (!command) {
       command = "missing.command";
     }
     this.command = command;
     this.properties = properties;
-    this.message = message;
+    this.message = message2;
   }
   toString() {
     let cmdStr = CMD_STRING + this.command;
@@ -19727,7 +19727,7 @@ function escapeProperty(s) {
 var crypto = __toESM(require("crypto"), 1);
 var fs = __toESM(require("fs"), 1);
 var os2 = __toESM(require("os"), 1);
-function issueFileCommand(command, message) {
+function issueFileCommand(command, message2) {
   const filePath = process.env[`GITHUB_${command}`];
   if (!filePath) {
     throw new Error(`Unable to find environment variable for file command ${command}`);
@@ -19735,7 +19735,7 @@ function issueFileCommand(command, message) {
   if (!fs.existsSync(filePath)) {
     throw new Error(`Missing file at path: ${filePath}`);
   }
-  fs.appendFileSync(filePath, `${toCommandValue(message)}${os2.EOL}`, {
+  fs.appendFileSync(filePath, `${toCommandValue(message2)}${os2.EOL}`, {
     encoding: "utf8"
   });
 }
@@ -20134,18 +20134,18 @@ function setOutput(name, value) {
   process.stdout.write(os4.EOL);
   issueCommand("set-output", { name }, toCommandValue(value));
 }
-function setFailed(message) {
+function setFailed(message2) {
   process.exitCode = ExitCode.Failure;
-  error(message);
+  error(message2);
 }
-function error(message, properties = {}) {
-  issueCommand("error", toCommandProperties(properties), message instanceof Error ? message.toString() : message);
+function error(message2, properties = {}) {
+  issueCommand("error", toCommandProperties(properties), message2 instanceof Error ? message2.toString() : message2);
 }
-function warning(message, properties = {}) {
-  issueCommand("warning", toCommandProperties(properties), message instanceof Error ? message.toString() : message);
+function warning(message2, properties = {}) {
+  issueCommand("warning", toCommandProperties(properties), message2 instanceof Error ? message2.toString() : message2);
 }
-function info(message) {
-  process.stdout.write(message + os4.EOL);
+function info(message2) {
+  process.stdout.write(message2 + os4.EOL);
 }
 
 // ../node_modules/.pnpm/@actions+github@9.1.1/node_modules/@actions/github/lib/context.js
@@ -20820,8 +20820,8 @@ var RequestError = class extends Error {
    * Response object if a response was received
    */
   response;
-  constructor(message, statusCode, options) {
-    super(message, { cause: options.cause });
+  constructor(message2, statusCode, options) {
+    super(message2, { cause: options.cause });
     this.name = "HttpError";
     this.status = Number.parseInt(statusCode);
     if (Number.isNaN(this.status)) {
@@ -20861,8 +20861,8 @@ function isPlainObject2(value) {
 }
 var noop = () => "";
 async function fetchWrapper(requestOptions) {
-  const fetch2 = requestOptions.request?.fetch || globalThis.fetch;
-  if (!fetch2) {
+  const fetch3 = requestOptions.request?.fetch || globalThis.fetch;
+  if (!fetch3) {
     throw new Error(
       "fetch is not set. Please pass a fetch implementation as new Octokit({ request: { fetch }}). Learn more at https://github.com/octokit/octokit.js/#fetch-missing"
     );
@@ -20878,7 +20878,7 @@ async function fetchWrapper(requestOptions) {
   );
   let fetchResponse;
   try {
-    fetchResponse = await fetch2(requestOptions.url, {
+    fetchResponse = await fetch3(requestOptions.url, {
       method: requestOptions.method,
       body,
       redirect: requestOptions.request?.redirect,
@@ -20889,22 +20889,22 @@ async function fetchWrapper(requestOptions) {
       ...requestOptions.body && { duplex: "half" }
     });
   } catch (error2) {
-    let message = "Unknown Error";
+    let message2 = "Unknown Error";
     if (error2 instanceof Error) {
       if (error2.name === "AbortError") {
         error2.status = 500;
         throw error2;
       }
-      message = error2.message;
+      message2 = error2.message;
       if (error2.name === "TypeError" && "cause" in error2) {
         if (error2.cause instanceof Error) {
-          message = error2.cause.message;
+          message2 = error2.cause.message;
         } else if (typeof error2.cause === "string") {
-          message = error2.cause;
+          message2 = error2.cause;
         }
       }
     }
-    const requestError = new RequestError(message, 500, {
+    const requestError = new RequestError(message2, 500, {
       request: requestOptions
     });
     requestError.cause = error2;
@@ -23894,6 +23894,36 @@ function getOctokit(token, options, ...additionalPlugins) {
   return new GitHubWithPlugins(getOctokitOptions(token, options));
 }
 
+// src/plan.ts
+var RESOURCE_PATTERNS = [
+  [/^(.+?) will be created$/, "create"],
+  [/^(.+?) will be updated in-place$/, "update"],
+  [/^(.+?) will be destroyed$/, "delete"],
+  [/^(.+?) (?:is tainted, so )?must be replaced$/, "replace"],
+  // ", as requested" (-replace) や " due to changes in replace_triggered_by" が続く
+  [/^(.+?) will be replaced\b/, "replace"],
+  [/^(.+?) will be imported$/, "import"],
+  [/^(.+?) will no longer be managed by Terraform$/, "forget"]
+];
+function parseResourceLine(line) {
+  const text = /^[\s+\-~!/<=]*#\s+(.+?)\s*$/.exec(line)?.[1];
+  if (text === void 0) {
+    return null;
+  }
+  const moved = /^(.+?) has moved to (.+)$/.exec(text);
+  if (moved?.[1] !== void 0 && moved[2] !== void 0) {
+    return { address: moved[2], action: "move", previousAddress: moved[1] };
+  }
+  for (const [pattern, action] of RESOURCE_PATTERNS) {
+    const address = pattern.exec(text)?.[1];
+    if (address !== void 0) {
+      return { address: address.replace(/ \(deposed object [^)]+\)$/, ""), action };
+    }
+  }
+  return null;
+}
+var STATE_ORDER = ["failed", "incomplete", "changes", "no-changes"];
+
 // src/atlantis.ts
 var STATUS_CONTEXT = "atlantis/plan";
 var MISSING_COMMENT = "plan \u30B3\u30E1\u30F3\u30C8\u304C\u898B\u3064\u304B\u3089\u306A\u3044";
@@ -23964,33 +23994,6 @@ function lastSections(comments) {
   }
   return new Map([...sections].map(([name, lines]) => [name, lines.join("\n")]));
 }
-var RESOURCE_PATTERNS = [
-  [/^(.+?) will be created$/, "create"],
-  [/^(.+?) will be updated in-place$/, "update"],
-  [/^(.+?) will be destroyed$/, "delete"],
-  [/^(.+?) (?:is tainted, so )?must be replaced$/, "replace"],
-  // ", as requested" (-replace) や " due to changes in replace_triggered_by" が続く
-  [/^(.+?) will be replaced\b/, "replace"],
-  [/^(.+?) will be imported$/, "import"],
-  [/^(.+?) will no longer be managed by Terraform$/, "forget"]
-];
-function parseResourceLine(line) {
-  const text = /^[\s+\-~!/<=]*#\s+(.+?)\s*$/.exec(line)?.[1];
-  if (text === void 0) {
-    return null;
-  }
-  const moved = /^(.+?) has moved to (.+)$/.exec(text);
-  if (moved?.[1] !== void 0 && moved[2] !== void 0) {
-    return { address: moved[2], action: "move", previousAddress: moved[1] };
-  }
-  for (const [pattern, action] of RESOURCE_PATTERNS) {
-    const address = pattern.exec(text)?.[1];
-    if (address !== void 0) {
-      return { address: address.replace(/ \(deposed object [^)]+\)$/, ""), action };
-    }
-  }
-  return null;
-}
 function countsMatch(planLine, resources) {
   const expected = (kind) => Number(new RegExp(`(\\d+) to ${kind}\\b`).exec(planLine)?.[1] ?? 0);
   const actual = (...actions) => resources.filter((r) => actions.includes(r.action)).length;
@@ -24033,7 +24036,6 @@ function toProject(name, status, section) {
   const resources = section.split("\n").map(parseResourceLine).filter((r) => r !== null);
   return countsMatch(description, resources) ? { ...project, state: "changes", resources } : { ...project, resources, reason: "\u30EA\u30BD\u30FC\u30B9\u6570\u304C Plan \u884C\u3068\u5408\u308F\u306A\u3044" };
 }
-var STATE_ORDER = ["failed", "incomplete", "changes", "no-changes"];
 function buildPlan(aggregate, statuses, comments) {
   if (aggregate.kind !== "settled") {
     return { state: aggregate.kind, projects: [], resources: [] };
@@ -24042,7 +24044,8 @@ function buildPlan(aggregate, statuses, comments) {
     return { state: "no-projects", projects: [], resources: [] };
   }
   const sections = lastSections(comments);
-  const projects = [...projectStatuses(statuses)].map(([name, status]) => toProject(name, status, sections.get(name))).toSorted((a, b) => a.project.localeCompare(b.project));
+  const latest = projectStatuses(statuses);
+  const projects = [...latest].map(([name, status]) => toProject(name, status, sections.get(name))).toSorted((a, b) => a.project.localeCompare(b.project));
   const failed = aggregate.state !== "success";
   if (failed ? !projects.some((p) => p.state === "failed") : projects.length === 0) {
     const reason = failureReason(comments.at(-1) ?? "");
@@ -24054,11 +24057,344 @@ function buildPlan(aggregate, statuses, comments) {
       resources: []
     });
   }
-  const state = STATE_ORDER.find((s) => projects.some((p) => p.state === s)) ?? "no-changes";
+  const state = [...latest.values()].some((s) => s.state === "pending") ? "pending" : STATE_ORDER.find((s) => projects.some((p) => p.state === s)) ?? "no-changes";
   return {
     state,
     projects,
     resources: projects.flatMap((p) => p.resources.map((r) => ({ ...r, project: p.project })))
+  };
+}
+
+// src/tfc.ts
+var TfcClient = class {
+  constructor(hostname, token, fetchFn = fetch) {
+    this.hostname = hostname;
+    this.token = token;
+    this.fetchFn = fetchFn;
+  }
+  hostname;
+  token;
+  fetchFn;
+  async getPlanForRun(runId) {
+    const path2 = `/runs/${encodeURIComponent(runId)}/plan`;
+    const response = await this.fetchFn(`https://${this.hostname}/api/v2${path2}`, {
+      headers: {
+        Authorization: `Bearer ${this.token}`,
+        "Content-Type": "application/vnd.api+json"
+      }
+    });
+    if (response.status === 404) {
+      return null;
+    }
+    if (!response.ok) {
+      throw new Error(
+        `HCP Terraform API request failed: GET ${path2} -> ${response.status} ${response.statusText}`
+      );
+    }
+    const { data } = await response.json();
+    return {
+      hasChanges: data.attributes["has-changes"],
+      additions: data.attributes["resource-additions"] ?? 0,
+      changes: data.attributes["resource-changes"] ?? 0,
+      destructions: data.attributes["resource-destructions"] ?? 0,
+      logReadUrl: data.attributes["log-read-url"] ?? null
+    };
+  }
+  async fetchLog(url) {
+    const response = await this.fetchFn(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch plan log: ${response.status} ${response.statusText}`);
+    }
+    return response.text();
+  }
+};
+
+// src/hcp-log.ts
+var ESC = String.fromCodePoint(27);
+var ANSI_PATTERN = new RegExp(`${ESC}\\[[0-9;]*[A-Za-z]`, "g");
+function stripAnsi(text) {
+  return text.replace(ANSI_PATTERN, "");
+}
+function stripControlChars(line) {
+  return Array.from(line).filter((char) => char === "	" || (char.codePointAt(0) ?? 0) >= 32).join("");
+}
+var HEADER_PATTERN = /^(Terraform v\d|on [a-z0-9_]+$|Initializing plugins and modules\.\.\.$)/;
+var TEXT_PLAN_START_PATTERN = /^(Terraform used the selected providers|Terraform will perform the following actions|No changes\.|Changes to Outputs:|Note: Objects have changed outside of Terraform|Terraform planned the following actions|╷|Error: |Warning: )/;
+function tryParseUiMessage(line) {
+  if (!line.startsWith("{")) {
+    return null;
+  }
+  try {
+    const parsed = JSON.parse(line);
+    if (typeof parsed === "object" && parsed !== null && "@level" in parsed) {
+      return parsed;
+    }
+  } catch {
+  }
+  return null;
+}
+function parsePlanLog(raw) {
+  const lines = raw.split(/\r?\n/).map((line) => stripControlChars(stripAnsi(line)));
+  const messages = [];
+  const textLines = [];
+  for (const line of lines) {
+    const message2 = tryParseUiMessage(line);
+    if (message2 === null) {
+      textLines.push(line);
+    } else {
+      messages.push(message2);
+    }
+  }
+  if (messages.length === 0) {
+    return parseTextLog(textLines);
+  }
+  const changes = [];
+  const diagnostics = [];
+  const errorMessages = [];
+  for (const message2 of messages) {
+    switch (message2.type) {
+      case "planned_change": {
+        const address = message2.change?.resource?.addr;
+        const action = message2.change?.action;
+        if (address !== void 0 && action !== void 0) {
+          const change = { address, action };
+          if (message2.change?.reason !== void 0) {
+            change.reason = message2.change.reason;
+          }
+          if (message2.change?.previous_resource?.addr !== void 0) {
+            change.previousAddress = message2.change.previous_resource.addr;
+          }
+          changes.push(change);
+        }
+        break;
+      }
+      case "diagnostic":
+        if (message2.diagnostic !== void 0) {
+          diagnostics.push(message2.diagnostic);
+        }
+        break;
+      default:
+        if (message2["@level"] === "error" && message2["@message"] !== void 0) {
+          errorMessages.push(message2["@message"]);
+        }
+    }
+  }
+  const trailer = textLines.map((line) => line.trim()).filter((line) => line.length > 0 && !HEADER_PATTERN.test(line));
+  return { format: "structured", changes, diagnostics, messages: [...errorMessages, ...trailer] };
+}
+function parseTextLog(lines) {
+  const start = lines.findIndex((line) => TEXT_PLAN_START_PATTERN.test(line));
+  const body = (start === -1 ? lines : lines.slice(start)).join("\n").trim();
+  const messages = lines.map((line) => line.trim()).filter((line) => line.startsWith("Operation failed:"));
+  return { format: "text", body, diagnostics: [], messages };
+}
+var ACTION_PREFIX = {
+  create: "+   create ",
+  update: "!   update ",
+  delete: "-   destroy",
+  replace: "-/+ replace",
+  read: "<=  read   ",
+  move: ">   move   ",
+  import: "+   import ",
+  noop: "    noop   "
+};
+function renderChange(change) {
+  const prefix = ACTION_PREFIX[change.action] ?? `    ${change.action}`;
+  const suffix = [
+    change.previousAddress === void 0 ? "" : ` (from ${change.previousAddress})`,
+    change.reason === void 0 ? "" : ` (${change.reason})`
+  ].join("");
+  return `${prefix} ${change.address}${suffix}`;
+}
+function renderDiagnostic(diagnostic) {
+  const heading = `${diagnostic.severity === "warning" ? "Warning" : "Error"}: ${diagnostic.summary}`;
+  const lines = [heading];
+  if (diagnostic.range !== void 0) {
+    const context3 = diagnostic.snippet?.context === void 0 ? "" : `, in ${diagnostic.snippet.context}`;
+    lines.push(
+      "",
+      `  on ${diagnostic.range.filename} line ${diagnostic.range.start.line}${context3}:`
+    );
+    if (diagnostic.snippet !== void 0) {
+      const { code, start_line } = diagnostic.snippet;
+      code.split("\n").forEach((line, index) => {
+        lines.push(`  ${String(start_line + index).padStart(4)}: ${line}`);
+      });
+    }
+  } else if (diagnostic.address !== void 0) {
+    lines.push("", `  with ${diagnostic.address}`);
+  }
+  if (diagnostic.detail !== void 0 && diagnostic.detail.length > 0) {
+    lines.push("", diagnostic.detail.trim());
+  }
+  return lines.join("\n");
+}
+
+// src/hcp.ts
+var STATUS_PREFIX = "Terraform Cloud/";
+function classifyStatus(status) {
+  const runUrl = status.target_url;
+  const runId = runUrl === null ? null : /\/runs\/(run-[A-Za-z0-9]+)/.exec(runUrl)?.[1] ?? null;
+  const description = status.description ?? "";
+  switch (status.state) {
+    case "pending":
+      return { kind: "pending", runId, runUrl, description };
+    case "success":
+      if (runId === null || runUrl === null) {
+        return { kind: "untriggered", description };
+      }
+      return { kind: "finished", runId, runUrl, description };
+    default:
+      return { kind: "errored", runId, runUrl, description };
+  }
+}
+function workspaceStatuses(statuses, organization) {
+  const prefix = `${STATUS_PREFIX}${organization}/`;
+  const result = /* @__PURE__ */ new Map();
+  for (const status of statuses) {
+    const workspace = status.context.startsWith(prefix) ? status.context.slice(prefix.length) : null;
+    if (workspace !== null && !result.has(workspace)) {
+      result.set(workspace, classifyStatus(status));
+    }
+  }
+  return new Map([...result].toSorted(([a], [b]) => a.localeCompare(b)));
+}
+var STRUCTURED_ACTIONS = {
+  create: "create",
+  update: "update",
+  delete: "delete",
+  replace: "replace",
+  import: "import",
+  move: "move",
+  forget: "forget"
+};
+function resourcesFromLog(log) {
+  if (log.format === "text") {
+    return log.body.split("\n").map(parseResourceLine).filter((r) => r !== null);
+  }
+  return log.changes.flatMap(({ address, action, previousAddress }) => {
+    const mapped = STRUCTURED_ACTIONS[action];
+    if (mapped === void 0) {
+      return [];
+    }
+    return [
+      previousAddress === void 0 ? { address, action: mapped } : { address, action: mapped, previousAddress }
+    ];
+  });
+}
+function countsMatch2(summary2, resources) {
+  const actual = (...actions) => resources.filter((r) => actions.includes(r.action)).length;
+  return summary2.additions === actual("create", "replace") && summary2.changes === actual("update") && summary2.destructions === actual("delete", "replace");
+}
+function errorReason(log) {
+  if (log === null) {
+    return void 0;
+  }
+  const diagnostic = log.diagnostics.find((d) => d.severity === "error");
+  if (diagnostic !== void 0) {
+    return `Error: ${diagnostic.summary}`;
+  }
+  const errorLine = log.format === "text" ? log.body.split("\n").map((l) => l.replace(/^│\s*/, "").trim()).find((l) => l.startsWith("Error: ")) : void 0;
+  return errorLine ?? log.messages[0];
+}
+var fence = (body, lang = "") => `\`\`\`${lang}
+${body}
+\`\`\``;
+function renderWorkspaceLog(workspace, runUrl, log) {
+  const blocks = log.format === "text" ? [fence(log.body)] : [
+    log.diagnostics.length > 0 && fence(log.diagnostics.map(renderDiagnostic).join("\n\n")),
+    log.changes.length > 0 && fence(log.changes.map(renderChange).join("\n"), "diff"),
+    log.messages.length > 0 && fence(log.messages.join("\n"))
+  ];
+  return `${[`## ${workspace}`, runUrl !== null && `run: ${runUrl}`, ...blocks].filter((block) => block !== false).join("\n\n")}
+`;
+}
+var message = (error2) => error2 instanceof Error ? error2.message : String(error2);
+async function toOutcome(reader, workspace, status, warn) {
+  const description = "description" in status ? status.description : "";
+  const base = {
+    project: workspace,
+    state: "incomplete",
+    status: description,
+    resources: []
+  };
+  switch (status.kind) {
+    case "pending":
+      return { project: { ...base, state: "pending" } };
+    case "untriggered":
+      return { project: { ...base, state: "untriggered" } };
+    case "errored": {
+      const project = { ...base, state: "failed" };
+      let log = null;
+      try {
+        const plan = status.runId === null ? null : await reader.getPlanForRun(status.runId);
+        log = plan?.logReadUrl ? parsePlanLog(await reader.fetchLog(plan.logReadUrl)) : null;
+      } catch (error2) {
+        warn(`Failed to fetch plan for ${workspace}: ${message(error2)}`);
+      }
+      const reason = errorReason(log);
+      return {
+        project: reason === void 0 ? project : { ...project, reason },
+        ...log === null ? {} : { log: renderWorkspaceLog(workspace, status.runUrl, log) }
+      };
+    }
+    case "finished": {
+      let plan;
+      let log = null;
+      try {
+        plan = await reader.getPlanForRun(status.runId);
+        if (plan?.hasChanges && plan.logReadUrl !== null) {
+          log = parsePlanLog(await reader.fetchLog(plan.logReadUrl));
+        }
+      } catch (error2) {
+        warn(`Failed to fetch plan for ${workspace}: ${message(error2)}`);
+        return { project: { ...base, reason: `HCP Terraform API: ${message(error2)}` } };
+      }
+      if (plan === null) {
+        return { project: { ...base, reason: "plan \u3092\u53D6\u5F97\u3067\u304D\u306A\u3044" } };
+      }
+      if (!plan.hasChanges) {
+        return { project: { ...base, state: "no-changes" } };
+      }
+      if (log === null) {
+        return { project: { ...base, reason: "plan \u30ED\u30B0\u3092\u53D6\u5F97\u3067\u304D\u306A\u3044" } };
+      }
+      const resources = resourcesFromLog(log);
+      const rendered = renderWorkspaceLog(workspace, status.runUrl, log);
+      return countsMatch2(plan, resources) ? { project: { ...base, state: "changes", resources }, log: rendered } : {
+        project: { ...base, resources, reason: "\u30EA\u30BD\u30FC\u30B9\u6570\u304C plan \u306E\u4EF6\u6570\u3068\u5408\u308F\u306A\u3044" },
+        log: rendered
+      };
+    }
+  }
+}
+function planState(projects) {
+  if (projects.length === 0) {
+    return "none";
+  }
+  if (projects.some((p) => p.state === "pending")) {
+    return "pending";
+  }
+  if (projects.every((p) => p.state === "untriggered")) {
+    return "no-projects";
+  }
+  return STATE_ORDER.find((s) => projects.some((p) => p.state === s)) ?? "no-changes";
+}
+function buildPlan2(projects) {
+  return {
+    state: planState(projects),
+    projects,
+    resources: projects.flatMap((p) => p.resources.map((r) => ({ ...r, project: p.project })))
+  };
+}
+async function collectHcpPlan(reader, workspaces, warn) {
+  const outcomes = [];
+  for (const [workspace, status] of workspaces) {
+    outcomes.push(await toOutcome(reader, workspace, status, warn));
+  }
+  return {
+    plan: buildPlan2(outcomes.map((o) => o.project)),
+    latest: outcomes.map((o) => o.log).filter((log) => log !== void 0).join("\n")
   };
 }
 
@@ -24076,7 +24412,9 @@ var PROJECT_LABELS = {
   failed: "\u5931\u6557",
   incomplete: "\u8981\u78BA\u8A8D",
   changes: "\u5909\u66F4\u3042\u308A",
-  "no-changes": "\u5909\u66F4\u306A\u3057"
+  "no-changes": "\u5909\u66F4\u306A\u3057",
+  pending: "\u672A\u5B8C\u4E86",
+  untriggered: "\u672A\u5B9F\u884C"
 };
 function destroyOrReplace(plan) {
   if (plan.resources.some((r) => r.action === "delete" || r.action === "replace")) {
@@ -24119,12 +24457,7 @@ function renderSummary(plan) {
 var repo = { owner: context2.repo.owner, repo: context2.repo.repo };
 var COMMENT_RETRIES = 3;
 var COMMENT_RETRY_MS = 5e3;
-async function collectPlan(octokit, issueNumber, headSha, login) {
-  const statuses = await octokit.paginate(octokit.rest.repos.listCommitStatusesForRef, {
-    ...repo,
-    ref: headSha,
-    per_page: 100
-  });
+async function collectPlan(octokit, issueNumber, statuses, login) {
   const aggregate = aggregateStatus(statuses);
   if (aggregate.kind === "pending") {
     warning("atlantis/plan is still pending. Run this action after the plan finishes.");
@@ -24156,11 +24489,34 @@ async function collectPlan(octokit, issueNumber, headSha, login) {
     await new Promise((resolve) => setTimeout(resolve, COMMENT_RETRY_MS));
   }
 }
+function readInputs() {
+  const atlantisLogin = getInput("atlantis-comment-author");
+  const token = getInput("hcp-terraform-token");
+  const organization = getInput("hcp-terraform-organization");
+  const hostname = getInput("hcp-terraform-hostname") || "app.terraform.io";
+  if (atlantisLogin !== "" && organization !== "") {
+    throw new Error("atlantis-comment-author and hcp-terraform-organization are mutually exclusive");
+  }
+  if (token !== "" && organization === "") {
+    throw new Error("hcp-terraform-organization is required when hcp-terraform-token is set");
+  }
+  if (atlantisLogin !== "") {
+    return { kind: "atlantis", login: atlantisLogin };
+  }
+  if (organization !== "") {
+    if (token === "") {
+      warning("hcp-terraform-token is empty; HCP Terraform plans are not collected.");
+      return "disabled";
+    }
+    return { kind: "hcp", tfc: new TfcClient(hostname, token), organization };
+  }
+  return "disabled";
+}
 async function run() {
   const octokit = getOctokit(getInput("github-token", { required: true }));
   const number = Number(getInput("pull-request-number", { required: true }));
   const outputDir = import_node_path.default.resolve(getInput("output-dir") || ".claude-review");
-  const atlantisLogin = getInput("atlantis-comment-author");
+  const mode = readInputs();
   const { data: pr } = await octokit.rest.pulls.get({ ...repo, pull_number: number });
   const files = await octokit.paginate(octokit.rest.pulls.listFiles, {
     ...repo,
@@ -24197,16 +24553,46 @@ async function run() {
   await write("pr-diff.patch", diff);
   setOutput("output-dir", outputDir);
   setOutput("head-sha", headSha);
-  if (atlantisLogin === "") {
+  if (mode === "disabled") {
     setOutput("plan-state", "disabled");
     setOutput("resource-count", "0");
     setOutput("destroy-or-replace", "unknown");
     return;
   }
-  const { plan, latest } = await collectPlan(octokit, number, headSha, atlantisLogin);
+  const statuses = await octokit.paginate(octokit.rest.repos.listCommitStatusesForRef, {
+    ...repo,
+    ref: headSha,
+    per_page: 100
+  });
+  let plan;
+  let latest;
+  let latestName;
+  if (mode.kind === "atlantis") {
+    ;
+    ({ plan, latest } = await collectPlan(octokit, number, statuses, mode.login));
+    latestName = "atlantis-plan-latest.md";
+    if (plan.state === "pending" && plan.projects.length > 0) {
+      warning("Some atlantis/plan project statuses are still pending.");
+    }
+  } else {
+    const workspaces = workspaceStatuses(statuses, mode.organization);
+    if (workspaces.size === 0) {
+      warning(
+        `No HCP Terraform statuses for organization "${mode.organization}" on ${headSha}.`
+      );
+    }
+    ;
+    ({ plan, latest } = await collectHcpPlan(mode.tfc, workspaces, warning));
+    latestName = "hcp-terraform-plan-latest.md";
+    if (plan.state === "pending") {
+      warning(
+        "Some HCP Terraform runs are still pending. Run this action after the runs finish."
+      );
+    }
+  }
   const summary2 = renderSummary(plan);
   await write("plan-summary.md", summary2);
-  await write("atlantis-plan-latest.md", latest);
+  await write(latestName, latest);
   setOutput("plan-state", plan.state);
   setOutput("resource-count", String(plan.resources.length));
   setOutput("destroy-or-replace", destroyOrReplace(plan));
