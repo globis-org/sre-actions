@@ -4,6 +4,9 @@
 // - Structured Run Output (デフォルト): `terraform plan -json` 相当の JSON lines
 //   (https://developer.hashicorp.com/terraform/internals/machine-readable-ui)
 // - Console UI: `terraform plan` のテキスト出力 (ANSI カラー付き)
+//
+// pr-context/src/hcp-log.ts にも同じ形式の解釈がある (レビュー用ファイル向け)。
+// action ごとに自己完結させる方針で共有していないので、解釈を直すときは両方を見ること
 
 export type PlannedChange = {
   address: string

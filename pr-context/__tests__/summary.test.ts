@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import type { Plan } from '../src/atlantis'
+import type { Plan } from '../src/plan'
 import { destroyOrReplace, renderLatestPlans, renderSummary } from '../src/summary'
 
 const plan: Plan = {

@@ -1,5 +1,5 @@
 name: sre-actions/pr-context
-description: Collect a pull request snapshot (metadata, diff, and Atlantis plan results) as files for AI-assisted reviews
+description: Collect a pull request snapshot (metadata, diff, and Atlantis or HCP Terraform plan results) as files for AI-assisted reviews
 author: globis-org
 inputs:
   github-token:
@@ -17,9 +17,27 @@ inputs:
   atlantis-comment-author:
     description: |
       Login of the GitHub App that Atlantis posts plan comments as (with or without the "[bot]" suffix).
-      When empty, Atlantis plans are not collected and plan-state is "disabled".
+      When empty, Atlantis plans are not collected. Mutually exclusive with hcp-terraform-organization.
     required: false
     default: ''
+  hcp-terraform-token:
+    description: |
+      HCP Terraform API token (team token with read access to runs).
+      When empty while hcp-terraform-organization is set (e.g. a pull request from a fork, where secrets are unavailable),
+      plans are not collected and plan-state is "disabled".
+    required: false
+    default: ''
+  hcp-terraform-organization:
+    description: |
+      HCP Terraform organization name. When set, the speculative plans HCP Terraform ran for the head commit
+      ("Terraform Cloud/<organization>/<workspace>" commit statuses) are collected instead of Atlantis plans.
+      When both this and atlantis-comment-author are empty, plan-state is "disabled".
+    required: false
+    default: ''
+  hcp-terraform-hostname:
+    description: HCP Terraform / Terraform Enterprise hostname
+    required: false
+    default: app.terraform.io
 
 outputs:
   output-dir:
@@ -31,7 +49,7 @@ outputs:
       disabled, pending, none, no-projects, failed, incomplete, changes, or no-changes.
       See README for the meaning of each state.
   resource-count:
-    description: Number of changed resources (counted per project)
+    description: Number of changed resources (counted per project or workspace)
   destroy-or-replace:
     description: |
       Whether any resource will be destroyed or replaced: true, false, or unknown

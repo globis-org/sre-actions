@@ -10,8 +10,11 @@ import {
   lastSections,
   MISSING_COMMENT,
   selectPlanComments,
-  type Plan,
+  type StatusRecord,
 } from './atlantis'
+import type { Plan } from './plan'
+import { TfcClient } from './tfc'
+import { collectHcpPlan, workspaceStatuses } from './hcp'
 import { destroyOrReplace, renderLatestPlans, renderSummary } from './summary'
 
 type Octokit = ReturnType<typeof getOctokit>
@@ -26,14 +29,9 @@ const COMMENT_RETRY_MS = 5000
 async function collectPlan(
   octokit: Octokit,
   issueNumber: number,
-  headSha: string,
+  statuses: StatusRecord[],
   login: string
 ): Promise<{ plan: Plan; latest: string }> {
-  const statuses = await octokit.paginate(octokit.rest.repos.listCommitStatusesForRef, {
-    ...repo,
-    ref: headSha,
-    per_page: 100,
-  })
   const aggregate = aggregateStatus(statuses)
   if (aggregate.kind === 'pending') {
     core.warning('atlantis/plan is still pending. Run this action after the plan finishes.')
@@ -66,11 +64,41 @@ async function collectPlan(
   }
 }
 
+type Mode =
+  | 'disabled'
+  | { kind: 'atlantis'; login: string }
+  | { kind: 'hcp'; tfc: TfcClient; organization: string }
+
+function readInputs(): Mode {
+  const atlantisLogin = core.getInput('atlantis-comment-author')
+  const token = core.getInput('hcp-terraform-token')
+  const organization = core.getInput('hcp-terraform-organization')
+  const hostname = core.getInput('hcp-terraform-hostname') || 'app.terraform.io'
+  if (atlantisLogin !== '' && organization !== '') {
+    throw new Error('atlantis-comment-author and hcp-terraform-organization are mutually exclusive')
+  }
+  if (token !== '' && organization === '') {
+    throw new Error('hcp-terraform-organization is required when hcp-terraform-token is set')
+  }
+  if (atlantisLogin !== '') {
+    return { kind: 'atlantis', login: atlantisLogin }
+  }
+  if (organization !== '') {
+    // fork からの PR では secrets が空になる。plan 抜きで PR 情報と diff は書き出す
+    if (token === '') {
+      core.warning('hcp-terraform-token is empty; HCP Terraform plans are not collected.')
+      return 'disabled'
+    }
+    return { kind: 'hcp', tfc: new TfcClient(hostname, token), organization }
+  }
+  return 'disabled'
+}
+
 async function run(): Promise<void> {
   const octokit = getOctokit(core.getInput('github-token', { required: true }))
   const number = Number(core.getInput('pull-request-number', { required: true }))
   const outputDir = path.resolve(core.getInput('output-dir') || '.claude-review')
-  const atlantisLogin = core.getInput('atlantis-comment-author')
+  const mode = readInputs()
 
   const { data: pr } = await octokit.rest.pulls.get({ ...repo, pull_number: number })
   const files = await octokit.paginate(octokit.rest.pulls.listFiles, {
@@ -113,20 +141,45 @@ async function run(): Promise<void> {
 
   core.setOutput('output-dir', outputDir)
   core.setOutput('head-sha', headSha)
-  if (atlantisLogin === '') {
+  if (mode === 'disabled') {
     core.setOutput('plan-state', 'disabled')
     core.setOutput('resource-count', '0')
     core.setOutput('destroy-or-replace', 'unknown')
     return
   }
 
-  const { plan, latest } = await collectPlan(octokit, number, headSha, atlantisLogin)
-  if (plan.state === 'pending' && plan.projects.length > 0) {
-    core.warning('Some atlantis/plan project statuses are still pending.')
+  const statuses = await octokit.paginate(octokit.rest.repos.listCommitStatusesForRef, {
+    ...repo,
+    ref: headSha,
+    per_page: 100,
+  })
+  let plan: Plan
+  let latest: string
+  let latestName: string
+  if (mode.kind === 'atlantis') {
+    ;({ plan, latest } = await collectPlan(octokit, number, statuses, mode.login))
+    latestName = 'atlantis-plan-latest.md'
+    if (plan.state === 'pending' && plan.projects.length > 0) {
+      core.warning('Some atlantis/plan project statuses are still pending.')
+    }
+  } else {
+    const workspaces = workspaceStatuses(statuses, mode.organization)
+    if (workspaces.size === 0) {
+      core.warning(
+        `No HCP Terraform statuses for organization "${mode.organization}" on ${headSha}.`
+      )
+    }
+    ;({ plan, latest } = await collectHcpPlan(mode.tfc, workspaces, core.warning))
+    latestName = 'hcp-terraform-plan-latest.md'
+    if (plan.state === 'pending') {
+      core.warning(
+        'Some HCP Terraform runs are still pending. Run this action after the runs finish.'
+      )
+    }
   }
   const summary = renderSummary(plan)
   await write('plan-summary.md', summary)
-  await write('atlantis-plan-latest.md', latest)
+  await write(latestName, latest)
 
   core.setOutput('plan-state', plan.state)
   core.setOutput('resource-count', String(plan.resources.length))
