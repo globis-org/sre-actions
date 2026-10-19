@@ -5,10 +5,10 @@ import {
   countsMatch,
   failureReason,
   lastSections,
-  parseResourceLine,
   selectPlanComments,
   type StatusRecord,
 } from '../src/atlantis'
+import { parseResourceLine } from '../src/plan'
 import { destroyOrReplace } from '../src/summary'
 
 // 実際の Atlantis コメントの構造を写したもの (パスや値は汎用のものに置き換えている)

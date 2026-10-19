@@ -1,4 +1,4 @@
-import type { Plan, PlanState, ProjectState } from './atlantis'
+import type { Plan, PlanState, ProjectState } from './plan'
 
 const PLAN_LABELS: Record<PlanState, string> = {
   pending: 'plan 未完了',
@@ -15,6 +15,8 @@ const PROJECT_LABELS: Record<ProjectState, string> = {
   incomplete: '要確認',
   changes: '変更あり',
   'no-changes': '変更なし',
+  pending: '未完了',
+  untriggered: '未実行',
 }
 
 // changes / no-changes / no-projects 以外は、一覧に載らないリソースがありうる

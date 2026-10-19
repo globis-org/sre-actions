@@ -7,6 +7,15 @@
 //   抽出したリソース数を status の Plan 行と突き合わせ、合わなければ incomplete にする
 //   (出力の打ち切り・コメントの欠落・未知の書式で、黙って「destroy なし」と報告しないため)
 
+import {
+  parseResourceLine,
+  STATE_ORDER,
+  type Plan,
+  type Project,
+  type Resource,
+  type ResourceAction,
+} from './plan'
+
 export const STATUS_CONTEXT = 'atlantis/plan'
 
 // main.ts はこの理由を見てコメントを取り直す
@@ -24,44 +33,6 @@ export type IssueComment = {
   type: string
   createdAt: string
   body: string
-}
-
-export type ResourceAction =
-  | 'create'
-  | 'update'
-  | 'delete'
-  | 'replace'
-  | 'import'
-  | 'move'
-  | 'forget'
-
-export type Resource = { address: string; action: ResourceAction; previousAddress?: string }
-
-// project をまたぐ一覧では、同じ address が workspace 違いで複数の project に出うるので project を持つ
-export type ProjectResource = Resource & { project: string }
-
-export type ProjectState = 'changes' | 'no-changes' | 'failed' | 'incomplete'
-
-export type Project = {
-  project: string
-  state: ProjectState
-  // status の description (Plan 行など)
-  status: string
-  // 失敗の理由や incomplete の理由
-  reason?: string
-  resources: Resource[]
-}
-
-// - pending:     plan が終わっていない (この action は待たない。前段で待つ)。
-//                集約 status が終わっていても、project の status に pending が残っていれば pending
-// - none:        head commit に plan の status が無い
-// - no-projects: plan は実行されたが対象 project が無い (Terraform に関係しない PR)
-export type PlanState = 'pending' | 'none' | 'no-projects' | ProjectState
-
-export type Plan = {
-  state: PlanState
-  projects: Project[]
-  resources: ProjectResource[]
 }
 
 export type Aggregate =
@@ -158,36 +129,6 @@ export function lastSections(comments: string[]): Map<string, string> {
   return new Map([...sections].map(([name, lines]) => [name, lines.join('\n')]))
 }
 
-const RESOURCE_PATTERNS: [RegExp, ResourceAction][] = [
-  [/^(.+?) will be created$/, 'create'],
-  [/^(.+?) will be updated in-place$/, 'update'],
-  [/^(.+?) will be destroyed$/, 'delete'],
-  [/^(.+?) (?:is tainted, so )?must be replaced$/, 'replace'],
-  // ", as requested" (-replace) や " due to changes in replace_triggered_by" が続く
-  [/^(.+?) will be replaced\b/, 'replace'],
-  [/^(.+?) will be imported$/, 'import'],
-  [/^(.+?) will no longer be managed by Terraform$/, 'forget'],
-]
-
-// terraform plan のテキスト出力の "# <address> ..." 行。data source の read は変更に含めない
-export function parseResourceLine(line: string): Resource | null {
-  const text = /^[\s+\-~!/<=]*#\s+(.+?)\s*$/.exec(line)?.[1]
-  if (text === undefined) {
-    return null
-  }
-  const moved = /^(.+?) has moved to (.+)$/.exec(text)
-  if (moved?.[1] !== undefined && moved[2] !== undefined) {
-    return { address: moved[2], action: 'move', previousAddress: moved[1] }
-  }
-  for (const [pattern, action] of RESOURCE_PATTERNS) {
-    const address = pattern.exec(text)?.[1]
-    if (address !== undefined) {
-      return { address: address.replace(/ \(deposed object [^)]+\)$/, ''), action }
-    }
-  }
-  return null
-}
-
 // add = create + replace、change = update、destroy = delete + replace。
 // import は "will be imported" 単独のものと update 等に併記されるものがあり数が合わないので見ない
 export function countsMatch(planLine: string, resources: Resource[]): boolean {
@@ -255,8 +196,6 @@ function toProject(name: string, status: StatusRecord, section: string | undefin
     ? { ...project, state: 'changes', resources }
     : { ...project, resources, reason: 'リソース数が Plan 行と合わない' }
 }
-
-const STATE_ORDER: ProjectState[] = ['failed', 'incomplete', 'changes', 'no-changes']
 
 export function buildPlan(
   aggregate: Aggregate,

@@ -1,6 +1,6 @@
 # PR Context
 
-Pull Request のレビューに必要なコンテキスト (PR のメタデータ、diff、Atlantis plan の結果) を集め、ファイルに書き出す GitHub Action です。
+Pull Request のレビューに必要なコンテキスト (PR のメタデータ、diff、Atlantis または HCP Terraform の plan の結果) を集め、ファイルに書き出す GitHub Action です。
 
 AI レビュー (claude-code-action など) の前段で実行し、レビューする側には集める作業をさせずに、書き出したファイルを読ませる使い方を想定しています。
 
@@ -9,7 +9,9 @@ AI レビュー (claude-code-action など) の前段で実行し、レビュー
 
 ## 使用例
 
-この action は plan の完了を待ちません。前段のジョブで [wait-for-commit-status](../wait-for-commit-status) などを使って待ちます。待機を軽い runner に置け、plan の結果でレビュー自体を skip する判断もレビューのジョブを起動する前にできるためです。
+この action は plan の完了を待ちません。前段のジョブで [wait-for-commit-status](../wait-for-commit-status) (Atlantis) や [hcp-terraform-plan](../hcp-terraform-plan) (HCP Terraform) を使って待ちます。待機を軽い runner に置け、plan の結果でレビュー自体を skip する判断もレビューのジョブを起動する前にできるためです。
+
+### Atlantis
 
 ```yaml
 on:
@@ -49,31 +51,66 @@ jobs:
           # ...
 ```
 
+### HCP Terraform
+
+```yaml
+jobs:
+  wait-plan:
+    runs-on: ubuntu-slim
+    timeout-minutes: 20
+    permissions:
+      statuses: read
+      pull-requests: read
+    steps:
+      - uses: globis-org/sre-actions/hcp-terraform-plan@v1
+        with:
+          token: ${{ secrets.HCP_TERRAFORM_TOKEN }}
+          organization: my-org
+          comment: false # コメントと gate は別の workflow で
+        continue-on-error: true # plan が失敗してもレビューは続ける
+
+  review:
+    needs: [wait-plan]
+    if: ${{ !cancelled() }}
+    # ...
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: globis-org/sre-actions/pr-context@v1
+        with:
+          hcp-terraform-token: ${{ secrets.HCP_TERRAFORM_TOKEN }}
+          hcp-terraform-organization: my-org
+
+      - uses: anthropics/claude-code-action@v1
+        # ...
+```
+
 書き出し先 (`output-dir`、既定は `.claude-review`) はリポジトリの `.gitignore` に追加してください。
 
 ## 書き出すファイル
 
-| ファイル                  | 内容                                                                                                                                                                                         |
-| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pr-info.json`            | PR のメタデータ。フィールド名は `gh pr view --json` に合わせる (`number`, `title`, `body`, `author`, `headRefName`, `headRefOid`, `files[].path` など)。`files` は API の上限で最大 3,000 件 |
-| `pr-diff.patch`           | base と head の SHA を固定した diff (`base...head`)                                                                                                                                          |
-| `plan-summary.md`         | `plan:` / `destroy / replace:` の 2 行、project の表、変更リソース一覧。レビューの prompt やサマリーにそのまま貼る用途 (Atlantis 有効時のみ)                                                 |
-| `atlantis-plan-latest.md` | project ごとの最新の plan 出力 (属性の変更内容を確認する用)。再 plan や前の失敗は含まない。状態とリソースの正は `plan-summary.md` (Atlantis 有効時のみ)                                      |
+| ファイル                       | 内容                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pr-info.json`                 | PR のメタデータ。フィールド名は `gh pr view --json` に合わせる (`number`, `title`, `body`, `author`, `headRefName`, `headRefOid`, `files[].path` など)。`files` は API の上限で最大 3,000 件                                                                                                                                                                     |
+| `pr-diff.patch`                | base と head の SHA を固定した diff (`base...head`)                                                                                                                                                                                                                                                                                                              |
+| `plan-summary.md`              | `plan:` / `destroy / replace:` の 2 行、project の表、変更リソース一覧。レビューの prompt やサマリーにそのまま貼る用途 (plan 収集時のみ。HCP Terraform では project = workspace)                                                                                                                                                                                 |
+| `atlantis-plan-latest.md`      | project ごとの最新の plan 出力 (属性の変更内容を確認する用)。再 plan や前の失敗は含まない。状態とリソースの正は `plan-summary.md` (Atlantis のみ)                                                                                                                                                                                                                |
+| `hcp-terraform-plan-latest.md` | workspace ごとの plan ログ (変更ありまたは失敗した workspace のみ)。Structured Run Output の workspace では `planned_change` の一覧 (data source の `read` や `noop` も含む) と diagnostic だけで、属性の差分は含まない ([plan 詳細の粒度](../hcp-terraform-plan/README.md#plan-詳細の粒度) を参照)。状態とリソースの正は `plan-summary.md` (HCP Terraform のみ) |
 
 ## plan の状態 (`plan-state`)
 
-| 値            | 意味                                                                        | `destroy-or-replace` |
-| ------------- | --------------------------------------------------------------------------- | -------------------- |
-| `disabled`    | `atlantis-comment-author` が空で、plan を収集していない                     | `unknown`            |
-| `pending`     | plan が終わっていない (project の status に pending が残っている場合も含む) | `unknown`            |
-| `none`        | head commit に `atlantis/plan` の status が無い                             | `unknown`            |
-| `no-projects` | 対象 project が無い (`0/0 projects planned`。Terraform に関係しない PR)     | `false`              |
-| `failed`      | いずれかの project の plan が失敗した                                       | `unknown`            |
-| `incomplete`  | 変更リソース一覧を検証できない project がある (下記)。手動で確認する        | `unknown`            |
-| `changes`     | いずれかの project に変更がある                                             | `true` / `false`     |
-| `no-changes`  | 全 project が変更なし                                                       | `false`              |
+| 値            | 意味                                                                                                                                        | `destroy-or-replace` |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| `disabled`    | `atlantis-comment-author` も `hcp-terraform-organization` も空で、plan を収集していない                                                     | `unknown`            |
+| `pending`     | plan が終わっていない (Atlantis: project の status に pending が残っている場合も含む。HCP Terraform: run が終わっていない workspace がある) | `unknown`            |
+| `none`        | head commit に plan の status が無い (`atlantis/plan`、または `Terraform Cloud/<org>/` の status)                                           | `unknown`            |
+| `no-projects` | 対象 project が無い (Atlantis: `0/0 projects planned`。HCP Terraform: 全 workspace が trigger されなかった。Terraform に関係しない PR)      | `false`              |
+| `failed`      | いずれかの project の plan が失敗した                                                                                                       | `unknown`            |
+| `incomplete`  | 変更リソース一覧を検証できない project がある (下記)。手動で確認する                                                                        | `unknown`            |
+| `changes`     | いずれかの project に変更がある                                                                                                             | `true` / `false`     |
+| `no-changes`  | 全 project が変更なし                                                                                                                       | `false`              |
 
-`failed` / `incomplete` / `pending` (project の status が残っている場合) でも、検証できた project の destroy / replace が見つかれば `destroy-or-replace` は `true` になります。
+`failed` / `incomplete` / `pending` (Atlantis で project の status が残っている場合、HCP Terraform で一部の workspace が終わっている場合) でも、検証できた project の destroy / replace が見つかれば `destroy-or-replace` は `true` になります。
 
 ## Atlantis の結果の組み立て方
 
@@ -93,14 +130,37 @@ jobs:
 - コメントが status より後に投稿された場合に備え、コメントが見つからない project があれば 5 秒おきに 3 回まで取り直す
 - Atlantis 既定のコメントテンプレートを前提にしている。カスタマイズしている場合はリソースを抽出できず `incomplete` になる
 
+## HCP Terraform の結果の組み立て方
+
+状態と run は commit status から、件数と変更リソースは HCP Terraform API から取ります。
+
+1. head commit の `Terraform Cloud/<organization>/<workspace>` の status を workspace ごとに最新のものに絞る。1 つも無ければ `none`。workspace の自動検出はせず、status が付いた workspace だけを対象にする (speculative plan が無効で status が付かない workspace は見えない。それを merge の gate で止めるのは [hcp-terraform-plan](../hcp-terraform-plan) の責務)
+2. status の state と `target_url` (run へのリンク) から workspace ごとの結果を決める。`pending` なら「未完了」、run へのリンクが無い `success` は「未実行」(trigger されなかった)、`failure` / `error` は失敗
+3. 終わった run は plan API (`/runs/<id>/plan`) から `has-changes` と件数 (add / change / destroy) を取り、変更があれば `log-read-url` の plan ログを読む。ログは Structured Run Output (`terraform plan -json` 相当) でも Console UI (テキスト) でも解釈する
+   - 変更リソース: structured では `planned_change` の `create` / `update` / `delete` / `replace` / `import` / `move` / `forget` (data source の `read` と `noop` は含めない)。テキストでは Atlantis と同じ `# <address> will be created` などの行
+   - 失敗の理由: error の diagnostic、無ければ `Error: <summary>` 行、それも無ければ末尾の `Operation failed: ...`
+4. 変更リソースの数を plan API の件数と突き合わせる (add = create + replace、change = update、destroy = delete + replace)。合わない、plan やログを取得できない workspace は `incomplete` にする
+
+### 注意事項
+
+- import と同時に update されるリソースは `update` として一覧に出る (structured では action が `update` のまま `importing` が付く)。import / move / forget は plan API の件数に含まれないため突き合わせに使わない
+- HCP Terraform API の認証・権限エラーでも action は失敗させず、その workspace を `incomplete` にして warning を出す (レビュー自体は続ける)
+- HCP Terraform 側の VCS 設定で **Non-aggregated status checks** が有効であること (aggregated の場合は workspace 単位の status が付かず、`none` になる)
+- `hcp-terraform-token` には run の read 権限を持つ team token を使う。fork からの PR では secrets を参照できず token が空になるが、その場合は warning を出して plan を収集せず (`plan-state` は `disabled`)、PR 情報と diff は書き出す
+- plan ログの解釈と HCP Terraform API のクライアントは [hcp-terraform-plan](../hcp-terraform-plan) と同等のものを pr-context 内に持つ (action ごとに自己完結させるため共有しない)。解釈を直すときは両方を見る
+- Console UI の workspace の plan ログは、テキストの plan を Atlantis と同じリソース行パーサーで解釈する。手元の環境に Console UI の workspace が無いため、実ログでの検証は structured のみ
+
 ## Inputs
 
-| Name                      | Description                                                                                                      | Required | Default                                   |
-| ------------------------- | ---------------------------------------------------------------------------------------------------------------- | -------- | ----------------------------------------- |
-| `github-token`            | PR・コメント・commit status の読み取りに使う GitHub token                                                        | No       | `${{ github.token }}`                     |
-| `pull-request-number`     | Pull Request 番号                                                                                                | No       | `${{ github.event.pull_request.number }}` |
-| `output-dir`              | 書き出し先ディレクトリ (作業ディレクトリからの相対パス)                                                          | No       | `.claude-review`                          |
-| `atlantis-comment-author` | Atlantis が plan コメントを投稿する GitHub App のログイン名 (`[bot]` の有無は問わない)。空なら plan を収集しない | No       | -                                         |
+| Name                         | Description                                                                                                                                                  | Required | Default                                   |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | ----------------------------------------- |
+| `github-token`               | PR・コメント・commit status の読み取りに使う GitHub token                                                                                                    | No       | `${{ github.token }}`                     |
+| `pull-request-number`        | Pull Request 番号                                                                                                                                            | No       | `${{ github.event.pull_request.number }}` |
+| `output-dir`                 | 書き出し先ディレクトリ (作業ディレクトリからの相対パス)                                                                                                      | No       | `.claude-review`                          |
+| `atlantis-comment-author`    | Atlantis が plan コメントを投稿する GitHub App のログイン名 (`[bot]` の有無は問わない)。`hcp-terraform-organization` とは排他                                | No       | -                                         |
+| `hcp-terraform-token`        | HCP Terraform API token (run の read 権限を持つ team token)。`hcp-terraform-organization` 指定時に空なら plan を収集しない                                   | No       | -                                         |
+| `hcp-terraform-organization` | HCP Terraform organization 名。指定すると HCP Terraform の speculative plan を収集する。`atlantis-comment-author` とは排他。どちらも空なら plan を収集しない | No       | -                                         |
+| `hcp-terraform-hostname`     | HCP Terraform / Terraform Enterprise のホスト名                                                                                                              | No       | `app.terraform.io`                        |
 
 ## Outputs
 
@@ -109,5 +169,5 @@ jobs:
 | `output-dir`         | 書き出し先ディレクトリの絶対パス                                             |
 | `head-sha`           | コンテキストを取得した head commit の SHA                                    |
 | `plan-state`         | plan の状態 ([plan の状態](#plan-の状態-plan-state) を参照)                  |
-| `resource-count`     | 変更リソースの数 (project ごとに数える)                                      |
+| `resource-count`     | 変更リソースの数 (project / workspace ごとに数える)                          |
 | `destroy-or-replace` | destroy または replace されるリソースがあるか (`true` / `false` / `unknown`) |
