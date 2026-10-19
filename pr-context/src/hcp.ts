@@ -155,6 +155,10 @@ export function renderWorkspaceLog(
 
 type Outcome = { project: Project; log?: string }
 
+// Console UI (text) のログは属性の差分を含む。structured は planned_change の一覧だけ
+const detailOf = (log: ParsedLog): NonNullable<Project['detail']> =>
+  log.format === 'text' ? 'attributes' : 'resources'
+
 const message = (error: unknown): string => (error instanceof Error ? error.message : String(error))
 
 async function toOutcome(
@@ -187,7 +191,11 @@ async function toOutcome(
       }
       const reason = errorReason(log)
       return {
-        project: reason === undefined ? project : { ...project, reason },
+        project: {
+          ...project,
+          ...(reason === undefined ? {} : { reason }),
+          ...(log === null ? {} : { detail: detailOf(log) }),
+        },
         ...(log === null ? {} : { log: renderWorkspaceLog(workspace, status.runUrl, log) }),
       }
     }
@@ -215,10 +223,11 @@ async function toOutcome(
       }
       const resources = resourcesFromLog(log)
       const rendered = renderWorkspaceLog(workspace, status.runUrl, log)
+      const detail = detailOf(log)
       return countsMatch(plan, resources)
-        ? { project: { ...base, state: 'changes', resources }, log: rendered }
+        ? { project: { ...base, state: 'changes', resources, detail }, log: rendered }
         : {
-            project: { ...base, resources, reason: 'リソース数が plan の件数と合わない' },
+            project: { ...base, resources, detail, reason: 'リソース数が plan の件数と合わない' },
             log: rendered,
           }
     }

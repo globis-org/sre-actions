@@ -9,7 +9,7 @@ AI レビュー (claude-code-action など) の前段で実行し、レビュー
 
 ## 使用例
 
-この action は plan の完了を待ちません。前段のジョブで [wait-for-commit-status](../wait-for-commit-status) (Atlantis) や [hcp-terraform-plan](../hcp-terraform-plan) (HCP Terraform) を使って待ちます。待機を軽い runner に置け、plan の結果でレビュー自体を skip する判断もレビューのジョブを起動する前にできるためです。
+この action は plan の完了を待ちません。前段のジョブで [wait-for-commit-statuses](../wait-for-commit-statuses) (Atlantis) や [hcp-terraform-plan](../hcp-terraform-plan) (HCP Terraform) を使って待ちます。待機を軽い runner に置け、plan の結果でレビュー自体を skip する判断もレビューのジョブを起動する前にできるためです。
 
 ### Atlantis
 
@@ -24,9 +24,9 @@ jobs:
     permissions:
       statuses: read
     steps:
-      - uses: globis-org/sre-actions/wait-for-commit-status@v1
+      - uses: globis-org/sre-actions/wait-for-commit-statuses@v1
         with:
-          check-name: atlantis/plan
+          context-names: atlantis/plan* # 集約 status と project ごとの status をまとめて待つ
         continue-on-error: true # plan が無い PR でもレビューは続ける
 
   review:
@@ -89,13 +89,43 @@ jobs:
 
 ## 書き出すファイル
 
-| ファイル                       | 内容                                                                                                                                                                                                                                                                                                                                                             |
-| ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pr-info.json`                 | PR のメタデータ。フィールド名は `gh pr view --json` に合わせる (`number`, `title`, `body`, `author`, `headRefName`, `headRefOid`, `files[].path` など)。`files` は API の上限で最大 3,000 件                                                                                                                                                                     |
-| `pr-diff.patch`                | base と head の SHA を固定した diff (`base...head`)                                                                                                                                                                                                                                                                                                              |
-| `plan-summary.md`              | `plan:` / `destroy / replace:` の 2 行、project の表、変更リソース一覧。レビューの prompt やサマリーにそのまま貼る用途 (plan 収集時のみ。HCP Terraform では project = workspace)                                                                                                                                                                                 |
-| `atlantis-plan-latest.md`      | project ごとの最新の plan 出力 (属性の変更内容を確認する用)。再 plan や前の失敗は含まない。状態とリソースの正は `plan-summary.md` (Atlantis のみ)                                                                                                                                                                                                                |
-| `hcp-terraform-plan-latest.md` | workspace ごとの plan ログ (変更ありまたは失敗した workspace のみ)。Structured Run Output の workspace では `planned_change` の一覧 (data source の `read` や `noop` も含む) と diagnostic だけで、属性の差分は含まない ([plan 詳細の粒度](../hcp-terraform-plan/README.md#plan-詳細の粒度) を参照)。状態とリソースの正は `plan-summary.md` (HCP Terraform のみ) |
+| ファイル          | 内容                                                                                                                                                                                                                                              |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pr-info.json`    | PR のメタデータ。フィールド名は `gh pr view --json` に合わせる (`number`, `title`, `body`, `author`, `headRefName`, `headRefOid`, `files[].path` など)。`files` は API の上限で最大 3,000 件                                                      |
+| `pr-diff.patch`   | base と head の SHA を固定した diff (`base...head`)                                                                                                                                                                                               |
+| `plan-summary.md` | 固定の 3 行 (`plan:` / `destroy / replace:` / `plan の詳細:`)、project の表、変更リソース一覧。レビューの prompt やサマリーにそのまま貼る用途 (plan 収集時のみ。HCP Terraform では project = workspace)                                           |
+| `plan-details.md` | project ごとの最新の plan 出力 (`## <project>` の節ごと。再 plan や前の失敗は含まない)。属性の差分を含むかは取得元と workspace の設定で変わり、`plan-summary.md` の 3 行目に示す (下記)。状態とリソースの正は `plan-summary.md` (plan 収集時のみ) |
+
+互換のため、取得元ごとの名前 (`atlantis-plan-latest.md` / `hcp-terraform-plan-latest.md`) でも `plan-details.md` と同じ内容をしばらく書き出します。これらは非推奨で、新しく書く skill は `plan-details.md` を読んでください。
+
+### `plan-summary.md` の形式
+
+先頭 3 行は位置と書式を固定しています (review-pr skill が行位置で読む)。
+
+```
+plan: 変更あり
+destroy / replace: `aws_s3_bucket.old` (delete, infra-app-prod)
+plan の詳細: 属性の差分あり
+
+| project | 状態 | status | 理由 |
+|---|---|---|---|
+| infra-app-prod | 変更あり | Terraform plan: 1 to add, 0 to change, 1 to destroy. |  |
+
+変更リソース一覧（2 件）:
+- infra-app-prod: `aws_s3_bucket.new` create
+- infra-app-prod: `aws_s3_bucket.old` delete
+```
+
+3 行目の `plan の詳細:` は `plan-details.md` で属性の変更内容まで確認できるかを示します。
+
+| 値                                                                              | 意味                                                                                                                                              |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `属性の差分あり`                                                                | 節のある全 project が `terraform plan` の出力 (Atlantis、または HCP Terraform の Console UI の workspace)                                         |
+| `属性の差分なし（変更リソースの一覧と diagnostic のみ）`                        | 節のある全 project が HCP Terraform の Structured Run Output。`planned_change` の一覧 (data source の `read` や `noop` も含む) と diagnostic だけ |
+| `一部は属性の差分なし（<project>, ... は変更リソースの一覧と diagnostic のみ）` | HCP Terraform で workspace ごとに設定が違う場合                                                                                                   |
+| `なし`                                                                          | `plan-details.md` に節が無い (変更なし、plan 未完了、plan 無しなど)                                                                               |
+
+Structured Run Output と Console UI の違いは hcp-terraform-plan の [plan 詳細の粒度](../hcp-terraform-plan/README.md#plan-詳細の粒度) を参照してください。
 
 ## plan の状態 (`plan-state`)
 

@@ -310,6 +310,7 @@ describe('buildPlan', () => {
             { address: 'aws_iam_role.a', action: 'delete' },
             { address: 'module.db.aws_db_instance.this["primary"]', action: 'replace' },
           ],
+          detail: 'attributes',
         },
         {
           project: 'infra/stg/default',
@@ -318,6 +319,7 @@ describe('buildPlan', () => {
           reason:
             'This project is currently locked by an unapplied plan from pull #1. To continue, delete the lock from #1 or apply that plan and merge the pull request.',
           resources: [],
+          detail: 'attributes',
         },
       ],
       resources: [

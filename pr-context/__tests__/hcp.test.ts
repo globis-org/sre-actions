@@ -308,10 +308,10 @@ describe('collectHcpPlan', () => {
       warn
     )
     expect(plan.state).toBe('changes')
-    expect(plan.projects.map(p => [p.project, p.state, p.reason])).toStrictEqual([
-      ['infra-app-prod', 'changes', undefined],
-      ['infra-app-stg', 'no-changes', undefined],
-      ['infra-tools', 'untriggered', undefined],
+    expect(plan.projects.map(p => [p.project, p.state, p.reason, p.detail])).toStrictEqual([
+      ['infra-app-prod', 'changes', undefined, 'resources'],
+      ['infra-app-stg', 'no-changes', undefined, undefined],
+      ['infra-tools', 'untriggered', undefined, undefined],
     ])
     expect(plan.projects[0]?.status).toBe('Terraform plan: 2 to add, 1 to change, 2 to destroy.')
     expect(plan.resources.map(r => `${r.project}:${r.address}:${r.action}`)).toStrictEqual([
@@ -326,6 +326,28 @@ describe('collectHcpPlan', () => {
     // no-changes の workspace と untriggered の workspace は latest に出さない
     expect(latest.match(/^## /gm)).toStrictEqual(['## '])
     expect(warnings).toStrictEqual([])
+  })
+
+  test('a Console UI (text) workspace is marked as having attribute diffs', async () => {
+    const { plan, latest } = await collectHcpPlan(
+      reader(
+        { 'run-abc123': summary({ additions: 2, changes: 0, destructions: 1 }) },
+        { 'https://archivist.example/log': TEXT_LOG }
+      ),
+      workspaceStatuses(
+        [
+          status(
+            'infra-app-prod',
+            'success',
+            'Terraform plan: 2 to add, 0 to change, 1 to destroy.'
+          ),
+        ],
+        'my-org'
+      ),
+      warn
+    )
+    expect(plan.projects[0]).toMatchObject({ state: 'changes', detail: 'attributes' })
+    expect(latest).toContain('~ ami = "ami-old" -> "ami-new" # forces replacement')
   })
 
   test('marks a workspace incomplete when the counts do not match, and keeps the resources', async () => {
@@ -368,6 +390,8 @@ describe('collectHcpPlan', () => {
       state: 'failed',
       status: 'Terraform plan errored.',
       reason: 'Error: Unsupported Terraform Core version',
+      // init 失敗のログは text なので属性の差分扱いになるが、plan 本体は無い
+      detail: 'attributes',
     })
     expect(latest).toContain('Operation failed: failed running terraform init (exit 1)')
     expect(destroyOrReplace(plan)).toBe('unknown')

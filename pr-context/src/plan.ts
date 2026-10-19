@@ -32,6 +32,9 @@ export type Project = {
   // 失敗の理由や incomplete の理由
   reason?: string
   resources: Resource[]
+  // plan-details.md にこの project の節があるとき、その粒度。
+  // attributes: 属性の差分を含む plan 出力、resources: 変更リソースの一覧と diagnostic のみ
+  detail?: 'attributes' | 'resources'
 }
 
 // 全体の状態になりうる project の状態 (pending は全体の pending に、untriggered は無視される)

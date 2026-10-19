@@ -171,6 +171,8 @@ function toProject(name: string, status: StatusRecord, section: string | undefin
     state: 'incomplete',
     status: description,
     resources: [],
+    // コメントの節は terraform plan の出力そのもの
+    ...(section === undefined ? {} : { detail: 'attributes' }),
   }
   if (status.state === 'failure' || status.state === 'error') {
     const reason = section === undefined ? undefined : failureReason(section)
