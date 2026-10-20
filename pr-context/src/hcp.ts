@@ -5,7 +5,8 @@
 // - 件数の正解は plan API (resource-additions / changes / destructions)。ログから抽出した変更
 //   リソースと突き合わせ、合わなければ incomplete にする (Atlantis と同じ方針)
 
-import { parsePlanLog, renderChange, renderDiagnostic, type ParsedLog } from './hcp-log'
+import { parsePlanLog, renderDiagnostic, type ParsedLog } from './hcp-log'
+import { parseJsonPlan, renderResourceChange, type ResourceChange } from './json-plan'
 import {
   parseResourceLine,
   STATE_ORDER,
@@ -133,19 +134,20 @@ export function errorReason(log: ParsedLog | null): string | undefined {
 
 const fence = (body: string, lang = ''): string => `\`\`\`${lang}\n${body}\n\`\`\``
 
-// hcp-terraform-plan-latest.md の workspace ごとの節。structured では属性の差分は無く、
-// 変更リソースの一覧と diagnostic だけになる
+// plan-details.md の workspace ごとの節。text はログの plan 本体をそのまま、structured は
+// diagnostic と JSON plan から描画した属性の差分 (失敗した run は diagnostic と messages だけ)
 export function renderWorkspaceLog(
   workspace: string,
   runUrl: string | null,
-  log: ParsedLog
+  log: ParsedLog,
+  changes: ResourceChange[] = []
 ): string {
   const blocks =
     log.format === 'text'
       ? [fence(log.body)]
       : [
           log.diagnostics.length > 0 && fence(log.diagnostics.map(renderDiagnostic).join('\n\n')),
-          log.changes.length > 0 && fence(log.changes.map(renderChange).join('\n'), 'diff'),
+          changes.length > 0 && fence(changes.map(renderResourceChange).join('\n\n'), 'diff'),
           log.messages.length > 0 && fence(log.messages.join('\n')),
         ]
   return `${[`## ${workspace}`, runUrl !== null && `run: ${runUrl}`, ...blocks]
@@ -154,10 +156,6 @@ export function renderWorkspaceLog(
 }
 
 type Outcome = { project: Project; log?: string }
-
-// Console UI (text) のログは属性の差分を含む。structured は planned_change の一覧だけ
-const detailOf = (log: ParsedLog): NonNullable<Project['detail']> =>
-  log.format === 'text' ? 'attributes' : 'resources'
 
 const message = (error: unknown): string => (error instanceof Error ? error.message : String(error))
 
@@ -189,13 +187,10 @@ async function toOutcome(
       } catch (error) {
         warn(`Failed to fetch plan for ${workspace}: ${message(error)}`)
       }
+      // 失敗した run の節は理由を読むためのもので、変更の粒度 (detail) は付けない
       const reason = errorReason(log)
       return {
-        project: {
-          ...project,
-          ...(reason === undefined ? {} : { reason }),
-          ...(log === null ? {} : { detail: detailOf(log) }),
-        },
+        project: reason === undefined ? project : { ...project, reason },
         ...(log === null ? {} : { log: renderWorkspaceLog(workspace, status.runUrl, log) }),
       }
     }
@@ -216,18 +211,36 @@ async function toOutcome(
         return { project: { ...base, reason: 'plan を取得できない' } }
       }
       if (!plan.hasChanges) {
-        return { project: { ...base, state: 'no-changes' } }
+        // Atlantis と同じく、plan を実行した workspace には節を残す (ログは読まない)
+        return {
+          project: { ...base, state: 'no-changes' },
+          log: `## ${workspace}\n\nrun: ${status.runUrl}\n\nNo changes.\n`,
+        }
       }
       if (log === null) {
         return { project: { ...base, reason: 'plan ログを取得できない' } }
       }
       const resources = resourcesFromLog(log)
-      const rendered = renderWorkspaceLog(workspace, status.runUrl, log)
-      const detail = detailOf(log)
+      // structured のログには属性の値が無いので、属性の差分は JSON plan から描画する
+      let changes: ResourceChange[] = []
+      if (log.format === 'structured') {
+        try {
+          changes = parseJsonPlan(await reader.fetchRedactedPlan(plan.id))
+        } catch (error) {
+          warn(`Failed to fetch the JSON plan for ${workspace}: ${message(error)}`)
+          return { project: { ...base, resources, reason: 'JSON plan を取得できない' } }
+        }
+      }
+      const rendered = renderWorkspaceLog(workspace, status.runUrl, log, changes)
       return countsMatch(plan, resources)
-        ? { project: { ...base, state: 'changes', resources, detail }, log: rendered }
+        ? { project: { ...base, state: 'changes', resources, hasDetails: true }, log: rendered }
         : {
-            project: { ...base, resources, detail, reason: 'リソース数が plan の件数と合わない' },
+            project: {
+              ...base,
+              resources,
+              hasDetails: true,
+              reason: 'リソース数が plan の件数と合わない',
+            },
             log: rendered,
           }
     }

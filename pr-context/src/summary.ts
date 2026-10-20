@@ -40,23 +40,6 @@ export function renderLatestPlans(sections: Map<string, string>): string {
 const cell = (text: string): string =>
   text.replace(/\|/g, '\\|').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\r?\n/g, ' ')
 
-// plan-details.md に属性の差分があるか。取得元 (Atlantis / HCP Terraform) や workspace の設定で
-// 変わるので、reviewer がどこまで確認できるかをここで示す
-function detailLine(plan: Plan): string {
-  const detailed = plan.projects.filter(p => p.detail !== undefined)
-  const resourcesOnly = detailed.filter(p => p.detail === 'resources').map(p => p.project)
-  if (detailed.length === 0) {
-    return 'なし'
-  }
-  if (resourcesOnly.length === 0) {
-    return '属性の差分あり'
-  }
-  if (resourcesOnly.length === detailed.length) {
-    return '属性の差分なし（変更リソースの一覧と diagnostic のみ）'
-  }
-  return `一部は属性の差分なし（${resourcesOnly.join(', ')} は変更リソースの一覧と diagnostic のみ）`
-}
-
 // reviewer の prompt とサマリーにそのまま貼る。列挙を LLM にさせないため決定的に作る。
 // 先頭 3 行は固定 (review-pr skill が行位置で読む)
 export function renderSummary(plan: Plan): string {
@@ -71,7 +54,8 @@ export function renderSummary(plan: Plan): string {
           ? 'なし'
           : destructive.map(r => `\`${r.address}\` (${r.action}, ${r.project})`).join(', ')
     }`,
-    `plan の詳細: ${detailLine(plan)}`,
+    // plan-details.md に属性の差分があるか。無いときに reviewer が探しに行かないため
+    `plan の詳細: ${plan.projects.some(p => p.hasDetails) ? '属性の差分あり' : 'なし'}`,
   ]
   if (plan.projects.length > 0) {
     lines.push('', '| project | 状態 | status | 理由 |', '|---|---|---|---|')

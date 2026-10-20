@@ -10,7 +10,7 @@ const plan: Plan = {
       state: 'changes',
       status: 'Plan: 1 to add, 0 to change, 1 to destroy.',
       resources: [],
-      detail: 'attributes',
+      hasDetails: true,
     },
   ],
   resources: [
@@ -76,25 +76,15 @@ describe('renderSummary', () => {
 
   // review-pr skill は先頭 3 行を行位置で読む
   test.each([
-    ['none of the projects has a section', [undefined, undefined], 'なし'],
-    ['every section has attribute diffs', ['attributes', 'attributes'], '属性の差分あり'],
-    [
-      'no section has attribute diffs',
-      ['resources', 'resources'],
-      '属性の差分なし（変更リソースの一覧と diagnostic のみ）',
-    ],
-    [
-      'mixed',
-      ['attributes', 'resources'],
-      '一部は属性の差分なし（infra-app-stg は変更リソースの一覧と diagnostic のみ）',
-    ],
-  ] as const)('plan の詳細: %s', (_, details, expected) => {
+    ['no project has a plan output', [false, false], 'なし'],
+    ['some project has a plan output', [false, true], '属性の差分あり'],
+  ])('plan の詳細: %s', (_, details, expected) => {
     const projects = (['infra-app-prod', 'infra-app-stg'] as const).map((project, i) => ({
       project,
       state: 'changes' as const,
       status: '',
       resources: [],
-      ...(details[i] === undefined ? {} : { detail: details[i] }),
+      ...(details[i] ? { hasDetails: true } : {}),
     }))
     const lines = renderSummary({ state: 'changes', projects, resources: [] }).split('\n')
     expect(lines[0]).toBe('plan: 変更あり')
