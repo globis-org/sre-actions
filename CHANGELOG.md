@@ -1,5 +1,9 @@
 # Changelog
 
+## [v1.4.1](https://github.com/globis-org/sre-actions/compare/v1.4.0...v1.4.1) - 2026-10-20
+
+- feat(pr-context): plan の詳細ファイルを plan-details.md にそろえ、HCP Terraform でも属性の差分を出す by @yukin01 in https://github.com/globis-org/sre-actions/pull/171
+
 ## [v1.4.0](https://github.com/globis-org/sre-actions/compare/v1.3.0...v1.4.0) - 2026-10-19
 
 - chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/165
