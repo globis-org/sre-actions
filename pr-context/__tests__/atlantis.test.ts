@@ -310,6 +310,7 @@ describe('buildPlan', () => {
             { address: 'aws_iam_role.a', action: 'delete' },
             { address: 'module.db.aws_db_instance.this["primary"]', action: 'replace' },
           ],
+          hasDetails: true,
         },
         {
           project: 'infra/stg/default',

@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest'
-import { parsePlanLog, renderChange, renderDiagnostic } from '../src/hcp-log'
+import { parsePlanLog, renderDiagnostic } from '../src/hcp-log'
 
 const line = (message: object): string => JSON.stringify({ '@level': 'info', ...message })
 
@@ -97,23 +97,6 @@ describe('parsePlanLog', () => {
   test('lines that look like JSON but are not UI messages are treated as text', () => {
     const parsed = parsePlanLog('{"foo": 1}\n{not json')
     expect(parsed.format).toBe('text')
-  })
-})
-
-describe('renderChange', () => {
-  test.each([
-    [{ address: 'a', action: 'create' }, '+   create  a'],
-    [{ address: 'a', action: 'update' }, '!   update  a'],
-    [
-      { address: 'a', action: 'delete', reason: 'delete_because_each_key' },
-      '-   destroy a (delete_because_each_key)',
-    ],
-    [{ address: 'a', action: 'replace', reason: 'cannot_update' }, '-/+ replace a (cannot_update)'],
-    [{ address: 'b', action: 'move', previousAddress: 'a' }, '>   move    b (from a)'],
-    [{ address: 'a', action: 'import' }, '+   import  a'],
-    [{ address: 'a', action: 'forget' }, '    forget a'],
-  ])('%o', (change, expected) => {
-    expect(renderChange(change)).toBe(expected)
   })
 })
 

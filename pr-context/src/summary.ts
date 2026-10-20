@@ -40,7 +40,8 @@ export function renderLatestPlans(sections: Map<string, string>): string {
 const cell = (text: string): string =>
   text.replace(/\|/g, '\\|').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\r?\n/g, ' ')
 
-// reviewer の prompt とサマリーにそのまま貼る。列挙を LLM にさせないため決定的に作る
+// reviewer の prompt とサマリーにそのまま貼る。列挙を LLM にさせないため決定的に作る。
+// 先頭 3 行は固定 (review-pr skill が行位置で読む)
 export function renderSummary(plan: Plan): string {
   const destructive = plan.resources.filter(r => r.action === 'delete' || r.action === 'replace')
   const verdict = destroyOrReplace(plan)
@@ -53,6 +54,8 @@ export function renderSummary(plan: Plan): string {
           ? 'なし'
           : destructive.map(r => `\`${r.address}\` (${r.action}, ${r.project})`).join(', ')
     }`,
+    // plan-details.md に属性の差分があるか。無いときに reviewer が探しに行かないため
+    `plan の詳細: ${plan.projects.some(p => p.hasDetails) ? '属性の差分あり' : 'なし'}`,
   ]
   if (plan.projects.length > 0) {
     lines.push('', '| project | 状態 | status | 理由 |', '|---|---|---|---|')

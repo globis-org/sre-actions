@@ -10,6 +10,7 @@ const plan: Plan = {
       state: 'changes',
       status: 'Plan: 1 to add, 0 to change, 1 to destroy.',
       resources: [],
+      hasDetails: true,
     },
   ],
   resources: [
@@ -49,6 +50,7 @@ describe('renderSummary', () => {
       [
         'plan: 変更あり',
         'destroy / replace: `aws_s3_bucket.old` (delete, infra/prod/default)',
+        'plan の詳細: 属性の差分あり',
         '',
         '| project | 状態 | status | 理由 |',
         '|---|---|---|---|',
@@ -65,11 +67,29 @@ describe('renderSummary', () => {
 
   test('states without projects', () => {
     expect(renderSummary({ state: 'no-projects', projects: [], resources: [] })).toBe(
-      'plan: plan 対象 project なし\ndestroy / replace: なし\n'
+      'plan: plan 対象 project なし\ndestroy / replace: なし\nplan の詳細: なし\n'
     )
     expect(renderSummary({ state: 'pending', projects: [], resources: [] })).toBe(
-      'plan: plan 未完了\ndestroy / replace: 不明（plan 未完了）\n'
+      'plan: plan 未完了\ndestroy / replace: 不明（plan 未完了）\nplan の詳細: なし\n'
     )
+  })
+
+  // review-pr skill は先頭 3 行を行位置で読む
+  test.each([
+    ['no project has a plan output', [false, false], 'なし'],
+    ['some project has a plan output', [false, true], '属性の差分あり'],
+  ])('plan の詳細: %s', (_, details, expected) => {
+    const projects = (['infra-app-prod', 'infra-app-stg'] as const).map((project, i) => ({
+      project,
+      state: 'changes' as const,
+      status: '',
+      resources: [],
+      ...(details[i] ? { hasDetails: true } : {}),
+    }))
+    const lines = renderSummary({ state: 'changes', projects, resources: [] }).split('\n')
+    expect(lines[0]).toBe('plan: 変更あり')
+    expect(lines[1]).toBe('destroy / replace: なし')
+    expect(lines[2]).toBe(`plan の詳細: ${expected}`)
   })
 })
 

@@ -1,4 +1,4 @@
-// HCP Terraform の plan ログ (log-read-url) の解釈と、レビュー用ファイルへの描画。
+// HCP Terraform の plan ログ (log-read-url) の解釈と、diagnostic の描画。
 //
 // workspace の User Interface 設定によって形式が変わる:
 // - Structured Run Output (デフォルト): `terraform plan -json` 相当の JSON lines
@@ -149,27 +149,6 @@ function parseTextLog(lines: string[]): ParsedLog {
     .map(line => line.trim())
     .filter(line => line.startsWith('Operation failed:'))
   return { format: 'text', body, diagnostics: [], messages }
-}
-
-// diff ハイライトが効くように action ごとに接頭辞を付ける
-const ACTION_PREFIX: Record<string, string> = {
-  create: '+   create ',
-  update: '!   update ',
-  delete: '-   destroy',
-  replace: '-/+ replace',
-  read: '<=  read   ',
-  move: '>   move   ',
-  import: '+   import ',
-  noop: '    noop   ',
-}
-
-export function renderChange(change: PlannedChange): string {
-  const prefix = ACTION_PREFIX[change.action] ?? `    ${change.action}`
-  const suffix = [
-    change.previousAddress === undefined ? '' : ` (from ${change.previousAddress})`,
-    change.reason === undefined ? '' : ` (${change.reason})`,
-  ].join('')
-  return `${prefix} ${change.address}${suffix}`
 }
 
 // Terraform CLI の診断メッセージ表示に倣う

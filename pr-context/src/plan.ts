@@ -32,6 +32,8 @@ export type Project = {
   // 失敗の理由や incomplete の理由
   reason?: string
   resources: Resource[]
+  // plan-details.md にこの project の属性の差分 (plan 出力) があるか。変更のある project にだけ付く
+  hasDetails?: boolean
 }
 
 // 全体の状態になりうる project の状態 (pending は全体の pending に、untriggered は無視される)

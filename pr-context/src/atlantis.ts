@@ -192,9 +192,10 @@ function toProject(name: string, status: StatusRecord, section: string | undefin
     .split('\n')
     .map(parseResourceLine)
     .filter(r => r !== null)
+  // コメントの節は terraform plan の出力そのもの (属性の差分を含む)
   return countsMatch(description, resources)
-    ? { ...project, state: 'changes', resources }
-    : { ...project, resources, reason: 'リソース数が Plan 行と合わない' }
+    ? { ...project, state: 'changes', resources, hasDetails: true }
+    : { ...project, resources, hasDetails: true, reason: 'リソース数が Plan 行と合わない' }
 }
 
 export function buildPlan(

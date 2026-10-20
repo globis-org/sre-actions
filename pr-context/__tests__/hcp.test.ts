@@ -9,6 +9,7 @@ import {
   workspaceStatuses,
 } from '../src/hcp'
 import { parsePlanLog } from '../src/hcp-log'
+import { parseJsonPlan } from '../src/json-plan'
 import type { PlanReader, PlanSummary } from '../src/tfc'
 import { destroyOrReplace } from '../src/summary'
 
@@ -100,6 +101,7 @@ const ERRORED_LOG = [
 ].join('\n')
 
 const summary = (overrides: Partial<PlanSummary> = {}): PlanSummary => ({
+  id: 'plan-xyz',
   hasChanges: true,
   additions: 2,
   changes: 1,
@@ -108,11 +110,54 @@ const summary = (overrides: Partial<PlanSummary> = {}): PlanSummary => ({
   ...overrides,
 })
 
+// 実ログで観測した形を汎用名で再現した JSON plan (json-output-redacted)。STRUCTURED_LOG と同じ変更
+const JSON_PLAN = JSON.stringify({
+  resource_changes: [
+    {
+      address: 'aws_s3_bucket.logs',
+      change: {
+        actions: ['create'],
+        before: null,
+        after: { bucket: 'logs', tags: { env: 'prod' } },
+        after_unknown: { id: true, arn: true },
+      },
+    },
+    {
+      address: 'aws_iam_role.app',
+      change: {
+        actions: ['update'],
+        before: { name: 'app', assume_role_policy: '{"Version":"2012-10-17"}', id: 'app' },
+        after: { name: 'app', assume_role_policy: '{"Version":"2008-10-17"}', id: 'app' },
+        importing: { id: 'app-role' },
+      },
+    },
+    {
+      address: 'aws_instance.web[1]',
+      action_reason: 'delete_because_each_key',
+      change: { actions: ['delete'], before: { ami: 'ami-old', id: 'i-1' }, after: null },
+    },
+    {
+      address: 'aws_s3_bucket.unchanged',
+      change: { actions: ['no-op'], before: { bucket: 'x' }, after: { bucket: 'x' } },
+    },
+  ],
+})
+
 function reader(
   plans: Record<string, PlanSummary | null>,
-  logs: Record<string, string>
+  logs: Record<string, string>,
+  jsonPlans: Record<string, string> = {}
 ): PlanReader {
   return {
+    fetchRedactedPlan: async planId => {
+      const plan = jsonPlans[planId]
+      if (plan === undefined) {
+        throw new Error(
+          `HCP Terraform API request failed: GET /plans/${planId}/json-output-redacted -> 404 Not Found`
+        )
+      }
+      return plan
+    },
     getPlanForRun: async runId => {
       if (!(runId in plans)) {
         throw new Error(
@@ -228,8 +273,13 @@ describe('errorReason', () => {
 })
 
 describe('renderWorkspaceLog', () => {
-  test('renders the change list and diagnostics of a structured log', () => {
-    const text = renderWorkspaceLog('infra-app-prod', RUN_URL, parsePlanLog(STRUCTURED_LOG))
+  test('renders the diagnostics and the attribute diffs of a structured log', () => {
+    const text = renderWorkspaceLog(
+      'infra-app-prod',
+      RUN_URL,
+      parsePlanLog(STRUCTURED_LOG),
+      parseJsonPlan(JSON_PLAN)
+    )
     expect(text).toBe(
       [
         '## infra-app-prod',
@@ -244,13 +294,17 @@ describe('renderWorkspaceLog', () => {
         '',
         '```diff',
         '+   create  aws_s3_bucket.logs',
-        '!   update  aws_iam_role.app',
-        '+   import  aws_iam_policy.legacy',
-        '-/+ replace aws_instance.web[0] (cannot_update)',
+        '    + arn: (known after apply)',
+        '    + bucket: "logs"',
+        '    + id: (known after apply)',
+        '    + tags: {"env":"prod"}',
+        '',
+        '!   update  aws_iam_role.app (imported from "app-role")',
+        '    ~ assume_role_policy: "{\\"Version\\":\\"2012-10-17\\"}" -> "{\\"Version\\":\\"2008-10-17\\"}"',
+        '',
         '-   destroy aws_instance.web[1] (delete_because_each_key)',
-        '>   move    module.app.aws_sqs_queue.this (from aws_sqs_queue.app)',
-        '<=  read    data.aws_ami.deferred (read_because_config_unknown)',
-        '    noop    aws_s3_bucket.unchanged',
+        '    - ami: "ami-old"',
+        '    - id: "i-1"',
         '```',
         '',
       ].join('\n')
@@ -273,6 +327,7 @@ describe('collectHcpPlan', () => {
   }
 
   test('verifies resources against the plan API counts', async () => {
+    warnings.length = 0
     const workspaces = workspaceStatuses(
       [
         status('infra-app-prod', 'success', 'Terraform plan: 2 to add, 1 to change, 2 to destroy.'),
@@ -302,16 +357,17 @@ describe('collectHcpPlan', () => {
             destructions: 0,
           }),
         },
-        { 'https://archivist.example/log': STRUCTURED_LOG }
+        { 'https://archivist.example/log': STRUCTURED_LOG },
+        { 'plan-xyz': JSON_PLAN }
       ),
       workspaces,
       warn
     )
     expect(plan.state).toBe('changes')
-    expect(plan.projects.map(p => [p.project, p.state, p.reason])).toStrictEqual([
-      ['infra-app-prod', 'changes', undefined],
-      ['infra-app-stg', 'no-changes', undefined],
-      ['infra-tools', 'untriggered', undefined],
+    expect(plan.projects.map(p => [p.project, p.state, p.reason, p.hasDetails])).toStrictEqual([
+      ['infra-app-prod', 'changes', undefined, true],
+      ['infra-app-stg', 'no-changes', undefined, undefined],
+      ['infra-tools', 'untriggered', undefined, undefined],
     ])
     expect(plan.projects[0]?.status).toBe('Terraform plan: 2 to add, 1 to change, 2 to destroy.')
     expect(plan.resources.map(r => `${r.project}:${r.address}:${r.action}`)).toStrictEqual([
@@ -323,16 +379,74 @@ describe('collectHcpPlan', () => {
       'infra-app-prod:module.app.aws_sqs_queue.this:move',
     ])
     expect(destroyOrReplace(plan)).toBe('true')
-    // no-changes の workspace と untriggered の workspace は latest に出さない
-    expect(latest.match(/^## /gm)).toStrictEqual(['## '])
+    // plan を実行した workspace には変更なしでも節がある。untriggered には無い
+    expect(latest.match(/^## .*$/gm)).toStrictEqual(['## infra-app-prod', '## infra-app-stg'])
+    expect(latest).toContain(
+      '## infra-app-stg\n\nrun: https://app.terraform.io/app/my-org/infra-app-prod/runs/run-stg\n\nNo changes.\n'
+    )
+    // 変更リソースの一覧 (正) はログから。JSON plan は属性の差分の描画にだけ使う
+    expect(latest).toContain('!   update  aws_iam_role.app (imported from "app-role")')
+    expect(latest).not.toContain('aws_s3_bucket.unchanged')
     expect(warnings).toStrictEqual([])
+  })
+
+  test('a structured workspace whose JSON plan cannot be fetched is incomplete, keeping the resources', async () => {
+    warnings.length = 0
+    const { plan, latest } = await collectHcpPlan(
+      reader({ 'run-abc123': summary() }, { 'https://archivist.example/log': STRUCTURED_LOG }),
+      workspaceStatuses(
+        [
+          status(
+            'infra-app-prod',
+            'success',
+            'Terraform plan: 2 to add, 1 to change, 2 to destroy.'
+          ),
+        ],
+        'my-org'
+      ),
+      warn
+    )
+    expect(plan.state).toBe('incomplete')
+    expect(plan.projects[0]).toMatchObject({
+      state: 'incomplete',
+      reason: 'JSON plan を取得できない',
+    })
+    expect(plan.projects[0]?.hasDetails).toBeUndefined()
+    expect(plan.resources).toHaveLength(6)
+    expect(destroyOrReplace(plan)).toBe('true')
+    expect(latest).toBe('')
+    expect(warnings).toHaveLength(1)
+    expect(warnings[0]).toContain('Failed to fetch the JSON plan for infra-app-prod')
+  })
+
+  test('a Console UI (text) workspace is marked as having attribute diffs', async () => {
+    const { plan, latest } = await collectHcpPlan(
+      reader(
+        { 'run-abc123': summary({ additions: 2, changes: 0, destructions: 1 }) },
+        { 'https://archivist.example/log': TEXT_LOG }
+      ),
+      workspaceStatuses(
+        [
+          status(
+            'infra-app-prod',
+            'success',
+            'Terraform plan: 2 to add, 0 to change, 1 to destroy.'
+          ),
+        ],
+        'my-org'
+      ),
+      warn
+    )
+    expect(plan.projects[0]).toMatchObject({ state: 'changes', hasDetails: true })
+    expect(latest).toContain('~ ami = "ami-old" -> "ami-new" # forces replacement')
   })
 
   test('marks a workspace incomplete when the counts do not match, and keeps the resources', async () => {
     const { plan } = await collectHcpPlan(
       reader(
         { 'run-abc123': summary({ additions: 3 }) },
-        { 'https://archivist.example/log': STRUCTURED_LOG }
+        { 'https://archivist.example/log': STRUCTURED_LOG },
+        { 'plan-xyz': JSON_PLAN }
       ),
       workspaceStatuses(
         [
@@ -369,6 +483,8 @@ describe('collectHcpPlan', () => {
       status: 'Terraform plan errored.',
       reason: 'Error: Unsupported Terraform Core version',
     })
+    // 失敗した run には粒度を付けない (3 行目は変更の粒度を表す)
+    expect(plan.projects[0]?.hasDetails).toBeUndefined()
     expect(latest).toContain('Operation failed: failed running terraform init (exit 1)')
     expect(destroyOrReplace(plan)).toBe('unknown')
   })
