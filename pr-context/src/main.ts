@@ -155,10 +155,8 @@ async function run(): Promise<void> {
   })
   let plan: Plan
   let details: string
-  let legacyName: string
   if (mode.kind === 'atlantis') {
     ;({ plan, latest: details } = await collectPlan(octokit, number, statuses, mode.login))
-    legacyName = 'atlantis-plan-latest.md'
     if (plan.state === 'pending' && plan.projects.length > 0) {
       core.warning('Some atlantis/plan project statuses are still pending.')
     }
@@ -170,7 +168,6 @@ async function run(): Promise<void> {
       )
     }
     ;({ plan, latest: details } = await collectHcpPlan(mode.tfc, workspaces, core.warning))
-    legacyName = 'hcp-terraform-plan-latest.md'
     if (plan.state === 'pending') {
       core.warning(
         'Some HCP Terraform runs are still pending. Run this action after the runs finish.'
@@ -180,8 +177,6 @@ async function run(): Promise<void> {
   const summary = renderSummary(plan)
   await write('plan-summary.md', summary)
   await write('plan-details.md', details)
-  // 取得元ごとの名前は互換のために残している (非推奨)。中身は plan-details.md と同じ
-  await write(legacyName, details)
 
   core.setOutput('plan-state', plan.state)
   core.setOutput('resource-count', String(plan.resources.length))

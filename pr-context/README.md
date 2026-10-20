@@ -96,8 +96,6 @@ jobs:
 | `plan-summary.md` | 固定の 3 行 (`plan:` / `destroy / replace:` / `plan の詳細:`)、project の表、変更リソース一覧。レビューの prompt やサマリーにそのまま貼る用途 (plan 収集時のみ。HCP Terraform では project = workspace)                                                                                                                             |
 | `plan-details.md` | plan を実行した project (未実行・未完了を除く) ごとの最新の plan 出力 (`## <project>` の節ごと。変更なしの project は `No changes.`、失敗した project はエラー出力。再 plan や前の失敗は含まない)。変更のある project があるかを `plan-summary.md` の 3 行目に示す (下記)。状態とリソースの正は `plan-summary.md` (plan 収集時のみ) |
 
-互換のため、取得元ごとの名前 (`atlantis-plan-latest.md` / `hcp-terraform-plan-latest.md`) でも `plan-details.md` と同じ内容をしばらく書き出します。これらは非推奨で、新しく書く skill は `plan-details.md` を読んでください。
-
 ### `plan-summary.md` の形式
 
 先頭 3 行は位置と書式を固定しています (review-pr skill が行位置で読む)。
