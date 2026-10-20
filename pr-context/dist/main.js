@@ -19522,7 +19522,7 @@ var require_dist = __commonJS({
   "../node_modules/.pnpm/content-type@2.0.0/node_modules/content-type/dist/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
-    exports2.format = format;
+    exports2.format = format2;
     exports2.parse = parse3;
     var TEXT_REGEXP = /^[\u0009\u0020-\u007e\u0080-\u00ff]*$/;
     var TOKEN_REGEXP = /^[!#$%&'*+.^_`|~0-9A-Za-z-]+$/;
@@ -19534,7 +19534,7 @@ var require_dist = __commonJS({
       C.prototype = /* @__PURE__ */ Object.create(null);
       return C;
     })();
-    function format(obj) {
+    function format2(obj) {
       const { type, parameters } = obj;
       if (!type || !TYPE_REGEXP.test(type)) {
         throw new TypeError(`Invalid type: ${type}`);
@@ -20645,7 +20645,7 @@ function parse(options) {
   if (!isBinaryRequest) {
     if (options.mediaType.format) {
       headers.accept = headers.accept.split(/,/).map(
-        (format) => format.replace(
+        (format2) => format2.replace(
           /application\/vnd(\.\w+)(\.v3)?(\.\w+)?(\+json)?$/,
           `application/vnd$1$2.${options.mediaType.format}`
         )
@@ -20655,8 +20655,8 @@ function parse(options) {
       if (options.mediaType.previews?.length) {
         const previewsFromAcceptHeader = headers.accept.match(/(?<![\w-])[\w-]+(?=-preview)/g) || [];
         headers.accept = previewsFromAcceptHeader.concat(options.mediaType.previews).map((preview) => {
-          const format = options.mediaType.format ? `.${options.mediaType.format}` : "+json";
-          return `application/vnd.github.${preview}-preview${format}`;
+          const format2 = options.mediaType.format ? `.${options.mediaType.format}` : "+json";
+          return `application/vnd.github.${preview}-preview${format2}`;
         }).join(",");
       }
     }
@@ -24034,7 +24034,7 @@ function toProject(name, status, section) {
     return { ...project, reason: MISSING_COMMENT };
   }
   const resources = section.split("\n").map(parseResourceLine).filter((r) => r !== null);
-  return countsMatch(description, resources) ? { ...project, state: "changes", resources } : { ...project, resources, reason: "\u30EA\u30BD\u30FC\u30B9\u6570\u304C Plan \u884C\u3068\u5408\u308F\u306A\u3044" };
+  return countsMatch(description, resources) ? { ...project, state: "changes", resources, hasDetails: true } : { ...project, resources, hasDetails: true, reason: "\u30EA\u30BD\u30FC\u30B9\u6570\u304C Plan \u884C\u3068\u5408\u308F\u306A\u3044" };
 }
 function buildPlan(aggregate, statuses, comments) {
   if (aggregate.kind !== "settled") {
@@ -24075,14 +24075,18 @@ var TfcClient = class {
   hostname;
   token;
   fetchFn;
-  async getPlanForRun(runId) {
-    const path2 = `/runs/${encodeURIComponent(runId)}/plan`;
-    const response = await this.fetchFn(`https://${this.hostname}/api/v2${path2}`, {
+  get(path2, redirect = "follow") {
+    return this.fetchFn(`https://${this.hostname}/api/v2${path2}`, {
       headers: {
         Authorization: `Bearer ${this.token}`,
         "Content-Type": "application/vnd.api+json"
-      }
+      },
+      redirect
     });
+  }
+  async getPlanForRun(runId) {
+    const path2 = `/runs/${encodeURIComponent(runId)}/plan`;
+    const response = await this.get(path2);
     if (response.status === 404) {
       return null;
     }
@@ -24093,6 +24097,7 @@ var TfcClient = class {
     }
     const { data } = await response.json();
     return {
+      id: data.id,
       hasChanges: data.attributes["has-changes"],
       additions: data.attributes["resource-additions"] ?? 0,
       changes: data.attributes["resource-changes"] ?? 0,
@@ -24106,6 +24111,20 @@ var TfcClient = class {
       throw new Error(`Failed to fetch plan log: ${response.status} ${response.statusText}`);
     }
     return response.text();
+  }
+  // json-output-redacted は API ドキュメントに無いが、Terraform CLI が Structured Run Output の描画に
+  // 使っている endpoint。runs の read 権限で取れる (文書化されている json-output は admin が必要)。
+  // 307 で署名付き URL に誘導されるので、認証ヘッダを付けずにそちらを取る
+  async fetchRedactedPlan(planId) {
+    const path2 = `/plans/${encodeURIComponent(planId)}/json-output-redacted`;
+    const response = await this.get(path2, "manual");
+    const location = response.headers.get("location");
+    if (response.status !== 307 || location === null) {
+      throw new Error(
+        `HCP Terraform API request failed: GET ${path2} -> ${response.status} ${response.statusText}`
+      );
+    }
+    return this.fetchLog(location);
   }
 };
 
@@ -24188,24 +24207,6 @@ function parseTextLog(lines) {
   const messages = lines.map((line) => line.trim()).filter((line) => line.startsWith("Operation failed:"));
   return { format: "text", body, diagnostics: [], messages };
 }
-var ACTION_PREFIX = {
-  create: "+   create ",
-  update: "!   update ",
-  delete: "-   destroy",
-  replace: "-/+ replace",
-  read: "<=  read   ",
-  move: ">   move   ",
-  import: "+   import ",
-  noop: "    noop   "
-};
-function renderChange(change) {
-  const prefix = ACTION_PREFIX[change.action] ?? `    ${change.action}`;
-  const suffix = [
-    change.previousAddress === void 0 ? "" : ` (from ${change.previousAddress})`,
-    change.reason === void 0 ? "" : ` (${change.reason})`
-  ].join("");
-  return `${prefix} ${change.address}${suffix}`;
-}
 function renderDiagnostic(diagnostic) {
   const heading = `${diagnostic.severity === "warning" ? "Warning" : "Error"}: ${diagnostic.summary}`;
   const lines = [heading];
@@ -24226,6 +24227,117 @@ function renderDiagnostic(diagnostic) {
   }
   if (diagnostic.detail !== void 0 && diagnostic.detail.length > 0) {
     lines.push("", diagnostic.detail.trim());
+  }
+  return lines.join("\n");
+}
+
+// src/json-plan.ts
+function actionOf(raw) {
+  const actions = raw.change.actions.join(",");
+  switch (actions) {
+    case "create":
+    case "update":
+    case "delete":
+    case "read":
+    case "forget":
+      return actions;
+    case "delete,create":
+    case "create,delete":
+      return "replace";
+    case "no-op":
+      if (raw.change.importing) {
+        return "import";
+      }
+      return raw.previous_address === void 0 ? null : "move";
+    default:
+      return null;
+  }
+}
+function parseJsonPlan(raw) {
+  const document = JSON.parse(raw);
+  const changes = [];
+  for (const rc of document.resource_changes ?? []) {
+    const action = actionOf(rc);
+    if (action === null) {
+      continue;
+    }
+    const change = {
+      address: rc.address,
+      action,
+      before: rc.change.before,
+      after: rc.change.after,
+      afterUnknown: rc.change.after_unknown,
+      beforeSensitive: rc.change.before_sensitive,
+      afterSensitive: rc.change.after_sensitive,
+      replaceKeys: new Set(
+        (rc.change.replace_paths ?? []).map((path2) => String(path2[0])).filter((k) => k !== "undefined")
+      )
+    };
+    if (rc.previous_address !== void 0) {
+      change.previousAddress = rc.previous_address;
+    }
+    if (rc.action_reason) {
+      change.reason = rc.action_reason;
+    }
+    if (rc.change.importing?.id !== void 0) {
+      change.importId = rc.change.importing.id;
+    }
+    changes.push(change);
+  }
+  return changes;
+}
+var marked = (marks, key) => typeof marks === "object" && marks !== null && marks[key] === true;
+var HEADER2 = {
+  create: "+   create ",
+  update: "!   update ",
+  delete: "-   destroy",
+  replace: "-/+ replace",
+  read: "<=  read   ",
+  move: ">   move   ",
+  import: "+   import ",
+  forget: "    forget "
+};
+var format = (value) => value === void 0 ? "null" : JSON.stringify(value);
+function renderResourceChange(change) {
+  const suffix = [
+    change.previousAddress === void 0 ? "" : ` (from ${change.previousAddress})`,
+    change.reason === void 0 ? "" : ` (${change.reason})`,
+    change.importId === void 0 ? "" : ` (imported from ${JSON.stringify(change.importId)})`
+  ].join("");
+  const lines = [`${HEADER2[change.action]} ${change.address}${suffix}`];
+  const before = change.before ?? {};
+  const after = change.after ?? {};
+  const unknownKeys = typeof change.afterUnknown === "object" && change.afterUnknown !== null ? Object.keys(change.afterUnknown).filter((k) => marked(change.afterUnknown, k)) : [];
+  const keys = [
+    .../* @__PURE__ */ new Set([...Object.keys(before), ...Object.keys(after), ...unknownKeys])
+  ].toSorted();
+  for (const key of keys) {
+    const sensitive = marked(change.beforeSensitive, key) || marked(change.afterSensitive, key);
+    const unknown = marked(change.afterUnknown, key);
+    const show = (value) => sensitive ? "(sensitive value)" : format(value);
+    const afterText = unknown ? "(known after apply)" : show(after[key]);
+    const forces = change.replaceKeys.has(key) ? " # forces replacement" : "";
+    switch (change.action) {
+      case "create":
+        if (unknown || after[key] !== void 0 && after[key] !== null) {
+          lines.push(`    + ${key}: ${afterText}`);
+        }
+        break;
+      case "delete":
+      case "forget":
+        if (before[key] !== void 0 && before[key] !== null) {
+          lines.push(`    - ${key}: ${show(before[key])}`);
+        }
+        break;
+      case "update":
+      case "replace":
+        if (unknown || JSON.stringify(before[key]) !== JSON.stringify(after[key])) {
+          lines.push(`    ~ ${key}: ${show(before[key])} -> ${afterText}${forces}`);
+        }
+        break;
+      default:
+        break;
+    }
   }
   return lines.join("\n");
 }
@@ -24300,10 +24412,10 @@ function errorReason(log) {
 var fence = (body, lang = "") => `\`\`\`${lang}
 ${body}
 \`\`\``;
-function renderWorkspaceLog(workspace, runUrl, log) {
+function renderWorkspaceLog(workspace, runUrl, log, changes = []) {
   const blocks = log.format === "text" ? [fence(log.body)] : [
     log.diagnostics.length > 0 && fence(log.diagnostics.map(renderDiagnostic).join("\n\n")),
-    log.changes.length > 0 && fence(log.changes.map(renderChange).join("\n"), "diff"),
+    changes.length > 0 && fence(changes.map(renderResourceChange).join("\n\n"), "diff"),
     log.messages.length > 0 && fence(log.messages.join("\n"))
   ];
   return `${[`## ${workspace}`, runUrl !== null && `run: ${runUrl}`, ...blocks].filter((block) => block !== false).join("\n\n")}
@@ -24354,15 +24466,37 @@ async function toOutcome(reader, workspace, status, warn) {
         return { project: { ...base, reason: "plan \u3092\u53D6\u5F97\u3067\u304D\u306A\u3044" } };
       }
       if (!plan.hasChanges) {
-        return { project: { ...base, state: "no-changes" } };
+        return {
+          project: { ...base, state: "no-changes" },
+          log: `## ${workspace}
+
+run: ${status.runUrl}
+
+No changes.
+`
+        };
       }
       if (log === null) {
         return { project: { ...base, reason: "plan \u30ED\u30B0\u3092\u53D6\u5F97\u3067\u304D\u306A\u3044" } };
       }
       const resources = resourcesFromLog(log);
-      const rendered = renderWorkspaceLog(workspace, status.runUrl, log);
-      return countsMatch2(plan, resources) ? { project: { ...base, state: "changes", resources }, log: rendered } : {
-        project: { ...base, resources, reason: "\u30EA\u30BD\u30FC\u30B9\u6570\u304C plan \u306E\u4EF6\u6570\u3068\u5408\u308F\u306A\u3044" },
+      let changes = [];
+      if (log.format === "structured") {
+        try {
+          changes = parseJsonPlan(await reader.fetchRedactedPlan(plan.id));
+        } catch (error2) {
+          warn(`Failed to fetch the JSON plan for ${workspace}: ${message(error2)}`);
+          return { project: { ...base, resources, reason: "JSON plan \u3092\u53D6\u5F97\u3067\u304D\u306A\u3044" } };
+        }
+      }
+      const rendered = renderWorkspaceLog(workspace, status.runUrl, log, changes);
+      return countsMatch2(plan, resources) ? { project: { ...base, state: "changes", resources, hasDetails: true }, log: rendered } : {
+        project: {
+          ...base,
+          resources,
+          hasDetails: true,
+          reason: "\u30EA\u30BD\u30FC\u30B9\u6570\u304C plan \u306E\u4EF6\u6570\u3068\u5408\u308F\u306A\u3044"
+        },
         log: rendered
       };
     }
@@ -24434,7 +24568,9 @@ function renderSummary(plan) {
   const verdict = destroyOrReplace(plan);
   const lines = [
     `plan: ${PLAN_LABELS[plan.state]}`,
-    `destroy / replace: ${verdict === "unknown" ? `\u4E0D\u660E\uFF08${PLAN_LABELS[plan.state]}\uFF09` : verdict === "false" ? "\u306A\u3057" : destructive.map((r) => `\`${r.address}\` (${r.action}, ${r.project})`).join(", ")}`
+    `destroy / replace: ${verdict === "unknown" ? `\u4E0D\u660E\uFF08${PLAN_LABELS[plan.state]}\uFF09` : verdict === "false" ? "\u306A\u3057" : destructive.map((r) => `\`${r.address}\` (${r.action}, ${r.project})`).join(", ")}`,
+    // plan-details.md に属性の差分があるか。無いときに reviewer が探しに行かないため
+    `plan \u306E\u8A73\u7D30: ${plan.projects.some((p) => p.hasDetails) ? "\u5C5E\u6027\u306E\u5DEE\u5206\u3042\u308A" : "\u306A\u3057"}`
   ];
   if (plan.projects.length > 0) {
     lines.push("", "| project | \u72B6\u614B | status | \u7406\u7531 |", "|---|---|---|---|");
@@ -24565,12 +24701,10 @@ async function run() {
     per_page: 100
   });
   let plan;
-  let latest;
-  let latestName;
+  let details;
   if (mode.kind === "atlantis") {
     ;
-    ({ plan, latest } = await collectPlan(octokit, number, statuses, mode.login));
-    latestName = "atlantis-plan-latest.md";
+    ({ plan, latest: details } = await collectPlan(octokit, number, statuses, mode.login));
     if (plan.state === "pending" && plan.projects.length > 0) {
       warning("Some atlantis/plan project statuses are still pending.");
     }
@@ -24582,8 +24716,7 @@ async function run() {
       );
     }
     ;
-    ({ plan, latest } = await collectHcpPlan(mode.tfc, workspaces, warning));
-    latestName = "hcp-terraform-plan-latest.md";
+    ({ plan, latest: details } = await collectHcpPlan(mode.tfc, workspaces, warning));
     if (plan.state === "pending") {
       warning(
         "Some HCP Terraform runs are still pending. Run this action after the runs finish."
@@ -24592,7 +24725,7 @@ async function run() {
   }
   const summary2 = renderSummary(plan);
   await write("plan-summary.md", summary2);
-  await write(latestName, latest);
+  await write("plan-details.md", details);
   setOutput("plan-state", plan.state);
   setOutput("resource-count", String(plan.resources.length));
   setOutput("destroy-or-replace", destroyOrReplace(plan));
