@@ -5,6 +5,7 @@ Pull Request のレビューに必要なコンテキスト (PR のメタデー�
 AI レビュー (claude-code-action など) の前段で実行し、レビューする側には集める作業をさせずに、書き出したファイルを読ませる使い方を想定しています。
 
 - PR 情報と diff は同じ head commit に固定して取得する
+- inline コメントを付けられる行は diff からコードで決める
 - plan の状態と変更リソース一覧はコードで決め、LLM に列挙・判定させない
 
 ## 使用例
@@ -89,12 +90,13 @@ jobs:
 
 ## 書き出すファイル
 
-| ファイル          | 内容                                                                                                                                                                                                                                                                                                                                |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pr-info.json`    | PR のメタデータ。フィールド名は `gh pr view --json` に合わせる (`number`, `title`, `body`, `author`, `headRefName`, `headRefOid`, `files[].path` など)。`files` は API の上限で最大 3,000 件                                                                                                                                        |
-| `pr-diff.patch`   | base と head の SHA を固定した diff (`base...head`)                                                                                                                                                                                                                                                                                 |
-| `plan-summary.md` | 固定の 3 行 (`plan:` / `destroy / replace:` / `plan の詳細:`)、project の表、変更リソース一覧。レビューの prompt やサマリーにそのまま貼る用途 (plan 収集時のみ。HCP Terraform では project = workspace)                                                                                                                             |
-| `plan-details.md` | plan を実行した project (未実行・未完了を除く) ごとの最新の plan 出力 (`## <project>` の節ごと。変更なしの project は `No changes.`、失敗した project はエラー出力。再 plan や前の失敗は含まない)。変更のある project があるかを `plan-summary.md` の 3 行目に示す (下記)。状態とリソースの正は `plan-summary.md` (plan 収集時のみ) |
+| ファイル                | 内容                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `pr-info.json`          | PR のメタデータ。フィールド名は `gh pr view --json` に合わせる (`number`, `title`, `body`, `author`, `headRefName`, `headRefOid`, `files[].path` など)。`files` は API の上限で最大 3,000 件                                                                                                                                                                                                                                                                                              |
+| `pr-diff.patch`         | base と head の SHA を固定した diff (`base...head`)                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| `commentable-lines.txt` | `pr-diff.patch` のうち、head 側で review comment を付けられる行 (hunk の中の追加行と前後の行)。1 行に 1 つ `<path>:<line>:<head の原文>` の形で、行番号は head のファイルの行番号。diff に無いファイルの行や hunk の外の行には GitHub の review comment を付けられないので、inline コメントの前に `grep -F '<path>:<line>:' commentable-lines.txt` で確かめる用途 (末尾が同じ別のパスにも一致するので、出た行が `<path>:` で始まることを確かめる)。削除されたファイルとバイナリは含まない |
+| `plan-summary.md`       | 固定の 3 行 (`plan:` / `destroy / replace:` / `plan の詳細:`)、project の表、変更リソース一覧。レビューの prompt やサマリーにそのまま貼る用途 (plan 収集時のみ。HCP Terraform では project = workspace)                                                                                                                                                                                                                                                                                   |
+| `plan-details.md`       | plan を実行した project (未実行・未完了を除く) ごとの最新の plan 出力 (`## <project>` の節ごと。変更なしの project は `No changes.`、失敗した project はエラー出力。再 plan や前の失敗は含まない)。変更のある project があるかを `plan-summary.md` の 3 行目に示す (下記)。状態とリソースの正は `plan-summary.md` (plan 収集時のみ)                                                                                                                                                       |
 
 ### `plan-summary.md` の形式
 

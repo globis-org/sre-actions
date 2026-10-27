@@ -12,6 +12,7 @@ import {
   selectPlanComments,
   type StatusRecord,
 } from './atlantis'
+import { commentableLines } from './diff'
 import type { Plan } from './plan'
 import { TfcClient } from './tfc'
 import { collectHcpPlan, workspaceStatuses } from './hcp'
@@ -138,6 +139,8 @@ async function run(): Promise<void> {
   }
   await write('pr-info.json', `${JSON.stringify(prInfo, null, 2)}\n`)
   await write('pr-diff.patch', diff as unknown as string)
+  const commentable = commentableLines(diff as unknown as string)
+  await write('commentable-lines.txt', commentable.map(line => `${line}\n`).join(''))
 
   core.setOutput('output-dir', outputDir)
   core.setOutput('head-sha', headSha)
