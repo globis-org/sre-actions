@@ -50,7 +50,8 @@ export type JsonPlan = {
   unknown: string[]
 }
 
-// 変更の無い no-op は 'no-op'、解釈できない組み合わせは null
+// 変更の無い no-op は 'no-op'、解釈できない組み合わせは null。両方を null にすると、知らない
+// 組み合わせも no-op と同じように黙って捨ててしまう
 function actionOf(raw: RawResourceChange): ResourceChange['action'] | 'no-op' | null {
   const actions = raw.change.actions.join(',')
   switch (actions) {

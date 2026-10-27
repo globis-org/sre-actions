@@ -2,8 +2,8 @@
 //
 // - workspace の集合は head commit に付いた "Terraform Cloud/<org>/<workspace>" の status で決める。
 //   status の target_url が run を指し、plan の件数と log-read-url は run の plan API から取る
-// - 変更リソースは JSON plan (json-output-redacted) から取る。ログの形式 (Structured Run Output /
-//   Console UI) によらず同じ形なので、テキストの解釈に頼らない
+// - 変更リソースは JSON plan (json-output-redacted) から取る。ログから取らないのは、Console UI の
+//   workspace ではテキストを解釈することになり、Terraform の表示が変わると黙って取りこぼすため
 // - 件数の正解は plan API (resource-additions / changes / destructions)。JSON plan の変更リソースと
 //   突き合わせ、合わなければ incomplete にする (Atlantis と同じ方針)
 
@@ -197,7 +197,8 @@ async function toOutcome(
         return { project: { ...base, reason: 'plan を取得できない' } }
       }
       if (!plan.hasChanges) {
-        // 変更が無ければ JSON plan もログも読まない (件数の正は plan API)。
+        // 変更の無い workspace のために JSON plan (数 MB) を取らない。forget だけの plan で
+        // has-changes が false になるなら、その forget はここで見えなくなる (未確認)。
         // Atlantis と同じく、plan を実行した workspace には節を残す
         return {
           project: { ...base, state: 'no-changes' },
@@ -209,10 +210,11 @@ async function toOutcome(
         json = parseJsonPlan(await reader.fetchRedactedPlan(plan.id))
       } catch (error) {
         warn(`Failed to fetch the JSON plan for ${workspace}: ${message(error)}`)
+        // ログから一覧を作り直さない。テキストの解釈に戻ると、取りこぼしても気づけない
         return { project: { ...base, reason: 'JSON plan を取得できない' } }
       }
       // ログは plan-details.md の描画 (Console UI の plan 本体、structured の diagnostic) にだけ使う。
-      // 取れなければ JSON plan から描画する
+      // 一覧の照合は JSON plan だけで済むので、取れなくても incomplete にはしない
       let log: ParsedLog | null = null
       try {
         log = plan.logReadUrl === null ? null : parsePlanLog(await reader.fetchLog(plan.logReadUrl))
@@ -222,7 +224,8 @@ async function toOutcome(
       const resources = resourcesFromJsonPlan(json)
       const rendered = renderWorkspaceLog(workspace, status.runUrl, log, json.changes)
       const detailed = { ...base, resources, hasDetails: true }
-      // 件数が合っていても、解釈できない変更があれば一覧を信用しない
+      // 件数が合っても一覧を信用しない。plan API は add / change / destroy しか数えないので、
+      // 解釈できない変更がそれ以外の種類だと、件数の照合では気づけない
       const [first, ...others] = json.unknown
       if (first !== undefined) {
         const rest = others.length > 0 ? ` ほか ${others.length} 件` : ''
