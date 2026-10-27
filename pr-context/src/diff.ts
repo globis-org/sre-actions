@@ -1,8 +1,10 @@
 // diff (git の unified diff) から、PR の head 側で review comment を付けられる行を取り出す。
 //
 // GitHub の review comment は、diff に無いファイルの行と hunk の外の行には付けられない
-// (API が "could not be resolved" などで失敗する)。inline コメントを投稿する前に、行がこの一覧に
-// あるかで確かめられるようにする
+// (API が "could not be resolved" などで失敗する)。この判定をレビューする LLM に diff から
+// させないのは、hunk の見出しの後ろに出る行 (resource の先頭行など) を hunk の中と取り違えるため。
+// pulls.listFiles の patch を使わないのは、head が起動時の SHA に固定されず、pr-diff.patch と
+// ずれうるため
 
 // git の C 形式のクォート ("b/\346\227\245.tf" など) を戻す。8 進のエスケープは UTF-8 のバイト列
 function unquote(text: string): string {
@@ -36,6 +38,7 @@ function unquote(text: string): string {
 }
 
 // "+++ b/<path>" の <path>。削除されたファイル ("+++ /dev/null") は null。
+// "diff --git a/<path> b/<path>" から取らないのは、空白を含む名前で a と b の境目が決まらないため。
 // 空白を含む名前には git が末尾にタブを付ける
 export function headPath(header: string): string | null {
   const raw = header.replace(/\t$/, '')
