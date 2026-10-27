@@ -8,7 +8,7 @@ import {
   selectPlanComments,
   type StatusRecord,
 } from '../src/atlantis'
-import { parseResourceLine } from '../src/plan'
+import { isUnknownResourceLine, parseResourceLine } from '../src/plan'
 import { destroyOrReplace } from '../src/summary'
 
 // 実際の Atlantis コメントの構造を写したもの (パスや値は汎用のものに置き換えている)
@@ -200,6 +200,11 @@ describe('parseResourceLine', () => {
     ['  # aws_s3_bucket.a will be imported', 'aws_s3_bucket.a', 'import'],
     ['  # aws_s3_bucket.a will no longer be managed by Terraform', 'aws_s3_bucket.a', 'forget'],
     [
+      '  # module.app.aws_iam_role.this will no longer be managed by Terraform, but will not be destroyed',
+      'module.app.aws_iam_role.this',
+      'forget',
+    ],
+    [
       '  # module.a["key with space"].aws_s3_bucket.this will be created',
       'module.a["key with space"].aws_s3_bucket.this',
       'create',
@@ -226,6 +231,38 @@ describe('parseResourceLine', () => {
   })
 })
 
+describe('isUnknownResourceLine', () => {
+  test.each([
+    '  # action.aws_lambda_invoke.a will be invoked',
+    '  # aws_s3_bucket.a will be frobnicated',
+    '! # aws_s3_bucket.a must be recreated',
+    '  # aws_instance.a (deposed object 1a2b) will be frobnicated',
+  ])('flags %s', line => {
+    expect(isUnknownResourceLine(line)).toBe(true)
+  })
+
+  test.each([
+    '  # aws_s3_bucket.a will be created',
+    '  # module.app.aws_iam_role.this will no longer be managed by Terraform, but will not be destroyed',
+    '  # aws_s3_bucket.a has moved to aws_s3_bucket.b',
+    '  # data.aws_iam_policy_document.a will be read during apply',
+    // plan の前に出る drift の報告
+    '  # aws_s3_bucket.a has changed',
+    '  # aws_s3_bucket.a has been deleted',
+    '  # (because aws_instance.a is not in configuration)',
+    '  # (config refers to values not yet known)',
+    // 見出しの後の注記と、低い字下げで出る値の中の文
+    '  # Warning: this will destroy the imported resource',
+    '  # apiVersion: example.com/v1 is the API version',
+    '      # (3 unchanged attributes hidden)',
+    // 属性の値の中のコメント (user_data のスクリプトなど)
+    '          # this script will be run at boot',
+    '+ resource "aws_s3_bucket" "a" {',
+  ])('accepts %s', line => {
+    expect(isUnknownResourceLine(line)).toBe(false)
+  })
+})
+
 describe('countsMatch', () => {
   const resources = [
     { address: 'a', action: 'create' as const },
@@ -238,7 +275,8 @@ describe('countsMatch', () => {
     ['Plan: 2 to add, 1 to change, 2 to destroy.', true],
     ['Plan: 5 to import, 2 to add, 1 to change, 2 to destroy.', true],
     ['Plan: 2 to add, 1 to change, 3 to destroy.', false],
-    ['Plan: 2 to add, 1 to change, 2 to destroy, 1 to forget.', false],
+    // forget は Plan 行に数が出ない Terraform があるので見ない
+    ['Plan: 2 to add, 1 to change, 2 to destroy, 1 to forget.', true],
   ])('%s', (line, expected) => {
     expect(countsMatch(line, resources)).toBe(expected)
   })
@@ -368,6 +406,54 @@ describe('buildPlan', () => {
     )
     expect(plan.state).toBe('incomplete')
     expect(plan.projects[0]?.reason).toBe(reason)
+  })
+
+  test('forgotten resources are listed even though the Plan line has no forget count', () => {
+    const plan = buildPlan(
+      settled,
+      [
+        status(
+          'atlantis/plan: infra/prod/default',
+          'success',
+          'Plan: 0 to add, 0 to change, 0 to destroy.'
+        ),
+      ],
+      [
+        single(
+          'infra/prod',
+          '  # module.app.aws_iam_role.this will no longer be managed by Terraform, but will not be destroyed\n  # module.app.aws_iam_role_policy.this will no longer be managed by Terraform, but will not be destroyed\nPlan: 0 to add, 0 to change, 0 to destroy.'
+        ),
+      ]
+    )
+    expect(plan.state).toBe('changes')
+    expect(plan.resources.map(r => [r.address, r.action])).toStrictEqual([
+      ['module.app.aws_iam_role.this', 'forget'],
+      ['module.app.aws_iam_role_policy.this', 'forget'],
+    ])
+  })
+
+  test('an unknown resource heading makes the project incomplete even when the counts match', () => {
+    const plan = buildPlan(
+      settled,
+      [
+        status(
+          'atlantis/plan: infra/prod/default',
+          'success',
+          'Plan: 1 to add, 0 to change, 0 to destroy.'
+        ),
+      ],
+      [
+        single(
+          'infra/prod',
+          '  # aws_s3_bucket.a will be created\n  # action.aws_lambda_invoke.a will be invoked\n  # action.aws_lambda_invoke.b will be invoked\nPlan: 1 to add, 0 to change, 0 to destroy.'
+        ),
+      ]
+    )
+    expect(plan.state).toBe('incomplete')
+    expect(plan.projects[0]?.reason).toBe(
+      '未知の行: # action.aws_lambda_invoke.a will be invoked ほか 1 行'
+    )
+    expect(plan.resources.map(r => r.address)).toStrictEqual(['aws_s3_bucket.a'])
   })
 
   test('aggregate states without project statuses', () => {

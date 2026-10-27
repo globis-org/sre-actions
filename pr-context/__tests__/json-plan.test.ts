@@ -6,7 +6,7 @@ const plan = (resourceChanges: object[]): string =>
 
 describe('parseJsonPlan', () => {
   test('keeps changed resources, pure imports and moves; drops other no-ops', () => {
-    const changes = parseJsonPlan(
+    const { changes, unknown } = parseJsonPlan(
       plan([
         { address: 'a', change: { actions: ['create'], before: null, after: {} } },
         { address: 'b', change: { actions: ['delete', 'create'], before: {}, after: {} } },
@@ -34,6 +34,18 @@ describe('parseJsonPlan', () => {
       ['g', 'forget', undefined, undefined],
       ['data.h', 'read', undefined, undefined],
     ])
+    expect(unknown).toStrictEqual([])
+  })
+
+  test('reports unknown action combinations instead of dropping them', () => {
+    const { changes, unknown } = parseJsonPlan(
+      plan([
+        { address: 'a', change: { actions: ['create'], before: null, after: {} } },
+        { address: 'b', change: { actions: ['create', 'forget'], before: {}, after: {} } },
+      ])
+    )
+    expect(changes.map(c => c.address)).toStrictEqual(['a'])
+    expect(unknown).toStrictEqual(['b (create,forget)'])
   })
 
   test('collects the top-level keys of replace_paths', () => {
@@ -50,7 +62,7 @@ describe('parseJsonPlan', () => {
           },
         },
       ])
-    )
+    ).changes
     expect(change?.reason).toBe('replace_because_cannot_update')
     expect([...(change?.replaceKeys ?? [])]).toStrictEqual(['policy_arn', 'ingress'])
   })

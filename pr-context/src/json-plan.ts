@@ -1,6 +1,6 @@
-// terraform show -json 相当の JSON plan (HCP Terraform の json-output-redacted) から、
-// リソースごとの属性の差分を描画する。Structured Run Output の workspace でも属性の変更内容を
-// plan-details.md に出すために使う。
+// terraform show -json 相当の JSON plan (HCP Terraform の json-output-redacted) から、変更リソースの
+// 一覧を作り、リソースごとの属性の差分を描画する。workspace の User Interface 設定 (Structured
+// Run Output / Console UI) によらず同じ形で取れるので、HCP Terraform の変更リソースの正にする。
 //
 // 描画は Terraform の人間向け出力の再現ではなく、変更された属性を `key: before -> after` で並べる
 // だけ。入れ子の値は JSON のまま出す (reviewer は LLM なので読める)
@@ -44,7 +44,14 @@ type RawResourceChange = {
   }
 }
 
-function actionOf(raw: RawResourceChange): ResourceChange['action'] | null {
+export type JsonPlan = {
+  changes: ResourceChange[]
+  // 解釈できない actions の組み合わせ ("<address> (<actions>)")。黙って一覧から落とさないために返す
+  unknown: string[]
+}
+
+// 変更の無い no-op は 'no-op'、解釈できない組み合わせは null
+function actionOf(raw: RawResourceChange): ResourceChange['action'] | 'no-op' | null {
   const actions = raw.change.actions.join(',')
   switch (actions) {
     case 'create':
@@ -61,19 +68,24 @@ function actionOf(raw: RawResourceChange): ResourceChange['action'] | null {
       if (raw.change.importing) {
         return 'import'
       }
-      return raw.previous_address === undefined ? null : 'move'
+      return raw.previous_address === undefined ? 'no-op' : 'move'
     default:
       return null
   }
 }
 
 // 変更のあるリソースだけを返す (no-op は import / move を除いて落とす)
-export function parseJsonPlan(raw: string): ResourceChange[] {
+export function parseJsonPlan(raw: string): JsonPlan {
   const document = JSON.parse(raw) as { resource_changes?: RawResourceChange[] }
   const changes: ResourceChange[] = []
+  const unknown: string[] = []
   for (const rc of document.resource_changes ?? []) {
     const action = actionOf(rc)
+    if (action === 'no-op') {
+      continue
+    }
     if (action === null) {
+      unknown.push(`${rc.address} (${rc.change.actions.join(',')})`)
       continue
     }
     const change: ResourceChange = {
@@ -99,7 +111,7 @@ export function parseJsonPlan(raw: string): ResourceChange[] {
     }
     changes.push(change)
   }
-  return changes
+  return { changes, unknown }
 }
 
 const marked = (marks: Marks, key: string): boolean =>

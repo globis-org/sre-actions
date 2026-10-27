@@ -1,4 +1,6 @@
 // HCP Terraform の plan ログ (log-read-url) の解釈と、diagnostic の描画。
+// 変更リソースは JSON plan から取る (hcp.ts) ので、ここでは plan-details.md に出す diagnostic・
+// 失敗の理由・Console UI の plan 本体だけを取り出す。
 //
 // workspace の User Interface 設定によって形式が変わる:
 // - Structured Run Output (デフォルト): `terraform plan -json` 相当の JSON lines
@@ -8,13 +10,6 @@
 //
 // hcp-terraform-plan/src/log.ts にも同じ形式の解釈がある (PR コメント用)。
 // action ごとに自己完結させる方針で共有していないので、解釈を直すときは両方を見ること
-
-export type PlannedChange = {
-  address: string
-  action: string
-  reason?: string
-  previousAddress?: string
-}
 
 export type Diagnostic = {
   severity: string
@@ -28,7 +23,6 @@ export type Diagnostic = {
 export type ParsedLog =
   | {
       format: 'structured'
-      changes: PlannedChange[]
       diagnostics: Diagnostic[]
       // error レベルの log メッセージと、JSON でない末尾行 ("Operation failed: ..." など)
       messages: string[]
@@ -44,12 +38,6 @@ type UiMessage = {
   '@level'?: string
   '@message'?: string
   type?: string
-  change?: {
-    action?: string
-    reason?: string
-    resource?: { addr?: string }
-    previous_resource?: { addr?: string }
-  }
   diagnostic?: Diagnostic
 }
 
@@ -105,26 +93,10 @@ export function parsePlanLog(raw: string): ParsedLog {
     return parseTextLog(textLines)
   }
 
-  const changes: PlannedChange[] = []
   const diagnostics: Diagnostic[] = []
   const errorMessages: string[] = []
   for (const message of messages) {
     switch (message.type) {
-      case 'planned_change': {
-        const address = message.change?.resource?.addr
-        const action = message.change?.action
-        if (address !== undefined && action !== undefined) {
-          const change: PlannedChange = { address, action }
-          if (message.change?.reason !== undefined) {
-            change.reason = message.change.reason
-          }
-          if (message.change?.previous_resource?.addr !== undefined) {
-            change.previousAddress = message.change.previous_resource.addr
-          }
-          changes.push(change)
-        }
-        break
-      }
       case 'diagnostic':
         if (message.diagnostic !== undefined) {
           diagnostics.push(message.diagnostic)
@@ -139,7 +111,7 @@ export function parsePlanLog(raw: string): ParsedLog {
   const trailer = textLines
     .map(line => line.trim())
     .filter(line => line.length > 0 && !HEADER_PATTERN.test(line))
-  return { format: 'structured', changes, diagnostics, messages: [...errorMessages, ...trailer] }
+  return { format: 'structured', diagnostics, messages: [...errorMessages, ...trailer] }
 }
 
 function parseTextLog(lines: string[]): ParsedLog {
