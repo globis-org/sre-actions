@@ -8,6 +8,7 @@
 //   (出力の打ち切り・コメントの欠落・未知の書式で、黙って「destroy なし」と報告しないため)
 
 import {
+  isUnknownResourceLine,
   parseResourceLine,
   STATE_ORDER,
   type Plan,
@@ -130,7 +131,9 @@ export function lastSections(comments: string[]): Map<string, string> {
 }
 
 // add = create + replace、change = update、destroy = delete + replace。
-// import は "will be imported" 単独のものと update 等に併記されるものがあり数が合わないので見ない
+// import は "will be imported" 単独のものと update 等に併記されるものがあり数が合わないので見ない。
+// forget も見ない。Plan 行に forget の数が出ない Terraform があり、照合すると forget のある project が
+// すべて incomplete になる (取りこぼしは isUnknownResourceLine で拾う)
 export function countsMatch(planLine: string, resources: Resource[]): boolean {
   const expected = (kind: string): number =>
     Number(new RegExp(`(\\d+) to ${kind}\\b`).exec(planLine)?.[1] ?? 0)
@@ -139,8 +142,7 @@ export function countsMatch(planLine: string, resources: Resource[]): boolean {
   return (
     expected('add') === actual('create', 'replace') &&
     expected('change') === actual('update') &&
-    expected('destroy') === actual('delete', 'replace') &&
-    expected('forget') === actual('forget')
+    expected('destroy') === actual('delete', 'replace')
   )
 }
 
@@ -188,10 +190,15 @@ function toProject(name: string, status: StatusRecord, section: string | undefin
   if (section === undefined) {
     return { ...project, reason: MISSING_COMMENT }
   }
-  const resources = section
-    .split('\n')
-    .map(parseResourceLine)
-    .filter(r => r !== null)
+  const lines = section.split('\n')
+  const resources = lines.map(parseResourceLine).filter(r => r !== null)
+  // 件数が合っても一覧を信用しない。Plan 行は add / change / destroy しか数えないので、
+  // forget のような数えられない変更を取りこぼしても、件数の照合では気づけない
+  const unknown = lines.filter(isUnknownResourceLine).map(line => line.trim())
+  if (unknown.length > 0) {
+    const rest = unknown.length > 1 ? ` ほか ${unknown.length - 1} 行` : ''
+    return { ...project, resources, hasDetails: true, reason: `未知の行: ${unknown[0]}${rest}` }
+  }
   // コメントの節は terraform plan の出力そのもの (属性の差分を含む)
   return countsMatch(description, resources)
     ? { ...project, state: 'changes', resources, hasDetails: true }

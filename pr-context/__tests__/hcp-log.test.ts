@@ -4,7 +4,7 @@ import { parsePlanLog, renderDiagnostic } from '../src/hcp-log'
 const line = (message: object): string => JSON.stringify({ '@level': 'info', ...message })
 
 describe('parsePlanLog', () => {
-  test('structured: collects planned changes, diagnostics, error messages and the trailer', () => {
+  test('structured: collects diagnostics, error messages and the trailer, ignoring planned changes', () => {
     const parsed = parsePlanLog(
       [
         '\u0002Terraform v1.16.0',
@@ -41,15 +41,6 @@ describe('parsePlanLog', () => {
     )
     expect(parsed).toStrictEqual({
       format: 'structured',
-      changes: [
-        { address: 'aws_s3_bucket.a', action: 'create' },
-        {
-          address: 'module.b.aws_sqs_queue.this',
-          action: 'move',
-          previousAddress: 'aws_sqs_queue.b',
-        },
-        { address: 'aws_instance.c', action: 'replace', reason: 'cannot_update' },
-      ],
       diagnostics: [{ severity: 'error', summary: 'Unsupported attribute', detail: 'x' }],
       messages: [
         'Terraform exited with code 1',

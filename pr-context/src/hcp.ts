@@ -2,13 +2,19 @@
 //
 // - workspace の集合は head commit に付いた "Terraform Cloud/<org>/<workspace>" の status で決める。
 //   status の target_url が run を指し、plan の件数と log-read-url は run の plan API から取る
-// - 件数の正解は plan API (resource-additions / changes / destructions)。ログから抽出した変更
-//   リソースと突き合わせ、合わなければ incomplete にする (Atlantis と同じ方針)
+// - 変更リソースは JSON plan (json-output-redacted) から取る。ログから取らないのは、Console UI の
+//   workspace ではテキストを解釈することになり、Terraform の表示が変わると黙って取りこぼすため
+// - 件数の正解は plan API (resource-additions / changes / destructions)。JSON plan の変更リソースと
+//   突き合わせ、合わなければ incomplete にする (Atlantis と同じ方針)
 
 import { parsePlanLog, renderDiagnostic, type ParsedLog } from './hcp-log'
-import { parseJsonPlan, renderResourceChange, type ResourceChange } from './json-plan'
 import {
-  parseResourceLine,
+  parseJsonPlan,
+  renderResourceChange,
+  type JsonPlan,
+  type ResourceChange,
+} from './json-plan'
+import {
   STATE_ORDER,
   type Plan,
   type PlanState,
@@ -67,40 +73,22 @@ export function workspaceStatuses(
   return new Map([...result].toSorted(([a], [b]) => a.localeCompare(b)))
 }
 
-// terraform plan -json の planned_change の action。data source の read と noop は変更に含めない
-const STRUCTURED_ACTIONS: Record<string, ResourceAction> = {
-  create: 'create',
-  update: 'update',
-  delete: 'delete',
-  replace: 'replace',
-  import: 'import',
-  move: 'move',
-  forget: 'forget',
-}
-
-// import と同時に update されるリソースは update として出る (action が update のまま importing が付く)
-export function resourcesFromLog(log: ParsedLog): Resource[] {
-  if (log.format === 'text') {
-    return log.body
-      .split('\n')
-      .map(parseResourceLine)
-      .filter(r => r !== null)
-  }
-  return log.changes.flatMap(({ address, action, previousAddress }) => {
-    const mapped = STRUCTURED_ACTIONS[action]
-    if (mapped === undefined) {
+// data source の read は変更に含めない (属性の差分の描画には使う)。
+// import と同時に update されるリソースは update として出る (actions が update のまま importing が付く)
+export function resourcesFromJsonPlan(plan: JsonPlan): Resource[] {
+  return plan.changes.flatMap(({ address, action, previousAddress }) => {
+    if (action === 'read') {
       return []
     }
     return [
-      previousAddress === undefined
-        ? { address, action: mapped }
-        : { address, action: mapped, previousAddress },
+      previousAddress === undefined ? { address, action } : { address, action, previousAddress },
     ]
   })
 }
 
 // add = create + replace、change = update、destroy = delete + replace。
-// import は単独のものと update 等に併記されるもの (importing) があり数が合わないので見ない
+// import は単独のものと update 等に併記されるもの (importing) があり数が合わないので見ない。
+// move / forget は plan API の件数に含まれない
 export function countsMatch(
   summary: Pick<PlanSummary, 'additions' | 'changes' | 'destructions'>,
   resources: Resource[]
@@ -134,21 +122,24 @@ export function errorReason(log: ParsedLog | null): string | undefined {
 
 const fence = (body: string, lang = ''): string => `\`\`\`${lang}\n${body}\n\`\`\``
 
-// plan-details.md の workspace ごとの節。text はログの plan 本体をそのまま、structured は
-// diagnostic と JSON plan から描画した属性の差分 (失敗した run は diagnostic と messages だけ)
+// plan-details.md の workspace ごとの節。text はログの plan 本体をそのまま、structured (とログを
+// 取れなかった場合) は diagnostic と JSON plan から描画した属性の差分 (失敗した run は diagnostic と
+// messages だけ)
 export function renderWorkspaceLog(
   workspace: string,
   runUrl: string | null,
-  log: ParsedLog,
+  log: ParsedLog | null,
   changes: ResourceChange[] = []
 ): string {
   const blocks =
-    log.format === 'text'
+    log?.format === 'text'
       ? [fence(log.body)]
       : [
-          log.diagnostics.length > 0 && fence(log.diagnostics.map(renderDiagnostic).join('\n\n')),
+          log !== null &&
+            log.diagnostics.length > 0 &&
+            fence(log.diagnostics.map(renderDiagnostic).join('\n\n')),
           changes.length > 0 && fence(changes.map(renderResourceChange).join('\n\n'), 'diff'),
-          log.messages.length > 0 && fence(log.messages.join('\n')),
+          log !== null && log.messages.length > 0 && fence(log.messages.join('\n')),
         ]
   return `${[`## ${workspace}`, runUrl !== null && `run: ${runUrl}`, ...blocks]
     .filter(block => block !== false)
@@ -196,13 +187,8 @@ async function toOutcome(
     }
     case 'finished': {
       let plan: PlanSummary | null
-      let log: ParsedLog | null = null
       try {
         plan = await reader.getPlanForRun(status.runId)
-        // 変更が無ければログは読まない (件数の正は plan API)
-        if (plan?.hasChanges && plan.logReadUrl !== null) {
-          log = parsePlanLog(await reader.fetchLog(plan.logReadUrl))
-        }
       } catch (error) {
         warn(`Failed to fetch plan for ${workspace}: ${message(error)}`)
         return { project: { ...base, reason: `HCP Terraform API: ${message(error)}` } }
@@ -211,36 +197,44 @@ async function toOutcome(
         return { project: { ...base, reason: 'plan を取得できない' } }
       }
       if (!plan.hasChanges) {
-        // Atlantis と同じく、plan を実行した workspace には節を残す (ログは読まない)
+        // 変更の無い workspace のために JSON plan (数 MB) を取らない。forget だけの plan で
+        // has-changes が false になるなら、その forget はここで見えなくなる (未確認)。
+        // Atlantis と同じく、plan を実行した workspace には節を残す
         return {
           project: { ...base, state: 'no-changes' },
           log: `## ${workspace}\n\nrun: ${status.runUrl}\n\nNo changes.\n`,
         }
       }
-      if (log === null) {
-        return { project: { ...base, reason: 'plan ログを取得できない' } }
+      let json: JsonPlan
+      try {
+        json = parseJsonPlan(await reader.fetchRedactedPlan(plan.id))
+      } catch (error) {
+        warn(`Failed to fetch the JSON plan for ${workspace}: ${message(error)}`)
+        // ログから一覧を作り直さない。テキストの解釈に戻ると、取りこぼしても気づけない
+        return { project: { ...base, reason: 'JSON plan を取得できない' } }
       }
-      const resources = resourcesFromLog(log)
-      // structured のログには属性の値が無いので、属性の差分は JSON plan から描画する
-      let changes: ResourceChange[] = []
-      if (log.format === 'structured') {
-        try {
-          changes = parseJsonPlan(await reader.fetchRedactedPlan(plan.id))
-        } catch (error) {
-          warn(`Failed to fetch the JSON plan for ${workspace}: ${message(error)}`)
-          return { project: { ...base, resources, reason: 'JSON plan を取得できない' } }
-        }
+      // ログは plan-details.md の描画 (Console UI の plan 本体、structured の diagnostic) にだけ使う。
+      // 一覧の照合は JSON plan だけで済むので、取れなくても incomplete にはしない
+      let log: ParsedLog | null = null
+      try {
+        log = plan.logReadUrl === null ? null : parsePlanLog(await reader.fetchLog(plan.logReadUrl))
+      } catch (error) {
+        warn(`Failed to fetch the plan log for ${workspace}: ${message(error)}`)
       }
-      const rendered = renderWorkspaceLog(workspace, status.runUrl, log, changes)
+      const resources = resourcesFromJsonPlan(json)
+      const rendered = renderWorkspaceLog(workspace, status.runUrl, log, json.changes)
+      const detailed = { ...base, resources, hasDetails: true }
+      // 件数が合っても一覧を信用しない。plan API は add / change / destroy しか数えないので、
+      // 解釈できない変更がそれ以外の種類だと、件数の照合では気づけない
+      const [first, ...others] = json.unknown
+      if (first !== undefined) {
+        const rest = others.length > 0 ? ` ほか ${others.length} 件` : ''
+        return { project: { ...detailed, reason: `未知の action: ${first}${rest}` }, log: rendered }
+      }
       return countsMatch(plan, resources)
-        ? { project: { ...base, state: 'changes', resources, hasDetails: true }, log: rendered }
+        ? { project: { ...detailed, state: 'changes' }, log: rendered }
         : {
-            project: {
-              ...base,
-              resources,
-              hasDetails: true,
-              reason: 'リソース数が plan の件数と合わない',
-            },
+            project: { ...detailed, reason: 'リソース数が plan の件数と合わない' },
             log: rendered,
           }
     }

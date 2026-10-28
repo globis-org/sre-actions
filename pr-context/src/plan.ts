@@ -58,8 +58,32 @@ const RESOURCE_PATTERNS: [RegExp, ResourceAction][] = [
   // ", as requested" (-replace) や " due to changes in replace_triggered_by" が続く
   [/^(.+?) will be replaced\b/, 'replace'],
   [/^(.+?) will be imported$/, 'import'],
-  [/^(.+?) will no longer be managed by Terraform$/, 'forget'],
+  // removed ブロックでは ", but will not be destroyed" が続く
+  [/^(.+?) will no longer be managed by Terraform(?:, but will not be destroyed)?$/, 'forget'],
 ]
+
+// "# <address> will ..." の形の行。"#" で始まる行をすべて見ないのは、属性の値の中の "# ..."
+// (user_data のスクリプトなど) まで拾うため。値は深く字下げされているので、"#" の前は diff の
+// 記号を含めて 4 文字までにする。動詞を行のどこかで探さず address の直後に限るのは、見出しの
+// 補足 ("# (because ...)")、注記 ("# Warning: this will ...")、低い字下げで出る値の中の文
+// ("# apiVersion: ... is ...") を誤検知しないため
+const HEADING =
+  /^[\s+\-~!/<=]{0,4}#\s+((?:[\w.-]|\[[^\]]*\])+(?: \(deposed object [^)]+\))? (?:will|must|is|has)\b.*?)\s*$/
+
+// 変更ではない見出し: data source の read と、plan の前に出る drift の報告
+const NOT_CHANGES = [/ will be read during apply$/, / has changed$/, / has been deleted$/]
+
+// リソースの見出しの形をしているのに、変更としても変更でない見出しとしても解釈できない行か。
+// 件数の照合だけに頼らないのは、Plan 行に数えられない変更 (forget など) の取りこぼしに
+// 気づけないため
+export function isUnknownResourceLine(line: string): boolean {
+  const text = HEADING.exec(line)?.[1]
+  return (
+    text !== undefined &&
+    !NOT_CHANGES.some(pattern => pattern.test(text)) &&
+    parseResourceLine(line) === null
+  )
+}
 
 // terraform plan のテキスト出力の "# <address> ..." 行。data source の read は変更に含めない
 export function parseResourceLine(line: string): Resource | null {

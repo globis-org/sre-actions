@@ -5,7 +5,7 @@ import {
   countsMatch,
   errorReason,
   renderWorkspaceLog,
-  resourcesFromLog,
+  resourcesFromJsonPlan,
   workspaceStatuses,
 } from '../src/hcp'
 import { parsePlanLog } from '../src/hcp-log'
@@ -110,9 +110,15 @@ const summary = (overrides: Partial<PlanSummary> = {}): PlanSummary => ({
   ...overrides,
 })
 
-// 実ログで観測した形を汎用名で再現した JSON plan (json-output-redacted)。STRUCTURED_LOG と同じ変更
+// 実ログで観測した形を汎用名で再現した JSON plan (json-output-redacted)。STRUCTURED_LOG と同じ変更。
+// 純 import と move は no-op に importing / previous_address が付き、data source の read も入る
 const JSON_PLAN = JSON.stringify({
   resource_changes: [
+    {
+      address: 'data.aws_ami.deferred',
+      action_reason: 'read_because_config_unknown',
+      change: { actions: ['read'], before: null, after: { id: 'ami-1' } },
+    },
     {
       address: 'aws_s3_bucket.logs',
       change: {
@@ -132,13 +138,56 @@ const JSON_PLAN = JSON.stringify({
       },
     },
     {
+      address: 'aws_iam_policy.legacy',
+      change: {
+        actions: ['no-op'],
+        before: { name: 'legacy' },
+        after: { name: 'legacy' },
+        importing: { id: 'arn:aws:iam::123456789012:policy/legacy' },
+      },
+    },
+    {
+      address: 'aws_instance.web[0]',
+      action_reason: 'replace_because_cannot_update',
+      change: {
+        actions: ['delete', 'create'],
+        before: { ami: 'ami-old', id: 'i-0' },
+        after: { ami: 'ami-new' },
+        after_unknown: { id: true },
+        replace_paths: [['ami']],
+      },
+    },
+    {
       address: 'aws_instance.web[1]',
       action_reason: 'delete_because_each_key',
       change: { actions: ['delete'], before: { ami: 'ami-old', id: 'i-1' }, after: null },
     },
     {
+      address: 'module.app.aws_sqs_queue.this',
+      previous_address: 'aws_sqs_queue.app',
+      change: { actions: ['no-op'], before: { name: 'app' }, after: { name: 'app' } },
+    },
+    {
       address: 'aws_s3_bucket.unchanged',
       change: { actions: ['no-op'], before: { bucket: 'x' }, after: { bucket: 'x' } },
+    },
+  ],
+})
+
+// TEXT_LOG と同じ変更
+const TEXT_JSON_PLAN = JSON.stringify({
+  resource_changes: [
+    {
+      address: 'aws_s3_bucket.logs',
+      change: { actions: ['create'], before: null, after: { bucket: 'logs' } },
+    },
+    {
+      address: 'aws_instance.web',
+      change: {
+        actions: ['delete', 'create'],
+        before: { ami: 'ami-old' },
+        after: { ami: 'ami-new' },
+      },
     },
   ],
 })
@@ -210,9 +259,9 @@ describe('workspaceStatuses', () => {
   })
 })
 
-describe('resourcesFromLog', () => {
-  test('maps structured actions and drops read / noop', () => {
-    expect(resourcesFromLog(parsePlanLog(STRUCTURED_LOG))).toStrictEqual([
+describe('resourcesFromJsonPlan', () => {
+  test('maps the actions and drops read / no-op', () => {
+    expect(resourcesFromJsonPlan(parseJsonPlan(JSON_PLAN))).toStrictEqual([
       { address: 'aws_s3_bucket.logs', action: 'create' },
       { address: 'aws_iam_role.app', action: 'update' },
       { address: 'aws_iam_policy.legacy', action: 'import' },
@@ -225,17 +274,10 @@ describe('resourcesFromLog', () => {
       },
     ])
   })
-
-  test('parses text (Console UI) logs with the Atlantis resource line parser', () => {
-    expect(resourcesFromLog(parsePlanLog(TEXT_LOG))).toStrictEqual([
-      { address: 'aws_s3_bucket.logs', action: 'create' },
-      { address: 'aws_instance.web', action: 'replace' },
-    ])
-  })
 })
 
 describe('countsMatch', () => {
-  const resources = resourcesFromLog(parsePlanLog(STRUCTURED_LOG))
+  const resources = resourcesFromJsonPlan(parseJsonPlan(JSON_PLAN))
 
   test('replace counts as add and destroy; import, move are not counted', () => {
     expect(countsMatch({ additions: 2, changes: 1, destructions: 2 }, resources)).toBe(true)
@@ -278,7 +320,7 @@ describe('renderWorkspaceLog', () => {
       'infra-app-prod',
       RUN_URL,
       parsePlanLog(STRUCTURED_LOG),
-      parseJsonPlan(JSON_PLAN)
+      parseJsonPlan(JSON_PLAN).changes
     )
     expect(text).toBe(
       [
@@ -293,6 +335,8 @@ describe('renderWorkspaceLog', () => {
         '```',
         '',
         '```diff',
+        '<=  read    data.aws_ami.deferred (read_because_config_unknown)',
+        '',
         '+   create  aws_s3_bucket.logs',
         '    + arn: (known after apply)',
         '    + bucket: "logs"',
@@ -302,9 +346,17 @@ describe('renderWorkspaceLog', () => {
         '!   update  aws_iam_role.app (imported from "app-role")',
         '    ~ assume_role_policy: "{\\"Version\\":\\"2012-10-17\\"}" -> "{\\"Version\\":\\"2008-10-17\\"}"',
         '',
+        '+   import  aws_iam_policy.legacy (imported from "arn:aws:iam::123456789012:policy/legacy")',
+        '',
+        '-/+ replace aws_instance.web[0] (replace_because_cannot_update)',
+        '    ~ ami: "ami-old" -> "ami-new" # forces replacement',
+        '    ~ id: "i-0" -> (known after apply)',
+        '',
         '-   destroy aws_instance.web[1] (delete_because_each_key)',
         '    - ami: "ami-old"',
         '    - id: "i-1"',
+        '',
+        '>   move    module.app.aws_sqs_queue.this (from aws_sqs_queue.app)',
         '```',
         '',
       ].join('\n')
@@ -384,13 +436,13 @@ describe('collectHcpPlan', () => {
     expect(latest).toContain(
       '## infra-app-stg\n\nrun: https://app.terraform.io/app/my-org/infra-app-prod/runs/run-stg\n\nNo changes.\n'
     )
-    // 変更リソースの一覧 (正) はログから。JSON plan は属性の差分の描画にだけ使う
+    // structured の属性の差分は JSON plan から描画する。no-op は出さない
     expect(latest).toContain('!   update  aws_iam_role.app (imported from "app-role")')
     expect(latest).not.toContain('aws_s3_bucket.unchanged')
     expect(warnings).toStrictEqual([])
   })
 
-  test('a structured workspace whose JSON plan cannot be fetched is incomplete, keeping the resources', async () => {
+  test('a workspace whose JSON plan cannot be fetched is incomplete without resources', async () => {
     warnings.length = 0
     const { plan, latest } = await collectHcpPlan(
       reader({ 'run-abc123': summary() }, { 'https://archivist.example/log': STRUCTURED_LOG }),
@@ -412,18 +464,19 @@ describe('collectHcpPlan', () => {
       reason: 'JSON plan を取得できない',
     })
     expect(plan.projects[0]?.hasDetails).toBeUndefined()
-    expect(plan.resources).toHaveLength(6)
-    expect(destroyOrReplace(plan)).toBe('true')
+    expect(plan.resources).toStrictEqual([])
+    expect(destroyOrReplace(plan)).toBe('unknown')
     expect(latest).toBe('')
     expect(warnings).toHaveLength(1)
     expect(warnings[0]).toContain('Failed to fetch the JSON plan for infra-app-prod')
   })
 
-  test('a Console UI (text) workspace is marked as having attribute diffs', async () => {
+  test('a Console UI (text) workspace takes the resources from the JSON plan and the details from the log', async () => {
     const { plan, latest } = await collectHcpPlan(
       reader(
         { 'run-abc123': summary({ additions: 2, changes: 0, destructions: 1 }) },
-        { 'https://archivist.example/log': TEXT_LOG }
+        { 'https://archivist.example/log': TEXT_LOG },
+        { 'plan-xyz': TEXT_JSON_PLAN }
       ),
       workspaceStatuses(
         [
@@ -438,7 +491,12 @@ describe('collectHcpPlan', () => {
       warn
     )
     expect(plan.projects[0]).toMatchObject({ state: 'changes', hasDetails: true })
+    expect(plan.resources.map(r => `${r.address}:${r.action}`)).toStrictEqual([
+      'aws_s3_bucket.logs:create',
+      'aws_instance.web:replace',
+    ])
     expect(latest).toContain('~ ami = "ami-old" -> "ami-new" # forces replacement')
+    expect(latest).not.toContain('-/+ replace aws_instance.web')
   })
 
   test('marks a workspace incomplete when the counts do not match, and keeps the resources', async () => {
@@ -464,6 +522,77 @@ describe('collectHcpPlan', () => {
     expect(plan.projects[0]?.reason).toBe('リソース数が plan の件数と合わない')
     expect(plan.resources).toHaveLength(6)
     expect(destroyOrReplace(plan)).toBe('true')
+  })
+
+  test('forgotten resources are listed from the JSON plan', async () => {
+    const { plan } = await collectHcpPlan(
+      reader(
+        { 'run-abc123': summary({ additions: 0, changes: 0, destructions: 0 }) },
+        { 'https://archivist.example/log': STRUCTURED_LOG },
+        {
+          'plan-xyz': JSON.stringify({
+            resource_changes: [
+              {
+                address: 'module.app.aws_iam_role.this',
+                change: { actions: ['forget'], before: { name: 'app' }, after: null },
+              },
+            ],
+          }),
+        }
+      ),
+      workspaceStatuses(
+        [
+          status(
+            'infra-app-prod',
+            'success',
+            'Terraform plan: 0 to add, 0 to change, 0 to destroy.'
+          ),
+        ],
+        'my-org'
+      ),
+      warn
+    )
+    expect(plan.state).toBe('changes')
+    expect(plan.resources.map(r => `${r.address}:${r.action}`)).toStrictEqual([
+      'module.app.aws_iam_role.this:forget',
+    ])
+  })
+
+  test('an unknown action makes the workspace incomplete even when the counts match', async () => {
+    const { plan } = await collectHcpPlan(
+      reader(
+        { 'run-abc123': summary({ additions: 1, changes: 0, destructions: 0 }) },
+        { 'https://archivist.example/log': STRUCTURED_LOG },
+        {
+          'plan-xyz': JSON.stringify({
+            resource_changes: [
+              {
+                address: 'aws_s3_bucket.logs',
+                change: { actions: ['create'], before: null, after: {} },
+              },
+              {
+                address: 'aws_s3_bucket.old',
+                change: { actions: ['create', 'forget'], before: {}, after: {} },
+              },
+            ],
+          }),
+        }
+      ),
+      workspaceStatuses(
+        [
+          status(
+            'infra-app-prod',
+            'success',
+            'Terraform plan: 1 to add, 0 to change, 0 to destroy.'
+          ),
+        ],
+        'my-org'
+      ),
+      warn
+    )
+    expect(plan.state).toBe('incomplete')
+    expect(plan.projects[0]?.reason).toBe('未知の action: aws_s3_bucket.old (create,forget)')
+    expect(plan.resources.map(r => r.address)).toStrictEqual(['aws_s3_bucket.logs'])
   })
 
   test('reports an errored run with the reason from its log', async () => {
@@ -556,10 +685,10 @@ describe('collectHcpPlan', () => {
     expect(calls).toStrictEqual([])
   })
 
-  test('a failed log fetch on a workspace with changes is incomplete', async () => {
+  test('a failed log fetch still verifies the JSON plan and renders the details from it', async () => {
     warnings.length = 0
-    const { plan } = await collectHcpPlan(
-      reader({ 'run-abc123': summary() }, {}),
+    const { plan, latest } = await collectHcpPlan(
+      reader({ 'run-abc123': summary() }, {}, { 'plan-xyz': JSON_PLAN }),
       workspaceStatuses(
         [
           status(
@@ -572,16 +701,21 @@ describe('collectHcpPlan', () => {
       ),
       warn
     )
-    expect(plan.state).toBe('incomplete')
-    expect(plan.projects[0]?.reason).toBe(
-      'HCP Terraform API: Failed to fetch plan log: 404 Not Found'
-    )
-    expect(warnings).toHaveLength(1)
+    expect(plan.state).toBe('changes')
+    expect(plan.resources).toHaveLength(6)
+    expect(latest).toContain('-/+ replace aws_instance.web[0]')
+    expect(warnings).toStrictEqual([
+      'Failed to fetch the plan log for infra-app-prod: Failed to fetch plan log: 404 Not Found',
+    ])
   })
 
   test('pending workspaces make the plan pending but settled workspaces are still verified', async () => {
     const { plan } = await collectHcpPlan(
-      reader({ 'run-abc123': summary() }, { 'https://archivist.example/log': STRUCTURED_LOG }),
+      reader(
+        { 'run-abc123': summary() },
+        { 'https://archivist.example/log': STRUCTURED_LOG },
+        { 'plan-xyz': JSON_PLAN }
+      ),
       workspaceStatuses(
         [
           status(
