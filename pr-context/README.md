@@ -90,15 +90,21 @@ jobs:
 
 ## 書き出すファイル
 
-| ファイル                | 内容                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `pr-info.json`          | PR のメタデータ。フィールド名は `gh pr view --json` に合わせる (`number`, `title`, `body`, `author`, `headRefName`, `headRefOid`, `files[].path` など)。`files` は API の上限で最大 3,000 件                                                                                                                                                                                                                                                                                              |
-| `pr-diff.patch`         | base と head の SHA を固定した diff (`base...head`)                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| `commentable-lines.txt` | `pr-diff.patch` のうち、head 側で review comment を付けられる行 (hunk の中の追加行と前後の行)。1 行に 1 つ `<path>:<line>:<head の原文>` の形で、行番号は head のファイルの行番号。diff に無いファイルの行や hunk の外の行には GitHub の review comment を付けられないので、inline コメントの前に `grep -F '<path>:<line>:' commentable-lines.txt` で確かめる用途 (末尾が同じ別のパスにも一致するので、出た行が `<path>:` で始まることを確かめる)。削除されたファイルとバイナリは含まない |
-| `plan-summary.md`       | 固定の 3 行 (`plan:` / `destroy / replace:` / `plan の詳細:`)、project の表、変更リソース一覧。レビューの prompt やサマリーにそのまま貼る用途 (plan 収集時のみ。HCP Terraform では project = workspace)                                                                                                                                                                                                                                                                                   |
-| `plan-details.md`       | plan を実行した project (未実行・未完了を除く) ごとの最新の plan 出力 (`## <project>` の節ごと。変更なしの project は `No changes.`、失敗した project はエラー出力。再 plan や前の失敗は含まない)。変更のある project があるかを `plan-summary.md` の 3 行目に示す (下記)。状態とリソースの正は `plan-summary.md` (plan 収集時のみ)                                                                                                                                                       |
+HCP Terraform では project = workspace です。
 
-### `plan-summary.md` の形式
+| ファイル                | 内容                                                                                                                                  |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `pr-info.json`          | PR のメタデータ。フィールド名は `gh pr view --json` に合わせる。`headRefOid` は action が起動した時点の head。`files` は最大 3,000 件 |
+| `pr-diff.patch`         | base と head の SHA を固定した diff (`base...head`)                                                                                   |
+| `commentable-lines.txt` | head 側で review comment を付けられる行 (hunk の中の追加行と前後の行)。1 行に 1 つ `<path>:<line>:<原文>` (下記)                      |
+| `plan-summary.md`       | plan の状態、project の表、変更リソース一覧 (下記)。plan 収集時のみ                                                                   |
+| `plan-details.md`       | project ごとの最新の plan 出力 (下記)。属性の変更内容を確かめる用途で、状態とリソースの正は `plan-summary.md`。plan 収集時のみ        |
+
+### `commentable-lines.txt`
+
+diff に無いファイルの行や hunk の外の行には review comment を付けられません。inline コメントの前に `grep -F '<path>:<line>:' commentable-lines.txt` で確かめます。末尾が同じ別のパスにも一致するので、出た行が `<path>:` で始まることも確かめてください。削除されたファイルとバイナリは含みません。
+
+### `plan-summary.md`
 
 先頭 3 行は位置と書式を固定しています (review-pr skill が行位置で読む)。
 
@@ -116,75 +122,56 @@ plan の詳細: 属性の差分あり
 - infra-app-prod: `aws_s3_bucket.old` delete
 ```
 
-3 行目の `plan の詳細:` は `plan-details.md` で属性の変更内容まで確認できるかを示します。
+`plan の詳細:` は、変更のある project の plan 出力が `plan-details.md` にあれば `属性の差分あり`、無ければ `なし` です。
 
-| 値               | 意味                                                                                                                                                                                                                           |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `属性の差分あり` | 変更のある project の plan 出力が `plan-details.md` にある。Atlantis と HCP Terraform の Console UI は `terraform plan` の出力、HCP Terraform の Structured Run Output は JSON plan から描画した `key: before -> after` の一覧 |
-| `なし`           | `plan-details.md` に変更のある project の節が無い (変更なし、plan 未完了、plan 無し、失敗のみなど)                                                                                                                             |
+### `plan-details.md`
 
-Structured Run Output の workspace の属性の差分は、HCP Terraform の `json-output-redacted` から取ります ([HCP Terraform の結果の組み立て方](#hcp-terraform-の結果の組み立て方) を参照)。
+plan を実行した project ごとに、最新の plan だけを `## <project>` の節で出します (再 plan や前の失敗は含まない)。
+
+- Atlantis と HCP Terraform の Console UI: `terraform plan` の出力
+- HCP Terraform の Structured Run Output: diagnostic と、JSON plan から描画した `key: before -> after`
+- 変更なしの project は `No changes.`、失敗した project はエラーの出力
 
 ## plan の状態 (`plan-state`)
 
-| 値            | 意味                                                                                                                                        | `destroy-or-replace` |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
-| `disabled`    | `atlantis-comment-author` も `hcp-terraform-organization` も空で、plan を収集していない                                                     | `unknown`            |
-| `pending`     | plan が終わっていない (Atlantis: project の status に pending が残っている場合も含む。HCP Terraform: run が終わっていない workspace がある) | `unknown`            |
-| `none`        | head commit に plan の status が無い (`atlantis/plan`、または `Terraform Cloud/<org>/` の status)                                           | `unknown`            |
-| `no-projects` | 対象 project が無い (Atlantis: `0/0 projects planned`。HCP Terraform: 全 workspace が trigger されなかった。Terraform に関係しない PR)      | `false`              |
-| `failed`      | いずれかの project の plan が失敗した                                                                                                       | `unknown`            |
-| `incomplete`  | 変更リソース一覧を検証できない project がある (下記)。手動で確認する                                                                        | `unknown`            |
-| `changes`     | いずれかの project に変更がある                                                                                                             | `true` / `false`     |
-| `no-changes`  | 全 project が変更なし                                                                                                                       | `false`              |
+| 値            | 意味                                                                                                                      | `destroy-or-replace` |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| `disabled`    | plan を収集していない (`atlantis-comment-author` も `hcp-terraform-organization` も空、または `hcp-terraform-token` が空) | `unknown`            |
+| `pending`     | plan が終わっていない project がある                                                                                      | `unknown`            |
+| `none`        | head commit に plan の status が無い                                                                                      | `unknown`            |
+| `no-projects` | 対象 project が無い (Terraform に関係しない PR)                                                                           | `false`              |
+| `failed`      | plan が失敗した project がある                                                                                            | `unknown`            |
+| `incomplete`  | 変更リソース一覧を確かめられない project がある (下記)。手動で確認する                                                    | `unknown`            |
+| `changes`     | 変更のある project がある                                                                                                 | `true` / `false`     |
+| `no-changes`  | 全 project が変更なし                                                                                                     | `false`              |
 
-`failed` / `incomplete` / `pending` (Atlantis で project の status が残っている場合、HCP Terraform で一部の workspace が終わっている場合) でも、検証できた project の destroy / replace が見つかれば `destroy-or-replace` は `true` になります。
+`failed` / `incomplete` / `pending` でも、確かめられた project に destroy / replace があれば `destroy-or-replace` は `true` です。
 
-## Atlantis の結果の組み立て方
+## 変更リソース一覧の作り方
 
-状態は commit status から、変更リソースと失敗の理由はコメントから取ります。
+|              | Atlantis                                                  | HCP Terraform                                                                    |
+| ------------ | --------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| 状態         | project ごとの commit status (`atlantis/plan: <project>`) | workspace ごとの commit status (`Terraform Cloud/<org>/<workspace>`) と plan API |
+| 変更リソース | plan コメントの `# <address> will ...` の行               | `json-output-redacted` (`terraform show -json` 相当) の `resource_changes`       |
+| 照合する件数 | status の Plan 行                                         | plan API の件数                                                                  |
 
-1. head commit の集約 status (`atlantis/plan`) を読む。無ければ `none`、`pending` なら `pending`、description が `0/0 ` で始まれば `no-projects`
-2. project ごとの status (`atlantis/plan: <dir>/<workspace>`、名前付き project は `atlantis/plan: <project>`) の最新を、その project の結果とする。description は Plan 行、`No changes.`、または失敗。いずれかの最新が `pending` なら、集約 status が `failure` でも `pending` とする (同じ commit で plan が重なり、後の plan がロック衝突で先に失敗した場合など)。このときも project の表と `(全体)` 行 (失敗の理由) は出す
-3. 集約 status が head に最初に付いた時刻以降に、`atlantis-comment-author` (GitHub App) が投稿した plan コメントを集める。それより前は古い head への plan として使わない。分割された続き (`Continued plan output ...`) は前のコメントにつなぐ
-4. コメントを project ごとの節に分け、project ごとに最後の節から次を取る
-   - 変更リソース: `# <address> will be created` などの行 (data source の `read` は含めない)。action は `terraform plan -json` の語彙 (`create` / `update` / `delete` / `replace` / `import` / `move` / `forget`)。`removed` ブロックの `# <address> will no longer be managed by Terraform, but will not be destroyed` は `forget`
-   - 解釈できない行: `# <address> will ...` のように address の直後に `will` / `must` / `is` / `has` が続くのに、上のどれにも当たらない行 (Terraform の新しい表示など)。plan の前の drift の報告 (`has changed` / `has been deleted`) と data source の `read` は除く
-   - 失敗の理由: `**Plan Failed**: <理由>` の同じ行、無ければ後続の Terraform の診断行 (`│ Error: <summary>`)、それも無ければ HTML タグ行とコードフェンスを飛ばした最初の行
-5. 変更リソースの数を status の Plan 行と突き合わせる (add = create + replace、change = update、destroy = delete + replace)。合わない、解釈できない行がある、またはコメントが見つからない project は `incomplete` にする。出力の打ち切り、コメントの欠落 (折りたたみ・削除)、未知の書式で、黙って「destroy なし」と報告しないため
+action は `terraform plan -json` の語彙 (`create` / `update` / `delete` / `replace` / `import` / `move` / `forget`) です。data source の `read` は含めません。import と同時に update されるリソースは `update` として出ます。
 
-### 注意事項
+project は次のときに `incomplete` になります。出力の打ち切りや未知の書式で、黙って「destroy なし」と報告しないためです。
 
-- import と同時に update されるリソースは `update` として一覧に出る (Terraform の表示が `(imported from ...)` を併記する形のため)。import の数は突き合わせに使わない
-- forget の数は Plan 行に出ないことがある (`removed` ブロックだけの plan でも `Plan: 0 to add, 0 to change, 0 to destroy.`) ので、突き合わせに使わない。forget の行を取りこぼした場合は、解釈できない行として `incomplete` になる
-- コメントが status より後に投稿された場合に備え、コメントが見つからない project があれば 5 秒おきに 3 回まで取り直す
-- Atlantis 既定のコメントテンプレートを前提にしている。カスタマイズしている場合はリソースを抽出できず `incomplete` になる
-
-## HCP Terraform の結果の組み立て方
-
-状態と run は commit status から、件数と変更リソースは HCP Terraform API から取ります。
-
-1. head commit の `Terraform Cloud/<organization>/<workspace>` の status を workspace ごとに最新のものに絞る。1 つも無ければ `none`。workspace の自動検出はせず、status が付いた workspace だけを対象にする (speculative plan が無効で status が付かない workspace は見えない。それを merge の gate で止めるのは [hcp-terraform-plan](../hcp-terraform-plan) の責務)
-2. status の state と `target_url` (run へのリンク) から workspace ごとの結果を決める。`pending` なら「未完了」、run へのリンクが無い `success` は「未実行」(trigger されなかった)、`failure` / `error` は失敗
-3. 終わった run は plan API (`/runs/<id>/plan`) から `has-changes` と件数 (add / change / destroy) を取る。`has-changes` が false なら「変更なし」とし、JSON plan もログも読まない
-4. 変更があれば `GET /plans/<id>/json-output-redacted` (`terraform show -json` 相当。sensitive な値はハッシュ化済み) を取り、`resource_changes` の `actions` から変更リソースを作る。workspace の User Interface 設定 (Structured Run Output / Console UI) によらず同じ形なので、ログの形式に関係なくこれを正にする
-   - 変更リソース: `create` / `update` / `delete` / `replace` (`delete,create` と `create,delete`) / `forget`、`no-op` に `importing` が付いたものは `import`、`previous_address` が付いたものは `move`。data source の `read` と、それ以外の `no-op` は含めない
-   - 解釈できない `actions` の組み合わせがあれば、件数が合っていても `incomplete` にする (理由に `未知の action: <address> (<actions>)`)
-   - 取得できない workspace は `incomplete` にする (変更リソースは空)
-5. 変更リソースの数を plan API の件数と突き合わせる (add = create + replace、change = update、destroy = delete + replace)。合わない workspace は `incomplete` にする
-6. `log-read-url` の plan ログを、`plan-details.md` の描画と失敗の理由のためだけに読む。Console UI (テキスト) のログは plan 本体をそのまま、Structured Run Output (`terraform plan -json` 相当) のログは diagnostic と、JSON plan から描画した `key: before -> after` を出す。ログを取得できなければ warning を出し、JSON plan から描画する
-   - 失敗の理由: error の diagnostic、無ければ `Error: <summary>` 行、それも無ければ末尾の `Operation failed: ...`
+- 変更リソースの数が件数と合わない (add = create + replace、change = update、destroy = delete + replace。import / move / forget は件数に出ないので数えない)
+- 解釈できない変更がある (Atlantis: address の直後に `will` などが続くのに解釈できない行。HCP Terraform: 知らない `actions` の組み合わせ)
+- 材料を取れない (Atlantis: plan コメントが見つからない。HCP Terraform: API のエラー、JSON plan を取得できない)
 
 ### 注意事項
 
-- import と同時に update されるリソースは `update` として一覧に出る (JSON plan では actions が `update` のまま `importing` が付く)。import / move / forget は plan API の件数に含まれないため突き合わせに使わない
-- `has-changes` が false の workspace は JSON plan を読まないので、forget だけの plan で `has-changes` が false になる場合は、forget が一覧に出ない (未確認)
-- HCP Terraform API の認証・権限エラーでも action は失敗させず、その workspace を `incomplete` にして warning を出す (レビュー自体は続ける)
-- HCP Terraform 側の VCS 設定で **Non-aggregated status checks** が有効であること (aggregated の場合は workspace 単位の status が付かず、`none` になる)
-- `hcp-terraform-token` には run の read 権限を持つ team token を使う。fork からの PR では secrets を参照できず token が空になるが、その場合は warning を出して plan を収集せず (`plan-state` は `disabled`)、PR 情報と diff は書き出す
-- `json-output-redacted` は API ドキュメントに無い endpoint だが、Terraform CLI が Structured Run Output の描画に使っているもの。文書化されている `json-output` は workspace の admin 権限が必要で、state の値をそのまま含むため使わない。redacted は runs の read 権限で取れる (team token で確認済み)。サイズは数百 KB〜数 MB で、変更のある workspace ごとに 1 回取る
-- plan ログの解釈と HCP Terraform API のクライアントは [hcp-terraform-plan](../hcp-terraform-plan) と同等のものを pr-context 内に持つ (action ごとに自己完結させるため共有しない)。解釈を直すときは両方を見る
-- Console UI の workspace の plan ログは、`plan-details.md` に plan 本体として出すだけで解釈しない。手元の環境に Console UI の workspace が無いため、実ログでの検証は structured のみ
+- Atlantis は既定のコメントテンプレートを前提にしている。カスタマイズしているとリソースを抽出できず `incomplete` になる
+- HCP Terraform 側の VCS 設定で **Non-aggregated status checks** を有効にする (aggregated では workspace ごとの status が付かず `none` になる)
+- HCP Terraform は status が付いた workspace だけを対象にする。speculative plan が無効で status が付かない workspace は見えない (merge の gate で止めるのは [hcp-terraform-plan](../hcp-terraform-plan) の責務)
+- `hcp-terraform-token` には runs の read 権限を持つ team token を使う。fork からの PR では token が空になるので plan を収集せず、PR 情報と diff だけを書き出す
+- `json-output-redacted` は API ドキュメントに無い endpoint (Terraform CLI が使っているもの)。変更のある workspace ごとに 1 回取る (数百 KB〜数 MB)
+- `has-changes` が false の workspace は JSON plan を読まない。forget だけの plan がこれに当たるかは確かめていない
+- HCP Terraform の Console UI の workspace は、実ログで検証していない
 
 ## Inputs
 
