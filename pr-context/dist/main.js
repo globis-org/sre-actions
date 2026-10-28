@@ -23903,8 +23903,15 @@ var RESOURCE_PATTERNS = [
   // ", as requested" (-replace) や " due to changes in replace_triggered_by" が続く
   [/^(.+?) will be replaced\b/, "replace"],
   [/^(.+?) will be imported$/, "import"],
-  [/^(.+?) will no longer be managed by Terraform$/, "forget"]
+  // removed ブロックでは ", but will not be destroyed" が続く
+  [/^(.+?) will no longer be managed by Terraform(?:, but will not be destroyed)?$/, "forget"]
 ];
+var HEADING = /^[\s+\-~!/<=]{0,4}#\s+((?:[\w.-]|\[[^\]]*\])+(?: \(deposed object [^)]+\))? (?:will|must|is|has)\b.*?)\s*$/;
+var NOT_CHANGES = [/ will be read during apply$/, / has changed$/, / has been deleted$/];
+function isUnknownResourceLine(line) {
+  const text = HEADING.exec(line)?.[1];
+  return text !== void 0 && !NOT_CHANGES.some((pattern) => pattern.test(text)) && parseResourceLine(line) === null;
+}
 function parseResourceLine(line) {
   const text = /^[\s+\-~!/<=]*#\s+(.+?)\s*$/.exec(line)?.[1];
   if (text === void 0) {
@@ -23997,7 +24004,7 @@ function lastSections(comments) {
 function countsMatch(planLine, resources) {
   const expected = (kind) => Number(new RegExp(`(\\d+) to ${kind}\\b`).exec(planLine)?.[1] ?? 0);
   const actual = (...actions) => resources.filter((r) => actions.includes(r.action)).length;
-  return expected("add") === actual("create", "replace") && expected("change") === actual("update") && expected("destroy") === actual("delete", "replace") && expected("forget") === actual("forget");
+  return expected("add") === actual("create", "replace") && expected("change") === actual("update") && expected("destroy") === actual("delete", "replace");
 }
 function failureReason(text) {
   const lines = text.split("\n").map((line) => line.trim());
@@ -24033,7 +24040,13 @@ function toProject(name, status, section) {
   if (section === void 0) {
     return { ...project, reason: MISSING_COMMENT };
   }
-  const resources = section.split("\n").map(parseResourceLine).filter((r) => r !== null);
+  const lines = section.split("\n");
+  const resources = lines.map(parseResourceLine).filter((r) => r !== null);
+  const unknown = lines.filter(isUnknownResourceLine).map((line) => line.trim());
+  if (unknown.length > 0) {
+    const rest = unknown.length > 1 ? ` \u307B\u304B ${unknown.length - 1} \u884C` : "";
+    return { ...project, resources, hasDetails: true, reason: `\u672A\u77E5\u306E\u884C: ${unknown[0]}${rest}` };
+  }
   return countsMatch(description, resources) ? { ...project, state: "changes", resources, hasDetails: true } : { ...project, resources, hasDetails: true, reason: "\u30EA\u30BD\u30FC\u30B9\u6570\u304C Plan \u884C\u3068\u5408\u308F\u306A\u3044" };
 }
 function buildPlan(aggregate, statuses, comments) {
@@ -24063,6 +24076,85 @@ function buildPlan(aggregate, statuses, comments) {
     projects,
     resources: projects.flatMap((p) => p.resources.map((r) => ({ ...r, project: p.project })))
   };
+}
+
+// src/diff.ts
+function unquote(text) {
+  const bytes = [];
+  const escapes = {
+    a: "\x07",
+    b: "\b",
+    f: "\f",
+    n: "\n",
+    r: "\r",
+    t: "	",
+    v: "\v"
+  };
+  for (let i = 1; i < text.length - 1; i++) {
+    const char = text[i] ?? "";
+    if (char !== "\\") {
+      bytes.push(...Buffer.from(char));
+      continue;
+    }
+    const octal = /^[0-7]{3}/.exec(text.slice(i + 1))?.[0];
+    if (octal !== void 0) {
+      bytes.push(Number.parseInt(octal, 8));
+      i += 3;
+    } else {
+      const next = text[i + 1] ?? "";
+      bytes.push(...Buffer.from(escapes[next] ?? next));
+      i += 1;
+    }
+  }
+  return Buffer.from(bytes).toString("utf8");
+}
+function headPath(header) {
+  const raw = header.replace(/\t$/, "");
+  const path2 = raw.startsWith('"') ? unquote(raw) : raw;
+  return path2 === "/dev/null" ? null : path2.replace(/^b\//, "");
+}
+var HUNK = /^@@ -\d+(?:,(\d+))? \+(\d+)(?:,(\d+))? @@/;
+function commentableLines(diff) {
+  const result = [];
+  let path2 = null;
+  let oldLeft = 0;
+  let newLeft = 0;
+  let line = 0;
+  for (const raw of diff.split("\n")) {
+    const text = raw.replace(/\r$/, "");
+    if (oldLeft > 0 || newLeft > 0) {
+      const mark = text[0] ?? " ";
+      if (mark === "\\") {
+        continue;
+      }
+      if (mark === "-") {
+        oldLeft--;
+        continue;
+      }
+      if (path2 !== null) {
+        result.push(`${path2}:${line}:${text.slice(1)}`);
+      }
+      line++;
+      newLeft--;
+      if (mark !== "+") {
+        oldLeft--;
+      }
+      continue;
+    }
+    if (text.startsWith("diff --git ")) {
+      path2 = null;
+    } else if (text.startsWith("+++ ")) {
+      path2 = headPath(text.slice(4));
+    } else {
+      const hunk = HUNK.exec(text);
+      if (hunk !== null) {
+        oldLeft = Number(hunk[1] ?? 1);
+        line = Number(hunk[2]);
+        newLeft = Number(hunk[3] ?? 1);
+      }
+    }
+  }
+  return result;
 }
 
 // src/tfc.ts
@@ -24167,26 +24259,10 @@ function parsePlanLog(raw) {
   if (messages.length === 0) {
     return parseTextLog(textLines);
   }
-  const changes = [];
   const diagnostics = [];
   const errorMessages = [];
   for (const message2 of messages) {
     switch (message2.type) {
-      case "planned_change": {
-        const address = message2.change?.resource?.addr;
-        const action = message2.change?.action;
-        if (address !== void 0 && action !== void 0) {
-          const change = { address, action };
-          if (message2.change?.reason !== void 0) {
-            change.reason = message2.change.reason;
-          }
-          if (message2.change?.previous_resource?.addr !== void 0) {
-            change.previousAddress = message2.change.previous_resource.addr;
-          }
-          changes.push(change);
-        }
-        break;
-      }
       case "diagnostic":
         if (message2.diagnostic !== void 0) {
           diagnostics.push(message2.diagnostic);
@@ -24199,7 +24275,7 @@ function parsePlanLog(raw) {
     }
   }
   const trailer = textLines.map((line) => line.trim()).filter((line) => line.length > 0 && !HEADER_PATTERN.test(line));
-  return { format: "structured", changes, diagnostics, messages: [...errorMessages, ...trailer] };
+  return { format: "structured", diagnostics, messages: [...errorMessages, ...trailer] };
 }
 function parseTextLog(lines) {
   const start = lines.findIndex((line) => TEXT_PLAN_START_PATTERN.test(line));
@@ -24248,7 +24324,7 @@ function actionOf(raw) {
       if (raw.change.importing) {
         return "import";
       }
-      return raw.previous_address === void 0 ? null : "move";
+      return raw.previous_address === void 0 ? "no-op" : "move";
     default:
       return null;
   }
@@ -24256,9 +24332,14 @@ function actionOf(raw) {
 function parseJsonPlan(raw) {
   const document = JSON.parse(raw);
   const changes = [];
+  const unknown = [];
   for (const rc of document.resource_changes ?? []) {
     const action = actionOf(rc);
+    if (action === "no-op") {
+      continue;
+    }
     if (action === null) {
+      unknown.push(`${rc.address} (${rc.change.actions.join(",")})`);
       continue;
     }
     const change = {
@@ -24284,7 +24365,7 @@ function parseJsonPlan(raw) {
     }
     changes.push(change);
   }
-  return changes;
+  return { changes, unknown };
 }
 var marked = (marks, key) => typeof marks === "object" && marks !== null && marks[key] === true;
 var HEADER2 = {
@@ -24371,26 +24452,13 @@ function workspaceStatuses(statuses, organization) {
   }
   return new Map([...result].toSorted(([a], [b]) => a.localeCompare(b)));
 }
-var STRUCTURED_ACTIONS = {
-  create: "create",
-  update: "update",
-  delete: "delete",
-  replace: "replace",
-  import: "import",
-  move: "move",
-  forget: "forget"
-};
-function resourcesFromLog(log) {
-  if (log.format === "text") {
-    return log.body.split("\n").map(parseResourceLine).filter((r) => r !== null);
-  }
-  return log.changes.flatMap(({ address, action, previousAddress }) => {
-    const mapped = STRUCTURED_ACTIONS[action];
-    if (mapped === void 0) {
+function resourcesFromJsonPlan(plan) {
+  return plan.changes.flatMap(({ address, action, previousAddress }) => {
+    if (action === "read") {
       return [];
     }
     return [
-      previousAddress === void 0 ? { address, action: mapped } : { address, action: mapped, previousAddress }
+      previousAddress === void 0 ? { address, action } : { address, action, previousAddress }
     ];
   });
 }
@@ -24413,10 +24481,10 @@ var fence = (body, lang = "") => `\`\`\`${lang}
 ${body}
 \`\`\``;
 function renderWorkspaceLog(workspace, runUrl, log, changes = []) {
-  const blocks = log.format === "text" ? [fence(log.body)] : [
-    log.diagnostics.length > 0 && fence(log.diagnostics.map(renderDiagnostic).join("\n\n")),
+  const blocks = log?.format === "text" ? [fence(log.body)] : [
+    log !== null && log.diagnostics.length > 0 && fence(log.diagnostics.map(renderDiagnostic).join("\n\n")),
     changes.length > 0 && fence(changes.map(renderResourceChange).join("\n\n"), "diff"),
-    log.messages.length > 0 && fence(log.messages.join("\n"))
+    log !== null && log.messages.length > 0 && fence(log.messages.join("\n"))
   ];
   return `${[`## ${workspace}`, runUrl !== null && `run: ${runUrl}`, ...blocks].filter((block) => block !== false).join("\n\n")}
 `;
@@ -24452,12 +24520,8 @@ async function toOutcome(reader, workspace, status, warn) {
     }
     case "finished": {
       let plan;
-      let log = null;
       try {
         plan = await reader.getPlanForRun(status.runId);
-        if (plan?.hasChanges && plan.logReadUrl !== null) {
-          log = parsePlanLog(await reader.fetchLog(plan.logReadUrl));
-        }
       } catch (error2) {
         warn(`Failed to fetch plan for ${workspace}: ${message(error2)}`);
         return { project: { ...base, reason: `HCP Terraform API: ${message(error2)}` } };
@@ -24476,27 +24540,29 @@ No changes.
 `
         };
       }
-      if (log === null) {
-        return { project: { ...base, reason: "plan \u30ED\u30B0\u3092\u53D6\u5F97\u3067\u304D\u306A\u3044" } };
+      let json;
+      try {
+        json = parseJsonPlan(await reader.fetchRedactedPlan(plan.id));
+      } catch (error2) {
+        warn(`Failed to fetch the JSON plan for ${workspace}: ${message(error2)}`);
+        return { project: { ...base, reason: "JSON plan \u3092\u53D6\u5F97\u3067\u304D\u306A\u3044" } };
       }
-      const resources = resourcesFromLog(log);
-      let changes = [];
-      if (log.format === "structured") {
-        try {
-          changes = parseJsonPlan(await reader.fetchRedactedPlan(plan.id));
-        } catch (error2) {
-          warn(`Failed to fetch the JSON plan for ${workspace}: ${message(error2)}`);
-          return { project: { ...base, resources, reason: "JSON plan \u3092\u53D6\u5F97\u3067\u304D\u306A\u3044" } };
-        }
+      let log = null;
+      try {
+        log = plan.logReadUrl === null ? null : parsePlanLog(await reader.fetchLog(plan.logReadUrl));
+      } catch (error2) {
+        warn(`Failed to fetch the plan log for ${workspace}: ${message(error2)}`);
       }
-      const rendered = renderWorkspaceLog(workspace, status.runUrl, log, changes);
-      return countsMatch2(plan, resources) ? { project: { ...base, state: "changes", resources, hasDetails: true }, log: rendered } : {
-        project: {
-          ...base,
-          resources,
-          hasDetails: true,
-          reason: "\u30EA\u30BD\u30FC\u30B9\u6570\u304C plan \u306E\u4EF6\u6570\u3068\u5408\u308F\u306A\u3044"
-        },
+      const resources = resourcesFromJsonPlan(json);
+      const rendered = renderWorkspaceLog(workspace, status.runUrl, log, json.changes);
+      const detailed = { ...base, resources, hasDetails: true };
+      const [first, ...others] = json.unknown;
+      if (first !== void 0) {
+        const rest = others.length > 0 ? ` \u307B\u304B ${others.length} \u4EF6` : "";
+        return { project: { ...detailed, reason: `\u672A\u77E5\u306E action: ${first}${rest}` }, log: rendered };
+      }
+      return countsMatch2(plan, resources) ? { project: { ...detailed, state: "changes" }, log: rendered } : {
+        project: { ...detailed, reason: "\u30EA\u30BD\u30FC\u30B9\u6570\u304C plan \u306E\u4EF6\u6570\u3068\u5408\u308F\u306A\u3044" },
         log: rendered
       };
     }
@@ -24687,6 +24753,9 @@ async function run() {
   await write("pr-info.json", `${JSON.stringify(prInfo, null, 2)}
 `);
   await write("pr-diff.patch", diff);
+  const commentable = commentableLines(diff);
+  await write("commentable-lines.txt", commentable.map((line) => `${line}
+`).join(""));
   setOutput("output-dir", outputDir);
   setOutput("head-sha", headSha);
   if (mode === "disabled") {
