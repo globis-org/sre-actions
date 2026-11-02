@@ -46,9 +46,7 @@ Add to your repo's `mise.toml`:
 
 ```toml
 [task_config]
-includes = [
-    'git::https://github.com/globis-org/sre-actions.git//skill-frontmatter-linter/tasks',
-]
+includes = ['git::https://github.com/globis-org/sre-actions.git//skill-frontmatter-linter/tasks']
 ```
 
 ```bash
