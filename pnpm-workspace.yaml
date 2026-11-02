@@ -3,6 +3,8 @@ minimumReleaseAge: 10080 # 1 week
 minimumReleaseAgeExclude:
   - typescript
   - '@typescript/*'
+  # Renovate security update: zod@4.6.6
+  - zod@4.6.6
 
 packages:
   - '*'
