@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.5.0](https://github.com/globis-org/sre-actions/compare/v1.4.1...v1.5.0) - 2026-11-02
+
+- modify(pr-context): forget を一覧に載せ、解釈できない変更は incomplete にし、コメントできる行の一覧を書き出す by @yukin01 in https://github.com/globis-org/sre-actions/pull/173
+- chore(deps): update github-actions by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/168
+- chore(deps): update dependency @types/node to v26 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/176
+- fix(skill-frontmatter-linter): README の TOML 例を oxfmt 0.74 の整形に合わせる by @yukin01 in https://github.com/globis-org/sre-actions/pull/177
+- fix(deps): update npm dependencies (non-major) by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/169
+
 ## [v1.4.1](https://github.com/globis-org/sre-actions/compare/v1.4.0...v1.4.1) - 2026-10-20
 
 - feat(pr-context): plan の詳細ファイルを plan-details.md にそろえ、HCP Terraform でも属性の差分を出す by @yukin01 in https://github.com/globis-org/sre-actions/pull/171
