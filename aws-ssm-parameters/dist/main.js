@@ -18758,10 +18758,10 @@ var require_undici = __commonJS({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/emitWarningIfUnsupportedVersion.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/emitWarningIfUnsupportedVersion.js
 var state, emitWarningIfUnsupportedVersion;
 var init_emitWarningIfUnsupportedVersion = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/emitWarningIfUnsupportedVersion.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/emitWarningIfUnsupportedVersion.js"() {
     state = {
       warningEmitted: false
     };
@@ -18789,10 +18789,10 @@ More information can be found at: https://a.co/c895JFp`);
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/longPollMiddleware.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/longPollMiddleware.js
 var longPollMiddleware, longPollMiddlewareOptions, getLongPollPlugin;
 var init_longPollMiddleware = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/longPollMiddleware.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/longPollMiddleware.js"() {
     longPollMiddleware = () => (next, context) => async (args) => {
       context.__retryLongPoll = true;
       return next(args);
@@ -18811,7 +18811,7 @@ var init_longPollMiddleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/setCredentialFeature.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/setCredentialFeature.js
 function setCredentialFeature(credentials, feature, value) {
   if (!credentials.$source) {
     credentials.$source = {};
@@ -18820,23 +18820,23 @@ function setCredentialFeature(credentials, feature, value) {
   return credentials;
 }
 var init_setCredentialFeature = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/setCredentialFeature.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/setCredentialFeature.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/isStreamingPayload/isStreamingPayload.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/isStreamingPayload/isStreamingPayload.js
 var import_node_stream, isStreamingPayload;
 var init_isStreamingPayload = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/isStreamingPayload/isStreamingPayload.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/isStreamingPayload/isStreamingPayload.js"() {
     import_node_stream = require("node:stream");
     isStreamingPayload = (request) => request?.body instanceof import_node_stream.Readable || typeof ReadableStream !== "undefined" && request?.body instanceof ReadableStream;
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/middleware-stack/MiddlewareStack.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/middleware-stack/MiddlewareStack.js
 var getAllAliases, getMiddlewareNameWithAliases, constructStack, stepWeights, priorityWeights;
 var init_MiddlewareStack = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/middleware-stack/MiddlewareStack.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/middleware-stack/MiddlewareStack.js"() {
     getAllAliases = (name, aliases) => {
       const _aliases = [];
       if (name) {
@@ -19170,7 +19170,7 @@ var require_dist_cjs = __commonJS({
       FieldPosition3[FieldPosition3["HEADER"] = 0] = "HEADER";
       FieldPosition3[FieldPosition3["TRAILER"] = 1] = "TRAILER";
     })(FieldPosition2 || (FieldPosition2 = {}));
-    var SMITHY_CONTEXT_KEY3 = "__smithy_context";
+    var SMITHY_CONTEXT_KEY4 = "__smithy_context";
     var IniSectionType4;
     (function(IniSectionType5) {
       IniSectionType5["PROFILE"] = "profile";
@@ -19190,31 +19190,31 @@ var require_dist_cjs = __commonJS({
     exports2.HttpAuthLocation = HttpAuthLocation;
     exports2.IniSectionType = IniSectionType4;
     exports2.RequestHandlerProtocol = RequestHandlerProtocol;
-    exports2.SMITHY_CONTEXT_KEY = SMITHY_CONTEXT_KEY3;
+    exports2.SMITHY_CONTEXT_KEY = SMITHY_CONTEXT_KEY4;
     exports2.getDefaultClientConfiguration = getDefaultClientConfiguration2;
     exports2.resolveDefaultRuntimeConfig = resolveDefaultRuntimeConfig2;
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/getSmithyContext.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/getSmithyContext.js
 var import_types, getSmithyContext;
 var init_getSmithyContext = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/getSmithyContext.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/getSmithyContext.js"() {
     import_types = __toESM(require_dist_cjs());
     getSmithyContext = (context) => context[import_types.SMITHY_CONTEXT_KEY] || (context[import_types.SMITHY_CONTEXT_KEY] = {});
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/hasOwn.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/hasOwn.js
 function hasOwn(o3, k5) {
   return Object.prototype.hasOwnProperty.call(o3, k5);
 }
 var init_hasOwn = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/hasOwn.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/hasOwn.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/httpRequest.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/httpRequest.js
 function cloneQuery(query) {
   return Object.keys(query).reduce((carry, paramName) => {
     const param = query[paramName];
@@ -19226,7 +19226,7 @@ function cloneQuery(query) {
 }
 var HttpRequest;
 var init_httpRequest = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/httpRequest.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/httpRequest.js"() {
     HttpRequest = class _HttpRequest {
       method;
       protocol;
@@ -19276,10 +19276,10 @@ var init_httpRequest = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/httpResponse.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/httpResponse.js
 var HttpResponse;
 var init_httpResponse = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/httpResponse.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/httpResponse.js"() {
     HttpResponse = class {
       statusCode;
       reason;
@@ -19301,10 +19301,10 @@ var init_httpResponse = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/isValidHostLabel.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/isValidHostLabel.js
 var VALID_HOST_LABEL_REGEX, isValidHostLabel;
 var init_isValidHostLabel = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/isValidHostLabel.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/isValidHostLabel.js"() {
     VALID_HOST_LABEL_REGEX = new RegExp(`^(?!.*-$)(?!-)[a-zA-Z0-9-]{1,63}$`);
     isValidHostLabel = (value, allowSubDomains = false) => {
       if (!allowSubDomains) {
@@ -19321,20 +19321,20 @@ var init_isValidHostLabel = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/isValidHostname.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/isValidHostname.js
 function isValidHostname(hostname3) {
   const hostPattern = /^[a-z0-9][a-z0-9.-]*[a-z0-9]$/;
   return hostPattern.test(hostname3);
 }
 var init_isValidHostname = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/isValidHostname.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/isValidHostname.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/normalizeProvider.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/normalizeProvider.js
 var normalizeProvider;
 var init_normalizeProvider = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/normalizeProvider.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/normalizeProvider.js"() {
     normalizeProvider = (input2) => {
       if (typeof input2 === "function")
         return input2;
@@ -19344,7 +19344,7 @@ var init_normalizeProvider = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/parseQueryString.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/parseQueryString.js
 function parseQueryString(querystring) {
   const query = {};
   querystring = querystring.replace(/^\?/, "");
@@ -19367,14 +19367,14 @@ function parseQueryString(querystring) {
   return query;
 }
 var init_parseQueryString = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/parseQueryString.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/parseQueryString.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/parseUrl.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/parseUrl.js
 var parseUrl;
 var init_parseUrl = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/parseUrl.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/parseUrl.js"() {
     init_parseQueryString();
     parseUrl = (url2) => {
       if (typeof url2 === "string") {
@@ -19396,10 +19396,10 @@ var init_parseUrl = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/toEndpointV1.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/toEndpointV1.js
 var toEndpointV1;
 var init_toEndpointV1 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/toEndpointV1.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/toEndpointV1.js"() {
     init_hasOwn();
     init_parseUrl();
     toEndpointV1 = (endpoint) => {
@@ -19423,9 +19423,9 @@ var init_toEndpointV1 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/index.js
 var init_transport = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/transport/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/transport/index.js"() {
     init_getSmithyContext();
     init_hasOwn();
     init_httpRequest();
@@ -19439,28 +19439,28 @@ var init_transport = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/invalid-dependency/invalidFunction.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/invalid-dependency/invalidFunction.js
 var invalidFunction;
 var init_invalidFunction = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/invalid-dependency/invalidFunction.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/invalid-dependency/invalidFunction.js"() {
     invalidFunction = (message) => () => {
       throw new Error(message);
     };
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/invalid-dependency/invalidProvider.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/invalid-dependency/invalidProvider.js
 var invalidProvider;
 var init_invalidProvider = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/invalid-dependency/invalidProvider.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/invalid-dependency/invalidProvider.js"() {
     invalidProvider = (message) => () => Promise.reject(message);
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/circularReplacer.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/circularReplacer.js
 var getCircularReplacer;
 var init_circularReplacer = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/circularReplacer.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/circularReplacer.js"() {
     getCircularReplacer = () => {
       const seen = /* @__PURE__ */ new WeakSet();
       return (key, value) => {
@@ -19476,20 +19476,20 @@ var init_circularReplacer = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/utils/sleep.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/utils/sleep.js
 var sleep;
 var init_sleep = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/utils/sleep.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/utils/sleep.js"() {
     sleep = (seconds) => {
       return new Promise((resolve) => setTimeout(resolve, seconds * 1e3));
     };
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/waiter.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/waiter.js
 var waiterServiceDefaults, WaiterState, checkExceptions;
 var init_waiter = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/waiter.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/waiter.js"() {
     init_circularReplacer();
     waiterServiceDefaults = {
       minDelay: 2,
@@ -19525,10 +19525,10 @@ var init_waiter = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/poller.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/poller.js
 var runPolling, checkWarn403, createMessageFromResponse, exponentialBackoffWithJitter, randomInRange;
 var init_poller = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/poller.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/poller.js"() {
     init_circularReplacer();
     init_sleep();
     init_waiter();
@@ -19617,10 +19617,10 @@ var init_poller = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/utils/validate.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/utils/validate.js
 var validateWaiterOptions;
 var init_validate = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/utils/validate.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/utils/validate.js"() {
     validateWaiterOptions = (options) => {
       if (options.maxWaitTime <= 0) {
         throw new Error(`WaiterConfiguration.maxWaitTime must be greater than 0`);
@@ -19637,10 +19637,10 @@ var init_validate = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/createWaiter.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/createWaiter.js
 var abortTimeout, createWaiter;
 var init_createWaiter = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/createWaiter.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/util-waiter/createWaiter.js"() {
     init_poller();
     init_validate();
     init_waiter();
@@ -19691,10 +19691,10 @@ var init_createWaiter = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/client.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/client.js
 var Client;
 var init_client = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/client.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/client.js"() {
     init_MiddlewareStack();
     Client = class {
       config;
@@ -19745,10 +19745,10 @@ var init_client = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/deref.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/deref.js
 var deref;
 var init_deref = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/deref.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/deref.js"() {
     deref = (schemaRef) => {
       if (typeof schemaRef === "function") {
         return schemaRef();
@@ -19758,10 +19758,10 @@ var init_deref = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/operation.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/operation.js
 var operation;
 var init_operation = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/operation.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/operation.js"() {
     operation = (namespace, name, traits, input2, output2) => ({
       name,
       namespace,
@@ -19772,10 +19772,10 @@ var init_operation = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/middleware/schemaDeserializationMiddleware.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/middleware/schemaDeserializationMiddleware.js
 var schemaDeserializationMiddleware, findHeader;
 var init_schemaDeserializationMiddleware = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/middleware/schemaDeserializationMiddleware.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/middleware/schemaDeserializationMiddleware.js"() {
     init_transport();
     init_operation();
     schemaDeserializationMiddleware = (config2) => (next, context) => async (args) => {
@@ -19839,10 +19839,10 @@ var init_schemaDeserializationMiddleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/middleware/schemaSerializationMiddleware.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/middleware/schemaSerializationMiddleware.js
 var schemaSerializationMiddleware;
 var init_schemaSerializationMiddleware = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/middleware/schemaSerializationMiddleware.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/middleware/schemaSerializationMiddleware.js"() {
     init_transport();
     init_operation();
     schemaSerializationMiddleware = (config2) => (next, context) => async (args) => {
@@ -19862,7 +19862,7 @@ var init_schemaSerializationMiddleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/middleware/getSchemaSerdePlugin.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/middleware/getSchemaSerdePlugin.js
 function getSchemaSerdePlugin(config2) {
   return {
     applyToStack: (commandStack) => {
@@ -19874,7 +19874,7 @@ function getSchemaSerdePlugin(config2) {
 }
 var deserializerMiddlewareOption, serializerMiddlewareOption;
 var init_getSchemaSerdePlugin = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/middleware/getSchemaSerdePlugin.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/middleware/getSchemaSerdePlugin.js"() {
     init_schemaDeserializationMiddleware();
     init_schemaSerializationMiddleware();
     deserializerMiddlewareOption = {
@@ -19892,10 +19892,10 @@ var init_getSchemaSerdePlugin = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/Schema.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/Schema.js
 var Schema;
 var init_Schema = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/Schema.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/Schema.js"() {
     Schema = class {
       name;
       namespace;
@@ -19919,10 +19919,10 @@ var init_Schema = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/ListSchema.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/ListSchema.js
 var ListSchema, list;
 var init_ListSchema = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/ListSchema.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/ListSchema.js"() {
     init_Schema();
     ListSchema = class _ListSchema extends Schema {
       static symbol = /* @__PURE__ */ Symbol.for("@smithy/lis");
@@ -19938,10 +19938,10 @@ var init_ListSchema = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/MapSchema.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/MapSchema.js
 var MapSchema, map;
 var init_MapSchema = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/MapSchema.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/MapSchema.js"() {
     init_Schema();
     MapSchema = class _MapSchema extends Schema {
       static symbol = /* @__PURE__ */ Symbol.for("@smithy/map");
@@ -19959,10 +19959,10 @@ var init_MapSchema = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/OperationSchema.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/OperationSchema.js
 var OperationSchema, op;
 var init_OperationSchema = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/OperationSchema.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/OperationSchema.js"() {
     init_Schema();
     OperationSchema = class _OperationSchema extends Schema {
       static symbol = /* @__PURE__ */ Symbol.for("@smithy/ope");
@@ -19980,10 +19980,10 @@ var init_OperationSchema = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/StructureSchema.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/StructureSchema.js
 var StructureSchema, struct;
 var init_StructureSchema = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/StructureSchema.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/StructureSchema.js"() {
     init_Schema();
     StructureSchema = class _StructureSchema extends Schema {
       static symbol = /* @__PURE__ */ Symbol.for("@smithy/str");
@@ -20001,10 +20001,10 @@ var init_StructureSchema = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/ErrorSchema.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/ErrorSchema.js
 var ErrorSchema, error2;
 var init_ErrorSchema = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/ErrorSchema.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/ErrorSchema.js"() {
     init_Schema();
     init_StructureSchema();
     ErrorSchema = class _ErrorSchema extends StructureSchema {
@@ -20023,7 +20023,7 @@ var init_ErrorSchema = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/translateTraits.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/translateTraits.js
 function translateTraits(indicator) {
   if (typeof indicator === "object") {
     return indicator;
@@ -20051,12 +20051,12 @@ function translateTraits(indicator) {
 }
 var traitsCache;
 var init_translateTraits = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/translateTraits.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/translateTraits.js"() {
     traitsCache = [];
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/NormalizedSchema.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/NormalizedSchema.js
 function member(memberSchema, memberName) {
   if (memberSchema instanceof NormalizedSchema) {
     return Object.assign(memberSchema, {
@@ -20069,7 +20069,7 @@ function member(memberSchema, memberName) {
 }
 var anno, simpleSchemaCacheN, simpleSchemaCacheS, NormalizedSchema, isMemberSchema, isStaticSchema;
 var init_NormalizedSchema = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/NormalizedSchema.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/NormalizedSchema.js"() {
     init_deref();
     init_translateTraits();
     anno = {
@@ -20345,10 +20345,10 @@ var init_NormalizedSchema = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/SimpleSchema.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/SimpleSchema.js
 var SimpleSchema, sim, simAdapter;
 var init_SimpleSchema = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/SimpleSchema.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/SimpleSchema.js"() {
     init_Schema();
     SimpleSchema = class _SimpleSchema extends Schema {
       static symbol = /* @__PURE__ */ Symbol.for("@smithy/sim");
@@ -20370,10 +20370,10 @@ var init_SimpleSchema = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/sentinels.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/sentinels.js
 var SCHEMA;
 var init_sentinels = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/schemas/sentinels.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/schemas/sentinels.js"() {
     SCHEMA = {
       BLOB: 21,
       STREAMING_BLOB: 42,
@@ -20393,10 +20393,10 @@ var init_sentinels = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/TypeRegistry.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/TypeRegistry.js
 var TypeRegistry;
 var init_TypeRegistry = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/TypeRegistry.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/TypeRegistry.js"() {
     TypeRegistry = class _TypeRegistry {
       namespace;
       schemas;
@@ -20509,7 +20509,7 @@ var init_TypeRegistry = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/index.js
 var schema_exports = {};
 __export(schema_exports, {
   ErrorSchema: () => ErrorSchema,
@@ -20541,7 +20541,7 @@ __export(schema_exports, {
   translateTraits: () => translateTraits
 });
 var init_schema = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/schema/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/schema/index.js"() {
     init_deref();
     init_getSchemaSerdePlugin();
     init_ListSchema();
@@ -20559,7 +20559,7 @@ var init_schema = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/schemaLogFilter.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/schemaLogFilter.js
 function schemaLogFilter(schema, data) {
   if (data == null) {
     return data;
@@ -20592,19 +20592,21 @@ function schemaLogFilter(schema, data) {
 }
 var SENSITIVE_STRING;
 var init_schemaLogFilter = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/schemaLogFilter.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/schemaLogFilter.js"() {
     init_schema();
     SENSITIVE_STRING = "***SensitiveInformation***";
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/command.js
-var import_types2, Command2, ClassBuilder;
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/command.js
+var import_types2, operationEventStreamMarker, Command2, ClassBuilder;
 var init_command = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/command.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/command.js"() {
     import_types2 = __toESM(require_dist_cjs());
     init_MiddlewareStack();
     init_schemaLogFilter();
+    init_schema();
+    operationEventStreamMarker = /* @__PURE__ */ Symbol.for("@smithy/op-event-stream");
     Command2 = class {
       middlewareStack = constructStack();
       schema;
@@ -20638,9 +20640,20 @@ var init_command = __esm({
           requestOptions = { ...requestOptions };
           delete requestOptions.metricsRecorder;
         }
-        if (smithyContext.eventStream) {
+        let isEventStream;
+        const schema = this.schema;
+        const marker = schema?.[operationEventStreamMarker];
+        if (marker !== void 0) {
+          isEventStream = marker;
+        } else if (schema) {
+          if (Array.isArray(schema) && schema[0] === 9) {
+            const [, , , , input$, output$] = schema;
+            isEventStream = schema[operationEventStreamMarker] = Boolean(NormalizedSchema.of(input$).getEventStreamMember() || NormalizedSchema.of(output$).getEventStreamMember());
+          }
+        }
+        if (isEventStream) {
           requestOptions = {
-            isEventStream: true,
+            isEventStream,
             ...requestOptions
           };
         }
@@ -20744,18 +20757,18 @@ var init_command = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/constants.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/constants.js
 var SENSITIVE_STRING2;
 var init_constants = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/constants.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/constants.js"() {
     SENSITIVE_STRING2 = "***SensitiveInformation***";
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/create-aggregated-client.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/create-aggregated-client.js
 var createAggregatedClient;
 var init_create_aggregated_client = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/create-aggregated-client.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/create-aggregated-client.js"() {
     createAggregatedClient = (commands5, Client2, options) => {
       for (const [command5, CommandCtor] of Object.entries(commands5)) {
         const methodImpl = async function(args, optionsOrCb, cb) {
@@ -20804,10 +20817,10 @@ var init_create_aggregated_client = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/exceptions.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/exceptions.js
 var ServiceException, decorateServiceException;
 var init_exceptions = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/exceptions.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/exceptions.js"() {
     ServiceException = class _ServiceException extends Error {
       static shapeId = "smithy.ts.sdk.synthetic.nonamespace.client#ServiceException";
       $fault;
@@ -20889,10 +20902,10 @@ var init_exceptions = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/default-error-handler.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/default-error-handler.js
 var throwDefaultError, withBaseException, deserializeMetadata;
 var init_default_error_handler = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/default-error-handler.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/default-error-handler.js"() {
     init_exceptions();
     throwDefaultError = ({ output: output2, parsedBody, exceptionCtor, errorCode }) => {
       const $metadata = deserializeMetadata(output2);
@@ -20918,10 +20931,10 @@ var init_default_error_handler = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/defaults-mode.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/defaults-mode.js
 var loadConfigsForDefaultMode;
 var init_defaults_mode = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/defaults-mode.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/defaults-mode.js"() {
     loadConfigsForDefaultMode = (mode) => {
       switch (mode) {
         case "standard":
@@ -20951,10 +20964,10 @@ var init_defaults_mode = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/emitWarningIfUnsupportedVersion.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/emitWarningIfUnsupportedVersion.js
 var warningEmitted, emitWarningIfUnsupportedVersion2;
 var init_emitWarningIfUnsupportedVersion2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/emitWarningIfUnsupportedVersion.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/emitWarningIfUnsupportedVersion.js"() {
     warningEmitted = false;
     emitWarningIfUnsupportedVersion2 = (version2) => {
       if (version2 && !warningEmitted && parseInt(version2.substring(1, version2.indexOf("."))) < 16) {
@@ -20964,10 +20977,10 @@ var init_emitWarningIfUnsupportedVersion2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/extensions/checksum.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/extensions/checksum.js
 var import_types3, knownAlgorithms, getChecksumConfiguration, resolveChecksumRuntimeConfig;
 var init_checksum = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/extensions/checksum.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/extensions/checksum.js"() {
     init_transport();
     import_types3 = __toESM(require_dist_cjs());
     knownAlgorithms = Object.values(import_types3.AlgorithmId);
@@ -21021,10 +21034,10 @@ var init_checksum = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/extensions/retry.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/extensions/retry.js
 var getRetryConfiguration, resolveRetryRuntimeConfig;
 var init_retry = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/extensions/retry.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/extensions/retry.js"() {
     getRetryConfiguration = (runtimeConfig) => {
       return {
         setRetryStrategy(retryStrategy) {
@@ -21043,10 +21056,10 @@ var init_retry = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/extensions/defaultExtensionConfiguration.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/extensions/defaultExtensionConfiguration.js
 var getDefaultExtensionConfiguration, getDefaultClientConfiguration, resolveDefaultRuntimeConfig;
 var init_defaultExtensionConfiguration = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/extensions/defaultExtensionConfiguration.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/extensions/defaultExtensionConfiguration.js"() {
     init_checksum();
     init_retry();
     getDefaultExtensionConfiguration = (runtimeConfig) => {
@@ -21059,18 +21072,18 @@ var init_defaultExtensionConfiguration = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/get-array-if-single-item.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/get-array-if-single-item.js
 var getArrayIfSingleItem;
 var init_get_array_if_single_item = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/get-array-if-single-item.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/get-array-if-single-item.js"() {
     getArrayIfSingleItem = (mayBeArray) => Array.isArray(mayBeArray) ? mayBeArray : [mayBeArray];
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/get-value-from-text-node.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/get-value-from-text-node.js
 var getValueFromTextNode;
 var init_get_value_from_text_node = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/get-value-from-text-node.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/get-value-from-text-node.js"() {
     init_transport();
     getValueFromTextNode = (obj) => {
       const textNodeName = "#text";
@@ -21088,20 +21101,20 @@ var init_get_value_from_text_node = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/is-serializable-header-value.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/is-serializable-header-value.js
 var isSerializableHeaderValue;
 var init_is_serializable_header_value = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/is-serializable-header-value.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/is-serializable-header-value.js"() {
     isSerializableHeaderValue = (value) => {
       return value != null;
     };
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/NoOpLogger.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/NoOpLogger.js
 var NoOpLogger;
 var init_NoOpLogger = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/NoOpLogger.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/NoOpLogger.js"() {
     NoOpLogger = class {
       trace() {
       }
@@ -21117,7 +21130,7 @@ var init_NoOpLogger = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/object-mapping.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/object-mapping.js
 function map2(arg0, arg1, arg2) {
   let target;
   let filter;
@@ -21148,7 +21161,7 @@ function map2(arg0, arg1, arg2) {
 }
 var convertMap, take, mapWithFilter, applyInstruction, nonNullish, pass;
 var init_object_mapping = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/object-mapping.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/object-mapping.js"() {
     init_transport();
     convertMap = (target) => {
       const output2 = {};
@@ -21215,10 +21228,10 @@ var init_object_mapping = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/ser-utils.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/ser-utils.js
 var serializeFloat, serializeDateTime;
 var init_ser_utils = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/ser-utils.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/ser-utils.js"() {
     serializeFloat = (value) => {
       if (value !== value) {
         return "NaN";
@@ -21236,10 +21249,10 @@ var init_ser_utils = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/serde-json.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/serde-json.js
 var _json;
 var init_serde_json = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/serde-json.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/serde-json.js"() {
     init_transport();
     _json = (obj) => {
       if (obj == null) {
@@ -21265,7 +21278,7 @@ var init_serde_json = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/client-command-builder.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/client-command-builder.js
 function makeBuilder(common, service, name, ep) {
   return function makeCommand(added, plugins, op2, $, smithyContext = {}) {
     const epMerged = Object.assign({}, common, added);
@@ -21277,12 +21290,12 @@ function makeBuilder(common, service, name, ep) {
   };
 }
 var init_client_command_builder = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/client-command-builder.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/smithy-client/client-command-builder.js"() {
     init_command();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/index.js
 var client_exports = {};
 __export(client_exports, {
   AlgorithmId: () => import_types3.AlgorithmId,
@@ -21326,7 +21339,7 @@ __export(client_exports, {
   withBaseException: () => withBaseException
 });
 var init_client2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/client/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/client/index.js"() {
     init_MiddlewareStack();
     init_transport();
     init_transport();
@@ -21357,18 +21370,18 @@ var init_client2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/is-array-buffer/is-array-buffer.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/is-array-buffer/is-array-buffer.js
 var isArrayBuffer;
 var init_is_array_buffer = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/is-array-buffer/is-array-buffer.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/is-array-buffer/is-array-buffer.js"() {
     isArrayBuffer = (arg) => typeof ArrayBuffer === "function" && arg instanceof ArrayBuffer || Object.prototype.toString.call(arg) === "[object ArrayBuffer]";
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-buffer-from/buffer-from.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-buffer-from/buffer-from.js
 var fromArrayBuffer, fromString;
 var init_buffer_from = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-buffer-from/buffer-from.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-buffer-from/buffer-from.js"() {
     init_is_array_buffer();
     fromArrayBuffer = (input2, offset = 0, length = input2.byteLength - offset) => {
       if (!isArrayBuffer(input2)) {
@@ -21385,10 +21398,10 @@ var init_buffer_from = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/fromBase64.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/fromBase64.js
 var BASE64_REGEX, fromBase64;
 var init_fromBase64 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/fromBase64.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/fromBase64.js"() {
     init_buffer_from();
     BASE64_REGEX = /^[A-Za-z0-9+/]*={0,2}$/;
     fromBase64 = (input2) => {
@@ -21404,10 +21417,10 @@ var init_fromBase64 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/fromUtf8.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/fromUtf8.js
 var fromUtf8;
 var init_fromUtf8 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/fromUtf8.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/fromUtf8.js"() {
     init_buffer_from();
     fromUtf8 = (input2) => {
       const buf2 = fromString(input2, "utf8");
@@ -21416,10 +21429,10 @@ var init_fromUtf8 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/toBase64.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/toBase64.js
 var toBase64;
 var init_toBase64 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/toBase64.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/toBase64.js"() {
     init_buffer_from();
     init_fromUtf8();
     toBase64 = (_input) => {
@@ -21437,7 +21450,7 @@ var init_toBase64 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/blob/Uint8ArrayBlobAdapter.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/blob/Uint8ArrayBlobAdapter.js
 function bindUint8ArrayBlobAdapter(toUtf83, fromUtf83, toBase643, fromBase642) {
   return class Uint8ArrayBlobAdapter2 extends Uint8Array {
     static fromString(source, encoding = "utf-8") {
@@ -21462,14 +21475,14 @@ function bindUint8ArrayBlobAdapter(toUtf83, fromUtf83, toBase643, fromBase642) {
   };
 }
 var init_Uint8ArrayBlobAdapter = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/blob/Uint8ArrayBlobAdapter.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/blob/Uint8ArrayBlobAdapter.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/toUtf8.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/toUtf8.js
 var toUtf8;
 var init_toUtf8 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/toUtf8.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/toUtf8.js"() {
     init_buffer_from();
     toUtf8 = (input2) => {
       if (typeof input2 === "string") {
@@ -21483,7 +21496,7 @@ var init_toUtf8 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/uuid/v4.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/uuid/v4.js
 function bindV4(getRandomValues2) {
   if (typeof crypto !== "undefined" && typeof crypto.randomUUID === "function") {
     return () => crypto.randomUUID();
@@ -21498,23 +21511,23 @@ function bindV4(getRandomValues2) {
 }
 var decimalToHex;
 var init_v4 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/uuid/v4.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/uuid/v4.js"() {
     decimalToHex = Array.from({ length: 256 }, (_, i5) => i5.toString(16).padStart(2, "0"));
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/copyDocumentWithTransform.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/copyDocumentWithTransform.js
 var copyDocumentWithTransform;
 var init_copyDocumentWithTransform = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/copyDocumentWithTransform.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/copyDocumentWithTransform.js"() {
     copyDocumentWithTransform = (source, _schemaRef, _transform2 = (_) => _) => source;
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/parse-utils.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/parse-utils.js
 var parseBoolean, expectBoolean, expectNumber, MAX_FLOAT, expectFloat32, expectLong, expectInt, expectInt32, expectShort, expectByte, expectSizedInt, castInt, expectNonNull, expectObject, expectString, expectUnion, strictParseDouble, strictParseFloat, strictParseFloat32, NUMBER_REGEX, parseNumber, limitedParseDouble, handleFloat, limitedParseFloat, limitedParseFloat32, parseFloatString, strictParseLong, strictParseInt, strictParseInt32, strictParseShort, strictParseByte, stackTraceWarning, logger;
 var init_parse_utils = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/parse-utils.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/parse-utils.js"() {
     init_transport();
     parseBoolean = (value) => {
       switch (value) {
@@ -21750,7 +21763,7 @@ var init_parse_utils = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/date-utils.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/date-utils.js
 function dateToUtcString(date6) {
   const year2 = date6.getUTCFullYear();
   const month = date6.getUTCMonth();
@@ -21767,7 +21780,7 @@ function dateToUtcString(date6) {
 }
 var DAYS, MONTHS, RFC3339, parseRfc3339DateTime, RFC3339_WITH_OFFSET, parseRfc3339DateTimeWithOffset, IMF_FIXDATE, RFC_850_DATE, ASC_TIME, parseRfc7231DateTime, parseEpochTimestamp, buildDate, parseTwoDigitYear, FIFTY_YEARS_IN_MILLIS, adjustRfc850Year, parseMonthByShortName, DAYS_IN_MONTH, validateDayOfMonth, isLeapYear, parseDateValue, parseMilliseconds, parseOffsetToMilliseconds, stripLeadingZeroes;
 var init_date_utils = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/date-utils.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/date-utils.js"() {
     init_parse_utils();
     DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -21942,10 +21955,10 @@ var init_date_utils = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/lazy-json.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/lazy-json.js
 var LazyJsonString;
 var init_lazy_json = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/lazy-json.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/lazy-json.js"() {
     LazyJsonString = function LazyJsonString2(val) {
       const str = Object.assign(new String(val), {
         deserializeJSON() {
@@ -21972,7 +21985,7 @@ var init_lazy_json = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/quote-header.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/quote-header.js
 function quoteHeader(part) {
   if (part.includes(",") || part.includes('"')) {
     part = `"${part.replace(/"/g, '\\"')}"`;
@@ -21980,11 +21993,11 @@ function quoteHeader(part) {
   return part;
 }
 var init_quote_header = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/quote-header.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/quote-header.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/schema-serde-lib/schema-date-utils.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/schema-serde-lib/schema-date-utils.js
 function range(v, min, max) {
   const _v = Number(v);
   if (_v < min || _v > max) {
@@ -21993,7 +22006,7 @@ function range(v, min, max) {
 }
 var ddd, mmm, time, date, year, RFC3339_WITH_OFFSET2, IMF_FIXDATE2, RFC_850_DATE2, ASC_TIME2, months, _parseEpochTimestamp, _parseRfc3339DateTimeWithOffset, _parseRfc7231DateTime;
 var init_schema_date_utils = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/schema-serde-lib/schema-date-utils.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/schema-serde-lib/schema-date-utils.js"() {
     ddd = `(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun)(?:[ne|u?r]?s?day)?`;
     mmm = `(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)`;
     time = `(\\d?\\d):(\\d{2}):(\\d{2})(?:\\.(\\d+))?`;
@@ -22088,7 +22101,7 @@ var init_schema_date_utils = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/split-every.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/split-every.js
 function splitEvery(value, delimiter, numDelimiters) {
   if (numDelimiters <= 0 || !Number.isInteger(numDelimiters)) {
     throw new Error("Invalid number of delimiters (" + numDelimiters + ") for splitEvery.");
@@ -22116,14 +22129,14 @@ function splitEvery(value, delimiter, numDelimiters) {
   return compoundSegments;
 }
 var init_split_every = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/split-every.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/split-every.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/split-header.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/split-header.js
 var splitHeader;
 var init_split_header = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/split-header.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/split-header.js"() {
     splitHeader = (value) => {
       const z2 = value.length;
       const values = [];
@@ -22164,13 +22177,13 @@ var init_split_header = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/value/NumericValue.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/value/NumericValue.js
 function nv(input2) {
   return new NumericValue(String(input2), "bigDecimal");
 }
 var format, NumericValue;
 var init_NumericValue = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/value/NumericValue.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/value/NumericValue.js"() {
     format = /^-?((0|[1-9]\d*)(\.\d+)?|\.\d+)([eE][+-]?\d+)?$/;
     NumericValue = class _NumericValue {
       string;
@@ -22196,7 +22209,7 @@ var init_NumericValue = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-hex-encoding/hex-encoding.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-hex-encoding/hex-encoding.js
 function fromHex(encoded) {
   if (encoded.length % 2 !== 0) {
     throw new Error("Hex encoded strings must have an even number length");
@@ -22221,7 +22234,7 @@ function toHex(bytes) {
 }
 var SHORT_TO_HEX, HEX_TO_SHORT;
 var init_hex_encoding = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-hex-encoding/hex-encoding.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-hex-encoding/hex-encoding.js"() {
     SHORT_TO_HEX = {};
     HEX_TO_SHORT = {};
     for (let i5 = 0; i5 < 256; i5++) {
@@ -22235,10 +22248,10 @@ var init_hex_encoding = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-body-length/calculateBodyLength.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-body-length/calculateBodyLength.js
 var import_node_fs, calculateBodyLength;
 var init_calculateBodyLength = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-body-length/calculateBodyLength.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-body-length/calculateBodyLength.js"() {
     import_node_fs = require("node:fs");
     calculateBodyLength = (body) => {
       if (!body) {
@@ -22264,10 +22277,10 @@ var init_calculateBodyLength = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/toUint8Array.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/toUint8Array.js
 var toUint8Array;
 var init_toUint8Array = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/toUint8Array.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/toUint8Array.js"() {
     init_fromUtf8();
     toUint8Array = (data) => {
       if (data instanceof Uint8Array) {
@@ -22284,7 +22297,7 @@ var init_toUint8Array = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/concatBytes.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/concatBytes.js
 function concatBytes(arrays, length) {
   if (length === void 0) {
     length = 0;
@@ -22301,14 +22314,14 @@ function concatBytes(arrays, length) {
   return result;
 }
 var init_concatBytes = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/concatBytes.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/concatBytes.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/middleware-serde/deserializerMiddleware.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/middleware-serde/deserializerMiddleware.js
 var deserializerMiddleware, findHeader2;
 var init_deserializerMiddleware = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/middleware-serde/deserializerMiddleware.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/middleware-serde/deserializerMiddleware.js"() {
     init_transport();
     deserializerMiddleware = (options, deserializer) => (next, context) => async (args) => {
       const { response } = await next(args);
@@ -22366,10 +22379,10 @@ var init_deserializerMiddleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/property-provider/ProviderError.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/property-provider/ProviderError.js
 var ProviderError;
 var init_ProviderError = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/property-provider/ProviderError.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/property-provider/ProviderError.js"() {
     ProviderError = class _ProviderError extends Error {
       name = "ProviderError";
       tryNextLink;
@@ -22395,10 +22408,10 @@ var init_ProviderError = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/property-provider/CredentialsProviderError.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/property-provider/CredentialsProviderError.js
 var CredentialsProviderError;
 var init_CredentialsProviderError = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/property-provider/CredentialsProviderError.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/property-provider/CredentialsProviderError.js"() {
     init_ProviderError();
     CredentialsProviderError = class _CredentialsProviderError extends ProviderError {
       name = "CredentialsProviderError";
@@ -22410,10 +22423,10 @@ var init_CredentialsProviderError = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/property-provider/TokenProviderError.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/property-provider/TokenProviderError.js
 var TokenProviderError;
 var init_TokenProviderError = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/property-provider/TokenProviderError.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/property-provider/TokenProviderError.js"() {
     init_ProviderError();
     TokenProviderError = class _TokenProviderError extends ProviderError {
       name = "TokenProviderError";
@@ -22425,10 +22438,10 @@ var init_TokenProviderError = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/property-provider/chain.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/property-provider/chain.js
 var chain;
 var init_chain = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/property-provider/chain.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/property-provider/chain.js"() {
     init_ProviderError();
     chain = (...providers) => async () => {
       if (providers.length === 0) {
@@ -22452,18 +22465,18 @@ var init_chain = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/property-provider/fromValue.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/property-provider/fromValue.js
 var fromValue;
 var init_fromValue = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/property-provider/fromValue.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/property-provider/fromValue.js"() {
     fromValue = (staticValue) => () => Promise.resolve(staticValue);
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/property-provider/memoize.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/property-provider/memoize.js
 var memoize;
 var init_memoize = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/property-provider/memoize.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/property-provider/memoize.js"() {
     memoize = (provider, isExpired, requiresRefresh) => {
       let resolved;
       let pending;
@@ -22511,10 +22524,10 @@ var init_memoize = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/util-config-provider/booleanSelector.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/util-config-provider/booleanSelector.js
 var booleanSelector;
 var init_booleanSelector = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/util-config-provider/booleanSelector.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/util-config-provider/booleanSelector.js"() {
     booleanSelector = (obj, key, type) => {
       if (!(key in obj))
         return void 0;
@@ -22527,10 +22540,10 @@ var init_booleanSelector = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/util-config-provider/numberSelector.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/util-config-provider/numberSelector.js
 var numberSelector;
 var init_numberSelector = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/util-config-provider/numberSelector.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/util-config-provider/numberSelector.js"() {
     numberSelector = (obj, key, type) => {
       if (!(key in obj))
         return void 0;
@@ -22543,10 +22556,10 @@ var init_numberSelector = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/util-config-provider/types.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/util-config-provider/types.js
 var SelectorType;
 var init_types = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/util-config-provider/types.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/util-config-provider/types.js"() {
     (function(SelectorType2) {
       SelectorType2["ENV"] = "env";
       SelectorType2["CONFIG"] = "shared config entry";
@@ -22554,10 +22567,10 @@ var init_types = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getHomeDir.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getHomeDir.js
 var import_node_os, import_node_path, homeDirCache, getHomeDirCacheKey, getHomeDir;
 var init_getHomeDir = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getHomeDir.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getHomeDir.js"() {
     import_node_os = require("node:os");
     import_node_path = require("node:path");
     homeDirCache = {};
@@ -22583,20 +22596,20 @@ var init_getHomeDir = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getProfileName.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getProfileName.js
 var ENV_PROFILE, DEFAULT_PROFILE, getProfileName;
 var init_getProfileName = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getProfileName.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getProfileName.js"() {
     ENV_PROFILE = "AWS_PROFILE";
     DEFAULT_PROFILE = "default";
     getProfileName = (init) => init.profile || process.env[ENV_PROFILE] || DEFAULT_PROFILE;
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getSSOTokenFilepath.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getSSOTokenFilepath.js
 var import_node_crypto, import_node_path2, getSSOTokenFilepath;
 var init_getSSOTokenFilepath = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getSSOTokenFilepath.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getSSOTokenFilepath.js"() {
     import_node_crypto = require("node:crypto");
     import_node_path2 = require("node:path");
     init_getHomeDir();
@@ -22608,10 +22621,10 @@ var init_getSSOTokenFilepath = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getSSOTokenFromFile.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getSSOTokenFromFile.js
 var import_promises, tokenIntercept, getSSOTokenFromFile;
 var init_getSSOTokenFromFile = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getSSOTokenFromFile.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getSSOTokenFromFile.js"() {
     import_promises = require("node:fs/promises");
     init_getSSOTokenFilepath();
     tokenIntercept = {};
@@ -22626,18 +22639,18 @@ var init_getSSOTokenFromFile = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/constants.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/constants.js
 var CONFIG_PREFIX_SEPARATOR;
 var init_constants2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/constants.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/constants.js"() {
     CONFIG_PREFIX_SEPARATOR = ".";
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getConfigData.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getConfigData.js
 var import_types4, getConfigData;
 var init_getConfigData = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getConfigData.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getConfigData.js"() {
     import_types4 = __toESM(require_dist_cjs());
     init_constants2();
     getConfigData = (data) => Object.entries(data).filter(([key]) => {
@@ -22657,10 +22670,10 @@ var init_getConfigData = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getConfigFilepath.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getConfigFilepath.js
 var import_node_path3, ENV_CONFIG_PATH, getConfigFilepath;
 var init_getConfigFilepath = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getConfigFilepath.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getConfigFilepath.js"() {
     import_node_path3 = require("node:path");
     init_getHomeDir();
     ENV_CONFIG_PATH = "AWS_CONFIG_FILE";
@@ -22668,10 +22681,10 @@ var init_getConfigFilepath = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getCredentialsFilepath.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getCredentialsFilepath.js
 var import_node_path4, ENV_CREDENTIALS_PATH, getCredentialsFilepath;
 var init_getCredentialsFilepath = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getCredentialsFilepath.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getCredentialsFilepath.js"() {
     import_node_path4 = require("node:path");
     init_getHomeDir();
     ENV_CREDENTIALS_PATH = "AWS_SHARED_CREDENTIALS_FILE";
@@ -22679,10 +22692,10 @@ var init_getCredentialsFilepath = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/parseIni.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/parseIni.js
 var import_types5, prefixKeyRegex, profileNameBlockList, parseIni;
 var init_parseIni = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/parseIni.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/parseIni.js"() {
     import_types5 = __toESM(require_dist_cjs());
     init_constants2();
     prefixKeyRegex = /^([\w-]+)\s(["'])?([\w-@+.%:/]+)\2$/;
@@ -22735,10 +22748,10 @@ var init_parseIni = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/readFile.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/readFile.js
 var import_promises2, filePromises, fileIntercept, readFile2;
 var init_readFile = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/readFile.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/readFile.js"() {
     import_promises2 = require("node:fs/promises");
     filePromises = {};
     fileIntercept = {};
@@ -22754,10 +22767,10 @@ var init_readFile = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/loadSharedConfigFiles.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/loadSharedConfigFiles.js
 var import_node_path5, swallowError, loadSharedConfigFiles;
 var init_loadSharedConfigFiles = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/loadSharedConfigFiles.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/loadSharedConfigFiles.js"() {
     import_node_path5 = require("node:path");
     init_getConfigData();
     init_getConfigFilepath();
@@ -22795,20 +22808,20 @@ var init_loadSharedConfigFiles = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getSsoSessionData.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getSsoSessionData.js
 var import_types6, getSsoSessionData;
 var init_getSsoSessionData = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getSsoSessionData.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/getSsoSessionData.js"() {
     import_types6 = __toESM(require_dist_cjs());
     init_loadSharedConfigFiles();
     getSsoSessionData = (data) => Object.entries(data).filter(([key]) => key.startsWith(import_types6.IniSectionType.SSO_SESSION + CONFIG_PREFIX_SEPARATOR)).reduce((acc, [key, value]) => ({ ...acc, [key.substring(key.indexOf(CONFIG_PREFIX_SEPARATOR) + 1)]: value }), {});
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/loadSsoSessionData.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/loadSsoSessionData.js
 var swallowError2, loadSsoSessionData;
 var init_loadSsoSessionData = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/loadSsoSessionData.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/loadSsoSessionData.js"() {
     init_getConfigFilepath();
     init_getSsoSessionData();
     init_parseIni();
@@ -22818,10 +22831,10 @@ var init_loadSsoSessionData = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/mergeConfigFiles.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/mergeConfigFiles.js
 var mergeConfigFiles;
 var init_mergeConfigFiles = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/mergeConfigFiles.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/mergeConfigFiles.js"() {
     mergeConfigFiles = (...files) => {
       const merged = {};
       for (const file2 of files) {
@@ -22838,10 +22851,10 @@ var init_mergeConfigFiles = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/parseKnownFiles.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/parseKnownFiles.js
 var parseKnownFiles;
 var init_parseKnownFiles = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/parseKnownFiles.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/parseKnownFiles.js"() {
     init_loadSharedConfigFiles();
     init_mergeConfigFiles();
     parseKnownFiles = async (init) => {
@@ -22851,10 +22864,10 @@ var init_parseKnownFiles = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/externalDataInterceptor.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/externalDataInterceptor.js
 var externalDataInterceptor;
 var init_externalDataInterceptor = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/externalDataInterceptor.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/shared-ini-file-loader/externalDataInterceptor.js"() {
     init_getSSOTokenFromFile();
     init_readFile();
     externalDataInterceptor = {
@@ -22874,7 +22887,7 @@ var init_externalDataInterceptor = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/getSelectorName.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/getSelectorName.js
 function getSelectorName(functionString) {
   try {
     const constants3 = new Set(Array.from(functionString.match(/([A-Z_]){3,}/g) ?? []));
@@ -22887,14 +22900,14 @@ function getSelectorName(functionString) {
   }
 }
 var init_getSelectorName = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/getSelectorName.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/getSelectorName.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/fromEnv.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/fromEnv.js
 var fromEnv;
 var init_fromEnv = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/fromEnv.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/fromEnv.js"() {
     init_CredentialsProviderError();
     init_getSelectorName();
     fromEnv = (envVarSelector, options) => async () => {
@@ -22911,10 +22924,10 @@ var init_fromEnv = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/fromSharedConfigFiles.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/fromSharedConfigFiles.js
 var fromSharedConfigFiles;
 var init_fromSharedConfigFiles = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/fromSharedConfigFiles.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/fromSharedConfigFiles.js"() {
     init_CredentialsProviderError();
     init_getProfileName();
     init_loadSharedConfigFiles();
@@ -22939,20 +22952,20 @@ var init_fromSharedConfigFiles = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/fromStatic.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/fromStatic.js
 var isFunction, fromStatic;
 var init_fromStatic = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/fromStatic.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/fromStatic.js"() {
     init_fromValue();
     isFunction = (func) => typeof func === "function";
     fromStatic = (defaultValue) => isFunction(defaultValue) ? async () => await defaultValue() : fromValue(defaultValue);
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/configLoader.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/configLoader.js
 var loadConfig;
 var init_configLoader = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/configLoader.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/node-config-provider/configLoader.js"() {
     init_chain();
     init_memoize();
     init_fromEnv();
@@ -22966,10 +22979,10 @@ var init_configLoader = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/NodeUseDualstackEndpointConfigOptions.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/NodeUseDualstackEndpointConfigOptions.js
 var ENV_USE_DUALSTACK_ENDPOINT, CONFIG_USE_DUALSTACK_ENDPOINT, DEFAULT_USE_DUALSTACK_ENDPOINT, NODE_USE_DUALSTACK_ENDPOINT_CONFIG_OPTIONS, nodeDualstackConfigSelectors;
 var init_NodeUseDualstackEndpointConfigOptions = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/NodeUseDualstackEndpointConfigOptions.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/NodeUseDualstackEndpointConfigOptions.js"() {
     init_booleanSelector();
     init_types();
     ENV_USE_DUALSTACK_ENDPOINT = "AWS_USE_DUALSTACK_ENDPOINT";
@@ -22988,10 +23001,10 @@ var init_NodeUseDualstackEndpointConfigOptions = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/NodeUseFipsEndpointConfigOptions.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/NodeUseFipsEndpointConfigOptions.js
 var ENV_USE_FIPS_ENDPOINT, CONFIG_USE_FIPS_ENDPOINT, DEFAULT_USE_FIPS_ENDPOINT, NODE_USE_FIPS_ENDPOINT_CONFIG_OPTIONS, nodeFipsConfigSelectors;
 var init_NodeUseFipsEndpointConfigOptions = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/NodeUseFipsEndpointConfigOptions.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/NodeUseFipsEndpointConfigOptions.js"() {
     init_booleanSelector();
     init_types();
     ENV_USE_FIPS_ENDPOINT = "AWS_USE_FIPS_ENDPOINT";
@@ -23010,10 +23023,10 @@ var init_NodeUseFipsEndpointConfigOptions = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/resolveCustomEndpointsConfig.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/resolveCustomEndpointsConfig.js
 var resolveCustomEndpointsConfig;
 var init_resolveCustomEndpointsConfig = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/resolveCustomEndpointsConfig.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/resolveCustomEndpointsConfig.js"() {
     init_client2();
     resolveCustomEndpointsConfig = (input2) => {
       const { tls, endpoint, urlParser, useDualstackEndpoint } = input2;
@@ -23027,10 +23040,10 @@ var init_resolveCustomEndpointsConfig = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/utils/getEndpointFromRegion.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/utils/getEndpointFromRegion.js
 var getEndpointFromRegion;
 var init_getEndpointFromRegion = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/utils/getEndpointFromRegion.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/utils/getEndpointFromRegion.js"() {
     getEndpointFromRegion = async (input2) => {
       const { tls = true } = input2;
       const region = await input2.region();
@@ -23049,10 +23062,10 @@ var init_getEndpointFromRegion = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/resolveEndpointsConfig.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/resolveEndpointsConfig.js
 var resolveEndpointsConfig;
 var init_resolveEndpointsConfig = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/resolveEndpointsConfig.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/endpointsConfig/resolveEndpointsConfig.js"() {
     init_client2();
     init_getEndpointFromRegion();
     resolveEndpointsConfig = (input2) => {
@@ -23068,10 +23081,10 @@ var init_resolveEndpointsConfig = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/defaults-mode/constants.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/defaults-mode/constants.js
 var AWS_EXECUTION_ENV, AWS_REGION_ENV, AWS_DEFAULT_REGION_ENV, ENV_IMDS_DISABLED, DEFAULTS_MODE_OPTIONS, IMDS_REGION_PATH, IMDS_TOKEN_PATH, X_AWS_EC2_METADATA_TOKEN, X_AWS_EC2_METADATA_TOKEN_TTL;
 var init_constants3 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/defaults-mode/constants.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/defaults-mode/constants.js"() {
     AWS_EXECUTION_ENV = "AWS_EXECUTION_ENV";
     AWS_REGION_ENV = "AWS_REGION";
     AWS_DEFAULT_REGION_ENV = "AWS_DEFAULT_REGION";
@@ -23084,10 +23097,10 @@ var init_constants3 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/getInstanceMetadataRegion.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/getInstanceMetadataRegion.js
 var TIMEOUT_MS, NEG_CACHE_TTL_MS, negativeCacheUntil, getInstanceMetadataRegion, cacheNegativeAndReturnUndefined, resolveImdsEndpoint, imdsRequest;
 var init_getInstanceMetadataRegion = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/getInstanceMetadataRegion.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/getInstanceMetadataRegion.js"() {
     init_constants3();
     TIMEOUT_MS = 1e3;
     NEG_CACHE_TTL_MS = 6e4;
@@ -23180,10 +23193,10 @@ var init_getInstanceMetadataRegion = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/config.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/config.js
 var REGION_ENV_NAME, REGION_INI_NAME, NODE_REGION_CONFIG_OPTIONS, NODE_REGION_CONFIG_FILE_OPTIONS;
 var init_config = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/config.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/config.js"() {
     init_getInstanceMetadataRegion();
     REGION_ENV_NAME = "AWS_REGION";
     REGION_INI_NAME = "region";
@@ -23204,10 +23217,10 @@ var init_config = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/checkRegion.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/checkRegion.js
 var validRegions, checkRegion;
 var init_checkRegion = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/checkRegion.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/checkRegion.js"() {
     init_transport();
     validRegions = /* @__PURE__ */ new Set();
     checkRegion = (region, check2 = isValidHostLabel) => {
@@ -23224,27 +23237,27 @@ var init_checkRegion = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/isFipsRegion.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/isFipsRegion.js
 var isFipsRegion;
 var init_isFipsRegion = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/isFipsRegion.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/isFipsRegion.js"() {
     isFipsRegion = (region) => typeof region === "string" && (region.startsWith("fips-") || region.endsWith("-fips"));
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/getRealRegion.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/getRealRegion.js
 var getRealRegion;
 var init_getRealRegion = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/getRealRegion.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/getRealRegion.js"() {
     init_isFipsRegion();
     getRealRegion = (region) => isFipsRegion(region) ? ["fips-aws-global", "aws-fips"].includes(region) ? "us-east-1" : region.replace(/fips-(dkr-|prod-)?|-fips/, "") : region;
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/resolveRegionConfig.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/resolveRegionConfig.js
 var resolveRegionConfig;
 var init_resolveRegionConfig = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/resolveRegionConfig.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionConfig/resolveRegionConfig.js"() {
     init_checkRegion();
     init_getRealRegion();
     init_isFipsRegion();
@@ -23272,34 +23285,34 @@ var init_resolveRegionConfig = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getHostnameFromVariants.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getHostnameFromVariants.js
 var getHostnameFromVariants;
 var init_getHostnameFromVariants = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getHostnameFromVariants.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getHostnameFromVariants.js"() {
     getHostnameFromVariants = (variants = [], { useFipsEndpoint, useDualstackEndpoint }) => variants.find(({ tags }) => useFipsEndpoint === tags.includes("fips") && useDualstackEndpoint === tags.includes("dualstack"))?.hostname;
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getResolvedHostname.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getResolvedHostname.js
 var getResolvedHostname;
 var init_getResolvedHostname = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getResolvedHostname.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getResolvedHostname.js"() {
     getResolvedHostname = (resolvedRegion, { regionHostname, partitionHostname }) => regionHostname ? regionHostname : partitionHostname ? partitionHostname.replace("{region}", resolvedRegion) : void 0;
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getResolvedPartition.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getResolvedPartition.js
 var getResolvedPartition;
 var init_getResolvedPartition = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getResolvedPartition.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getResolvedPartition.js"() {
     getResolvedPartition = (region, { partitionHash }) => Object.keys(partitionHash || {}).find((key) => partitionHash[key].regions.includes(region)) ?? "aws";
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getResolvedSigningRegion.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getResolvedSigningRegion.js
 var getResolvedSigningRegion;
 var init_getResolvedSigningRegion = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getResolvedSigningRegion.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getResolvedSigningRegion.js"() {
     getResolvedSigningRegion = (hostname3, { signingRegion, regionRegex, useFipsEndpoint }) => {
       if (signingRegion) {
         return signingRegion;
@@ -23314,10 +23327,10 @@ var init_getResolvedSigningRegion = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getRegionInfo.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getRegionInfo.js
 var getRegionInfo;
 var init_getRegionInfo = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getRegionInfo.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/config-resolver/regionInfo/getRegionInfo.js"() {
     init_getHostnameFromVariants();
     init_getResolvedHostname();
     init_getResolvedPartition();
@@ -23350,10 +23363,10 @@ var init_getRegionInfo = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/defaults-mode/defaultsModeConfig.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/defaults-mode/defaultsModeConfig.js
 var AWS_DEFAULTS_MODE_ENV, AWS_DEFAULTS_MODE_CONFIG, NODE_DEFAULTS_MODE_CONFIG_OPTIONS;
 var init_defaultsModeConfig = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/defaults-mode/defaultsModeConfig.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/defaults-mode/defaultsModeConfig.js"() {
     AWS_DEFAULTS_MODE_ENV = "AWS_DEFAULTS_MODE";
     AWS_DEFAULTS_MODE_CONFIG = "defaults_mode";
     NODE_DEFAULTS_MODE_CONFIG_OPTIONS = {
@@ -23368,10 +23381,10 @@ var init_defaultsModeConfig = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/defaults-mode/resolveDefaultsModeConfig.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/defaults-mode/resolveDefaultsModeConfig.js
 var resolveDefaultsModeConfig, resolveNodeDefaultsModeAuto, inferPhysicalRegion;
 var init_resolveDefaultsModeConfig = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/defaults-mode/resolveDefaultsModeConfig.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/defaults-mode/resolveDefaultsModeConfig.js"() {
     init_config();
     init_getInstanceMetadataRegion();
     init_configLoader();
@@ -23419,7 +23432,7 @@ var init_resolveDefaultsModeConfig = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/index.js
 var config_exports = {};
 __export(config_exports, {
   CONFIG_PREFIX_SEPARATOR: () => CONFIG_PREFIX_SEPARATOR,
@@ -23466,7 +23479,7 @@ __export(config_exports, {
   resolveRegionConfig: () => resolveRegionConfig
 });
 var init_config2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/config/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/config/index.js"() {
     init_ProviderError();
     init_CredentialsProviderError();
     init_TokenProviderError();
@@ -23499,10 +23512,10 @@ var init_config2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getEndpointUrlConfig.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getEndpointUrlConfig.js
 var ENV_ENDPOINT_URL, CONFIG_ENDPOINT_URL, getEndpointUrlConfig;
 var init_getEndpointUrlConfig = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getEndpointUrlConfig.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getEndpointUrlConfig.js"() {
     init_config2();
     ENV_ENDPOINT_URL = "AWS_ENDPOINT_URL";
     CONFIG_ENDPOINT_URL = "endpoint_url";
@@ -23539,10 +23552,10 @@ var init_getEndpointUrlConfig = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getIgnoreConfiguredEndpointUrls.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getIgnoreConfiguredEndpointUrls.js
 var ENV_IGNORE_CONFIGURED_ENDPOINT_URLS, CONFIG_IGNORE_CONFIGURED_ENDPOINT_URLS, ignoreConfiguredEndpointUrlsConfigSelectors;
 var init_getIgnoreConfiguredEndpointUrls = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getIgnoreConfiguredEndpointUrls.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getIgnoreConfiguredEndpointUrls.js"() {
     init_config2();
     ENV_IGNORE_CONFIGURED_ENDPOINT_URLS = "AWS_IGNORE_CONFIGURED_ENDPOINT_URLS";
     CONFIG_IGNORE_CONFIGURED_ENDPOINT_URLS = "ignore_configured_endpoint_urls";
@@ -23554,10 +23567,10 @@ var init_getIgnoreConfiguredEndpointUrls = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getEndpointFromConfig.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getEndpointFromConfig.js
 var getEndpointFromConfig;
 var init_getEndpointFromConfig = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getEndpointFromConfig.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getEndpointFromConfig.js"() {
     init_config2();
     init_getEndpointUrlConfig();
     init_getIgnoreConfiguredEndpointUrls();
@@ -23571,10 +23584,10 @@ var init_getEndpointFromConfig = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/service-customizations/s3.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/service-customizations/s3.js
 var resolveParamsForS3, DOMAIN_PATTERN, IP_ADDRESS_PATTERN, DOTS_PATTERN, isDnsCompatibleBucketName, isArnBucketName;
 var init_s3 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/service-customizations/s3.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/service-customizations/s3.js"() {
     resolveParamsForS3 = async (endpointParams) => {
       const bucket = endpointParams?.Bucket || "";
       if (typeof endpointParams.Bucket === "string") {
@@ -23609,17 +23622,17 @@ var init_s3 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/service-customizations/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/service-customizations/index.js
 var init_service_customizations = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/service-customizations/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/service-customizations/index.js"() {
     init_s3();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/createConfigValueProvider.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/createConfigValueProvider.js
 var createConfigValueProvider;
 var init_createConfigValueProvider = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/createConfigValueProvider.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/createConfigValueProvider.js"() {
     createConfigValueProvider = (configKey, canonicalEndpointParamKey, config2, isClientContextParam = false) => {
       const configProvider = async () => {
         let configValue;
@@ -23672,14 +23685,14 @@ var init_createConfigValueProvider = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/toEndpointV1.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/toEndpointV1.js
 var init_toEndpointV12 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/toEndpointV1.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/toEndpointV1.js"() {
     init_transport();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getEndpointFromInstructions.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getEndpointFromInstructions.js
 function bindGetEndpointFromInstructions(getEndpointFromConfig2) {
   return async (commandInput, instructionsSupplier, clientConfig, context) => {
     if (!clientConfig.isCustomEndpoint && !clientConfig.ignoreConfiguredEndpointUrls) {
@@ -23714,7 +23727,7 @@ function bindGetEndpointFromInstructions(getEndpointFromConfig2) {
 }
 var resolveParams;
 var init_getEndpointFromInstructions = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getEndpointFromInstructions.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/adaptors/getEndpointFromInstructions.js"() {
     init_service_customizations();
     init_createConfigValueProvider();
     init_toEndpointV12();
@@ -23751,7 +23764,7 @@ var init_getEndpointFromInstructions = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/endpointMiddleware.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/endpointMiddleware.js
 function setFeature(context, feature, value) {
   if (!context.__smithy_context) {
     context.__smithy_context = { features: {} };
@@ -23797,13 +23810,13 @@ function bindEndpointMiddleware(getEndpointFromConfig2) {
   };
 }
 var init_endpointMiddleware = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/endpointMiddleware.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/endpointMiddleware.js"() {
     init_transport();
     init_getEndpointFromInstructions();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/getEndpointPlugin.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/getEndpointPlugin.js
 function bindGetEndpointPlugin(getEndpointFromConfig2) {
   const endpointMiddleware2 = bindEndpointMiddleware(getEndpointFromConfig2);
   return (config2, instructions) => ({
@@ -23817,7 +23830,7 @@ function bindGetEndpointPlugin(getEndpointFromConfig2) {
 }
 var serializerMiddlewareOption2, endpointMiddlewareOptions;
 var init_getEndpointPlugin = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/getEndpointPlugin.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/getEndpointPlugin.js"() {
     init_endpointMiddleware();
     serializerMiddlewareOption2 = {
       name: "serializerMiddleware",
@@ -23836,7 +23849,7 @@ var init_getEndpointPlugin = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/resolveEndpointConfig.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/resolveEndpointConfig.js
 function bindResolveEndpointConfig(getEndpointFromConfig2) {
   return (input2) => {
     const tls = input2.tls ?? true;
@@ -23862,16 +23875,16 @@ function bindResolveEndpointConfig(getEndpointFromConfig2) {
   };
 }
 var init_resolveEndpointConfig = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/resolveEndpointConfig.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/resolveEndpointConfig.js"() {
     init_transport();
     init_toEndpointV12();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/bdd/BinaryDecisionDiagram.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/bdd/BinaryDecisionDiagram.js
 var BinaryDecisionDiagram;
 var init_BinaryDecisionDiagram = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/bdd/BinaryDecisionDiagram.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/bdd/BinaryDecisionDiagram.js"() {
     BinaryDecisionDiagram = class _BinaryDecisionDiagram {
       nodes;
       root;
@@ -23890,10 +23903,10 @@ var init_BinaryDecisionDiagram = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/cache/EndpointCache.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/cache/EndpointCache.js
 var EndpointCache;
 var init_EndpointCache = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/cache/EndpointCache.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/cache/EndpointCache.js"() {
     EndpointCache = class {
       capacity;
       data = /* @__PURE__ */ new Map();
@@ -23935,7 +23948,8 @@ var init_EndpointCache = __esm({
           return false;
         }
         for (const param of parameters) {
-          const val = String(endpointParams[param] ?? "");
+          const raw = endpointParams[param];
+          const val = raw == null ? "\0" : String(raw);
           if (val.includes("|;")) {
             return false;
           }
@@ -23947,10 +23961,10 @@ var init_EndpointCache = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/types/EndpointError.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/types/EndpointError.js
 var EndpointError;
 var init_EndpointError = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/types/EndpointError.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/types/EndpointError.js"() {
     EndpointError = class extends Error {
       constructor(message) {
         super(message);
@@ -23960,22 +23974,22 @@ var init_EndpointError = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/types/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/types/index.js
 var init_types2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/types/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/types/index.js"() {
     init_EndpointError();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/debug/debugId.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/debug/debugId.js
 var debugId;
 var init_debugId = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/debug/debugId.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/debug/debugId.js"() {
     debugId = "endpoints";
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/debug/toDebugString.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/debug/toDebugString.js
 function toDebugString(input2) {
   if (typeof input2 !== "object" || input2 == null) {
     return input2;
@@ -23989,35 +24003,35 @@ function toDebugString(input2) {
   return JSON.stringify(input2, null, 2);
 }
 var init_toDebugString = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/debug/toDebugString.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/debug/toDebugString.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/debug/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/debug/index.js
 var init_debug = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/debug/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/debug/index.js"() {
     init_debugId();
     init_toDebugString();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/customEndpointFunctions.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/customEndpointFunctions.js
 var customEndpointFunctions;
 var init_customEndpointFunctions = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/customEndpointFunctions.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/customEndpointFunctions.js"() {
     customEndpointFunctions = {};
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/booleanEquals.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/booleanEquals.js
 var booleanEquals;
 var init_booleanEquals = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/booleanEquals.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/booleanEquals.js"() {
     booleanEquals = (value1, value2) => value1 === value2;
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/coalesce.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/coalesce.js
 function coalesce(...args) {
   for (const arg of args) {
     if (arg != null) {
@@ -24027,14 +24041,14 @@ function coalesce(...args) {
   return void 0;
 }
 var init_coalesce = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/coalesce.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/coalesce.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/getAttrPathList.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/getAttrPathList.js
 var getAttrPathList;
 var init_getAttrPathList = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/getAttrPathList.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/getAttrPathList.js"() {
     init_types2();
     getAttrPathList = (path) => {
       const parts = path.split(".");
@@ -24062,10 +24076,10 @@ var init_getAttrPathList = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/getAttr.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/getAttr.js
 var getAttr;
 var init_getAttr = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/getAttr.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/getAttr.js"() {
     init_types2();
     init_getAttrPathList();
     getAttr = (value, path) => getAttrPathList(path).reduce((acc, index) => {
@@ -24080,44 +24094,44 @@ var init_getAttr = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/isSet.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/isSet.js
 var isSet;
 var init_isSet = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/isSet.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/isSet.js"() {
     isSet = (value) => value != null;
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/ite.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/ite.js
 function ite(condition, trueValue, falseValue) {
   return condition ? trueValue : falseValue;
 }
 var init_ite = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/ite.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/ite.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/not.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/not.js
 var not;
 var init_not = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/not.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/not.js"() {
     not = (value) => !value;
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/isIpAddress.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/isIpAddress.js
 var IP_V4_REGEX, isIpAddress;
 var init_isIpAddress = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/isIpAddress.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/isIpAddress.js"() {
     IP_V4_REGEX = new RegExp(`^(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|\\d)){3}$`);
     isIpAddress = (value) => IP_V4_REGEX.test(value) || value.startsWith("[") && value.endsWith("]");
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/parseURL.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/parseURL.js
 var import_types12, DEFAULT_PORTS, parseURL;
 var init_parseURL = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/parseURL.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/parseURL.js"() {
     import_types12 = __toESM(require_dist_cjs());
     init_isIpAddress();
     DEFAULT_PORTS = {
@@ -24168,7 +24182,7 @@ var init_parseURL = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/split.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/split.js
 function split(value, delimiter, limit) {
   if (limit === 1) {
     return [value];
@@ -24183,22 +24197,22 @@ function split(value, delimiter, limit) {
   return parts.slice(0, limit - 1).concat(parts.slice(1).join(delimiter));
 }
 var init_split = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/split.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/split.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/stringEquals.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/stringEquals.js
 var stringEquals;
 var init_stringEquals = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/stringEquals.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/stringEquals.js"() {
     stringEquals = (value1, value2) => value1 === value2;
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/substring.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/substring.js
 var substring;
 var init_substring = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/substring.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/substring.js"() {
     substring = (input2, start, stop, reverse) => {
       if (input2 == null || start >= stop || input2.length < stop || /[^\u0000-\u007f]/.test(input2)) {
         return null;
@@ -24211,17 +24225,17 @@ var init_substring = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/uriEncode.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/uriEncode.js
 var uriEncode;
 var init_uriEncode = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/uriEncode.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/uriEncode.js"() {
     uriEncode = (value) => encodeURIComponent(value).replace(/[!*'()]/g, (c5) => `%${c5.charCodeAt(0).toString(16).toUpperCase()}`);
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/index.js
 var init_lib = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/lib/index.js"() {
     init_booleanEquals();
     init_coalesce();
     init_getAttr();
@@ -24237,10 +24251,10 @@ var init_lib = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/endpointFunctions.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/endpointFunctions.js
 var endpointFunctions;
 var init_endpointFunctions = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/endpointFunctions.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/endpointFunctions.js"() {
     init_lib();
     endpointFunctions = {
       booleanEquals,
@@ -24259,10 +24273,10 @@ var init_endpointFunctions = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateTemplate.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateTemplate.js
 var evaluateTemplate;
 var init_evaluateTemplate = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateTemplate.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateTemplate.js"() {
     init_lib();
     evaluateTemplate = (template, options) => {
       const evaluatedTemplateArr = [];
@@ -24298,20 +24312,20 @@ var init_evaluateTemplate = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getReferenceValue.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getReferenceValue.js
 var getReferenceValue;
 var init_getReferenceValue = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getReferenceValue.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getReferenceValue.js"() {
     getReferenceValue = ({ ref }, options) => {
       return options.referenceRecord[ref] ?? options.endpointParams[ref];
     };
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateExpression.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateExpression.js
 var evaluateExpression, callFunction, group;
 var init_evaluateExpression = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateExpression.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateExpression.js"() {
     init_types2();
     init_customEndpointFunctions();
     init_endpointFunctions();
@@ -24358,17 +24372,17 @@ var init_evaluateExpression = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/callFunction.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/callFunction.js
 var init_callFunction = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/callFunction.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/callFunction.js"() {
     init_evaluateExpression();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateCondition.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateCondition.js
 var evaluateCondition;
 var init_evaluateCondition = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateCondition.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateCondition.js"() {
     init_debug();
     init_types2();
     init_callFunction();
@@ -24388,10 +24402,10 @@ var init_evaluateCondition = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getEndpointHeaders.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getEndpointHeaders.js
 var getEndpointHeaders;
 var init_getEndpointHeaders = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getEndpointHeaders.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getEndpointHeaders.js"() {
     init_types2();
     init_evaluateExpression();
     getEndpointHeaders = (headers, options) => Object.entries(headers ?? {}).reduce((acc, [headerKey, headerVal]) => {
@@ -24407,10 +24421,10 @@ var init_getEndpointHeaders = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getEndpointProperties.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getEndpointProperties.js
 var getEndpointProperties, getEndpointProperty, group2;
 var init_getEndpointProperties = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getEndpointProperties.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getEndpointProperties.js"() {
     init_types2();
     init_evaluateTemplate();
     getEndpointProperties = (properties, options) => Object.entries(properties).reduce((acc, [propertyKey, propertyVal]) => {
@@ -24442,10 +24456,10 @@ var init_getEndpointProperties = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getEndpointUrl.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getEndpointUrl.js
 var getEndpointUrl;
 var init_getEndpointUrl = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getEndpointUrl.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/getEndpointUrl.js"() {
     init_types2();
     init_evaluateExpression();
     getEndpointUrl = (endpointUrl, options) => {
@@ -24463,10 +24477,10 @@ var init_getEndpointUrl = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/decideEndpoint.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/decideEndpoint.js
 var RESULT, decideEndpoint;
 var init_decideEndpoint = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/decideEndpoint.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/decideEndpoint.js"() {
     init_types2();
     init_evaluateCondition();
     init_evaluateExpression();
@@ -24512,10 +24526,10 @@ var init_decideEndpoint = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateConditions.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateConditions.js
 var evaluateConditions;
 var init_evaluateConditions = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateConditions.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateConditions.js"() {
     init_debug();
     init_evaluateCondition();
     evaluateConditions = (conditions = [], options) => {
@@ -24545,10 +24559,10 @@ var init_evaluateConditions = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateEndpointRule.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateEndpointRule.js
 var evaluateEndpointRule;
 var init_evaluateEndpointRule = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateEndpointRule.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateEndpointRule.js"() {
     init_debug();
     init_evaluateConditions();
     init_getEndpointHeaders();
@@ -24578,10 +24592,10 @@ var init_evaluateEndpointRule = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateErrorRule.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateErrorRule.js
 var evaluateErrorRule;
 var init_evaluateErrorRule = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateErrorRule.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateErrorRule.js"() {
     init_types2();
     init_evaluateConditions();
     init_evaluateExpression();
@@ -24600,10 +24614,10 @@ var init_evaluateErrorRule = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateRules.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateRules.js
 var evaluateRules, evaluateTreeRule, group3;
 var init_evaluateRules = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateRules.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/evaluateRules.js"() {
     init_types2();
     init_evaluateConditions();
     init_evaluateEndpointRule();
@@ -24644,17 +24658,17 @@ var init_evaluateRules = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/index.js
 var init_utils = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/utils/index.js"() {
     init_evaluateRules();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/resolveEndpoint.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/resolveEndpoint.js
 var resolveEndpoint;
 var init_resolveEndpoint = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/resolveEndpoint.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/util-endpoints/resolveEndpoint.js"() {
     init_transport();
     init_debug();
     init_types2();
@@ -24683,10 +24697,10 @@ var init_resolveEndpoint = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/resolveEndpointRequiredConfig.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/resolveEndpointRequiredConfig.js
 var resolveEndpointRequiredConfig;
 var init_resolveEndpointRequiredConfig = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/resolveEndpointRequiredConfig.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/middleware-endpoint/resolveEndpointRequiredConfig.js"() {
     resolveEndpointRequiredConfig = (input2) => {
       const { endpoint } = input2;
       if (endpoint === void 0) {
@@ -24699,7 +24713,7 @@ var init_resolveEndpointRequiredConfig = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/index.js
 var endpoints_exports = {};
 __export(endpoints_exports, {
   BinaryDecisionDiagram: () => BinaryDecisionDiagram,
@@ -24722,7 +24736,7 @@ __export(endpoints_exports, {
 });
 var getEndpointFromInstructions, resolveEndpointConfig, endpointMiddleware, getEndpointPlugin;
 var init_endpoints = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/endpoints/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/endpoints/index.js"() {
     init_getEndpointFromConfig();
     init_getEndpointFromInstructions();
     init_endpointMiddleware();
@@ -24748,10 +24762,10 @@ var init_endpoints = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/middleware-serde/serializerMiddleware.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/middleware-serde/serializerMiddleware.js
 var serializerMiddleware;
 var init_serializerMiddleware = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/middleware-serde/serializerMiddleware.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/middleware-serde/serializerMiddleware.js"() {
     init_endpoints();
     serializerMiddleware = (options, serializer) => (next, context) => async (args) => {
       const endpointConfig = options;
@@ -24768,7 +24782,7 @@ var init_serializerMiddleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/middleware-serde/serdePlugin.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/middleware-serde/serdePlugin.js
 function getSerdePlugin(config2, serializer, deserializer) {
   return {
     applyToStack: (commandStack) => {
@@ -24779,7 +24793,7 @@ function getSerdePlugin(config2, serializer, deserializer) {
 }
 var deserializerMiddlewareOption2, serializerMiddlewareOption3;
 var init_serdePlugin = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/middleware-serde/serdePlugin.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/middleware-serde/serdePlugin.js"() {
     init_deserializerMiddleware();
     init_serializerMiddleware();
     deserializerMiddlewareOption2 = {
@@ -24797,7 +24811,7 @@ var init_serdePlugin = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/hash-node/hash-node.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/hash-node/hash-node.js
 function castSourceData(toCast, encoding) {
   if (Buffer.isBuffer(toCast)) {
     return toCast;
@@ -24812,7 +24826,7 @@ function castSourceData(toCast, encoding) {
 }
 var import_node_crypto2, Hash;
 var init_hash_node = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/hash-node/hash-node.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/hash-node/hash-node.js"() {
     import_node_crypto2 = require("node:crypto");
     init_buffer_from();
     init_toUint8Array();
@@ -24838,10 +24852,10 @@ var init_hash_node = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/ChecksumStream.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/ChecksumStream.js
 var import_node_stream2, ChecksumStream;
 var init_ChecksumStream = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/ChecksumStream.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/ChecksumStream.js"() {
     import_node_stream2 = require("node:stream");
     init_toBase64();
     ChecksumStream = class extends import_node_stream2.Readable {
@@ -24920,10 +24934,10 @@ var init_ChecksumStream = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/stream-type-check.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/stream-type-check.js
 var isReadableStream, isBlob;
 var init_stream_type_check = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/stream-type-check.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/stream-type-check.js"() {
     isReadableStream = (stream) => typeof ReadableStream === "function" && (stream?.constructor?.name === ReadableStream.name || stream instanceof ReadableStream);
     isBlob = (blob) => {
       return typeof Blob === "function" && (blob?.constructor?.name === Blob.name || blob instanceof Blob);
@@ -24931,18 +24945,18 @@ var init_stream_type_check = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/fromUtf8.browser.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/fromUtf8.browser.js
 var fromUtf82;
 var init_fromUtf8_browser = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/fromUtf8.browser.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/fromUtf8.browser.js"() {
     fromUtf82 = (input2) => new TextEncoder().encode(input2);
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/constants-for-browser.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/constants-for-browser.js
 var chars, alphabetByEncoding, alphabetByValue, bitsPerLetter, bitsPerByte, maxLetterValue;
 var init_constants_for_browser = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/constants-for-browser.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/constants-for-browser.js"() {
     chars = `ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/`;
     alphabetByEncoding = Object.entries(chars).reduce((acc, [i5, c5]) => {
       acc[c5] = Number(i5);
@@ -24955,7 +24969,7 @@ var init_constants_for_browser = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/toBase64.browser.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/toBase64.browser.js
 function toBase642(_input) {
   let input2;
   if (typeof _input === "string") {
@@ -24987,16 +25001,16 @@ function toBase642(_input) {
   return str;
 }
 var init_toBase64_browser = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/toBase64.browser.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-base64/toBase64.browser.js"() {
     init_fromUtf8_browser();
     init_constants_for_browser();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/ChecksumStream.browser.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/ChecksumStream.browser.js
 var ReadableStreamRef, ChecksumStream2;
 var init_ChecksumStream_browser = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/ChecksumStream.browser.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/ChecksumStream.browser.js"() {
     ReadableStreamRef = typeof ReadableStream === "function" ? ReadableStream : function() {
     };
     ChecksumStream2 = class extends ReadableStreamRef {
@@ -25004,10 +25018,10 @@ var init_ChecksumStream_browser = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/createChecksumStream.browser.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/createChecksumStream.browser.js
 var createChecksumStream;
 var init_createChecksumStream_browser = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/createChecksumStream.browser.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/createChecksumStream.browser.js"() {
     init_toBase64_browser();
     init_stream_type_check();
     init_ChecksumStream_browser();
@@ -25045,7 +25059,7 @@ var init_createChecksumStream_browser = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/createChecksumStream.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/createChecksumStream.js
 function createChecksumStream2(init) {
   if (typeof ReadableStream === "function" && isReadableStream(init.source)) {
     return createChecksumStream(init);
@@ -25053,17 +25067,17 @@ function createChecksumStream2(init) {
   return new ChecksumStream(init);
 }
 var init_createChecksumStream = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/createChecksumStream.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/checksum/createChecksumStream.js"() {
     init_stream_type_check();
     init_ChecksumStream();
     init_createChecksumStream_browser();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/ByteArrayCollector.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/ByteArrayCollector.js
 var ByteArrayCollector;
 var init_ByteArrayCollector = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/ByteArrayCollector.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/ByteArrayCollector.js"() {
     ByteArrayCollector = class {
       allocByteArray;
       byteLength = 0;
@@ -25099,7 +25113,7 @@ var init_ByteArrayCollector = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/createBufferedReadable.browser.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/createBufferedReadable.browser.js
 function createBufferedReadableStream(upstream, size, logger2) {
   const reader = upstream.getReader();
   let streamBufferingLoggedWarning = false;
@@ -25191,12 +25205,12 @@ function modeOf(chunk, allowBuffer = true) {
   return -1;
 }
 var init_createBufferedReadable_browser = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/createBufferedReadable.browser.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/createBufferedReadable.browser.js"() {
     init_ByteArrayCollector();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/createBufferedReadable.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/createBufferedReadable.js
 function createBufferedReadable(upstream, size, logger2) {
   if (isReadableStream(upstream)) {
     return createBufferedReadableStream(upstream, size, logger2);
@@ -25252,7 +25266,7 @@ function createBufferedReadable(upstream, size, logger2) {
 }
 var import_node_stream3;
 var init_createBufferedReadable = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/createBufferedReadable.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/createBufferedReadable.js"() {
     import_node_stream3 = require("node:stream");
     init_ByteArrayCollector();
     init_createBufferedReadable_browser();
@@ -25260,10 +25274,10 @@ var init_createBufferedReadable = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/getAwsChunkedEncodingStream.browser.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/getAwsChunkedEncodingStream.browser.js
 var getAwsChunkedEncodingStream;
 var init_getAwsChunkedEncodingStream_browser = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/getAwsChunkedEncodingStream.browser.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/getAwsChunkedEncodingStream.browser.js"() {
     getAwsChunkedEncodingStream = (readableStream, options) => {
       const { base64Encoder, bodyLengthChecker, checksumAlgorithmFn, checksumLocationName, streamHasher } = options;
       const checksumRequired = base64Encoder !== void 0 && bodyLengthChecker !== void 0 && checksumAlgorithmFn !== void 0 && checksumLocationName !== void 0 && streamHasher !== void 0;
@@ -25296,7 +25310,7 @@ ${value}\r
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/getAwsChunkedEncodingStream.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/getAwsChunkedEncodingStream.js
 function getAwsChunkedEncodingStream2(stream, options) {
   const readable = stream;
   const readableStream = stream;
@@ -25349,14 +25363,14 @@ function getAwsChunkedEncodingStream2(stream, options) {
 }
 var import_node_stream4;
 var init_getAwsChunkedEncodingStream = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/getAwsChunkedEncodingStream.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/getAwsChunkedEncodingStream.js"() {
     import_node_stream4 = require("node:stream");
     init_getAwsChunkedEncodingStream_browser();
     init_stream_type_check();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/headStream.browser.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/headStream.browser.js
 async function headStream(stream, bytes) {
   let byteLengthCounter = 0;
   const chunks = [];
@@ -25388,14 +25402,14 @@ async function headStream(stream, bytes) {
   return collected;
 }
 var init_headStream_browser = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/headStream.browser.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/headStream.browser.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/headStream.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/headStream.js
 var import_node_stream5, headStream2, Collector;
 var init_headStream = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/headStream.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/headStream.js"() {
     import_node_stream5 = require("node:stream");
     init_concatBytes();
     init_headStream_browser();
@@ -25438,10 +25452,10 @@ var init_headStream = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/toUtf8.browser.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/toUtf8.browser.js
 var toUtf82;
 var init_toUtf8_browser = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/toUtf8.browser.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-utf8/toUtf8.browser.js"() {
     toUtf82 = (input2) => {
       if (typeof input2 === "string") {
         return input2;
@@ -25454,7 +25468,7 @@ var init_toUtf8_browser = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/stream-collector.browser.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/stream-collector.browser.js
 async function collectBlob(blob) {
   return blob.arrayBuffer().then((ab) => new Uint8Array(ab));
 }
@@ -25476,7 +25490,7 @@ async function collectReadableStream(stream) {
 }
 var streamCollector;
 var init_stream_collector_browser = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/stream-collector.browser.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/stream-collector.browser.js"() {
     init_concatBytes();
     init_stream_type_check();
     streamCollector = async (stream) => {
@@ -25488,10 +25502,10 @@ var init_stream_collector_browser = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/sdk-stream-mixin.browser.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/sdk-stream-mixin.browser.js
 var ERR_MSG_STREAM_HAS_BEEN_TRANSFORMED, sdkStreamMixin, isBlobInstance;
 var init_sdk_stream_mixin_browser = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/sdk-stream-mixin.browser.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/sdk-stream-mixin.browser.js"() {
     init_toBase64_browser();
     init_hex_encoding();
     init_toUtf8_browser();
@@ -25552,10 +25566,10 @@ var init_sdk_stream_mixin_browser = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/stream-collector.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/stream-collector.js
 var import_node_stream6, streamCollector2, Collector2;
 var init_stream_collector = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/stream-collector.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/stream-collector.js"() {
     import_node_stream6 = require("node:stream");
     init_concatBytes();
     init_stream_collector_browser();
@@ -25592,10 +25606,10 @@ var init_stream_collector = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/sdk-stream-mixin.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/sdk-stream-mixin.js
 var import_node_stream7, ERR_MSG_STREAM_HAS_BEEN_TRANSFORMED2, sdkStreamMixin2;
 var init_sdk_stream_mixin = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/sdk-stream-mixin.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/sdk-stream-mixin.js"() {
     import_node_stream7 = require("node:stream");
     init_buffer_from();
     init_sdk_stream_mixin_browser();
@@ -25647,7 +25661,7 @@ var init_sdk_stream_mixin = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/splitStream.browser.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/splitStream.browser.js
 async function splitStream(stream) {
   if (typeof stream.stream === "function") {
     stream = stream.stream();
@@ -25656,11 +25670,11 @@ async function splitStream(stream) {
   return readableStream.tee();
 }
 var init_splitStream_browser = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/splitStream.browser.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/splitStream.browser.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/splitStream.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/splitStream.js
 async function splitStream2(stream) {
   if (isReadableStream(stream) || isBlob(stream)) {
     return splitStream(stream);
@@ -25673,14 +25687,14 @@ async function splitStream2(stream) {
 }
 var import_node_stream8;
 var init_splitStream = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/splitStream.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/util-stream/splitStream.js"() {
     import_node_stream8 = require("node:stream");
     init_splitStream_browser();
     init_stream_type_check();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/index.js
 var serde_exports = {};
 __export(serde_exports, {
   ChecksumStream: () => ChecksumStream,
@@ -25759,7 +25773,7 @@ __export(serde_exports, {
 });
 var import_node_crypto3, Uint8ArrayBlobAdapter, _getRandomValues, v4, generateIdempotencyToken;
 var init_serde = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/serde/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/serde/index.js"() {
     import_node_crypto3 = require("node:crypto");
     init_fromBase64();
     init_toBase64();
@@ -25804,10 +25818,10 @@ var init_serde = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/collect-stream-body.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/collect-stream-body.js
 var collectBody;
 var init_collect_stream_body = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/collect-stream-body.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/collect-stream-body.js"() {
     init_serde();
     collectBody = async (streamBody = new Uint8Array(), context) => {
       if (streamBody instanceof Uint8Array) {
@@ -25822,21 +25836,21 @@ var init_collect_stream_body = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/extended-encode-uri-component.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/extended-encode-uri-component.js
 function extendedEncodeURIComponent(str) {
   return encodeURIComponent(str).replace(/[!'()*]/g, function(c5) {
     return "%" + c5.charCodeAt(0).toString(16).toUpperCase();
   });
 }
 var init_extended_encode_uri_component = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/extended-encode-uri-component.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/extended-encode-uri-component.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/SerdeContext.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/SerdeContext.js
 var SerdeContext;
 var init_SerdeContext = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/SerdeContext.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/SerdeContext.js"() {
     SerdeContext = class {
       serdeContext;
       setSerdeContext(serdeContext) {
@@ -25846,7 +25860,7 @@ var init_SerdeContext = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/chunked-blob-reader/chunked-blob-reader.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/chunked-blob-reader/chunked-blob-reader.js
 async function blobReader(blob, onChunk, chunkSize = 1024 * 1024) {
   const size = blob.size;
   let totalBytesRead = 0;
@@ -25857,14 +25871,14 @@ async function blobReader(blob, onChunk, chunkSize = 1024 * 1024) {
   }
 }
 var init_chunked_blob_reader = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/chunked-blob-reader/chunked-blob-reader.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/chunked-blob-reader/chunked-blob-reader.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/hash-blob-browser/blobHasher.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/hash-blob-browser/blobHasher.js
 var blobHasher;
 var init_blobHasher = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/hash-blob-browser/blobHasher.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/hash-blob-browser/blobHasher.js"() {
     init_chunked_blob_reader();
     blobHasher = async function blobHasher2(hashCtor, blob) {
       const hash2 = new hashCtor();
@@ -25876,10 +25890,10 @@ var init_blobHasher = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/hash-stream-node/HashCalculator.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/hash-stream-node/HashCalculator.js
 var import_node_stream9, HashCalculator;
 var init_HashCalculator = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/hash-stream-node/HashCalculator.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/hash-stream-node/HashCalculator.js"() {
     import_node_stream9 = require("node:stream");
     init_serde();
     HashCalculator = class extends import_node_stream9.Writable {
@@ -25900,10 +25914,10 @@ var init_HashCalculator = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/hash-stream-node/fileStreamHasher.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/hash-stream-node/fileStreamHasher.js
 var import_node_fs2, fileStreamHasher, isReadStream;
 var init_fileStreamHasher = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/hash-stream-node/fileStreamHasher.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/hash-stream-node/fileStreamHasher.js"() {
     import_node_fs2 = require("node:fs");
     init_HashCalculator();
     fileStreamHasher = (hashCtor, fileStream) => new Promise((resolve, reject) => {
@@ -25931,10 +25945,10 @@ var init_fileStreamHasher = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/hash-stream-node/readableStreamHasher.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/hash-stream-node/readableStreamHasher.js
 var readableStreamHasher;
 var init_readableStreamHasher = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/hash-stream-node/readableStreamHasher.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/hash-stream-node/readableStreamHasher.js"() {
     init_HashCalculator();
     readableStreamHasher = (hashCtor, readableStream) => {
       if (readableStream.readableFlowing !== null) {
@@ -25957,7 +25971,7 @@ var init_readableStreamHasher = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/md5/Md5Js.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/md5/Md5Js.js
 function compress(state2, block) {
   let a5 = state2[0], b5 = state2[1], c5 = state2[2], d5 = state2[3];
   for (let i5 = 0; i5 < 64; ++i5) {
@@ -25991,7 +26005,7 @@ function compress(state2, block) {
 }
 var Md5Js, INIT, M, S, T;
 var init_Md5Js = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/md5/Md5Js.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/md5/Md5Js.js"() {
     init_serde();
     Md5Js = class {
       digestLength = 16;
@@ -26053,7 +26067,7 @@ var init_Md5Js = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/md5/Md5Node.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/md5/Md5Node.js
 function buildNativeClass() {
   return class Md5Node {
     digestLength = 16;
@@ -26072,7 +26086,7 @@ function buildNativeClass() {
 }
 var import_node_crypto4, hasNativeCrypto, Md5Node;
 var init_Md5Node = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/md5/Md5Node.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/md5/Md5Node.js"() {
     import_node_crypto4 = require("node:crypto");
     init_serde();
     init_Md5Js();
@@ -26088,10 +26102,10 @@ var init_Md5Node = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/crc32/Crc32Js.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/crc32/Crc32Js.js
 var CRC32_TABLE, ONES, Crc32Js;
 var init_Crc32Js = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/crc32/Crc32Js.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/crc32/Crc32Js.js"() {
     CRC32_TABLE = new Uint32Array(256);
     for (let i5 = 0; i5 < 256; ++i5) {
       let c5 = i5;
@@ -26125,7 +26139,7 @@ var init_Crc32Js = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/crc32/Crc32Node.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/crc32/Crc32Node.js
 function buildNativeClass2(nativeCrc32) {
   return class Crc32Node {
     digestLength = 4;
@@ -26148,7 +26162,7 @@ function buildNativeClass2(nativeCrc32) {
 }
 var zlib, zlibCrc32, Crc32Node;
 var init_Crc32Node = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/crc32/Crc32Node.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/crc32/Crc32Node.js"() {
     zlib = __toESM(require("node:zlib"));
     init_Crc32Js();
     zlibCrc32 = typeof zlib.crc32 === "function" ? zlib.crc32 : void 0;
@@ -26156,10 +26170,10 @@ var init_Crc32Node = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/sha256/Sha256Js.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/sha256/Sha256Js.js
 var BLOCK, DIGEST_LENGTH, MAX_HASHABLE_LENGTH, Sha256Js, INIT2, K;
 var init_Sha256Js = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/sha256/Sha256Js.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/sha256/Sha256Js.js"() {
     init_serde();
     BLOCK = 64;
     DIGEST_LENGTH = 32;
@@ -26394,7 +26408,7 @@ var init_Sha256Js = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/sha256/Sha256Node.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/sha256/Sha256Node.js
 function buildNativeClass3() {
   return class Sha256Node {
     digestLength = 32;
@@ -26443,7 +26457,7 @@ function toBuffer(data) {
 }
 var import_node_crypto5, hasNativeCrypto2, Sha256Node;
 var init_Sha256Node = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/sha256/Sha256Node.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/sha256/Sha256Node.js"() {
     import_node_crypto5 = require("node:crypto");
     init_Sha256Js();
     hasNativeCrypto2 = (() => {
@@ -26458,10 +26472,10 @@ var init_Sha256Node = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/sha256/Sha256WebCrypto.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/sha256/Sha256WebCrypto.js
 var digest, sign, importKey, subtle, MAX_PENDING_BYTES, Sha256WebCrypto;
 var init_Sha256WebCrypto = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/sha256/Sha256WebCrypto.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/sha256/Sha256WebCrypto.js"() {
     init_serde();
     init_Sha256Js();
     ({ digest, sign, importKey } = globalThis?.crypto?.subtle ?? {});
@@ -26534,7 +26548,7 @@ var init_Sha256WebCrypto = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/index.js
 var checksum_exports = {};
 __export(checksum_exports, {
   Crc32: () => Crc32Node,
@@ -26553,7 +26567,7 @@ __export(checksum_exports, {
   readableStreamHasher: () => readableStreamHasher
 });
 var init_checksum2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/checksum/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/checksum/index.js"() {
     init_blobHasher();
     init_fileStreamHasher();
     init_readableStreamHasher();
@@ -26568,7 +26582,7 @@ var init_checksum2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/Int64.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/Int64.js
 function negate(bytes) {
   for (let i5 = 0; i5 < 8; i5++) {
     bytes[i5] ^= 255;
@@ -26581,7 +26595,7 @@ function negate(bytes) {
 }
 var Int64;
 var init_Int64 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/Int64.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/Int64.js"() {
     init_serde();
     Int64 = class _Int64 {
       bytes;
@@ -26619,10 +26633,10 @@ var init_Int64 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/HeaderMarshaller.js
-var HeaderMarshaller, HEADER_VALUE_TYPE, BOOLEAN_TAG, BYTE_TAG, SHORT_TAG, INT_TAG, LONG_TAG, BINARY_TAG, STRING_TAG, TIMESTAMP_TAG, UUID_TAG, UUID_PATTERN;
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/HeaderMarshaller.js
+var HeaderMarshaller, HEADER_VALUE_TYPE, BOOLEAN_TAG, BYTE_TAG, SHORT_TAG, INT_TAG, LONG_TAG, BINARY_TAG, STRING_TAG, TIMESTAMP_TAG, UUID_TAG, UUID_PATTERN, MAX_HEADER_VALUE_BYTES;
 var init_HeaderMarshaller = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/HeaderMarshaller.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/HeaderMarshaller.js"() {
     init_transport();
     init_serde();
     init_Int64();
@@ -26639,6 +26653,9 @@ var init_HeaderMarshaller = __esm({
           if (!hasOwn(headers, headerName))
             continue;
           const bytes = this.fromUtf8(headerName);
+          if (bytes.byteLength > 255) {
+            throw new Error(`@smithy/core/event-streams - header name exceeds 255 bytes: ${bytes.byteLength}`);
+          }
           chunks.push(Uint8Array.from([bytes.byteLength]), bytes, this.formatHeaderValue(headers[headerName]));
         }
         const out = new Uint8Array(chunks.reduce((carry, bytes) => carry + bytes.byteLength, 0));
@@ -26671,6 +26688,9 @@ var init_HeaderMarshaller = __esm({
             longBytes.set(header.value.bytes, 1);
             return longBytes;
           case "binary":
+            if (header.value.byteLength > MAX_HEADER_VALUE_BYTES) {
+              throw new Error(`@smithy/core/event-streams - header value (binary) exceeds ${MAX_HEADER_VALUE_BYTES} bytes: ${header.value.byteLength}`);
+            }
             const binView = new DataView(new ArrayBuffer(3 + header.value.byteLength));
             binView.setUint8(0, 6);
             binView.setUint16(1, header.value.byteLength, false);
@@ -26679,6 +26699,9 @@ var init_HeaderMarshaller = __esm({
             return binBytes;
           case "string":
             const utf8Bytes = this.fromUtf8(header.value);
+            if (utf8Bytes.byteLength > MAX_HEADER_VALUE_BYTES) {
+              throw new Error(`@smithy/core/event-streams - header value (string) exceeds ${MAX_HEADER_VALUE_BYTES} bytes: ${utf8Bytes.byteLength}`);
+            }
             const strView = new DataView(new ArrayBuffer(3 + utf8Bytes.byteLength));
             strView.setUint8(0, 7);
             strView.setUint16(1, utf8Bytes.byteLength, false);
@@ -26809,10 +26832,11 @@ var init_HeaderMarshaller = __esm({
     TIMESTAMP_TAG = "timestamp";
     UUID_TAG = "uuid";
     UUID_PATTERN = /^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/;
+    MAX_HEADER_VALUE_BYTES = 32767;
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/splitMessage.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/splitMessage.js
 function splitMessage({ byteLength, byteOffset, buffer }) {
   if (byteLength < MINIMUM_MESSAGE_LENGTH) {
     throw new Error("Provided message too short to accommodate event stream message overhead");
@@ -26841,7 +26865,7 @@ function splitMessage({ byteLength, byteOffset, buffer }) {
 }
 var PRELUDE_MEMBER_LENGTH, PRELUDE_LENGTH, CHECKSUM_LENGTH, MINIMUM_MESSAGE_LENGTH;
 var init_splitMessage = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/splitMessage.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/splitMessage.js"() {
     init_checksum2();
     PRELUDE_MEMBER_LENGTH = 4;
     PRELUDE_LENGTH = PRELUDE_MEMBER_LENGTH * 2;
@@ -26850,10 +26874,10 @@ var init_splitMessage = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/EventStreamCodec.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/EventStreamCodec.js
 var EventStreamCodec;
 var init_EventStreamCodec = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/EventStreamCodec.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/EventStreamCodec.js"() {
     init_checksum2();
     init_HeaderMarshaller();
     init_splitMessage();
@@ -26924,10 +26948,10 @@ var init_EventStreamCodec = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/MessageDecoderStream.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/MessageDecoderStream.js
 var MessageDecoderStream;
 var init_MessageDecoderStream = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/MessageDecoderStream.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/MessageDecoderStream.js"() {
     MessageDecoderStream = class {
       options;
       constructor(options) {
@@ -26946,10 +26970,10 @@ var init_MessageDecoderStream = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/MessageEncoderStream.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/MessageEncoderStream.js
 var MessageEncoderStream;
 var init_MessageEncoderStream = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/MessageEncoderStream.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/MessageEncoderStream.js"() {
     MessageEncoderStream = class {
       options;
       constructor(options) {
@@ -26971,10 +26995,10 @@ var init_MessageEncoderStream = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/SmithyMessageDecoderStream.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/SmithyMessageDecoderStream.js
 var SmithyMessageDecoderStream;
 var init_SmithyMessageDecoderStream = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/SmithyMessageDecoderStream.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/SmithyMessageDecoderStream.js"() {
     SmithyMessageDecoderStream = class {
       options;
       constructor(options) {
@@ -26995,10 +27019,10 @@ var init_SmithyMessageDecoderStream = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/SmithyMessageEncoderStream.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/SmithyMessageEncoderStream.js
 var SmithyMessageEncoderStream;
 var init_SmithyMessageEncoderStream = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/SmithyMessageEncoderStream.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-codec/SmithyMessageEncoderStream.js"() {
     SmithyMessageEncoderStream = class {
       options;
       constructor(options) {
@@ -27017,7 +27041,7 @@ var init_SmithyMessageEncoderStream = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-universal/getChunkedStream.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-universal/getChunkedStream.js
 function getChunkedStream(source) {
   let currentMessageTotalLength = 0;
   let currentMessagePendingLength = 0;
@@ -27083,11 +27107,11 @@ function getChunkedStream(source) {
   };
 }
 var init_getChunkedStream = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-universal/getChunkedStream.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-universal/getChunkedStream.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-universal/getUnmarshalledStream.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-universal/getUnmarshalledStream.js
 function getUnmarshalledStream(source, options) {
   const messageUnmarshaller = getMessageUnmarshaller(options.deserializer, options.toUtf8);
   return {
@@ -27133,14 +27157,14 @@ function getMessageUnmarshaller(deserializer, toUtf83) {
   };
 }
 var init_getUnmarshalledStream = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-universal/getUnmarshalledStream.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-universal/getUnmarshalledStream.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-universal/EventStreamMarshaller.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-universal/EventStreamMarshaller.js
 var EventStreamMarshaller, eventStreamSerdeProvider;
 var init_EventStreamMarshaller = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-universal/EventStreamMarshaller.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-universal/EventStreamMarshaller.js"() {
     init_EventStreamCodec();
     init_MessageDecoderStream();
     init_MessageEncoderStream();
@@ -27174,7 +27198,7 @@ var init_EventStreamMarshaller = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde/EventStreamMarshaller.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde/EventStreamMarshaller.js
 async function* readableToIterable(readStream) {
   let streamEnded = false;
   let generationEnded = false;
@@ -27203,7 +27227,7 @@ async function* readableToIterable(readStream) {
 }
 var import_node_stream10, EventStreamMarshaller2, eventStreamSerdeProvider2;
 var init_EventStreamMarshaller2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde/EventStreamMarshaller.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde/EventStreamMarshaller.js"() {
     import_node_stream10 = require("node:stream");
     init_EventStreamMarshaller();
     EventStreamMarshaller2 = class {
@@ -27226,10 +27250,10 @@ var init_EventStreamMarshaller2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde/utils.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde/utils.js
 var readableStreamToIterable, iterableToReadableStream;
 var init_utils2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde/utils.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde/utils.js"() {
     readableStreamToIterable = (readableStream) => ({
       [Symbol.asyncIterator]: async function* () {
         const reader = readableStream.getReader();
@@ -27260,20 +27284,20 @@ var init_utils2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-config-resolver/EventStreamSerdeConfig.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-config-resolver/EventStreamSerdeConfig.js
 var resolveEventStreamSerdeConfig;
 var init_EventStreamSerdeConfig = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-config-resolver/EventStreamSerdeConfig.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/eventstream-serde-config-resolver/EventStreamSerdeConfig.js"() {
     resolveEventStreamSerdeConfig = (input2) => Object.assign(input2, {
       eventStreamMarshaller: input2.eventStreamSerdeProvider(input2)
     });
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/EventStreamSerde.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/EventStreamSerde.js
 var EventStreamSerde;
 var init_EventStreamSerde = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/EventStreamSerde.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/EventStreamSerde.js"() {
     init_transport();
     init_schema();
     init_serde();
@@ -27546,7 +27570,7 @@ var init_EventStreamSerde = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/index.js
 var event_streams_exports = {};
 __export(event_streams_exports, {
   EventStreamCodec: () => EventStreamCodec,
@@ -27569,7 +27593,7 @@ __export(event_streams_exports, {
   universalEventStreamSerdeProvider: () => eventStreamSerdeProvider
 });
 var init_event_streams = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/event-streams/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/event-streams/index.js"() {
     init_EventStreamCodec();
     init_HeaderMarshaller();
     init_Int64();
@@ -27587,10 +27611,10 @@ var init_event_streams = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/HttpProtocol.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/HttpProtocol.js
 var HttpProtocol;
 var init_HttpProtocol = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/HttpProtocol.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/HttpProtocol.js"() {
     init_transport();
     init_schema();
     init_transport();
@@ -27790,10 +27814,10 @@ var init_HttpProtocol = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/HttpBindingProtocol.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/HttpBindingProtocol.js
 var HttpBindingProtocol;
 var init_HttpBindingProtocol = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/HttpBindingProtocol.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/HttpBindingProtocol.js"() {
     init_transport();
     init_schema();
     init_serde();
@@ -28074,10 +28098,10 @@ var init_HttpBindingProtocol = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/RpcProtocol.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/RpcProtocol.js
 var RpcProtocol;
 var init_RpcProtocol = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/RpcProtocol.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/RpcProtocol.js"() {
     init_transport();
     init_schema();
     init_transport();
@@ -28173,10 +28197,10 @@ var init_RpcProtocol = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/resolve-path.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/resolve-path.js
 var resolvedPath;
 var init_resolve_path = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/resolve-path.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/resolve-path.js"() {
     init_extended_encode_uri_component();
     resolvedPath = (resolvedPath2, input2, memberName, labelValueProvider, uriLabel, isGreedyLabel) => {
       if (input2 != null && input2[memberName] !== void 0) {
@@ -28193,13 +28217,13 @@ var init_resolve_path = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/requestBuilder.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/requestBuilder.js
 function requestBuilder(input2, context) {
   return new RequestBuilder(input2, context);
 }
 var RequestBuilder;
 var init_requestBuilder = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/requestBuilder.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/requestBuilder.js"() {
     init_transport();
     init_resolve_path();
     RequestBuilder = class {
@@ -28269,7 +28293,7 @@ var init_requestBuilder = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/serde/determineTimestampFormat.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/serde/determineTimestampFormat.js
 function determineTimestampFormat(ns, settings) {
   if (settings.timestampFormat.useTrait) {
     if (ns.isTimestampSchema() && (ns.getSchema() === 5 || ns.getSchema() === 6 || ns.getSchema() === 7)) {
@@ -28281,14 +28305,14 @@ function determineTimestampFormat(ns, settings) {
   return bindingFormat ?? settings.timestampFormat.default;
 }
 var init_determineTimestampFormat = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/serde/determineTimestampFormat.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/serde/determineTimestampFormat.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/serde/FromStringShapeDeserializer.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/serde/FromStringShapeDeserializer.js
 var FromStringShapeDeserializer;
 var init_FromStringShapeDeserializer = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/serde/FromStringShapeDeserializer.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/serde/FromStringShapeDeserializer.js"() {
     init_schema();
     init_serde();
     init_SerdeContext();
@@ -28356,10 +28380,10 @@ var init_FromStringShapeDeserializer = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/serde/HttpInterceptingShapeDeserializer.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/serde/HttpInterceptingShapeDeserializer.js
 var HttpInterceptingShapeDeserializer;
 var init_HttpInterceptingShapeDeserializer = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/serde/HttpInterceptingShapeDeserializer.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/serde/HttpInterceptingShapeDeserializer.js"() {
     init_schema();
     init_serde();
     init_SerdeContext();
@@ -28404,10 +28428,10 @@ var init_HttpInterceptingShapeDeserializer = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/serde/ToStringShapeSerializer.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/serde/ToStringShapeSerializer.js
 var ToStringShapeSerializer;
 var init_ToStringShapeSerializer = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/serde/ToStringShapeSerializer.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/serde/ToStringShapeSerializer.js"() {
     init_schema();
     init_serde();
     init_SerdeContext();
@@ -28500,10 +28524,10 @@ var init_ToStringShapeSerializer = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/serde/HttpInterceptingShapeSerializer.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/serde/HttpInterceptingShapeSerializer.js
 var HttpInterceptingShapeSerializer;
 var init_HttpInterceptingShapeSerializer = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/serde/HttpInterceptingShapeSerializer.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/serde/HttpInterceptingShapeSerializer.js"() {
     init_schema();
     init_ToStringShapeSerializer();
     HttpInterceptingShapeSerializer = class {
@@ -28540,10 +28564,10 @@ var init_HttpInterceptingShapeSerializer = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/protocol-http/Field.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/protocol-http/Field.js
 var import_types23, Field;
 var init_Field = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/protocol-http/Field.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/protocol-http/Field.js"() {
     import_types23 = __toESM(require_dist_cjs());
     Field = class {
       name;
@@ -28573,10 +28597,10 @@ var init_Field = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/protocol-http/Fields.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/protocol-http/Fields.js
 var Fields;
 var init_Fields = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/protocol-http/Fields.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/protocol-http/Fields.js"() {
     Fields = class {
       entries = {};
       encoding;
@@ -28600,10 +28624,10 @@ var init_Fields = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/protocol-http/extensions/httpExtensionConfiguration.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/protocol-http/extensions/httpExtensionConfiguration.js
 var getHttpHandlerExtensionConfiguration, resolveHttpHandlerRuntimeConfig;
 var init_httpExtensionConfiguration = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/protocol-http/extensions/httpExtensionConfiguration.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/protocol-http/extensions/httpExtensionConfiguration.js"() {
     getHttpHandlerExtensionConfiguration = (runtimeConfig) => {
       if (runtimeConfig.logger && runtimeConfig.logger.constructor?.name !== "NoOpLogger") {
         runtimeConfig.requestHandler?.updateHttpClientConfig?.(/* @__PURE__ */ Symbol.for("logger"), runtimeConfig.logger);
@@ -28631,7 +28655,7 @@ var init_httpExtensionConfiguration = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/middleware-content-length/contentLengthMiddleware.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/middleware-content-length/contentLengthMiddleware.js
 function contentLengthMiddleware(bodyLengthChecker) {
   return (next) => async (args) => {
     const request = args.request;
@@ -28658,7 +28682,7 @@ function contentLengthMiddleware(bodyLengthChecker) {
 }
 var CONTENT_LENGTH_HEADER, contentLengthMiddlewareOptions, getContentLengthPlugin;
 var init_contentLengthMiddleware = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/middleware-content-length/contentLengthMiddleware.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/middleware-content-length/contentLengthMiddleware.js"() {
     init_transport();
     CONTENT_LENGTH_HEADER = "content-length";
     contentLengthMiddlewareOptions = {
@@ -28675,25 +28699,25 @@ var init_contentLengthMiddleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/util-uri-escape/escape-uri.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/util-uri-escape/escape-uri.js
 var escapeUri, hexEncode;
 var init_escape_uri = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/util-uri-escape/escape-uri.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/util-uri-escape/escape-uri.js"() {
     escapeUri = (uri) => encodeURIComponent(uri).replace(/[!'()*]/g, hexEncode);
     hexEncode = (c5) => `%${c5.charCodeAt(0).toString(16).toUpperCase()}`;
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/util-uri-escape/escape-uri-path.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/util-uri-escape/escape-uri-path.js
 var escapeUriPath;
 var init_escape_uri_path = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/util-uri-escape/escape-uri-path.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/util-uri-escape/escape-uri-path.js"() {
     init_escape_uri();
     escapeUriPath = (uri) => uri.split("/").map(escapeUri).join("/");
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/querystring-builder/buildQueryString.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/querystring-builder/buildQueryString.js
 function buildQueryString(query) {
   const parts = [];
   for (let key of Object.keys(query).sort()) {
@@ -28714,12 +28738,1802 @@ function buildQueryString(query) {
   return parts.join("&");
 }
 var init_buildQueryString = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/querystring-builder/buildQueryString.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/querystring-builder/buildQueryString.js"() {
     init_escape_uri();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/ConfigurableSerdeContext.js
+var SerdeContextConfig;
+var init_ConfigurableSerdeContext = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/ConfigurableSerdeContext.js"() {
+    SerdeContextConfig = class {
+      serdeContext;
+      setSerdeContext(serdeContext) {
+        this.serdeContext = serdeContext;
+      }
+    };
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/UnionSerde.js
+var UnionSerde;
+var init_UnionSerde = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/UnionSerde.js"() {
+    UnionSerde = class {
+      from;
+      to;
+      keys;
+      constructor(from, to) {
+        this.from = from;
+        this.to = to;
+        const keys = Object.keys(this.from);
+        const set2 = new Set(keys);
+        set2.delete("__type");
+        this.keys = set2;
+      }
+      mark(key) {
+        this.keys.delete(key);
+      }
+      hasUnknown() {
+        return this.keys.size === 1 && Object.keys(this.to).length === 0;
+      }
+      writeUnknown() {
+        if (this.hasUnknown()) {
+          const k5 = this.keys.values().next().value;
+          const v = this.from[k5];
+          this.to.$unknown = [k5, v];
+        }
+      }
+    };
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/detectBufferParsing.js
+function detectBufferParsing() {
+  if (canParseBuffer === void 0) {
+    try {
+      if (typeof Buffer !== "function") {
+        canParseBuffer = false;
+      } else {
+        const result = JSON.parse(Buffer.from([123, 125]));
+        canParseBuffer = result !== null && typeof result === "object";
+      }
+    } catch {
+      canParseBuffer = false;
+    }
+  }
+  return canParseBuffer;
+}
+var canParseBuffer;
+var init_detectBufferParsing = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/detectBufferParsing.js"() {
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/jsonReviver.js
+function jsonReviver(key, value, context) {
+  if (context?.source) {
+    const numericString = context.source;
+    if (typeof value === "number") {
+      const inSafeRange = value <= Number.MAX_SAFE_INTEGER && value >= Number.MIN_SAFE_INTEGER;
+      if (inSafeRange) {
+        if (isRepresentable(numericString, value)) {
+          return value;
+        }
+        return new NumericValue(numericString, "bigDecimal");
+      } else {
+        if (isFractionalBigNumeric(numericString)) {
+          return new NumericValue(numericString, "bigDecimal");
+        }
+        if (/[eE]/.test(numericString)) {
+          return expandExponentToBigInt(numericString);
+        }
+        return BigInt(numericString);
+      }
+    }
+  }
+  return value;
+}
+function isFractionalBigNumeric(s2) {
+  const dotIndex = s2.indexOf(".");
+  if (dotIndex === -1) {
+    return false;
+  }
+  const eIndex = s2.search(/[eE]/);
+  if (eIndex === -1) {
+    return true;
+  }
+  const fracDigits = eIndex - dotIndex - 1;
+  const exp = parseInt(s2.slice(eIndex + 1), 10);
+  return exp < fracDigits;
+}
+function isRepresentable(numericString, value) {
+  if (numericString === String(value)) {
+    return true;
+  }
+  if (Object.is(value, -0)) {
+    return true;
+  }
+  if (/[eE]/.test(numericString)) {
+    return expandToDecimal(numericString) === expandToDecimal(String(value));
+  }
+  const normalized = numericString.replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "");
+  const canonical = String(value);
+  if (normalized === canonical) {
+    return true;
+  }
+  if (/[eE]/.test(canonical)) {
+    return normalized === expandToDecimal(canonical);
+  }
+  return false;
+}
+function expandToDecimal(s2) {
+  const negative = s2.startsWith("-");
+  const abs = negative ? s2.slice(1) : s2;
+  const eIndex = abs.search(/[eE]/);
+  let result;
+  if (eIndex === -1) {
+    result = abs;
+  } else {
+    const exp = parseInt(abs.slice(eIndex + 1), 10);
+    const mantissa = abs.slice(0, eIndex);
+    const dotIndex = mantissa.indexOf(".");
+    let digits;
+    let intLen;
+    if (dotIndex === -1) {
+      digits = mantissa;
+      intLen = mantissa.length;
+    } else {
+      digits = mantissa.slice(0, dotIndex) + mantissa.slice(dotIndex + 1);
+      intLen = dotIndex;
+    }
+    digits = digits.replace(/0+$/, "") || "0";
+    const newDotPos = intLen + exp;
+    if (digits === "0") {
+      result = "0";
+    } else if (newDotPos <= 0) {
+      result = "0." + "0".repeat(-newDotPos) + digits;
+    } else if (newDotPos >= digits.length) {
+      result = digits + "0".repeat(newDotPos - digits.length);
+    } else {
+      result = digits.slice(0, newDotPos) + "." + digits.slice(newDotPos);
+    }
+  }
+  if (result.includes(".")) {
+    result = result.replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "");
+  }
+  return (negative ? "-" : "") + result;
+}
+function expandExponentToBigInt(s2) {
+  const eIndex = s2.search(/[eE]/);
+  const exp = parseInt(s2.slice(eIndex + 1), 10);
+  const negative = s2.startsWith("-");
+  const mantissa = s2.slice(negative ? 1 : 0, eIndex);
+  const dotIndex = mantissa.indexOf(".");
+  let digits;
+  let shift;
+  if (dotIndex === -1) {
+    digits = mantissa;
+    shift = exp;
+  } else {
+    digits = mantissa.slice(0, dotIndex) + mantissa.slice(dotIndex + 1);
+    const fracDigits = mantissa.length - dotIndex - 1;
+    shift = exp - fracDigits;
+  }
+  digits = digits.replace(/0+$/, "") || "0";
+  const result = BigInt(digits) * 10n ** BigInt(shift + (mantissa.replace(".", "").length - digits.length));
+  return negative ? -result : result;
+}
+var init_jsonReviver = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/jsonReviver.js"() {
+    init_serde();
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/needsReviver.js
+function needsReviver(schema) {
+  const ns = NormalizedSchema.of(schema);
+  const raw = ns.getSchema();
+  if (Array.isArray(raw) && ns.isStructSchema()) {
+    if (REVIVER_SYMBOL in raw) {
+      return raw[REVIVER_SYMBOL];
+    }
+    const result = _check(ns, /* @__PURE__ */ new Set());
+    raw[REVIVER_SYMBOL] = result;
+    return result;
+  }
+  return _check(ns, /* @__PURE__ */ new Set());
+}
+function _check(ns, seen) {
+  const raw = ns.getSchema();
+  if (seen.has(raw)) {
+    return false;
+  }
+  seen.add(raw);
+  if (ns.isBigIntegerSchema() || ns.isBigDecimalSchema()) {
+    return true;
+  }
+  if (ns.isStructSchema()) {
+    for (const [, memberSchema] of ns.structIterator()) {
+      if (_check(memberSchema, seen)) {
+        return true;
+      }
+    }
+  } else if (ns.isListSchema() || ns.isMapSchema()) {
+    if (_check(ns.getValueSchema(), seen)) {
+      return true;
+    }
+  } else if (ns.isDocumentSchema()) {
+    return true;
+  }
+  return false;
+}
+var REVIVER_SYMBOL;
+var init_needsReviver = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/needsReviver.js"() {
+    init_schema();
+    REVIVER_SYMBOL = /* @__PURE__ */ Symbol.for("@aws-sdk/reviver");
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/common.js
+var collectBodyString;
+var init_common = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/common.js"() {
+    init_collect_stream_body();
+    init_serde();
+    collectBodyString = (streamBody, context) => collectBody(streamBody, context).then((body) => (context?.utf8Encoder ?? toUtf8)(body));
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/parseJsonBody.js
+async function parseJsonBody(streamBody, context, schema) {
+  let parsingInput;
+  if (detectBufferParsing() && typeof streamBody?.[Symbol.asyncIterator] === "function") {
+    const buffer = await collectBody(streamBody, context);
+    if (typeof Buffer === "function") {
+      if (Buffer.isBuffer(buffer)) {
+        parsingInput = buffer;
+      } else {
+        parsingInput = Buffer.from(buffer.buffer, buffer.byteOffset, buffer.byteLength);
+      }
+    }
+  }
+  if (!parsingInput) {
+    parsingInput = await collectBodyString(streamBody, context);
+  }
+  if (parsingInput.length === 0) {
+    return {};
+  }
+  const reviver = schema && needsReviver(schema) ? jsonReviver : void 0;
+  try {
+    return JSON.parse(parsingInput, reviver);
+  } catch (e5) {
+    if (e5?.name === "SyntaxError") {
+      Object.defineProperty(e5, "$responseBodyText", {
+        value: typeof parsingInput === "string" ? parsingInput : parsingInput.toString("utf8")
+      });
+    }
+    throw e5;
+  }
+}
+var parseJsonErrorBody, findKey, sanitizeErrorCode, loadRestJsonErrorCode, loadJsonRpcErrorCode, loadSmithyRpcV2JsonErrorCode, loadErrorCode;
+var init_parseJsonBody = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/parseJsonBody.js"() {
+    init_collect_stream_body();
+    init_common();
+    init_detectBufferParsing();
+    init_jsonReviver();
+    init_needsReviver();
+    parseJsonErrorBody = async (errorBody, context) => {
+      const value = await parseJsonBody(errorBody, context);
+      value.message = value.message ?? value.Message;
+      return value;
+    };
+    findKey = (object2, key) => Object.keys(object2).find((k5) => k5.toLowerCase() === key.toLowerCase());
+    sanitizeErrorCode = (rawValue) => {
+      let cleanValue = rawValue;
+      if (typeof cleanValue === "number") {
+        cleanValue = cleanValue.toString();
+      }
+      if (cleanValue.indexOf(",") >= 0) {
+        cleanValue = cleanValue.split(",")[0];
+      }
+      if (cleanValue.indexOf(":") >= 0) {
+        cleanValue = cleanValue.split(":")[0];
+      }
+      if (cleanValue.indexOf("#") >= 0) {
+        cleanValue = cleanValue.split("#")[1];
+      }
+      return cleanValue;
+    };
+    loadRestJsonErrorCode = (output2, data) => {
+      return loadErrorCode(output2, data, ["header", "code", "type"]);
+    };
+    loadJsonRpcErrorCode = (output2, data, queryCompat = false) => {
+      return loadErrorCode(output2, data, queryCompat ? ["code", "header", "type"] : ["type", "code", "header"]);
+    };
+    loadSmithyRpcV2JsonErrorCode = (output2, data) => {
+      if (data?.__type !== void 0) {
+        let cleanValue = data.__type;
+        if (typeof cleanValue === "number") {
+          cleanValue = cleanValue.toString();
+        }
+        if (cleanValue.indexOf(",") >= 0) {
+          cleanValue = cleanValue.split(",")[0];
+        }
+        if (cleanValue.indexOf(":") >= 0) {
+          cleanValue = cleanValue.split(":")[0];
+        }
+        return cleanValue;
+      }
+    };
+    loadErrorCode = ({ headers }, data, order) => {
+      while (order.length > 0) {
+        const location = order.shift();
+        switch (location) {
+          case "header":
+            const headerKey = findKey(headers ?? {}, "x-amzn-errortype");
+            if (headerKey !== void 0) {
+              return sanitizeErrorCode(headers[headerKey]);
+            }
+            break;
+          case "code":
+            const codeKey = findKey(data ?? {}, "code");
+            if (codeKey && data[codeKey] !== void 0) {
+              return sanitizeErrorCode(data[codeKey]);
+            }
+            break;
+          case "type":
+            if (data?.__type !== void 0) {
+              return sanitizeErrorCode(data.__type);
+            }
+            break;
+        }
+      }
+    };
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/writeKey.js
+function writeKey(obj) {
+  Object.defineProperty(obj, "__proto__", { value: void 0, writable: true, enumerable: true, configurable: true });
+}
+var init_writeKey = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/writeKey.js"() {
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/codec-v2/JsonShapeDeserializer2.js
+var JsonShapeDeserializer2;
+var init_JsonShapeDeserializer2 = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/codec-v2/JsonShapeDeserializer2.js"() {
+    init_determineTimestampFormat();
+    init_schema();
+    init_serde();
+    init_ConfigurableSerdeContext();
+    init_UnionSerde();
+    init_detectBufferParsing();
+    init_jsonReviver();
+    init_needsReviver();
+    init_parseJsonBody();
+    init_writeKey();
+    init_transport();
+    JsonShapeDeserializer2 = class extends SerdeContextConfig {
+      settings;
+      constructor(settings) {
+        super();
+        this.settings = settings;
+      }
+      async read(schema, data) {
+        const reviver = needsReviver(schema) ? jsonReviver : void 0;
+        let parsed;
+        if (typeof data === "string") {
+          if (data.length === 0) {
+            return {};
+          }
+          parsed = JSON.parse(data, reviver);
+        } else if (data instanceof Uint8Array && detectBufferParsing()) {
+          if (data.byteLength === 0) {
+            return {};
+          }
+          const buf2 = Buffer.isBuffer(data) ? data : Buffer.from(data.buffer, data.byteOffset, data.byteLength);
+          parsed = JSON.parse(buf2, reviver);
+        } else {
+          parsed = await parseJsonBody(data, this.serdeContext, schema);
+        }
+        return this._read(schema, parsed);
+      }
+      readObject(schema, data) {
+        return this._read(schema, data);
+      }
+      _read(schema, value) {
+        const isObject2 = value !== null && typeof value === "object";
+        const ns = NormalizedSchema.of(schema);
+        if (isObject2) {
+          if (ns.isStructSchema()) {
+            return this._readStruct(ns, value);
+          }
+          if (Array.isArray(value) && ns.isListSchema()) {
+            const listMember = ns.getValueSchema();
+            if (this.needsTransform(listMember)) {
+              for (let i5 = 0; i5 < value.length; ++i5) {
+                value[i5] = this._read(listMember, value[i5]);
+              }
+            }
+            return value;
+          }
+          if (ns.isMapSchema()) {
+            const mapMember = ns.getValueSchema();
+            const map4 = value;
+            if (this.needsTransform(mapMember)) {
+              for (const k5 in map4) {
+                if (!hasOwn(map4, k5))
+                  continue;
+                if (k5 === "__proto__") {
+                  writeKey(map4);
+                }
+                map4[k5] = this._read(mapMember, map4[k5]);
+              }
+            }
+            return map4;
+          }
+        }
+        if (ns.isBlobSchema() && typeof value === "string") {
+          return fromBase64(value);
+        }
+        const mediaType = ns.getMergedTraits().mediaType;
+        if (ns.isStringSchema() && typeof value === "string" && mediaType) {
+          const isJson = mediaType === "application/json" || mediaType.endsWith("+json");
+          if (isJson) {
+            return LazyJsonString.from(value);
+          }
+          return value;
+        }
+        if (ns.isTimestampSchema() && value != null) {
+          const format2 = determineTimestampFormat(ns, this.settings);
+          switch (format2) {
+            case 5:
+              return parseRfc3339DateTimeWithOffset(value);
+            case 6:
+              return parseRfc7231DateTime(value);
+            case 7:
+              return parseEpochTimestamp(value);
+            default:
+              console.warn("Missing timestamp format, parsing value with Date constructor:", value);
+              return new Date(value);
+          }
+        }
+        if (ns.isBigIntegerSchema() && (typeof value === "number" || typeof value === "string")) {
+          return BigInt(value);
+        }
+        if (ns.isBigDecimalSchema() && value != void 0) {
+          if (value instanceof NumericValue) {
+            return value;
+          }
+          const untyped = value;
+          if (untyped.type === "bigDecimal" && "string" in untyped) {
+            return new NumericValue(untyped.string, untyped.type);
+          }
+          return new NumericValue(String(value), "bigDecimal");
+        }
+        if (ns.isNumericSchema() && typeof value === "string") {
+          switch (value) {
+            case "Infinity":
+              return Infinity;
+            case "-Infinity":
+              return -Infinity;
+            case "NaN":
+              return NaN;
+          }
+          return value;
+        }
+        if (ns.isDocumentSchema()) {
+          if (isObject2) {
+            if (Array.isArray(value)) {
+              for (let i5 = 0; i5 < value.length; ++i5) {
+                const v = value[i5];
+                if (!(v instanceof NumericValue)) {
+                  value[i5] = this._read(ns, v);
+                }
+              }
+            } else {
+              const doc = value;
+              for (const k5 in doc) {
+                if (!hasOwn(doc, k5))
+                  continue;
+                if (k5 === "__proto__") {
+                  writeKey(doc);
+                }
+                const v = doc[k5];
+                if (!(v instanceof NumericValue)) {
+                  doc[k5] = this._read(ns, v);
+                }
+              }
+            }
+          }
+        }
+        return value;
+      }
+      _readStruct(ns, record2) {
+        const union2 = ns.isUnionSchema();
+        const out = {};
+        let nameMap;
+        const hasType = typeof record2.__type === "string";
+        const { jsonName } = this.settings;
+        if (jsonName && hasType) {
+          nameMap = {};
+        }
+        let unionSerde;
+        if (union2) {
+          unionSerde = new UnionSerde(record2, out);
+        }
+        for (const [memberName, memberSchema] of ns.structIterator()) {
+          let fromKey = memberName;
+          if (jsonName) {
+            fromKey = memberSchema.getMergedTraits().jsonName ?? fromKey;
+            if (hasType) {
+              nameMap[fromKey] = memberName;
+            }
+          }
+          if (union2) {
+            unionSerde.mark(fromKey);
+          }
+          if (record2[fromKey] != null) {
+            out[memberName] = this._read(memberSchema, record2[fromKey]);
+          }
+        }
+        if (union2) {
+          unionSerde.writeUnknown();
+        } else if (hasType) {
+          for (const k5 in record2) {
+            if (!hasOwn(record2, k5))
+              continue;
+            const v = record2[k5];
+            const t = jsonName ? nameMap[k5] ?? k5 : k5;
+            if (!(t in out)) {
+              out[t] = v;
+            }
+          }
+        }
+        return out;
+      }
+      needsTransform(ns) {
+        if (ns.isBlobSchema() || ns.isTimestampSchema() || ns.isBigIntegerSchema() || ns.isBigDecimalSchema() || ns.isNumericSchema()) {
+          return true;
+        }
+        if (ns.isDocumentSchema() || ns.isStructSchema() || ns.isListSchema() || ns.isMapSchema()) {
+          return true;
+        }
+        if (ns.isStringSchema() && ns.getMergedTraits().mediaType) {
+          return true;
+        }
+        return false;
+      }
+    };
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/codec-v2/JsonBytesStringAdapter.js
+var JsonBytesStringAdapter, warned;
+var init_JsonBytesStringAdapter = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/codec-v2/JsonBytesStringAdapter.js"() {
+    init_serde();
+    JsonBytesStringAdapter = class _JsonBytesStringAdapter extends Uint8Array {
+      string = null;
+      static allocUnsafe(bytes) {
+        if (typeof Buffer === "function") {
+          const buffer = Buffer.allocUnsafe(bytes);
+          return new _JsonBytesStringAdapter(buffer.buffer, buffer.byteOffset, buffer.byteLength);
+        }
+        return new _JsonBytesStringAdapter(bytes);
+      }
+      toString() {
+        return this.s();
+      }
+      valueOf() {
+        return this.s();
+      }
+      includes(searchString, position) {
+        if (typeof searchString === "string") {
+          return this.s().includes(searchString, position);
+        }
+        return Uint8Array.prototype.includes.call(this, searchString, position);
+      }
+      indexOf(searchString, position) {
+        if (typeof searchString === "string") {
+          return this.s().indexOf(searchString, position);
+        }
+        return Uint8Array.prototype.indexOf.call(this, searchString, position);
+      }
+      lastIndexOf(searchString, position) {
+        if (typeof searchString === "string") {
+          return this.s().lastIndexOf(searchString, position);
+        }
+        const fn = Uint8Array.prototype.lastIndexOf;
+        if (position !== void 0) {
+          return fn.call(this, searchString, position);
+        }
+        return fn.call(this, searchString);
+      }
+      startsWith(searchString, position) {
+        return this.s().startsWith(searchString, position);
+      }
+      endsWith(searchString, endPosition) {
+        return this.s().endsWith(searchString, endPosition);
+      }
+      match(regexp) {
+        return this.s().match(regexp);
+      }
+      replace(searchValue, replaceValue) {
+        return this.s().replace(searchValue, replaceValue);
+      }
+      search(regexp) {
+        return this.s().search(regexp);
+      }
+      split(separator, limit) {
+        return this.s().split(separator, limit);
+      }
+      substring(start, end2) {
+        return this.s().substring(start, end2);
+      }
+      trim() {
+        return this.s().trim();
+      }
+      trimStart() {
+        return this.s().trimStart();
+      }
+      trimEnd() {
+        return this.s().trimEnd();
+      }
+      charAt(pos2) {
+        return this.s().charAt(pos2);
+      }
+      charCodeAt(index) {
+        return this.s().charCodeAt(index);
+      }
+      padStart(maxLength, fillString) {
+        return this.s().padStart(maxLength, fillString);
+      }
+      padEnd(maxLength, fillString) {
+        return this.s().padEnd(maxLength, fillString);
+      }
+      repeat(count) {
+        return this.s().repeat(count);
+      }
+      toUpperCase() {
+        return this.s().toUpperCase();
+      }
+      toLowerCase() {
+        return this.s().toLowerCase();
+      }
+      s() {
+        if (this.string == null) {
+          const n3 = Date.now();
+          if (n3 > warned + 6e4) {
+            console.warn("@aws-sdk/core/protocols - WARN - JsonCodec2: you have called a string method on a Uint8Array request body. It has been automatically converted to string. In a future version this will throw an error.");
+            warned = n3;
+          }
+          this.string = toUtf8(this);
+        }
+        return this.string;
+      }
+    };
+    warned = 0;
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/codec-v2/JsonShapeSerializer2.js
+function alloc(size) {
+  return JsonBytesStringAdapter.allocUnsafe(size);
+}
+var encoder, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET, QUOTE, COLON, COMMA, BACKSLASH, TRUE, FALSE, NULL, ESCAPE_TABLE, INITIAL_BUFFER_SIZE, JsonShapeSerializer2;
+var init_JsonShapeSerializer2 = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/codec-v2/JsonShapeSerializer2.js"() {
+    init_determineTimestampFormat();
+    init_schema();
+    init_serde();
+    init_ConfigurableSerdeContext();
+    init_transport();
+    init_JsonBytesStringAdapter();
+    encoder = new TextEncoder();
+    OPEN_BRACE = 123;
+    CLOSE_BRACE = 125;
+    OPEN_BRACKET = 91;
+    CLOSE_BRACKET = 93;
+    QUOTE = 34;
+    COLON = 58;
+    COMMA = 44;
+    BACKSLASH = 92;
+    TRUE = new Uint8Array([116, 114, 117, 101]);
+    FALSE = new Uint8Array([102, 97, 108, 115, 101]);
+    NULL = new Uint8Array([110, 117, 108, 108]);
+    ESCAPE_TABLE = new Array(128).fill(null);
+    ESCAPE_TABLE[8] = "b";
+    ESCAPE_TABLE[9] = "t";
+    ESCAPE_TABLE[10] = "n";
+    ESCAPE_TABLE[12] = "f";
+    ESCAPE_TABLE[13] = "r";
+    ESCAPE_TABLE[34] = '"';
+    ESCAPE_TABLE[92] = "\\";
+    for (let i5 = 0; i5 < 32; i5++) {
+      if (ESCAPE_TABLE[i5] === null) {
+        ESCAPE_TABLE[i5] = "u00" + i5.toString(16).padStart(2, "0");
+      }
+    }
+    INITIAL_BUFFER_SIZE = 2048;
+    JsonShapeSerializer2 = class _JsonShapeSerializer2 extends SerdeContextConfig {
+      settings;
+      json;
+      i = 0;
+      rootSchema;
+      rawValue;
+      passthrough = false;
+      constructor(settings) {
+        super();
+        this.settings = settings;
+        this.json = alloc(INITIAL_BUFFER_SIZE);
+      }
+      write(schema, value) {
+        this.i = 0;
+        this.rawValue = value;
+        this.rootSchema = NormalizedSchema.of(schema);
+        this.passthrough = this.rootSchema.isBlobSchema() || this.rootSchema.isStringSchema();
+        if (!this.passthrough) {
+          this.writeValue(this.rootSchema, value, void 0);
+        }
+      }
+      writeDiscriminatedDocument(schema, value) {
+        this.i = 0;
+        this.rootSchema = NormalizedSchema.of(schema);
+        const ns = this.rootSchema;
+        if (ns.isStructSchema() && value != null && typeof value === "object") {
+          this.writeValue(ns, value, void 0);
+          const prefix = `"__type":"${ns.getName(true) ?? "Unknown"}",`;
+          const z2 = prefix.length;
+          this.ensure(z2);
+          this.json.copyWithin(1 + z2, 1, this.i);
+          encoder.encodeInto(prefix, this.json.subarray(1));
+          this.i += z2;
+        } else {
+          this.writeValue(ns, value, void 0);
+        }
+      }
+      flush() {
+        this.rootSchema = void 0;
+        const finalPosition = this.i;
+        this.i = 0;
+        const raw = this.rawValue;
+        this.rawValue = void 0;
+        if (finalPosition === 0) {
+          return raw;
+        }
+        const result = this.json.subarray(0, finalPosition);
+        this.json = alloc(INITIAL_BUFFER_SIZE);
+        return result;
+      }
+      ensure(byteCount) {
+        const { i: i5, json: json2 } = this;
+        if (i5 + byteCount > json2.length) {
+          let newSize = json2.length * 2;
+          while (newSize < i5 + byteCount) {
+            newSize *= 2;
+          }
+          const next = alloc(newSize);
+          next.set(this.json);
+          this.json = next;
+        }
+      }
+      writeAscii(s2) {
+        const z2 = s2.length;
+        this.ensure(z2);
+        let { i: i5, json: json2 } = this;
+        for (let j5 = 0; j5 < z2; ++j5) {
+          json2[i5] = s2.charCodeAt(j5);
+          i5 += 1;
+        }
+        this.i = i5;
+      }
+      writeAsciiQuoted(s2) {
+        const z2 = s2.length;
+        this.ensure(z2 + 4);
+        let { json: json2, i: i5 } = this;
+        json2[i5++] = QUOTE;
+        for (let j5 = 0; j5 < z2; ++j5) {
+          json2[i5++] = s2.charCodeAt(j5);
+        }
+        json2[i5++] = QUOTE;
+        this.i = i5;
+      }
+      writeJsonString(s2) {
+        const z2 = s2.length;
+        this.ensure(z2 * 3 + 2);
+        this.json[this.i++] = QUOTE;
+        for (let j5 = 0; j5 < z2; ++j5) {
+          const c5 = s2.charCodeAt(j5);
+          if (c5 > 34 && c5 < 92) {
+            this.json[this.i++] = c5;
+          } else if (c5 < 128) {
+            const esc2 = ESCAPE_TABLE[c5];
+            if (esc2 !== null) {
+              this.ensure(esc2.length + 1 + (z2 - j5 - 1) * 3 + 1);
+              this.json[this.i++] = BACKSLASH;
+              for (let k5 = 0; k5 < esc2.length; k5++) {
+                this.json[this.i++] = esc2.charCodeAt(k5);
+              }
+            } else {
+              this.json[this.i++] = c5;
+            }
+          } else if (c5 >= 55296 && c5 <= 56319) {
+            const next = j5 + 1 < z2 ? s2.charCodeAt(j5 + 1) : 0;
+            if (next >= 56320 && next <= 57343) {
+              this.ensure(4);
+              const { written } = encoder.encodeInto(s2.substring(j5, j5 + 2), this.json.subarray(this.i));
+              this.i += written;
+              ++j5;
+            } else {
+              this.ensure(6 + (z2 - j5 - 1) * 3 + 1);
+              this.writeUnicodeEscape(c5);
+            }
+          } else if (c5 >= 56320 && c5 <= 57343) {
+            this.ensure(6 + (z2 - j5 - 1) * 3 + 1);
+            this.writeUnicodeEscape(c5);
+          } else {
+            let { i: i5, json: json2 } = this;
+            if (c5 < 2048) {
+              json2[i5++] = 192 | c5 >> 6;
+              json2[i5++] = 128 | c5 & 63;
+            } else {
+              json2[i5++] = 224 | c5 >> 12;
+              json2[i5++] = 128 | c5 >> 6 & 63;
+              json2[i5++] = 128 | c5 & 63;
+            }
+            this.i = i5;
+          }
+        }
+        this.json[this.i++] = QUOTE;
+      }
+      writeUnicodeEscape(code) {
+        let { json: json2, i: i5 } = this;
+        json2[i5++] = BACKSLASH;
+        json2[i5++] = 117;
+        const hex3 = code.toString(16).padStart(4, "0");
+        for (let j5 = 0; j5 < 4; ++j5) {
+          json2[i5++] = hex3.charCodeAt(j5);
+        }
+        this.i = i5;
+      }
+      static B64 = (() => {
+        const chars2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        const table = new Uint8Array(64);
+        for (let i5 = 0; i5 < 64; ++i5) {
+          table[i5] = chars2.charCodeAt(i5);
+        }
+        return table;
+      })();
+      writeBase64(data) {
+        const b64Len = Math.ceil(data.length / 3) * 4;
+        this.ensure(b64Len + 2);
+        const json2 = this.json;
+        const B64 = _JsonShapeSerializer2.B64;
+        let i5 = this.i;
+        json2[i5++] = QUOTE;
+        const len = data.length;
+        const remainder = len % 3;
+        const mainLen = len - remainder;
+        for (let j5 = 0; j5 < mainLen; j5 += 3) {
+          const a5 = data[j5];
+          const b5 = data[j5 + 1];
+          const c5 = data[j5 + 2];
+          json2[i5++] = B64[a5 >> 2];
+          json2[i5++] = B64[(a5 & 3) << 4 | b5 >> 4];
+          json2[i5++] = B64[(b5 & 15) << 2 | c5 >> 6];
+          json2[i5++] = B64[c5 & 63];
+        }
+        if (remainder === 2) {
+          const a5 = data[mainLen];
+          const b5 = data[mainLen + 1];
+          json2[i5++] = B64[a5 >> 2];
+          json2[i5++] = B64[(a5 & 3) << 4 | b5 >> 4];
+          json2[i5++] = B64[(b5 & 15) << 2];
+          json2[i5++] = 61;
+        } else if (remainder === 1) {
+          const a5 = data[mainLen];
+          json2[i5++] = B64[a5 >> 2];
+          json2[i5++] = B64[(a5 & 3) << 4];
+          json2[i5++] = 61;
+          json2[i5++] = 61;
+        }
+        json2[i5++] = QUOTE;
+        this.i = i5;
+      }
+      writeValue(schema, value, container) {
+        if (value == null) {
+          if (container?.isStructSchema()) {
+            if (value === void 0) {
+              const ns2 = NormalizedSchema.of(schema);
+              if (ns2.isIdempotencyToken()) {
+                this.writeAsciiQuoted(generateIdempotencyToken());
+                return;
+              }
+            }
+            return;
+          }
+          this.ensure(4);
+          this.json.set(NULL, this.i);
+          this.i += 4;
+          return;
+        }
+        const ns = NormalizedSchema.of(schema);
+        const isObject2 = typeof value === "object";
+        if (ns.isStringSchema()) {
+          const mediaType = ns.getMergedTraits().mediaType;
+          if (mediaType) {
+            const isJson = mediaType === "application/json" || mediaType.endsWith("+json");
+            if (isJson) {
+              this.writeJsonString(LazyJsonString.from(value).toString());
+              return;
+            }
+          }
+        }
+        if (this.settings.bigNumberAsString && value != null && (ns.isBigIntegerSchema() || ns.isBigDecimalSchema())) {
+          const asString = value instanceof NumericValue ? value.string : String(value);
+          this.writeAsciiQuoted(asString);
+          return;
+        }
+        if (isObject2) {
+          if (ns.isStructSchema()) {
+            this.writeStruct(ns, value);
+            return;
+          }
+          if (Array.isArray(value) && (ns.isListSchema() || ns.isDocumentSchema())) {
+            this.writeList(ns, value, ns.isDocumentSchema());
+            return;
+          }
+          if (ns.isMapSchema()) {
+            this.writeMap(ns, value, false);
+            return;
+          }
+          if (value instanceof Uint8Array && (ns.isBlobSchema() || ns.isDocumentSchema())) {
+            this.writeBase64(value);
+            return;
+          }
+          if (value instanceof Date && (ns.isTimestampSchema() || ns.isDocumentSchema())) {
+            this.writeTimestamp(ns, value);
+            return;
+          }
+          if (value instanceof NumericValue) {
+            this.writeAscii(value.string);
+            return;
+          }
+          if (ns.isDocumentSchema()) {
+            if (Array.isArray(value)) {
+              this.writeList(ns, value, true);
+            } else {
+              this.writeMap(ns, value, true);
+            }
+            return;
+          }
+          const json2 = JSON.stringify(value);
+          this.writeAscii(json2);
+          return;
+        }
+        if (typeof value === "string") {
+          if (ns.isBlobSchema()) {
+            const b64 = (this.serdeContext?.base64Encoder ?? toBase64)(value);
+            this.writeAsciiQuoted(b64);
+            return;
+          }
+          this.writeJsonString(value);
+          return;
+        }
+        if (typeof value === "number") {
+          if (Math.abs(value) === Infinity || Number.isNaN(value)) {
+            this.writeAsciiQuoted(String(value));
+            return;
+          }
+          const numStr = String(value);
+          this.writeAscii(numStr);
+          return;
+        }
+        if (typeof value === "boolean") {
+          this.ensure(5);
+          let { i: i5, json: json2 } = this;
+          if (value) {
+            json2.set(TRUE, i5);
+            i5 += 4;
+          } else {
+            json2.set(FALSE, i5);
+            i5 += 5;
+          }
+          this.i = i5;
+          return;
+        }
+        if (typeof value === "bigint") {
+          this.writeAscii(value.toString());
+          return;
+        }
+        this.writeAscii(String(value));
+      }
+      writeStruct(ns, value) {
+        this.ensure(2);
+        this.json[this.i++] = OPEN_BRACE;
+        let wroteAny = false;
+        const hasType = typeof value.__type === "string";
+        let writtenKeys;
+        if (hasType) {
+          writtenKeys = /* @__PURE__ */ new Set();
+        }
+        for (const [memberName, memberSchema] of ns.structIterator()) {
+          const item = value[memberName];
+          if (item == null && !memberSchema.isIdempotencyToken()) {
+            continue;
+          }
+          if (wroteAny) {
+            this.ensure(1);
+            this.json[this.i++] = COMMA;
+          }
+          wroteAny = true;
+          const targetKey = this.settings.jsonName ? memberSchema.getMergedTraits().jsonName ?? memberName : memberName;
+          if (writtenKeys) {
+            writtenKeys.add(memberName);
+            writtenKeys.add(targetKey);
+          }
+          this.writeAsciiQuoted(targetKey);
+          this.json[this.i++] = COLON;
+          this.writeValue(memberSchema, item, ns);
+        }
+        if (!wroteAny && ns.isUnionSchema()) {
+          const { $unknown } = value;
+          if (Array.isArray($unknown)) {
+            const [k5, v] = $unknown;
+            this.writeAsciiQuoted(k5);
+            this.ensure(1);
+            this.json[this.i++] = COLON;
+            this.writeValue(15, v, ns);
+          }
+        } else if (hasType) {
+          for (const k5 in value) {
+            if (writtenKeys.has(k5)) {
+              continue;
+            }
+            writtenKeys.add(k5);
+            const v = value[k5];
+            if (wroteAny) {
+              this.ensure(1);
+              this.json[this.i++] = COMMA;
+            }
+            wroteAny = true;
+            this.writeAsciiQuoted(k5);
+            this.ensure(1);
+            this.json[this.i++] = COLON;
+            this.writeValue(15, v, void 0);
+          }
+        }
+        this.ensure(1);
+        this.json[this.i++] = CLOSE_BRACE;
+      }
+      writeList(ns, value, isDocument) {
+        const sparse = !!ns.getMergedTraits().sparse;
+        const valueSchema = ns.getValueSchema();
+        if (!isDocument) {
+          if (valueSchema.isStringSchema() || valueSchema.isNumericSchema() || valueSchema.isBooleanSchema()) {
+            let hasSpecials = false;
+            for (let i5 = 0; i5 < value.length; ++i5) {
+              const v = value[i5];
+              if (Number.isNaN(v) || v === Infinity || v === -Infinity || v == null && !sparse) {
+                hasSpecials = true;
+                break;
+              }
+            }
+            let json2;
+            if (!hasSpecials) {
+              json2 = JSON.stringify(value);
+            } else {
+              const out = [];
+              for (let i5 = 0; i5 < value.length; ++i5) {
+                const v = value[i5];
+                if (v == null && !sparse)
+                  continue;
+                if (Number.isNaN(v) || v === Infinity || v === -Infinity) {
+                  out.push(String(v));
+                } else {
+                  out.push(v);
+                }
+              }
+              json2 = JSON.stringify(out);
+            }
+            this.ensure(json2.length * 3);
+            this.i += encoder.encodeInto(json2, this.json.subarray(this.i)).written;
+            return;
+          }
+        }
+        this.ensure(2);
+        this.json[this.i++] = OPEN_BRACKET;
+        let wroteFirstItem = false;
+        for (let i5 = 0; i5 < value.length; ++i5) {
+          const item = value[i5];
+          if (isDocument ? item === void 0 : item == null && !sparse) {
+            continue;
+          }
+          if (wroteFirstItem) {
+            this.ensure(1);
+            this.json[this.i++] = COMMA;
+          }
+          this.writeValue(valueSchema, item, void 0);
+          wroteFirstItem = true;
+        }
+        this.ensure(1);
+        this.json[this.i++] = CLOSE_BRACKET;
+      }
+      writeMap(ns, value, isDocument) {
+        const sparse = !!ns.getMergedTraits().sparse;
+        const valueSchema = ns.getValueSchema();
+        if (!isDocument) {
+          if (valueSchema.isStringSchema() || valueSchema.isNumericSchema() || valueSchema.isBooleanSchema()) {
+            let modifications;
+            for (const k5 in value) {
+              if (!hasOwn(value, k5))
+                continue;
+              const v = value[k5];
+              if (Number.isNaN(v) || v === Infinity || v === -Infinity) {
+                (modifications ??= {})[k5] = v;
+                value[k5] = String(v);
+              } else if (v === null && !sparse) {
+                (modifications ??= {})[k5] = null;
+                value[k5] = void 0;
+              }
+            }
+            const json2 = JSON.stringify(value);
+            if (modifications) {
+              Object.assign(value, modifications);
+            }
+            this.ensure(json2.length * 3);
+            this.i += encoder.encodeInto(json2, this.json.subarray(this.i)).written;
+            return;
+          }
+        }
+        this.ensure(2);
+        this.json[this.i++] = OPEN_BRACE;
+        let first = true;
+        for (const k5 in value) {
+          if (!hasOwn(value, k5))
+            continue;
+          const v = value[k5];
+          if (isDocument ? v === void 0 : v == null && !sparse) {
+            continue;
+          }
+          if (!first) {
+            this.ensure(1);
+            this.json[this.i++] = COMMA;
+          }
+          first = false;
+          this.writeJsonString(k5);
+          this.ensure(1);
+          this.json[this.i++] = COLON;
+          this.writeValue(valueSchema, v, void 0);
+        }
+        this.ensure(1);
+        this.json[this.i++] = CLOSE_BRACE;
+      }
+      writeTimestamp(ns, value) {
+        const format2 = determineTimestampFormat(ns, this.settings);
+        switch (format2) {
+          case 5: {
+            const iso = value.toISOString().replace(".000Z", "Z");
+            this.writeAsciiQuoted(iso);
+            return;
+          }
+          case 6: {
+            this.writeAsciiQuoted(dateToUtcString(value));
+            return;
+          }
+          case 7: {
+            const epochSecs = String(value.getTime() / 1e3);
+            this.writeAscii(epochSecs);
+            return;
+          }
+          default: {
+            const epochSecs = String(value.getTime() / 1e3);
+            this.writeAscii(epochSecs);
+            return;
+          }
+        }
+      }
+    };
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/codec-v2/JsonCodec2.js
+var JsonCodec2;
+var init_JsonCodec2 = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/codec-v2/JsonCodec2.js"() {
+    init_ConfigurableSerdeContext();
+    init_JsonShapeDeserializer2();
+    init_JsonShapeSerializer2();
+    JsonCodec2 = class extends SerdeContextConfig {
+      settings;
+      constructor(settings) {
+        super();
+        this.settings = settings;
+      }
+      createSerializer() {
+        const serializer = new JsonShapeSerializer2(this.settings);
+        serializer.setSerdeContext(this.serdeContext);
+        return serializer;
+      }
+      createDeserializer() {
+        const deserializer = new JsonShapeDeserializer2(this.settings);
+        deserializer.setSerdeContext(this.serdeContext);
+        return deserializer;
+      }
+    };
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/SmithyRpcV2JsonProtocol.js
+var SmithyRpcV2JsonProtocol;
+var init_SmithyRpcV2JsonProtocol = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/SmithyRpcV2JsonProtocol.js"() {
+    init_RpcProtocol();
+    init_schema();
+    init_transport();
+    init_JsonCodec2();
+    init_parseJsonBody();
+    SmithyRpcV2JsonProtocol = class extends RpcProtocol {
+      codec = new JsonCodec2({
+        timestampFormat: {
+          useTrait: false,
+          default: 7
+        },
+        jsonName: false,
+        bigNumberAsString: true
+      });
+      serializer = this.codec.createSerializer();
+      deserializer = this.codec.createDeserializer();
+      constructor({ defaultNamespace, errorTypeRegistries: errorTypeRegistries5 }) {
+        super({ defaultNamespace, errorTypeRegistries: errorTypeRegistries5 });
+      }
+      getShapeId() {
+        return "smithy.protocols#rpcv2Json";
+      }
+      getPayloadCodec() {
+        return this.codec;
+      }
+      async serializeRequest(operationSchema, input2, context) {
+        const request = await super.serializeRequest(operationSchema, input2, context);
+        Object.assign(request.headers, {
+          "content-type": this.getDefaultContentType(),
+          "smithy-protocol": "rpc-v2-json",
+          accept: this.getDefaultContentType()
+        });
+        if (deref(operationSchema.input) === "unit") {
+          delete request.body;
+          delete request.headers["content-type"];
+        } else if (!request.body) {
+          request.body = "{}";
+        }
+        const { service, operation: operation2 } = getSmithyContext(context);
+        const path = `/service/${service}/operation/${operation2}`;
+        if (request.path.endsWith("/")) {
+          request.path += path.slice(1);
+        } else {
+          request.path += path;
+        }
+        return request;
+      }
+      async deserializeResponse(operationSchema, context, response) {
+        return super.deserializeResponse(operationSchema, context, response);
+      }
+      async handleError(operationSchema, context, response, dataObject, metadata) {
+        const errorName = loadSmithyRpcV2JsonErrorCode(response, dataObject) ?? "Unknown";
+        const errorMetadata = {
+          $metadata: metadata,
+          $fault: response.statusCode <= 500 ? "client" : "server"
+        };
+        let namespace = this.options.defaultNamespace;
+        if (errorName.includes("#")) {
+          [namespace] = errorName.split("#");
+        }
+        const registry2 = this.compositeErrorRegistry;
+        const nsRegistry = TypeRegistry.for(namespace);
+        registry2.copyFrom(nsRegistry);
+        let errorSchema;
+        try {
+          errorSchema = registry2.getSchema(errorName);
+        } catch (ignored) {
+          if (dataObject.Message) {
+            dataObject.message = dataObject.Message;
+          }
+          const syntheticRegistry = TypeRegistry.for("smithy.ts.sdk.synthetic." + namespace);
+          registry2.copyFrom(syntheticRegistry);
+          const baseExceptionSchema = registry2.getBaseException();
+          if (baseExceptionSchema) {
+            const ErrorCtor2 = registry2.getErrorCtor(baseExceptionSchema);
+            throw Object.assign(new ErrorCtor2({ name: errorName }), errorMetadata, dataObject);
+          }
+          throw Object.assign(new Error(errorName), errorMetadata, dataObject);
+        }
+        const ns = NormalizedSchema.of(errorSchema);
+        const ErrorCtor = registry2.getErrorCtor(errorSchema);
+        const message = dataObject.message ?? dataObject.Message ?? "Unknown";
+        const exception = new ErrorCtor({});
+        const output2 = {};
+        const errorDeserializer = this.codec.createDeserializer();
+        for (const [name, member2] of ns.structIterator()) {
+          if (dataObject[name] != null) {
+            output2[name] = errorDeserializer.readObject(member2, dataObject[name]);
+          }
+        }
+        throw Object.assign(exception, errorMetadata, {
+          $fault: ns.getMergedTraits().error,
+          message
+        }, output2);
+      }
+      getDefaultContentType() {
+        return "application/json";
+      }
+    };
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/codec-v1/JsonShapeDeserializer.js
+var JsonShapeDeserializer;
+var init_JsonShapeDeserializer = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/codec-v1/JsonShapeDeserializer.js"() {
+    init_determineTimestampFormat();
+    init_schema();
+    init_serde();
+    init_serde();
+    init_transport();
+    init_ConfigurableSerdeContext();
+    init_UnionSerde();
+    init_jsonReviver();
+    init_needsReviver();
+    init_parseJsonBody();
+    init_writeKey();
+    JsonShapeDeserializer = class extends SerdeContextConfig {
+      settings;
+      constructor(settings) {
+        super();
+        this.settings = settings;
+      }
+      async read(schema, data) {
+        const reviver = needsReviver(schema) ? jsonReviver : void 0;
+        return this._read(schema, typeof data === "string" ? JSON.parse(data, reviver) : await parseJsonBody(data, this.serdeContext, schema));
+      }
+      readObject(schema, data) {
+        return this._read(schema, data);
+      }
+      _read(schema, value) {
+        const isObject2 = value !== null && typeof value === "object";
+        const ns = NormalizedSchema.of(schema);
+        if (isObject2) {
+          if (ns.isStructSchema()) {
+            const record2 = value;
+            const union2 = ns.isUnionSchema();
+            const out = {};
+            let nameMap = void 0;
+            const { jsonName } = this.settings;
+            if (jsonName) {
+              nameMap = {};
+            }
+            let unionSerde;
+            if (union2) {
+              unionSerde = new UnionSerde(record2, out);
+            }
+            for (const [memberName, memberSchema] of ns.structIterator()) {
+              let fromKey = memberName;
+              if (jsonName) {
+                fromKey = memberSchema.getMergedTraits().jsonName ?? fromKey;
+                nameMap[fromKey] = memberName;
+              }
+              if (union2) {
+                unionSerde.mark(fromKey);
+              }
+              if (record2[fromKey] != null) {
+                out[memberName] = this._read(memberSchema, record2[fromKey]);
+              }
+            }
+            if (union2) {
+              unionSerde.writeUnknown();
+            } else if (typeof record2.__type === "string") {
+              for (const k5 in record2) {
+                if (!hasOwn(record2, k5))
+                  continue;
+                const v = record2[k5];
+                const t = jsonName ? nameMap[k5] ?? k5 : k5;
+                if (!(t in out)) {
+                  out[t] = v;
+                }
+              }
+            }
+            return out;
+          }
+          if (Array.isArray(value) && ns.isListSchema()) {
+            const listMember = ns.getValueSchema();
+            const out = [];
+            for (const item of value) {
+              out.push(this._read(listMember, item));
+            }
+            return out;
+          }
+          if (ns.isMapSchema()) {
+            const mapMember = ns.getValueSchema();
+            const out = {};
+            for (const _k in value) {
+              if (!hasOwn(value, _k))
+                continue;
+              if (_k === "__proto__") {
+                writeKey(out);
+              }
+              out[_k] = this._read(mapMember, value[_k]);
+            }
+            return out;
+          }
+        }
+        if (ns.isBlobSchema() && typeof value === "string") {
+          return fromBase64(value);
+        }
+        const mediaType = ns.getMergedTraits().mediaType;
+        if (ns.isStringSchema() && typeof value === "string" && mediaType) {
+          const isJson = mediaType === "application/json" || mediaType.endsWith("+json");
+          if (isJson) {
+            return LazyJsonString.from(value);
+          }
+          return value;
+        }
+        if (ns.isTimestampSchema() && value != null) {
+          const format2 = determineTimestampFormat(ns, this.settings);
+          switch (format2) {
+            case 5:
+              return parseRfc3339DateTimeWithOffset(value);
+            case 6:
+              return parseRfc7231DateTime(value);
+            case 7:
+              return parseEpochTimestamp(value);
+            default:
+              console.warn("Missing timestamp format, parsing value with Date constructor:", value);
+              return new Date(value);
+          }
+        }
+        if (ns.isBigIntegerSchema() && (typeof value === "number" || typeof value === "string")) {
+          return BigInt(value);
+        }
+        if (ns.isBigDecimalSchema() && value != void 0) {
+          if (value instanceof NumericValue) {
+            return value;
+          }
+          const untyped = value;
+          if (untyped.type === "bigDecimal" && "string" in untyped) {
+            return new NumericValue(untyped.string, untyped.type);
+          }
+          return new NumericValue(String(value), "bigDecimal");
+        }
+        if (ns.isNumericSchema() && typeof value === "string") {
+          switch (value) {
+            case "Infinity":
+              return Infinity;
+            case "-Infinity":
+              return -Infinity;
+            case "NaN":
+              return NaN;
+          }
+          return value;
+        }
+        if (ns.isDocumentSchema()) {
+          if (isObject2) {
+            const out = Array.isArray(value) ? [] : {};
+            for (const k5 in value) {
+              if (!hasOwn(value, k5))
+                continue;
+              if (k5 === "__proto__") {
+                writeKey(out);
+              }
+              const v = value[k5];
+              if (v instanceof NumericValue) {
+                out[k5] = v;
+              } else {
+                out[k5] = this._read(ns, v);
+              }
+            }
+            return out;
+          } else {
+            return structuredClone(value);
+          }
+        }
+        return value;
+      }
+    };
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/jsonReplacer.js
+var NUMERIC_CONTROL_CHAR, JsonReplacer;
+var init_jsonReplacer = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/jsonReplacer.js"() {
+    init_serde();
+    NUMERIC_CONTROL_CHAR = String.fromCharCode(925);
+    JsonReplacer = class {
+      values = /* @__PURE__ */ new Map();
+      counter = 0;
+      stage = 0;
+      createReplacer() {
+        if (this.stage === 1) {
+          throw new Error("@aws-sdk/core/protocols - JsonReplacer already created.");
+        }
+        if (this.stage === 2) {
+          throw new Error("@aws-sdk/core/protocols - JsonReplacer exhausted.");
+        }
+        this.stage = 1;
+        return (key, value) => {
+          if (value instanceof NumericValue) {
+            const v = `${NUMERIC_CONTROL_CHAR + "nv" + this.counter++}_` + value.string;
+            this.values.set(`"${v}"`, value.string);
+            return v;
+          }
+          if (typeof value === "bigint") {
+            const s2 = value.toString();
+            const v = `${NUMERIC_CONTROL_CHAR + "b" + this.counter++}_` + s2;
+            this.values.set(`"${v}"`, s2);
+            return v;
+          }
+          return value;
+        };
+      }
+      replaceInJson(json2) {
+        if (this.stage === 0) {
+          throw new Error("@aws-sdk/core/protocols - JsonReplacer not created yet.");
+        }
+        if (this.stage === 2) {
+          throw new Error("@aws-sdk/core/protocols - JsonReplacer exhausted.");
+        }
+        this.stage = 2;
+        if (this.counter === 0) {
+          return json2;
+        }
+        for (const [key, value] of this.values) {
+          json2 = json2.replace(key, value);
+        }
+        return json2;
+      }
+    };
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/codec-v1/JsonShapeSerializer.js
+var JsonShapeSerializer;
+var init_JsonShapeSerializer = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/codec-v1/JsonShapeSerializer.js"() {
+    init_determineTimestampFormat();
+    init_schema();
+    init_serde();
+    init_ConfigurableSerdeContext();
+    init_jsonReplacer();
+    init_writeKey();
+    init_transport();
+    JsonShapeSerializer = class extends SerdeContextConfig {
+      settings;
+      buffer;
+      useReplacer = false;
+      rootSchema;
+      constructor(settings) {
+        super();
+        this.settings = settings;
+      }
+      write(schema, value) {
+        this.rootSchema = NormalizedSchema.of(schema);
+        this.buffer = this._write(this.rootSchema, value);
+      }
+      flush() {
+        const { rootSchema, useReplacer } = this;
+        this.rootSchema = void 0;
+        this.useReplacer = false;
+        if (rootSchema?.isStructSchema() || rootSchema?.isDocumentSchema()) {
+          if (!useReplacer) {
+            return JSON.stringify(this.buffer);
+          }
+          const replacer = new JsonReplacer();
+          return replacer.replaceInJson(JSON.stringify(this.buffer, replacer.createReplacer(), 0));
+        }
+        return this.buffer;
+      }
+      writeDiscriminatedDocument(schema, value) {
+        this.write(schema, value);
+        if (typeof this.buffer === "object") {
+          this.buffer.__type = NormalizedSchema.of(schema).getName(true);
+        }
+      }
+      _write(schema, value, container) {
+        const isObject2 = value !== null && typeof value === "object";
+        const ns = NormalizedSchema.of(schema);
+        if (isObject2) {
+          if (ns.isStructSchema()) {
+            const record2 = value;
+            const out = {};
+            const { jsonName } = this.settings;
+            let nameMap = void 0;
+            if (jsonName) {
+              nameMap = {};
+            }
+            let outCount = 0;
+            for (const [memberName, memberSchema] of ns.structIterator()) {
+              const serializableValue = this._write(memberSchema, record2[memberName], ns);
+              if (serializableValue !== void 0) {
+                let targetKey = memberName;
+                if (jsonName) {
+                  targetKey = memberSchema.getMergedTraits().jsonName ?? memberName;
+                  nameMap[memberName] = targetKey;
+                }
+                out[targetKey] = serializableValue;
+                outCount++;
+              }
+            }
+            if (ns.isUnionSchema() && outCount === 0) {
+              const { $unknown } = record2;
+              if (Array.isArray($unknown)) {
+                const [k5, v] = $unknown;
+                if (k5 === "__proto__") {
+                  writeKey(out);
+                }
+                out[k5] = this._write(15, v);
+              }
+            } else if (typeof record2.__type === "string") {
+              for (const k5 in record2) {
+                if (!hasOwn(record2, k5))
+                  continue;
+                const v = record2[k5];
+                const targetKey = jsonName ? nameMap[k5] ?? k5 : k5;
+                if (!(targetKey in out)) {
+                  out[targetKey] = this._write(15, v);
+                }
+              }
+            }
+            return out;
+          }
+          if (Array.isArray(value) && ns.isListSchema()) {
+            const listMember = ns.getValueSchema();
+            const out = [];
+            const sparse = !!ns.getMergedTraits().sparse;
+            for (const item of value) {
+              if (sparse || item != null) {
+                out.push(this._write(listMember, item));
+              }
+            }
+            return out;
+          }
+          if (ns.isMapSchema()) {
+            const mapMember = ns.getValueSchema();
+            const out = {};
+            const sparse = !!ns.getMergedTraits().sparse;
+            for (const _k in value) {
+              if (!hasOwn(value, _k))
+                continue;
+              const _v = value[_k];
+              if (sparse || _v != null) {
+                if (_k === "__proto__") {
+                  writeKey(out);
+                }
+                out[_k] = this._write(mapMember, _v);
+              }
+            }
+            return out;
+          }
+          if (value instanceof Uint8Array && ns.isBlobSchema()) {
+            if (ns === this.rootSchema) {
+              return value;
+            }
+            return (this.serdeContext?.base64Encoder ?? toBase64)(value);
+          }
+          if (value instanceof Date && (ns.isTimestampSchema() || ns.isDocumentSchema())) {
+            const format2 = determineTimestampFormat(ns, this.settings);
+            switch (format2) {
+              case 5:
+                return value.toISOString().replace(".000Z", "Z");
+              case 6:
+                return dateToUtcString(value);
+              case 7:
+                return value.getTime() / 1e3;
+              default:
+                console.warn("Missing timestamp format, using epoch seconds", value);
+                return value.getTime() / 1e3;
+            }
+          }
+          if (value instanceof NumericValue) {
+            this.useReplacer = true;
+          }
+        }
+        if (value === null && container?.isStructSchema()) {
+          return void 0;
+        }
+        if (ns.isStringSchema()) {
+          if (typeof value === "undefined" && ns.isIdempotencyToken()) {
+            return generateIdempotencyToken();
+          }
+          const mediaType = ns.getMergedTraits().mediaType;
+          if (value != null && mediaType) {
+            const isJson = mediaType === "application/json" || mediaType.endsWith("+json");
+            if (isJson) {
+              return LazyJsonString.from(value);
+            }
+          }
+          return value;
+        }
+        if (typeof value === "number") {
+          if (Math.abs(value) === Infinity || isNaN(value)) {
+            return String(value);
+          }
+          return value;
+        }
+        if (typeof value === "string" && ns.isBlobSchema()) {
+          if (ns === this.rootSchema) {
+            return value;
+          }
+          return (this.serdeContext?.base64Encoder ?? toBase64)(value);
+        }
+        if (typeof value === "bigint") {
+          this.useReplacer = true;
+        }
+        if (ns.isDocumentSchema()) {
+          if (isObject2) {
+            if (value instanceof Uint8Array) {
+              return (this.serdeContext?.base64Encoder ?? toBase64)(value);
+            }
+            const out = Array.isArray(value) ? [] : {};
+            for (const k5 in value) {
+              if (!hasOwn(value, k5))
+                continue;
+              const v = value[k5];
+              if (k5 === "__proto__") {
+                writeKey(out);
+              }
+              if (v instanceof NumericValue) {
+                this.useReplacer = true;
+                out[k5] = v;
+              } else {
+                out[k5] = this._write(ns, v);
+              }
+            }
+            return out;
+          } else {
+            return structuredClone(value);
+          }
+        }
+        return value;
+      }
+    };
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/codec-v1/JsonCodec.js
+var JsonCodec;
+var init_JsonCodec = __esm({
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/json/codec-v1/JsonCodec.js"() {
+    init_ConfigurableSerdeContext();
+    init_JsonShapeDeserializer();
+    init_JsonShapeSerializer();
+    JsonCodec = class extends SerdeContextConfig {
+      settings;
+      constructor(settings) {
+        super();
+        this.settings = settings;
+      }
+      createSerializer() {
+        const serializer = new JsonShapeSerializer(this.settings);
+        serializer.setSerdeContext(this.serdeContext);
+        return serializer;
+      }
+      createDeserializer() {
+        const deserializer = new JsonShapeDeserializer(this.settings);
+        deserializer.setSerdeContext(this.serdeContext);
+        return deserializer;
+      }
+    };
+  }
+});
+
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/index.js
 var protocols_exports = {};
 __export(protocols_exports, {
   Field: () => Field,
@@ -28731,9 +30545,16 @@ __export(protocols_exports, {
   HttpProtocol: () => HttpProtocol,
   HttpRequest: () => HttpRequest,
   HttpResponse: () => HttpResponse,
+  JsonCodec: () => JsonCodec,
+  JsonCodec2: () => JsonCodec2,
+  JsonShapeDeserializer: () => JsonShapeDeserializer,
+  JsonShapeDeserializer2: () => JsonShapeDeserializer2,
+  JsonShapeSerializer: () => JsonShapeSerializer,
+  JsonShapeSerializer2: () => JsonShapeSerializer2,
   RequestBuilder: () => RequestBuilder,
   RpcProtocol: () => RpcProtocol,
   SerdeContext: () => SerdeContext,
+  SmithyRpcV2JsonProtocol: () => SmithyRpcV2JsonProtocol,
   ToStringShapeSerializer: () => ToStringShapeSerializer,
   buildQueryString: () => buildQueryString,
   collectBody: () => collectBody,
@@ -28746,6 +30567,11 @@ __export(protocols_exports, {
   getContentLengthPlugin: () => getContentLengthPlugin,
   getHttpHandlerExtensionConfiguration: () => getHttpHandlerExtensionConfiguration,
   isValidHostname: () => isValidHostname,
+  loadJsonRpcErrorCode: () => loadJsonRpcErrorCode,
+  loadRestJsonErrorCode: () => loadRestJsonErrorCode,
+  loadSmithyRpcV2JsonErrorCode: () => loadSmithyRpcV2JsonErrorCode,
+  parseJsonBody: () => parseJsonBody,
+  parseJsonErrorBody: () => parseJsonErrorBody,
   parseQueryString: () => parseQueryString,
   parseUrl: () => parseUrl,
   requestBuilder: () => requestBuilder,
@@ -28753,7 +30579,7 @@ __export(protocols_exports, {
   resolvedPath: () => resolvedPath
 });
 var init_protocols = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/protocols/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/protocols/index.js"() {
     init_collect_stream_body();
     init_extended_encode_uri_component();
     init_HttpBindingProtocol();
@@ -28779,13 +30605,21 @@ var init_protocols = __esm({
     init_buildQueryString();
     init_transport();
     init_transport();
+    init_SmithyRpcV2JsonProtocol();
+    init_parseJsonBody();
+    init_JsonCodec();
+    init_JsonShapeSerializer();
+    init_JsonShapeDeserializer();
+    init_JsonCodec2();
+    init_JsonShapeSerializer2();
+    init_JsonShapeDeserializer2();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/service-error-classification/constants.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/service-error-classification/constants.js
 var CLOCK_SKEW_ERROR_CODES, THROTTLING_ERROR_CODES, TRANSIENT_ERROR_CODES, TRANSIENT_ERROR_STATUS_CODES, NODEJS_TIMEOUT_ERROR_CODES, NODEJS_NETWORK_ERROR_CODES;
 var init_constants4 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/service-error-classification/constants.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/service-error-classification/constants.js"() {
     CLOCK_SKEW_ERROR_CODES = [
       "AccessDeniedException",
       "AuthFailure",
@@ -28818,13 +30652,13 @@ var init_constants4 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/service-error-classification/service-error-classification.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/service-error-classification/service-error-classification.js
 function isNodeJsHttp2TransientError(error64) {
   return error64.code === "ERR_HTTP2_STREAM_ERROR" && error64.message.includes("NGHTTP2_REFUSED_STREAM");
 }
 var isRetryableByTrait, isClockSkewError, isClockSkewCorrectedError, isBrowserNetworkError, isThrottlingError, isTransientError, isServerError;
 var init_service_error_classification = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/service-error-classification/service-error-classification.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/service-error-classification/service-error-classification.js"() {
     init_constants4();
     isRetryableByTrait = (error64) => error64?.$retryable !== void 0;
     isClockSkewError = (error64) => CLOCK_SKEW_ERROR_CODES.includes(error64.name);
@@ -28858,10 +30692,10 @@ var init_service_error_classification = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/constants.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/constants.js
 var DEFAULT_RETRY_DELAY_BASE, MAXIMUM_RETRY_DELAY, THROTTLING_RETRY_DELAY_BASE, INITIAL_RETRY_TOKENS, RETRY_COST, TIMEOUT_RETRY_COST, NO_RETRY_INCREMENT, INVOCATION_ID_HEADER, REQUEST_HEADER;
 var init_constants5 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/constants.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/constants.js"() {
     DEFAULT_RETRY_DELAY_BASE = 100;
     MAXIMUM_RETRY_DELAY = 20 * 1e3;
     THROTTLING_RETRY_DELAY_BASE = 500;
@@ -28874,7 +30708,7 @@ var init_constants5 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/parseRetryAfterHeader.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/parseRetryAfterHeader.js
 function parseRetryAfterHeader(response, logger2) {
   if (!HttpResponse.isInstance(response)) {
     return;
@@ -28920,17 +30754,17 @@ function getRetryAfterHint(response, logger2) {
   return parseRetryAfterHeader(response, logger2);
 }
 var init_parseRetryAfterHeader = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/parseRetryAfterHeader.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/parseRetryAfterHeader.js"() {
     init_transport();
     init_protocols();
     init_serde();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/util.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/util.js
 var asSdkError;
 var init_util = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/util.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/util.js"() {
     asSdkError = (error64) => {
       if (error64 instanceof Error)
         return error64;
@@ -28943,7 +30777,7 @@ var init_util = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retryMiddleware.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retryMiddleware.js
 function bindRetryMiddleware(isStreamingPayload2) {
   return (options) => (next, context) => async (args) => {
     let retryStrategy = await options.retryStrategy();
@@ -29013,7 +30847,7 @@ function bindGetRetryPlugin(isStreamingPayload2) {
 }
 var cooldown, isRetryStrategyV2, getRetryErrorInfo, getRetryErrorType, retryMiddlewareOptions;
 var init_retryMiddleware = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retryMiddleware.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retryMiddleware.js"() {
     init_client2();
     init_protocols();
     init_serde();
@@ -29053,10 +30887,10 @@ var init_retryMiddleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/DefaultRateLimiter.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/DefaultRateLimiter.js
 var DefaultRateLimiter;
 var init_DefaultRateLimiter = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/DefaultRateLimiter.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/DefaultRateLimiter.js"() {
     init_service_error_classification();
     DefaultRateLimiter = class _DefaultRateLimiter {
       static setTimeoutFn = (fn, delay) => setTimeout(fn, delay);
@@ -29170,10 +31004,10 @@ var init_DefaultRateLimiter = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/retries-2026-config.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/retries-2026-config.js
 var Retry;
 var init_retries_2026_config = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/retries-2026-config.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/retries-2026-config.js"() {
     Retry = class _Retry {
       static v2026 = typeof process !== "undefined" && process.env?.SMITHY_NEW_RETRIES_2026 === "true";
       static delay() {
@@ -29195,10 +31029,10 @@ var init_retries_2026_config = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/DefaultRetryBackoffStrategy.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/DefaultRetryBackoffStrategy.js
 var DefaultRetryBackoffStrategy;
 var init_DefaultRetryBackoffStrategy = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/DefaultRetryBackoffStrategy.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/DefaultRetryBackoffStrategy.js"() {
     init_constants5();
     init_retries_2026_config();
     DefaultRetryBackoffStrategy = class {
@@ -29216,10 +31050,10 @@ var init_DefaultRetryBackoffStrategy = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/DefaultRetryToken.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/DefaultRetryToken.js
 var DefaultRetryToken;
 var init_DefaultRetryToken = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/DefaultRetryToken.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/DefaultRetryToken.js"() {
     init_constants5();
     DefaultRetryToken = class {
       delay;
@@ -29251,10 +31085,10 @@ var init_DefaultRetryToken = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/config.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/config.js
 var RETRY_MODES, DEFAULT_MAX_ATTEMPTS, DEFAULT_RETRY_MODE;
 var init_config3 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/config.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/config.js"() {
     (function(RETRY_MODES2) {
       RETRY_MODES2["STANDARD"] = "standard";
       RETRY_MODES2["ADAPTIVE"] = "adaptive";
@@ -29264,10 +31098,10 @@ var init_config3 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/StandardRetryStrategy.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/StandardRetryStrategy.js
 var refusal, StandardRetryStrategy;
 var init_StandardRetryStrategy = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/StandardRetryStrategy.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/StandardRetryStrategy.js"() {
     init_DefaultRetryBackoffStrategy();
     init_DefaultRetryToken();
     init_config3();
@@ -29364,10 +31198,10 @@ var init_StandardRetryStrategy = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/AdaptiveRetryStrategy.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/AdaptiveRetryStrategy.js
 var AdaptiveRetryStrategy;
 var init_AdaptiveRetryStrategy = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/AdaptiveRetryStrategy.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/AdaptiveRetryStrategy.js"() {
     init_DefaultRateLimiter();
     init_StandardRetryStrategy();
     init_config3();
@@ -29405,10 +31239,10 @@ var init_AdaptiveRetryStrategy = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/ConfiguredRetryStrategy.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/ConfiguredRetryStrategy.js
 var ConfiguredRetryStrategy;
 var init_ConfiguredRetryStrategy = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/ConfiguredRetryStrategy.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/util-retry/ConfiguredRetryStrategy.js"() {
     init_StandardRetryStrategy();
     init_retries_2026_config();
     ConfiguredRetryStrategy = class extends StandardRetryStrategy {
@@ -29429,10 +31263,10 @@ var init_ConfiguredRetryStrategy = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/defaultRetryQuota.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/defaultRetryQuota.js
 var getDefaultRetryQuota;
 var init_defaultRetryQuota = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/defaultRetryQuota.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/defaultRetryQuota.js"() {
     init_constants5();
     getDefaultRetryQuota = (initialRetryTokens, options) => {
       const MAX_CAPACITY = initialRetryTokens;
@@ -29463,19 +31297,19 @@ var init_defaultRetryQuota = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/delayDecider.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/delayDecider.js
 var defaultDelayDecider;
 var init_delayDecider = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/delayDecider.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/delayDecider.js"() {
     init_constants5();
     defaultDelayDecider = (delayBase, attempts) => Math.floor(Math.min(MAXIMUM_RETRY_DELAY, Math.random() * 2 ** attempts * delayBase));
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/retryDecider.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/retryDecider.js
 var defaultRetryDecider;
 var init_retryDecider = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/retryDecider.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/retryDecider.js"() {
     init_service_error_classification();
     defaultRetryDecider = (error64) => {
       if (!error64) {
@@ -29486,10 +31320,10 @@ var init_retryDecider = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/StandardRetryStrategy.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/StandardRetryStrategy.js
 var StandardRetryStrategy2, getDelayFromRetryAfterHeader;
 var init_StandardRetryStrategy2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/StandardRetryStrategy.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/StandardRetryStrategy.js"() {
     init_protocols();
     init_serde();
     init_service_error_classification();
@@ -29586,10 +31420,10 @@ var init_StandardRetryStrategy2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/AdaptiveRetryStrategy.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/AdaptiveRetryStrategy.js
 var AdaptiveRetryStrategy2;
 var init_AdaptiveRetryStrategy2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/AdaptiveRetryStrategy.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/retry-pre-sra-deprecated/AdaptiveRetryStrategy.js"() {
     init_DefaultRateLimiter();
     init_config3();
     init_StandardRetryStrategy2();
@@ -29615,10 +31449,10 @@ var init_AdaptiveRetryStrategy2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/configurations.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/configurations.js
 var ENV_MAX_ATTEMPTS, CONFIG_MAX_ATTEMPTS, NODE_MAX_ATTEMPT_CONFIG_OPTIONS, resolveRetryConfig, ENV_RETRY_MODE, CONFIG_RETRY_MODE, NODE_RETRY_MODE_CONFIG_OPTIONS;
 var init_configurations = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/configurations.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/configurations.js"() {
     init_client2();
     init_AdaptiveRetryStrategy();
     init_StandardRetryStrategy();
@@ -29683,10 +31517,10 @@ var init_configurations = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/omitRetryHeadersMiddleware.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/omitRetryHeadersMiddleware.js
 var omitRetryHeadersMiddleware, omitRetryHeadersMiddlewareOptions, getOmitRetryHeadersPlugin;
 var init_omitRetryHeadersMiddleware = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/omitRetryHeadersMiddleware.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/middleware-retry/omitRetryHeadersMiddleware.js"() {
     init_protocols();
     init_constants5();
     omitRetryHeadersMiddleware = () => (next) => async (args) => {
@@ -29712,7 +31546,7 @@ var init_omitRetryHeadersMiddleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/index.js
 var retry_exports = {};
 __export(retry_exports, {
   AdaptiveRetryStrategy: () => AdaptiveRetryStrategy,
@@ -29761,7 +31595,7 @@ __export(retry_exports, {
 });
 var retryMiddleware, getRetryPlugin;
 var init_retry2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/retry/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/retry/index.js"() {
     init_isStreamingPayload();
     init_retryMiddleware();
     init_service_error_classification();
@@ -29785,7 +31619,7 @@ var init_retry2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/setFeature.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/setFeature.js
 function setFeature2(context, feature, value) {
   if (!context.__aws_sdk_context) {
     context.__aws_sdk_context = {
@@ -29797,13 +31631,13 @@ function setFeature2(context, feature, value) {
   context.__aws_sdk_context.features[feature] = value;
 }
 var init_setFeature = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/setFeature.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/setFeature.js"() {
     init_retry2();
     Retry.v2026 ||= typeof process === "object" && process.env?.AWS_NEW_RETRIES_2026 === "true";
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/setTokenFeature.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/setTokenFeature.js
 function setTokenFeature(token, feature, value) {
   if (!token.$source) {
     token.$source = {};
@@ -29812,17 +31646,17 @@ function setTokenFeature(token, feature, value) {
   return token;
 }
 var init_setTokenFeature = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/setTokenFeature.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/setTokenFeature.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-host-header/hostHeaderMiddleware.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-host-header/hostHeaderMiddleware.js
 function resolveHostHeaderConfig(input2) {
   return input2;
 }
 var hostHeaderMiddleware, hostHeaderMiddlewareOptions, getHostHeaderPlugin;
 var init_hostHeaderMiddleware = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-host-header/hostHeaderMiddleware.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-host-header/hostHeaderMiddleware.js"() {
     init_protocols();
     hostHeaderMiddleware = (options) => (next) => async (args) => {
       if (!HttpRequest.isInstance(args.request))
@@ -29855,10 +31689,10 @@ var init_hostHeaderMiddleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-logger/loggerMiddleware.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-logger/loggerMiddleware.js
 var loggerMiddleware, loggerMiddlewareOptions, getLoggerPlugin;
 var init_loggerMiddleware = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-logger/loggerMiddleware.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-logger/loggerMiddleware.js"() {
     loggerMiddleware = () => (next, context) => async (args) => {
       try {
         const response = await next(args);
@@ -29903,10 +31737,10 @@ var init_loggerMiddleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-recursion-detection/configuration.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-recursion-detection/configuration.js
 var recursionDetectionMiddlewareOptions;
 var init_configuration = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-recursion-detection/configuration.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-recursion-detection/configuration.js"() {
     recursionDetectionMiddlewareOptions = {
       step: "build",
       tags: ["RECURSION_DETECTION", "TRACE_CONTEXT_PROPAGATION"],
@@ -30044,7 +31878,7 @@ var init_invoke_store = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-recursion-detection/recursionDetectionMiddleware.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-recursion-detection/recursionDetectionMiddleware.js
 function sanitizeTraceHeaders(headers) {
   for (const header of Object.keys(headers)) {
     const lower = header.toLowerCase();
@@ -30056,7 +31890,7 @@ function sanitizeTraceHeaders(headers) {
 }
 var AWS_LAMBDA_FUNCTION_NAME, _X_AMZN_TRACE_ID, X_AMZN_TRACE_ID, TRACEPARENT, TRACESTATE, BAGGAGE, recursionDetectionMiddleware;
 var init_recursionDetectionMiddleware = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-recursion-detection/recursionDetectionMiddleware.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-recursion-detection/recursionDetectionMiddleware.js"() {
     init_invoke_store();
     init_protocols();
     AWS_LAMBDA_FUNCTION_NAME = "AWS_LAMBDA_FUNCTION_NAME";
@@ -30108,10 +31942,10 @@ var init_recursionDetectionMiddleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-recursion-detection/getRecursionDetectionPlugin.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-recursion-detection/getRecursionDetectionPlugin.js
 var getRecursionDetectionPlugin;
 var init_getRecursionDetectionPlugin = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-recursion-detection/getRecursionDetectionPlugin.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-recursion-detection/getRecursionDetectionPlugin.js"() {
     init_configuration();
     init_recursionDetectionMiddleware();
     getRecursionDetectionPlugin = (options) => ({
@@ -30122,10 +31956,10 @@ var init_getRecursionDetectionPlugin = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/resolveAuthOptions.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/resolveAuthOptions.js
 var resolveAuthOptions;
 var init_resolveAuthOptions = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/resolveAuthOptions.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/resolveAuthOptions.js"() {
     resolveAuthOptions = (candidateAuthOptions, authSchemePreference) => {
       if (!authSchemePreference || authSchemePreference.length === 0) {
         return candidateAuthOptions;
@@ -30149,7 +31983,7 @@ var init_resolveAuthOptions = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/httpAuthSchemeMiddleware.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/httpAuthSchemeMiddleware.js
 function convertHttpAuthSchemesToMap(httpAuthSchemes) {
   const map4 = /* @__PURE__ */ new Map();
   for (const scheme of httpAuthSchemes) {
@@ -30159,7 +31993,7 @@ function convertHttpAuthSchemesToMap(httpAuthSchemes) {
 }
 var httpAuthSchemeMiddleware;
 var init_httpAuthSchemeMiddleware = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/httpAuthSchemeMiddleware.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/httpAuthSchemeMiddleware.js"() {
     init_transport();
     init_resolveAuthOptions();
     httpAuthSchemeMiddleware = (config2, mwOptions) => (next, context) => async (args) => {
@@ -30198,10 +32032,10 @@ var init_httpAuthSchemeMiddleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/getHttpAuthSchemeEndpointRuleSetPlugin.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/getHttpAuthSchemeEndpointRuleSetPlugin.js
 var httpAuthSchemeEndpointRuleSetMiddlewareOptions, getHttpAuthSchemeEndpointRuleSetPlugin;
 var init_getHttpAuthSchemeEndpointRuleSetPlugin = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/getHttpAuthSchemeEndpointRuleSetPlugin.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/getHttpAuthSchemeEndpointRuleSetPlugin.js"() {
     init_httpAuthSchemeMiddleware();
     httpAuthSchemeEndpointRuleSetMiddlewareOptions = {
       step: "serialize",
@@ -30222,10 +32056,10 @@ var init_getHttpAuthSchemeEndpointRuleSetPlugin = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/getHttpAuthSchemePlugin.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/getHttpAuthSchemePlugin.js
 var httpAuthSchemeMiddlewareOptions, getHttpAuthSchemePlugin;
 var init_getHttpAuthSchemePlugin = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/getHttpAuthSchemePlugin.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/getHttpAuthSchemePlugin.js"() {
     init_httpAuthSchemeMiddleware();
     httpAuthSchemeMiddlewareOptions = {
       step: "serialize",
@@ -30246,19 +32080,19 @@ var init_getHttpAuthSchemePlugin = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/index.js
 var init_middleware_http_auth_scheme = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-auth-scheme/index.js"() {
     init_httpAuthSchemeMiddleware();
     init_getHttpAuthSchemeEndpointRuleSetPlugin();
     init_getHttpAuthSchemePlugin();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-signing/httpSigningMiddleware.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-signing/httpSigningMiddleware.js
 var defaultErrorHandler, defaultSuccessHandler, httpSigningMiddleware;
 var init_httpSigningMiddleware = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-signing/httpSigningMiddleware.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-signing/httpSigningMiddleware.js"() {
     init_protocols();
     init_transport();
     defaultErrorHandler = (signingProperties) => (error64) => {
@@ -30286,10 +32120,10 @@ var init_httpSigningMiddleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-signing/getHttpSigningMiddleware.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-signing/getHttpSigningMiddleware.js
 var httpSigningMiddlewareOptions, getHttpSigningPlugin;
 var init_getHttpSigningMiddleware = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-signing/getHttpSigningMiddleware.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-signing/getHttpSigningMiddleware.js"() {
     init_httpSigningMiddleware();
     httpSigningMiddlewareOptions = {
       step: "finalizeRequest",
@@ -30308,18 +32142,18 @@ var init_getHttpSigningMiddleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-signing/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-signing/index.js
 var init_middleware_http_signing = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-signing/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/middleware-http-signing/index.js"() {
     init_httpSigningMiddleware();
     init_getHttpSigningMiddleware();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/normalizeProvider.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/normalizeProvider.js
 var normalizeProvider2;
 var init_normalizeProvider2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/normalizeProvider.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/normalizeProvider.js"() {
     normalizeProvider2 = (input2) => {
       if (typeof input2 === "function")
         return input2;
@@ -30329,7 +32163,7 @@ var init_normalizeProvider2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/pagination/createPaginator.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/pagination/createPaginator.js
 function createPaginator(ClientCtor, CommandCtor, inputTokenName, outputTokenName, pageSizeTokenName) {
   return async function* paginateOperation(config2, input2, ...additionalArguments) {
     const _input = input2;
@@ -30356,7 +32190,7 @@ function createPaginator(ClientCtor, CommandCtor, inputTokenName, outputTokenNam
 }
 var makePagedClientRequest, get;
 var init_createPaginator = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/pagination/createPaginator.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/pagination/createPaginator.js"() {
     makePagedClientRequest = async (CommandCtor, client, input2, withCommand = (_) => _, ...args) => {
       let command5 = new CommandCtor(input2);
       command5 = withCommand(command5) ?? command5;
@@ -30376,7 +32210,7 @@ var init_createPaginator = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/setFeature.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/setFeature.js
 function setFeature3(context, feature, value) {
   if (!context.__smithy_context) {
     context.__smithy_context = {
@@ -30388,14 +32222,14 @@ function setFeature3(context, feature, value) {
   context.__smithy_context.features[feature] = value;
 }
 var init_setFeature2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/setFeature.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/setFeature.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/DefaultIdentityProviderConfig.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/DefaultIdentityProviderConfig.js
 var DefaultIdentityProviderConfig;
 var init_DefaultIdentityProviderConfig = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/DefaultIdentityProviderConfig.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/DefaultIdentityProviderConfig.js"() {
     init_transport();
     DefaultIdentityProviderConfig = class {
       authSchemes = /* @__PURE__ */ new Map();
@@ -30416,10 +32250,10 @@ var init_DefaultIdentityProviderConfig = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/httpApiKeyAuth.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/httpApiKeyAuth.js
 var import_types24, HttpApiKeyAuthSigner;
 var init_httpApiKeyAuth = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/httpApiKeyAuth.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/httpApiKeyAuth.js"() {
     init_protocols();
     import_types24 = __toESM(require_dist_cjs());
     HttpApiKeyAuthSigner = class {
@@ -30450,10 +32284,10 @@ var init_httpApiKeyAuth = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/httpBearerAuth.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/httpBearerAuth.js
 var HttpBearerAuthSigner;
 var init_httpBearerAuth = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/httpBearerAuth.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/httpBearerAuth.js"() {
     init_protocols();
     HttpBearerAuthSigner = class {
       async sign(httpRequest, identity, signingProperties) {
@@ -30468,10 +32302,10 @@ var init_httpBearerAuth = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/noAuth.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/noAuth.js
 var NoAuthSigner;
 var init_noAuth = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/noAuth.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/noAuth.js"() {
     NoAuthSigner = class {
       async sign(httpRequest, identity, signingProperties) {
         return httpRequest;
@@ -30480,19 +32314,19 @@ var init_noAuth = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/index.js
 var init_httpAuthSchemes = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/httpAuthSchemes/index.js"() {
     init_httpApiKeyAuth();
     init_httpBearerAuth();
     init_noAuth();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/memoizeIdentityProvider.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/memoizeIdentityProvider.js
 var createIsIdentityExpiredFunction, EXPIRATION_MS, isIdentityExpired, doesIdentityRequireRefresh, memoizeIdentityProvider;
 var init_memoizeIdentityProvider = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/memoizeIdentityProvider.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/memoizeIdentityProvider.js"() {
     createIsIdentityExpiredFunction = (expirationMs) => function isIdentityExpired2(identity) {
       return doesIdentityRequireRefresh(identity) && identity.expiration.getTime() - Date.now() < expirationMs;
     };
@@ -30550,16 +32384,16 @@ var init_memoizeIdentityProvider = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/index.js
 var init_util_identity_and_auth = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/legacy-root-exports/util-identity-and-auth/index.js"() {
     init_DefaultIdentityProviderConfig();
     init_httpAuthSchemes();
     init_memoizeIdentityProvider();
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/index.js
 var dist_es_exports = {};
 __export(dist_es_exports, {
   DefaultIdentityProviderConfig: () => DefaultIdentityProviderConfig,
@@ -30586,7 +32420,7 @@ __export(dist_es_exports, {
   setFeature: () => setFeature3
 });
 var init_dist_es = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/index.js"() {
     init_transport();
     init_middleware_http_auth_scheme();
     init_middleware_http_signing();
@@ -30598,7 +32432,7 @@ var init_dist_es = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/configurations.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/configurations.js
 function isValidUserAgentAppId(appId) {
   if (appId === void 0) {
     return true;
@@ -30626,16 +32460,16 @@ function resolveUserAgentConfig(input2) {
 }
 var DEFAULT_UA_APP_ID;
 var init_configurations2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/configurations.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/configurations.js"() {
     init_dist_es();
     DEFAULT_UA_APP_ID = void 0;
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/partitions.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/partitions.js
 var partitionsInfo;
 var init_partitions = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/partitions.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/partitions.js"() {
     partitionsInfo = {
       "partitions": [
         {
@@ -30915,10 +32749,10 @@ var init_partitions = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/partition.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/partition.js
 var selectedPartitionsInfo, selectedUserAgentPrefix, partition, setPartitionInfo, useDefaultPartitionInfo, getUserAgentPrefix;
 var init_partition = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/partition.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/partition.js"() {
     init_partitions();
     selectedPartitionsInfo = partitionsInfo;
     selectedUserAgentPrefix = "";
@@ -30962,7 +32796,7 @@ var init_partition = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/check-features.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/check-features.js
 async function checkFeatures(context, config2, args) {
   const request = args.request;
   if (request?.headers?.["smithy-protocol"] === "rpc-v2-cbor") {
@@ -31011,17 +32845,17 @@ async function checkFeatures(context, config2, args) {
 }
 var ACCOUNT_ID_ENDPOINT_REGEX;
 var init_check_features = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/check-features.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/check-features.js"() {
     init_retry2();
     init_setFeature();
     ACCOUNT_ID_ENDPOINT_REGEX = /\d{12}\.ddb/;
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/constants.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/constants.js
 var USER_AGENT, X_AMZ_USER_AGENT, SPACE, UA_NAME_SEPARATOR, UA_NAME_ESCAPE_REGEX, UA_VALUE_ESCAPE_REGEX, UA_ESCAPE_CHAR;
 var init_constants6 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/constants.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/constants.js"() {
     USER_AGENT = "user-agent";
     X_AMZ_USER_AGENT = "x-amz-user-agent";
     SPACE = " ";
@@ -31032,7 +32866,7 @@ var init_constants6 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/encode-features.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/encode-features.js
 function encodeFeatures(features) {
   let buffer = "";
   for (const key in features) {
@@ -31051,15 +32885,15 @@ function encodeFeatures(features) {
 }
 var BYTE_LIMIT;
 var init_encode_features = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/encode-features.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/encode-features.js"() {
     BYTE_LIMIT = 1024;
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/user-agent-middleware.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/user-agent-middleware.js
 var userAgentMiddleware, escapeUserAgent, getUserAgentMiddlewareOptions, getUserAgentPlugin;
 var init_user_agent_middleware = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/user-agent-middleware.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/middleware-user-agent/user-agent-middleware.js"() {
     init_protocols();
     init_partition();
     init_check_features();
@@ -31135,10 +32969,10 @@ var init_user_agent_middleware = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/getRuntimeUserAgentPair.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/getRuntimeUserAgentPair.js
 var import_node_process, getRuntimeUserAgentPair;
 var init_getRuntimeUserAgentPair = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/getRuntimeUserAgentPair.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/getRuntimeUserAgentPair.js"() {
     import_node_process = require("node:process");
     getRuntimeUserAgentPair = () => {
       const runtimesToCheck = ["deno", "bun", "llrt"];
@@ -31152,20 +32986,20 @@ var init_getRuntimeUserAgentPair = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/crt-availability.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/crt-availability.js
 var crtAvailability;
 var init_crt_availability = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/crt-availability.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/crt-availability.js"() {
     crtAvailability = {
       isCrtAvailable: false
     };
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/is-crt-available.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/is-crt-available.js
 var isCrtAvailable;
 var init_is_crt_available = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/is-crt-available.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/is-crt-available.js"() {
     init_crt_availability();
     isCrtAvailable = () => {
       if (crtAvailability.isCrtAvailable) {
@@ -31176,10 +33010,10 @@ var init_is_crt_available = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/defaultUserAgent.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/defaultUserAgent.js
 var import_node_os2, import_node_process2, createDefaultUserAgentProvider, defaultUserAgent;
 var init_defaultUserAgent = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/defaultUserAgent.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/defaultUserAgent.js"() {
     import_node_os2 = require("node:os");
     import_node_process2 = require("node:process");
     init_getRuntimeUserAgentPair();
@@ -31214,10 +33048,10 @@ var init_defaultUserAgent = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/nodeAppIdConfigOptions.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/nodeAppIdConfigOptions.js
 var UA_APP_ID_ENV_NAME, UA_APP_ID_INI_NAME, UA_APP_ID_INI_NAME_DEPRECATED, NODE_APP_ID_CONFIG_OPTIONS;
 var init_nodeAppIdConfigOptions = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/nodeAppIdConfigOptions.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-node/nodeAppIdConfigOptions.js"() {
     init_configurations2();
     UA_APP_ID_ENV_NAME = "AWS_SDK_UA_APP_ID";
     UA_APP_ID_INI_NAME = "sdk_ua_app_id";
@@ -31996,10 +33830,10 @@ var require_es5 = __commonJS({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-browser/createUserAgentStringParsingProvider.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-browser/createUserAgentStringParsingProvider.js
 var createUserAgentStringParsingProvider;
 var init_createUserAgentStringParsingProvider = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-browser/createUserAgentStringParsingProvider.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-browser/createUserAgentStringParsingProvider.js"() {
     createUserAgentStringParsingProvider = ({ serviceId, clientVersion }) => async (config2) => {
       const module2 = await Promise.resolve().then(() => __toESM(require_es5()));
       const parse4 = module2.parse ?? module2.default.parse ?? (() => "");
@@ -32023,10 +33857,10 @@ var init_createUserAgentStringParsingProvider = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-browser/defaultUserAgent.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-browser/defaultUserAgent.js
 var fallback;
 var init_defaultUserAgent2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-browser/defaultUserAgent.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-user-agent-browser/defaultUserAgent.js"() {
     fallback = {
       os(ua) {
         if (/iPhone|iPad|iPod/.test(ua))
@@ -32056,17 +33890,17 @@ var init_defaultUserAgent2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/isIpAddress.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/isIpAddress.js
 var init_isIpAddress2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/isIpAddress.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/isIpAddress.js"() {
     init_endpoints();
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/isVirtualHostableS3Bucket.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/isVirtualHostableS3Bucket.js
 var isVirtualHostableS3Bucket;
 var init_isVirtualHostableS3Bucket = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/isVirtualHostableS3Bucket.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/isVirtualHostableS3Bucket.js"() {
     init_endpoints();
     init_isIpAddress2();
     isVirtualHostableS3Bucket = (value, allowSubDomains = false) => {
@@ -32095,10 +33929,10 @@ var init_isVirtualHostableS3Bucket = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/parseArn.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/parseArn.js
 var ARN_DELIMITER, RESOURCE_DELIMITER, parseArn;
 var init_parseArn = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/parseArn.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/lib/aws/parseArn.js"() {
     ARN_DELIMITER = ":";
     RESOURCE_DELIMITER = "/";
     parseArn = (value) => {
@@ -32120,10 +33954,10 @@ var init_parseArn = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/aws.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/aws.js
 var awsEndpointFunctions;
 var init_aws = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/aws.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/aws.js"() {
     init_endpoints();
     init_isVirtualHostableS3Bucket();
     init_parseArn();
@@ -32137,17 +33971,17 @@ var init_aws = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/resolveEndpoint.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/resolveEndpoint.js
 var init_resolveEndpoint2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/resolveEndpoint.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/resolveEndpoint.js"() {
     init_endpoints();
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/resolveDefaultAwsRegionalEndpointsConfig.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/resolveDefaultAwsRegionalEndpointsConfig.js
 var resolveDefaultAwsRegionalEndpointsConfig, toEndpointV12;
 var init_resolveDefaultAwsRegionalEndpointsConfig = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/resolveDefaultAwsRegionalEndpointsConfig.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/resolveDefaultAwsRegionalEndpointsConfig.js"() {
     init_protocols();
     resolveDefaultAwsRegionalEndpointsConfig = (input2) => {
       if (typeof input2.endpointProvider !== "function") {
@@ -32170,22 +34004,22 @@ var init_resolveDefaultAwsRegionalEndpointsConfig = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/types/EndpointError.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/types/EndpointError.js
 var init_EndpointError2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/types/EndpointError.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/util-endpoints/types/EndpointError.js"() {
     init_endpoints();
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/region-config-resolver/awsRegionConfig.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/region-config-resolver/awsRegionConfig.js
 var init_awsRegionConfig = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/region-config-resolver/awsRegionConfig.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/region-config-resolver/awsRegionConfig.js"() {
     init_config2();
     init_config2();
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/region-config-resolver/stsRegionDefaultResolver.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/region-config-resolver/stsRegionDefaultResolver.js
 function stsRegionDefaultResolver(loaderConfig = {}) {
   return loadConfig({
     ...NODE_REGION_CONFIG_OPTIONS,
@@ -32199,7 +34033,7 @@ function stsRegionDefaultResolver(loaderConfig = {}) {
 }
 var warning;
 var init_stsRegionDefaultResolver = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/region-config-resolver/stsRegionDefaultResolver.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/region-config-resolver/stsRegionDefaultResolver.js"() {
     init_config2();
     warning = {
       silence: false
@@ -32207,10 +34041,10 @@ var init_stsRegionDefaultResolver = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/region-config-resolver/extensions.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/region-config-resolver/extensions.js
 var getAwsRegionExtensionConfiguration, resolveAwsRegionExtensionConfiguration;
 var init_extensions = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/region-config-resolver/extensions.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/region-config-resolver/extensions.js"() {
     getAwsRegionExtensionConfiguration = (runtimeConfig) => {
       return {
         setRegion(region) {
@@ -32229,7 +34063,7 @@ var init_extensions = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/index.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/index.js
 var client_exports2 = {};
 __export(client_exports2, {
   DEFAULT_UA_APP_ID: () => DEFAULT_UA_APP_ID,
@@ -32284,7 +34118,7 @@ __export(client_exports2, {
   userAgentMiddleware: () => userAgentMiddleware
 });
 var init_client3 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/client/index.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/client/index.js"() {
     init_emitWarningIfUnsupportedVersion();
     init_longPollMiddleware();
     init_setCredentialFeature();
@@ -32315,28 +34149,28 @@ var init_client3 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getDateHeader.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getDateHeader.js
 var getDateHeader, getAgeHeader;
 var init_getDateHeader = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getDateHeader.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getDateHeader.js"() {
     init_protocols();
     getDateHeader = (response) => HttpResponse.isInstance(response) ? response.headers?.date ?? response.headers?.Date : void 0;
     getAgeHeader = (response) => HttpResponse.isInstance(response) ? response.headers?.age ?? response.headers?.Age : void 0;
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getSkewCorrectedDate.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getSkewCorrectedDate.js
 var getSkewCorrectedDate;
 var init_getSkewCorrectedDate = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getSkewCorrectedDate.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getSkewCorrectedDate.js"() {
     getSkewCorrectedDate = (systemClockOffset) => new Date(Date.now() + systemClockOffset);
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getUpdatedSystemClockOffset.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getUpdatedSystemClockOffset.js
 var getUpdatedSystemClockOffset;
 var init_getUpdatedSystemClockOffset = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getUpdatedSystemClockOffset.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getUpdatedSystemClockOffset.js"() {
     getUpdatedSystemClockOffset = (clockTime, currentSystemClockOffset, timeRequestSent, ageHeader) => {
       if (ageHeader !== void 0) {
         return currentSystemClockOffset;
@@ -32352,26 +34186,32 @@ var init_getUpdatedSystemClockOffset = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/index.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/index.js
 var init_utils3 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/index.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/index.js"() {
     init_getDateHeader();
     init_getSkewCorrectedDate();
     init_getUpdatedSystemClockOffset();
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4Signer.js
-var throwSigningPropertyError, validateSigningProperties, AwsSdkSigV4Signer, AWSSDKSigV4Signer;
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4Signer.js
+var import_types25, throwSigningPropertyError, hasEventStreamOutput, validateSigningProperties, AwsSdkSigV4Signer, AWSSDKSigV4Signer;
 var init_AwsSdkSigV4Signer = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4Signer.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4Signer.js"() {
     init_protocols();
+    import_types25 = __toESM(require_dist_cjs());
     init_utils3();
     throwSigningPropertyError = (name, property) => {
       if (!property) {
         throw new Error(`Property \`${name}\` is not resolved for AWS SDK SigV4Auth`);
       }
       return property;
+    };
+    hasEventStreamOutput = (signingProperties) => {
+      const context = signingProperties.context;
+      const eventStream = context?.[import_types25.SMITHY_CONTEXT_KEY]?.eventStream;
+      return eventStream?.output === true;
     };
     validateSigningProperties = async (signingProperties) => {
       const context = throwSigningPropertyError("context", signingProperties.context);
@@ -32408,7 +34248,9 @@ var init_AwsSdkSigV4Signer = __esm({
         }
         const noSkewCorrection = await config2.disableClockSkewCorrection?.() === true;
         signingProperties._disableClockSkewCorrection = noSkewCorrection;
-        if (!noSkewCorrection) {
+        const skipSkewSampling = noSkewCorrection || hasEventStreamOutput(signingProperties);
+        signingProperties._skipClockSkewSampling = skipSkewSampling;
+        if (!skipSkewSampling) {
           signingProperties._preRequestSystemClockOffset = config2.systemClockOffset;
           signingProperties._requestSentAt = Date.now();
         }
@@ -32422,7 +34264,7 @@ var init_AwsSdkSigV4Signer = __esm({
       errorHandler(signingProperties) {
         return (error64) => {
           const errorException = error64;
-          if (!signingProperties._disableClockSkewCorrection) {
+          if (!signingProperties._skipClockSkewSampling && !signingProperties._disableClockSkewCorrection) {
             const serverTime = errorException.ServerTime ?? getDateHeader(errorException.$response);
             if (serverTime) {
               const config2 = throwSigningPropertyError("config", signingProperties.config);
@@ -32443,7 +34285,7 @@ var init_AwsSdkSigV4Signer = __esm({
         };
       }
       successHandler(httpResponse, signingProperties) {
-        if (signingProperties._disableClockSkewCorrection) {
+        if (signingProperties._skipClockSkewSampling || signingProperties._disableClockSkewCorrection) {
           return;
         }
         const dateHeader = getDateHeader(httpResponse);
@@ -32459,10 +34301,10 @@ var init_AwsSdkSigV4Signer = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4ASigner.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4ASigner.js
 var AwsSdkSigV4ASigner;
 var init_AwsSdkSigV4ASigner = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4ASigner.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/AwsSdkSigV4ASigner.js"() {
     init_protocols();
     init_utils3();
     init_AwsSdkSigV4Signer();
@@ -32491,26 +34333,26 @@ var init_AwsSdkSigV4ASigner = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getArrayForCommaSeparatedString.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getArrayForCommaSeparatedString.js
 var getArrayForCommaSeparatedString;
 var init_getArrayForCommaSeparatedString = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getArrayForCommaSeparatedString.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getArrayForCommaSeparatedString.js"() {
     getArrayForCommaSeparatedString = (str) => typeof str === "string" && str.length > 0 ? str.split(",").map((item) => item.trim()) : [];
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getBearerTokenEnvKey.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getBearerTokenEnvKey.js
 var getBearerTokenEnvKey;
 var init_getBearerTokenEnvKey = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getBearerTokenEnvKey.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/utils/getBearerTokenEnvKey.js"() {
     getBearerTokenEnvKey = (signingName) => `AWS_BEARER_TOKEN_${signingName.replace(/[\s-]/g, "_").toUpperCase()}`;
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/NODE_AUTH_SCHEME_PREFERENCE_OPTIONS.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/NODE_AUTH_SCHEME_PREFERENCE_OPTIONS.js
 var NODE_AUTH_SCHEME_PREFERENCE_ENV_KEY, NODE_AUTH_SCHEME_PREFERENCE_CONFIG_KEY, NODE_AUTH_SCHEME_PREFERENCE_OPTIONS;
 var init_NODE_AUTH_SCHEME_PREFERENCE_OPTIONS = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/NODE_AUTH_SCHEME_PREFERENCE_OPTIONS.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/NODE_AUTH_SCHEME_PREFERENCE_OPTIONS.js"() {
     init_getArrayForCommaSeparatedString();
     init_getBearerTokenEnvKey();
     NODE_AUTH_SCHEME_PREFERENCE_ENV_KEY = "AWS_AUTH_SCHEME_PREFERENCE";
@@ -32536,10 +34378,10 @@ var init_NODE_AUTH_SCHEME_PREFERENCE_OPTIONS = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/resolveAwsSdkSigV4AConfig.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/resolveAwsSdkSigV4AConfig.js
 var resolveAwsSdkSigV4AConfig, NODE_SIGV4A_CONFIG_OPTIONS;
 var init_resolveAwsSdkSigV4AConfig = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/resolveAwsSdkSigV4AConfig.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/resolveAwsSdkSigV4AConfig.js"() {
     init_dist_es();
     init_config2();
     resolveAwsSdkSigV4AConfig = (config2) => {
@@ -33116,7 +34958,7 @@ ${toHex2(hashedRequest)}`;
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/resolveAwsSdkSigV4Config.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/resolveAwsSdkSigV4Config.js
 function normalizeCredentialProvider(config2, { credentials, credentialDefaultProvider }) {
   let credentialsProvider;
   if (credentials) {
@@ -33150,7 +34992,7 @@ function bindCallerConfig(config2, credentialsProvider) {
 }
 var import_signature_v4, bindResolveAwsSdkSigV4Config;
 var init_resolveAwsSdkSigV4Config = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/resolveAwsSdkSigV4Config.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/resolveAwsSdkSigV4Config.js"() {
     init_client3();
     init_dist_es();
     import_signature_v4 = __toESM(require_dist_cjs2());
@@ -33254,9 +35096,9 @@ var init_resolveAwsSdkSigV4Config = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/index.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/index.js
 var init_aws_sdk = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/index.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/index.js"() {
     init_AwsSdkSigV4Signer();
     init_AwsSdkSigV4ASigner();
     init_NODE_AUTH_SCHEME_PREFERENCE_OPTIONS();
@@ -33265,10 +35107,10 @@ var init_aws_sdk = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/clock-skew-node-config.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/clock-skew-node-config.js
 var ENV_DISABLE_CLOCK_SKEW_CORRECTION, CONFIG_DISABLE_CLOCK_SKEW_CORRECTION, NODE_DISABLE_CLOCK_SKEW_CORRECTION_CONFIG_OPTIONS;
 var init_clock_skew_node_config = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/clock-skew-node-config.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/clock-skew-node-config.js"() {
     init_config2();
     ENV_DISABLE_CLOCK_SKEW_CORRECTION = "AWS_DISABLE_CLOCK_SKEW_CORRECTION";
     CONFIG_DISABLE_CLOCK_SKEW_CORRECTION = "disable_clock_skew_correction";
@@ -33280,17 +35122,17 @@ var init_clock_skew_node_config = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/clock-skew-defaults.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/clock-skew-defaults.js
 var DEFAULT_DISABLE_CLOCK_SKEW_CORRECTION;
 var init_clock_skew_defaults = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/clock-skew-defaults.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/aws_sdk/clock-skew-defaults.js"() {
     init_config2();
     init_clock_skew_node_config();
     DEFAULT_DISABLE_CLOCK_SKEW_CORRECTION = loadConfig(NODE_DISABLE_CLOCK_SKEW_CORRECTION_CONFIG_OPTIONS);
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/index.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/index.js
 var httpAuthSchemes_exports = {};
 __export(httpAuthSchemes_exports, {
   AWSSDKSigV4Signer: () => AWSSDKSigV4Signer,
@@ -33306,7 +35148,7 @@ __export(httpAuthSchemes_exports, {
 });
 var resolveAwsSdkSigV4Config, resolveAWSSDKSigV4Config;
 var init_httpAuthSchemes2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/index.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/httpAuthSchemes/index.js"() {
     init_aws_sdk();
     init_getBearerTokenEnvKey();
     init_aws_sdk();
@@ -33316,9 +35158,9 @@ var init_httpAuthSchemes2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+credential-provider-env@3.972.72/node_modules/@aws-sdk/credential-provider-env/dist-cjs/index.js
+// ../node_modules/.pnpm/@aws-sdk+credential-provider-env@3.972.76/node_modules/@aws-sdk/credential-provider-env/dist-cjs/index.js
 var require_dist_cjs3 = __commonJS({
-  "../node_modules/.pnpm/@aws-sdk+credential-provider-env@3.972.72/node_modules/@aws-sdk/credential-provider-env/dist-cjs/index.js"(exports2) {
+  "../node_modules/.pnpm/@aws-sdk+credential-provider-env@3.972.76/node_modules/@aws-sdk/credential-provider-env/dist-cjs/index.js"(exports2) {
     var { setCredentialFeature: setCredentialFeature2 } = (init_client3(), __toCommonJS(client_exports2));
     var { CredentialsProviderError: CredentialsProviderError2 } = (init_config2(), __toCommonJS(config_exports));
     var ENV_KEY = "AWS_ACCESS_KEY_ID";
@@ -34526,9 +36368,9 @@ or increase socketAcquisitionWarningTimeout=(millis) in the NodeHttpHandler conf
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+credential-provider-http@3.972.74/node_modules/@aws-sdk/credential-provider-http/dist-cjs/index.js
+// ../node_modules/.pnpm/@aws-sdk+credential-provider-http@3.972.78/node_modules/@aws-sdk/credential-provider-http/dist-cjs/index.js
 var require_dist_cjs6 = __commonJS({
-  "../node_modules/.pnpm/@aws-sdk+credential-provider-http@3.972.74/node_modules/@aws-sdk/credential-provider-http/dist-cjs/index.js"(exports2) {
+  "../node_modules/.pnpm/@aws-sdk+credential-provider-http@3.972.78/node_modules/@aws-sdk/credential-provider-http/dist-cjs/index.js"(exports2) {
     var { setCredentialFeature: setCredentialFeature2 } = (init_client3(), __toCommonJS(client_exports2));
     var { CredentialsProviderError: CredentialsProviderError2 } = (init_config2(), __toCommonJS(config_exports));
     var { NodeHttpHandler } = require_dist_cjs5();
@@ -34685,7 +36527,7 @@ Set AWS_CONTAINER_CREDENTIALS_FULL_URI or AWS_CONTAINER_CREDENTIALS_RELATIVE_URI
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/auth/httpAuthSchemeProvider.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/auth/httpAuthSchemeProvider.js
 function createAwsAuthSigv4HttpAuthOption(authParameters) {
   return {
     schemeId: "aws.auth#sigv4",
@@ -34708,7 +36550,7 @@ function createSmithyApiNoAuthHttpAuthOption(authParameters) {
 }
 var defaultSSOOIDCHttpAuthSchemeParametersProvider, defaultSSOOIDCHttpAuthSchemeProvider, resolveHttpAuthSchemeConfig;
 var init_httpAuthSchemeProvider = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/auth/httpAuthSchemeProvider.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/auth/httpAuthSchemeProvider.js"() {
     init_httpAuthSchemes2();
     init_client2();
     defaultSSOOIDCHttpAuthSchemeParametersProvider = async (config2, context, input2) => {
@@ -34743,10 +36585,10 @@ var init_httpAuthSchemeProvider = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/endpoint/EndpointParameters.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/endpoint/EndpointParameters.js
 var resolveClientEndpointParameters, commonParams;
 var init_EndpointParameters = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/endpoint/EndpointParameters.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/endpoint/EndpointParameters.js"() {
     resolveClientEndpointParameters = (options) => {
       return Object.assign(options, {
         useDualstackEndpoint: options.useDualstackEndpoint ?? false,
@@ -34763,13 +36605,13 @@ var init_EndpointParameters = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/package.json
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/package.json
 var package_default;
 var init_package = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/package.json"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/package.json"() {
     package_default = {
       name: "@aws-sdk/nested-clients",
-      version: "3.997.46",
+      version: "3.997.50",
       description: "Nested clients for AWS SDK packages.",
       homepage: "https://github.com/aws/aws-sdk-js-v3/tree/main/packages/nested-clients",
       license: "Apache-2.0",
@@ -34869,10 +36711,10 @@ var init_package = __esm({
         "test:watch": "yarn g:vitest watch"
       },
       dependencies: {
-        "@aws-sdk/core": "^3.978.1",
-        "@aws-sdk/signature-v4-multi-region": "^3.996.47",
-        "@aws-sdk/types": "^3.974.6",
-        "@smithy/core": "^3.35.0",
+        "@aws-sdk/core": "^3.978.5",
+        "@aws-sdk/signature-v4-multi-region": "^3.996.49",
+        "@aws-sdk/types": "^3.975.0",
+        "@smithy/core": "^3.36.1",
         "@smithy/fetch-http-handler": "^5.8.0",
         "@smithy/node-http-handler": "^4.12.1",
         "@smithy/types": "^4.19.0",
@@ -34891,10 +36733,10 @@ var init_package = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/cbor/cbor-types.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/cbor/cbor-types.js
 var majorUint64, majorNegativeInt64, majorUnstructuredByteString, majorUtf8String, majorList, majorMap, majorTag, majorSpecial, specialFalse, specialTrue, specialNull, specialUndefined, extendedOneByte, extendedFloat16, extendedFloat32, extendedFloat64, minorIndefinite, tagSymbol;
 var init_cbor_types = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/cbor/cbor-types.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/cbor/cbor-types.js"() {
     majorUint64 = 0;
     majorNegativeInt64 = 1;
     majorUnstructuredByteString = 2;
@@ -34916,10 +36758,10 @@ var init_cbor_types = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/cbor/parseCborBody.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/cbor/parseCborBody.js
 var loadSmithyRpcV2CborErrorCode;
 var init_parseCborBody = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/cbor/parseCborBody.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/cbor/parseCborBody.js"() {
     loadSmithyRpcV2CborErrorCode = (output2, data) => {
       const sanitizeErrorCode2 = (rawValue) => {
         let cleanValue = rawValue;
@@ -34941,7 +36783,7 @@ var init_parseCborBody = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/cbor/codec-v2/CborShapeSerializer2.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/cbor/codec-v2/CborShapeSerializer2.js
 function loadCborStructIterator(ns) {
   const schema = ns.getSchema();
   const existing = schema[CBOR_STRUCT_CACHE];
@@ -35500,9 +37342,9 @@ function writeTimestamp(date6) {
     writeFloat64(epochSecs);
   }
 }
-var CborShapeSerializer2, CBOR_STRUCT_CACHE, USE_BUFFER, textEncoder, INITIAL_BUFFER_SIZE, buf, view, cursor, STRING_CACHE_MAX, stringEncodeCache, encodeCacheEpoch, encodeCacheSaturated;
+var CborShapeSerializer2, CBOR_STRUCT_CACHE, USE_BUFFER, textEncoder, INITIAL_BUFFER_SIZE2, buf, view, cursor, STRING_CACHE_MAX, stringEncodeCache, encodeCacheEpoch, encodeCacheSaturated;
 var init_CborShapeSerializer2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/cbor/codec-v2/CborShapeSerializer2.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/cbor/codec-v2/CborShapeSerializer2.js"() {
     init_transport();
     init_protocols();
     init_schema();
@@ -35517,7 +37359,7 @@ var init_CborShapeSerializer2 = __esm({
       flush() {
         const result = buf.subarray(0, cursor);
         cursor = 0;
-        buf = allocUnsafe(INITIAL_BUFFER_SIZE);
+        buf = allocUnsafe(INITIAL_BUFFER_SIZE2);
         view = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
         return result;
       }
@@ -35525,8 +37367,8 @@ var init_CborShapeSerializer2 = __esm({
     CBOR_STRUCT_CACHE = /* @__PURE__ */ Symbol.for("@smithy/cbor-struct-cache");
     USE_BUFFER = typeof Buffer !== "undefined";
     textEncoder = new TextEncoder();
-    INITIAL_BUFFER_SIZE = 2048;
-    buf = USE_BUFFER ? Buffer.allocUnsafe(INITIAL_BUFFER_SIZE) : new Uint8Array(INITIAL_BUFFER_SIZE);
+    INITIAL_BUFFER_SIZE2 = 2048;
+    buf = USE_BUFFER ? Buffer.allocUnsafe(INITIAL_BUFFER_SIZE2) : new Uint8Array(INITIAL_BUFFER_SIZE2);
     view = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
     cursor = 0;
     STRING_CACHE_MAX = 2048;
@@ -35536,7 +37378,7 @@ var init_CborShapeSerializer2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/cbor/codec-v2/CborShapeDeserializer2.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/cbor/codec-v2/CborShapeDeserializer2.js
 function readValue(ns) {
   if (pos >= end) {
     throw new Error("unexpected end of CBOR payload.");
@@ -36139,7 +37981,7 @@ function transformObject(ns, value) {
 }
 var CborShapeDeserializer2, USE_BUFFER2, textDecoder, payload, isBuffer, dataView, pos, end, STRING_CACHE_SIZE, stringCache, stringCacheEpochs, cacheEpoch;
 var init_CborShapeDeserializer2 = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/cbor/codec-v2/CborShapeDeserializer2.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/cbor/codec-v2/CborShapeDeserializer2.js"() {
     init_transport();
     init_protocols();
     init_schema();
@@ -36174,10 +38016,10 @@ var init_CborShapeDeserializer2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/cbor/CborCodec.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/cbor/CborCodec.js
 var CborCodec;
 var init_CborCodec = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/cbor/CborCodec.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/cbor/CborCodec.js"() {
     init_protocols();
     init_CborShapeSerializer2();
     init_CborShapeDeserializer2();
@@ -36196,10 +38038,10 @@ var init_CborCodec = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/cbor/SmithyRpcV2CborProtocol.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/cbor/SmithyRpcV2CborProtocol.js
 var SmithyRpcV2CborProtocol;
 var init_SmithyRpcV2CborProtocol = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/cbor/SmithyRpcV2CborProtocol.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/cbor/SmithyRpcV2CborProtocol.js"() {
     init_protocols();
     init_schema();
     init_transport();
@@ -36299,18 +38141,18 @@ var init_SmithyRpcV2CborProtocol = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/cbor/index.js
+// ../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/cbor/index.js
 var init_cbor = __esm({
-  "../node_modules/.pnpm/@smithy+core@3.35.1/node_modules/@smithy/core/dist-es/submodules/cbor/index.js"() {
+  "../node_modules/.pnpm/@smithy+core@3.36.2/node_modules/@smithy/core/dist-es/submodules/cbor/index.js"() {
     init_parseCborBody();
     init_SmithyRpcV2CborProtocol();
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/ProtocolLib.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/ProtocolLib.js
 var ProtocolLib;
 var init_ProtocolLib = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/ProtocolLib.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/ProtocolLib.js"() {
     init_client2();
     init_schema();
     ProtocolLib = class {
@@ -36448,10 +38290,10 @@ var init_ProtocolLib = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/cbor/AwsSmithyRpcV2CborProtocol.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/cbor/AwsSmithyRpcV2CborProtocol.js
 var AwsSmithyRpcV2CborProtocol;
 var init_AwsSmithyRpcV2CborProtocol = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/cbor/AwsSmithyRpcV2CborProtocol.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/cbor/AwsSmithyRpcV2CborProtocol.js"() {
     init_cbor();
     init_schema();
     init_ProtocolLib();
@@ -36505,1212 +38347,13 @@ var init_AwsSmithyRpcV2CborProtocol = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/ConfigurableSerdeContext.js
-var SerdeContextConfig;
-var init_ConfigurableSerdeContext = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/ConfigurableSerdeContext.js"() {
-    SerdeContextConfig = class {
-      serdeContext;
-      setSerdeContext(serdeContext) {
-        this.serdeContext = serdeContext;
-      }
-    };
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/UnionSerde.js
-var UnionSerde;
-var init_UnionSerde = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/UnionSerde.js"() {
-    UnionSerde = class {
-      from;
-      to;
-      keys;
-      constructor(from, to) {
-        this.from = from;
-        this.to = to;
-        const keys = Object.keys(this.from);
-        const set2 = new Set(keys);
-        set2.delete("__type");
-        this.keys = set2;
-      }
-      mark(key) {
-        this.keys.delete(key);
-      }
-      hasUnknown() {
-        return this.keys.size === 1 && Object.keys(this.to).length === 0;
-      }
-      writeUnknown() {
-        if (this.hasUnknown()) {
-          const k5 = this.keys.values().next().value;
-          const v = this.from[k5];
-          this.to.$unknown = [k5, v];
-        }
-      }
-    };
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/detectBufferParsing.js
-function detectBufferParsing() {
-  if (canParseBuffer === void 0) {
-    try {
-      if (typeof Buffer !== "function") {
-        canParseBuffer = false;
-      } else {
-        const result = JSON.parse(Buffer.from([123, 125]));
-        canParseBuffer = result !== null && typeof result === "object";
-      }
-    } catch {
-      canParseBuffer = false;
-    }
-  }
-  return canParseBuffer;
-}
-var canParseBuffer;
-var init_detectBufferParsing = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/detectBufferParsing.js"() {
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/jsonReviver.js
-function jsonReviver(key, value, context) {
-  if (context?.source) {
-    const numericString = context.source;
-    if (typeof value === "number") {
-      const inSafeRange = value <= Number.MAX_SAFE_INTEGER && value >= Number.MIN_SAFE_INTEGER;
-      if (inSafeRange) {
-        if (isRepresentable(numericString, value)) {
-          return value;
-        }
-        return new NumericValue(numericString, "bigDecimal");
-      } else {
-        if (isFractionalBigNumeric(numericString)) {
-          return new NumericValue(numericString, "bigDecimal");
-        }
-        if (/[eE]/.test(numericString)) {
-          return expandExponentToBigInt(numericString);
-        }
-        return BigInt(numericString);
-      }
-    }
-  }
-  return value;
-}
-function isFractionalBigNumeric(s2) {
-  const dotIndex = s2.indexOf(".");
-  if (dotIndex === -1) {
-    return false;
-  }
-  const eIndex = s2.search(/[eE]/);
-  if (eIndex === -1) {
-    return true;
-  }
-  const fracDigits = eIndex - dotIndex - 1;
-  const exp = parseInt(s2.slice(eIndex + 1), 10);
-  return exp < fracDigits;
-}
-function isRepresentable(numericString, value) {
-  if (numericString === String(value)) {
-    return true;
-  }
-  if (Object.is(value, -0)) {
-    return true;
-  }
-  if (/[eE]/.test(numericString)) {
-    return expandToDecimal(numericString) === expandToDecimal(String(value));
-  }
-  const normalized = numericString.replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "");
-  const canonical = String(value);
-  if (normalized === canonical) {
-    return true;
-  }
-  if (/[eE]/.test(canonical)) {
-    return normalized === expandToDecimal(canonical);
-  }
-  return false;
-}
-function expandToDecimal(s2) {
-  const negative = s2.startsWith("-");
-  const abs = negative ? s2.slice(1) : s2;
-  const eIndex = abs.search(/[eE]/);
-  let result;
-  if (eIndex === -1) {
-    result = abs;
-  } else {
-    const exp = parseInt(abs.slice(eIndex + 1), 10);
-    const mantissa = abs.slice(0, eIndex);
-    const dotIndex = mantissa.indexOf(".");
-    let digits;
-    let intLen;
-    if (dotIndex === -1) {
-      digits = mantissa;
-      intLen = mantissa.length;
-    } else {
-      digits = mantissa.slice(0, dotIndex) + mantissa.slice(dotIndex + 1);
-      intLen = dotIndex;
-    }
-    digits = digits.replace(/0+$/, "") || "0";
-    const newDotPos = intLen + exp;
-    if (digits === "0") {
-      result = "0";
-    } else if (newDotPos <= 0) {
-      result = "0." + "0".repeat(-newDotPos) + digits;
-    } else if (newDotPos >= digits.length) {
-      result = digits + "0".repeat(newDotPos - digits.length);
-    } else {
-      result = digits.slice(0, newDotPos) + "." + digits.slice(newDotPos);
-    }
-  }
-  if (result.includes(".")) {
-    result = result.replace(/(\.\d*?)0+$/, "$1").replace(/\.$/, "");
-  }
-  return (negative ? "-" : "") + result;
-}
-function expandExponentToBigInt(s2) {
-  const eIndex = s2.search(/[eE]/);
-  const exp = parseInt(s2.slice(eIndex + 1), 10);
-  const negative = s2.startsWith("-");
-  const mantissa = s2.slice(negative ? 1 : 0, eIndex);
-  const dotIndex = mantissa.indexOf(".");
-  let digits;
-  let shift;
-  if (dotIndex === -1) {
-    digits = mantissa;
-    shift = exp;
-  } else {
-    digits = mantissa.slice(0, dotIndex) + mantissa.slice(dotIndex + 1);
-    const fracDigits = mantissa.length - dotIndex - 1;
-    shift = exp - fracDigits;
-  }
-  digits = digits.replace(/0+$/, "") || "0";
-  const result = BigInt(digits) * 10n ** BigInt(shift + (mantissa.replace(".", "").length - digits.length));
-  return negative ? -result : result;
-}
-var init_jsonReviver = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/jsonReviver.js"() {
-    init_serde();
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/needsReviver.js
-function needsReviver(schema) {
-  const ns = NormalizedSchema.of(schema);
-  const raw = ns.getSchema();
-  if (Array.isArray(raw) && ns.isStructSchema()) {
-    if (REVIVER_SYMBOL in raw) {
-      return raw[REVIVER_SYMBOL];
-    }
-    const result = _check(ns, /* @__PURE__ */ new Set());
-    raw[REVIVER_SYMBOL] = result;
-    return result;
-  }
-  return _check(ns, /* @__PURE__ */ new Set());
-}
-function _check(ns, seen) {
-  const raw = ns.getSchema();
-  if (seen.has(raw)) {
-    return false;
-  }
-  seen.add(raw);
-  if (ns.isBigIntegerSchema() || ns.isBigDecimalSchema()) {
-    return true;
-  }
-  if (ns.isStructSchema()) {
-    for (const [, memberSchema] of ns.structIterator()) {
-      if (_check(memberSchema, seen)) {
-        return true;
-      }
-    }
-  } else if (ns.isListSchema() || ns.isMapSchema()) {
-    if (_check(ns.getValueSchema(), seen)) {
-      return true;
-    }
-  } else if (ns.isDocumentSchema()) {
-    return true;
-  }
-  return false;
-}
-var REVIVER_SYMBOL;
-var init_needsReviver = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/needsReviver.js"() {
-    init_schema();
-    REVIVER_SYMBOL = /* @__PURE__ */ Symbol.for("@aws-sdk/reviver");
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/common.js
-var collectBodyString;
-var init_common = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/common.js"() {
-    init_protocols();
-    init_serde();
-    collectBodyString = (streamBody, context) => collectBody(streamBody, context).then((body) => (context?.utf8Encoder ?? toUtf8)(body));
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/parseJsonBody.js
-async function parseJsonBody(streamBody, context, schema) {
-  let parsingInput;
-  if (detectBufferParsing() && typeof streamBody?.[Symbol.asyncIterator] === "function") {
-    const buffer = await collectBody(streamBody, context);
-    if (typeof Buffer === "function") {
-      if (Buffer.isBuffer(buffer)) {
-        parsingInput = buffer;
-      } else {
-        parsingInput = Buffer.from(buffer.buffer, buffer.byteOffset, buffer.byteLength);
-      }
-    }
-  }
-  if (!parsingInput) {
-    parsingInput = await collectBodyString(streamBody, context);
-  }
-  if (parsingInput.length === 0) {
-    return {};
-  }
-  const reviver = schema && needsReviver(schema) ? jsonReviver : void 0;
-  try {
-    return JSON.parse(parsingInput, reviver);
-  } catch (e5) {
-    if (e5?.name === "SyntaxError") {
-      Object.defineProperty(e5, "$responseBodyText", {
-        value: typeof parsingInput === "string" ? parsingInput : parsingInput.toString("utf8")
-      });
-    }
-    throw e5;
-  }
-}
-var parseJsonErrorBody, findKey, sanitizeErrorCode, loadRestJsonErrorCode, loadJsonRpcErrorCode, loadErrorCode;
-var init_parseJsonBody = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/parseJsonBody.js"() {
-    init_protocols();
-    init_common();
-    init_detectBufferParsing();
-    init_jsonReviver();
-    init_needsReviver();
-    parseJsonErrorBody = async (errorBody, context) => {
-      const value = await parseJsonBody(errorBody, context);
-      value.message = value.message ?? value.Message;
-      return value;
-    };
-    findKey = (object2, key) => Object.keys(object2).find((k5) => k5.toLowerCase() === key.toLowerCase());
-    sanitizeErrorCode = (rawValue) => {
-      let cleanValue = rawValue;
-      if (typeof cleanValue === "number") {
-        cleanValue = cleanValue.toString();
-      }
-      if (cleanValue.indexOf(",") >= 0) {
-        cleanValue = cleanValue.split(",")[0];
-      }
-      if (cleanValue.indexOf(":") >= 0) {
-        cleanValue = cleanValue.split(":")[0];
-      }
-      if (cleanValue.indexOf("#") >= 0) {
-        cleanValue = cleanValue.split("#")[1];
-      }
-      return cleanValue;
-    };
-    loadRestJsonErrorCode = (output2, data) => {
-      return loadErrorCode(output2, data, ["header", "code", "type"]);
-    };
-    loadJsonRpcErrorCode = (output2, data, queryCompat = false) => {
-      return loadErrorCode(output2, data, queryCompat ? ["code", "header", "type"] : ["type", "code", "header"]);
-    };
-    loadErrorCode = ({ headers }, data, order) => {
-      while (order.length > 0) {
-        const location = order.shift();
-        switch (location) {
-          case "header":
-            const headerKey = findKey(headers ?? {}, "x-amzn-errortype");
-            if (headerKey !== void 0) {
-              return sanitizeErrorCode(headers[headerKey]);
-            }
-            break;
-          case "code":
-            const codeKey = findKey(data ?? {}, "code");
-            if (codeKey && data[codeKey] !== void 0) {
-              return sanitizeErrorCode(data[codeKey]);
-            }
-            break;
-          case "type":
-            if (data?.__type !== void 0) {
-              return sanitizeErrorCode(data.__type);
-            }
-            break;
-        }
-      }
-    };
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/writeKey.js
-function writeKey(obj) {
-  Object.defineProperty(obj, "__proto__", { value: void 0, writable: true, enumerable: true, configurable: true });
-}
-var init_writeKey = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/writeKey.js"() {
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/codec-v2/JsonShapeDeserializer2.js
-var JsonShapeDeserializer2;
-var init_JsonShapeDeserializer2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/codec-v2/JsonShapeDeserializer2.js"() {
-    init_protocols();
-    init_schema();
-    init_serde();
-    init_ConfigurableSerdeContext();
-    init_UnionSerde();
-    init_detectBufferParsing();
-    init_jsonReviver();
-    init_needsReviver();
-    init_parseJsonBody();
-    init_writeKey();
-    JsonShapeDeserializer2 = class extends SerdeContextConfig {
-      settings;
-      constructor(settings) {
-        super();
-        this.settings = settings;
-      }
-      async read(schema, data) {
-        const reviver = needsReviver(schema) ? jsonReviver : void 0;
-        let parsed;
-        if (typeof data === "string") {
-          if (data.length === 0) {
-            return {};
-          }
-          parsed = JSON.parse(data, reviver);
-        } else if (data instanceof Uint8Array && detectBufferParsing()) {
-          if (data.byteLength === 0) {
-            return {};
-          }
-          const buf2 = Buffer.isBuffer(data) ? data : Buffer.from(data.buffer, data.byteOffset, data.byteLength);
-          parsed = JSON.parse(buf2, reviver);
-        } else {
-          parsed = await parseJsonBody(data, this.serdeContext, schema);
-        }
-        return this._read(schema, parsed);
-      }
-      readObject(schema, data) {
-        return this._read(schema, data);
-      }
-      _read(schema, value) {
-        const isObject2 = value !== null && typeof value === "object";
-        const ns = NormalizedSchema.of(schema);
-        if (isObject2) {
-          if (ns.isStructSchema()) {
-            return this._readStruct(ns, value);
-          }
-          if (Array.isArray(value) && ns.isListSchema()) {
-            const listMember = ns.getValueSchema();
-            if (this.needsTransform(listMember)) {
-              for (let i5 = 0; i5 < value.length; ++i5) {
-                value[i5] = this._read(listMember, value[i5]);
-              }
-            }
-            return value;
-          }
-          if (ns.isMapSchema()) {
-            const mapMember = ns.getValueSchema();
-            const map4 = value;
-            if (this.needsTransform(mapMember)) {
-              for (const k5 in map4) {
-                if (k5 === "__proto__") {
-                  writeKey(map4);
-                }
-                map4[k5] = this._read(mapMember, map4[k5]);
-              }
-            }
-            return map4;
-          }
-        }
-        if (ns.isBlobSchema() && typeof value === "string") {
-          return fromBase64(value);
-        }
-        const mediaType = ns.getMergedTraits().mediaType;
-        if (ns.isStringSchema() && typeof value === "string" && mediaType) {
-          const isJson = mediaType === "application/json" || mediaType.endsWith("+json");
-          if (isJson) {
-            return LazyJsonString.from(value);
-          }
-          return value;
-        }
-        if (ns.isTimestampSchema() && value != null) {
-          const format2 = determineTimestampFormat(ns, this.settings);
-          switch (format2) {
-            case 5:
-              return parseRfc3339DateTimeWithOffset(value);
-            case 6:
-              return parseRfc7231DateTime(value);
-            case 7:
-              return parseEpochTimestamp(value);
-            default:
-              console.warn("Missing timestamp format, parsing value with Date constructor:", value);
-              return new Date(value);
-          }
-        }
-        if (ns.isBigIntegerSchema() && (typeof value === "number" || typeof value === "string")) {
-          return BigInt(value);
-        }
-        if (ns.isBigDecimalSchema() && value != void 0) {
-          if (value instanceof NumericValue) {
-            return value;
-          }
-          const untyped = value;
-          if (untyped.type === "bigDecimal" && "string" in untyped) {
-            return new NumericValue(untyped.string, untyped.type);
-          }
-          return new NumericValue(String(value), "bigDecimal");
-        }
-        if (ns.isNumericSchema() && typeof value === "string") {
-          switch (value) {
-            case "Infinity":
-              return Infinity;
-            case "-Infinity":
-              return -Infinity;
-            case "NaN":
-              return NaN;
-          }
-          return value;
-        }
-        if (ns.isDocumentSchema()) {
-          if (isObject2) {
-            if (Array.isArray(value)) {
-              for (let i5 = 0; i5 < value.length; ++i5) {
-                const v = value[i5];
-                if (!(v instanceof NumericValue)) {
-                  value[i5] = this._read(ns, v);
-                }
-              }
-            } else {
-              const doc = value;
-              for (const k5 in doc) {
-                if (k5 === "__proto__") {
-                  writeKey(doc);
-                }
-                const v = doc[k5];
-                if (!(v instanceof NumericValue)) {
-                  doc[k5] = this._read(ns, v);
-                }
-              }
-            }
-          }
-        }
-        return value;
-      }
-      _readStruct(ns, record2) {
-        const union2 = ns.isUnionSchema();
-        const out = {};
-        let nameMap;
-        const hasType = typeof record2.__type === "string";
-        const { jsonName } = this.settings;
-        if (jsonName && hasType) {
-          nameMap = {};
-        }
-        let unionSerde;
-        if (union2) {
-          unionSerde = new UnionSerde(record2, out);
-        }
-        for (const [memberName, memberSchema] of ns.structIterator()) {
-          let fromKey = memberName;
-          if (jsonName) {
-            fromKey = memberSchema.getMergedTraits().jsonName ?? fromKey;
-            if (hasType) {
-              nameMap[fromKey] = memberName;
-            }
-          }
-          if (union2) {
-            unionSerde.mark(fromKey);
-          }
-          if (record2[fromKey] != null) {
-            out[memberName] = this._read(memberSchema, record2[fromKey]);
-          }
-        }
-        if (union2) {
-          unionSerde.writeUnknown();
-        } else if (hasType) {
-          for (const k5 in record2) {
-            const v = record2[k5];
-            const t = jsonName ? nameMap[k5] ?? k5 : k5;
-            if (!(t in out)) {
-              out[t] = v;
-            }
-          }
-        }
-        return out;
-      }
-      needsTransform(ns) {
-        if (ns.isBlobSchema() || ns.isTimestampSchema() || ns.isBigIntegerSchema() || ns.isBigDecimalSchema()) {
-          return true;
-        }
-        if (ns.isDocumentSchema() || ns.isStructSchema() || ns.isListSchema() || ns.isMapSchema()) {
-          return true;
-        }
-        if (ns.isStringSchema() && ns.getMergedTraits().mediaType) {
-          return true;
-        }
-        return false;
-      }
-    };
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/codec-v2/JsonBytesStringAdapter.js
-var JsonBytesStringAdapter, warned;
-var init_JsonBytesStringAdapter = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/codec-v2/JsonBytesStringAdapter.js"() {
-    init_serde();
-    JsonBytesStringAdapter = class _JsonBytesStringAdapter extends Uint8Array {
-      string = null;
-      static allocUnsafe(bytes) {
-        if (typeof Buffer === "function") {
-          const buffer = Buffer.allocUnsafe(bytes);
-          return new _JsonBytesStringAdapter(buffer.buffer, buffer.byteOffset, buffer.byteLength);
-        }
-        return new _JsonBytesStringAdapter(bytes);
-      }
-      toString() {
-        return this.s();
-      }
-      valueOf() {
-        return this.s();
-      }
-      includes(searchString, position) {
-        if (typeof searchString === "string") {
-          return this.s().includes(searchString, position);
-        }
-        return Uint8Array.prototype.includes.call(this, searchString, position);
-      }
-      indexOf(searchString, position) {
-        if (typeof searchString === "string") {
-          return this.s().indexOf(searchString, position);
-        }
-        return Uint8Array.prototype.indexOf.call(this, searchString, position);
-      }
-      lastIndexOf(searchString, position) {
-        if (typeof searchString === "string") {
-          return this.s().lastIndexOf(searchString, position);
-        }
-        const fn = Uint8Array.prototype.lastIndexOf;
-        if (position !== void 0) {
-          return fn.call(this, searchString, position);
-        }
-        return fn.call(this, searchString);
-      }
-      startsWith(searchString, position) {
-        return this.s().startsWith(searchString, position);
-      }
-      endsWith(searchString, endPosition) {
-        return this.s().endsWith(searchString, endPosition);
-      }
-      match(regexp) {
-        return this.s().match(regexp);
-      }
-      replace(searchValue, replaceValue) {
-        return this.s().replace(searchValue, replaceValue);
-      }
-      search(regexp) {
-        return this.s().search(regexp);
-      }
-      split(separator, limit) {
-        return this.s().split(separator, limit);
-      }
-      substring(start, end2) {
-        return this.s().substring(start, end2);
-      }
-      trim() {
-        return this.s().trim();
-      }
-      trimStart() {
-        return this.s().trimStart();
-      }
-      trimEnd() {
-        return this.s().trimEnd();
-      }
-      charAt(pos2) {
-        return this.s().charAt(pos2);
-      }
-      charCodeAt(index) {
-        return this.s().charCodeAt(index);
-      }
-      padStart(maxLength, fillString) {
-        return this.s().padStart(maxLength, fillString);
-      }
-      padEnd(maxLength, fillString) {
-        return this.s().padEnd(maxLength, fillString);
-      }
-      repeat(count) {
-        return this.s().repeat(count);
-      }
-      toUpperCase() {
-        return this.s().toUpperCase();
-      }
-      toLowerCase() {
-        return this.s().toLowerCase();
-      }
-      s() {
-        if (this.string == null) {
-          const n3 = Date.now();
-          if (n3 > warned + 6e4) {
-            console.warn("@aws-sdk/core/protocols - WARN - JsonCodec2: you have called a string method on a Uint8Array request body. It has been automatically converted to string. In a future version this will throw an error.");
-            warned = n3;
-          }
-          this.string = toUtf8(this);
-        }
-        return this.string;
-      }
-    };
-    warned = 0;
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/codec-v2/JsonShapeSerializer2.js
-function alloc(size) {
-  return JsonBytesStringAdapter.allocUnsafe(size);
-}
-var encoder, OPEN_BRACE, CLOSE_BRACE, OPEN_BRACKET, CLOSE_BRACKET, QUOTE, COLON, COMMA, BACKSLASH, TRUE, FALSE, NULL, ESCAPE_TABLE, INITIAL_BUFFER_SIZE2, JsonShapeSerializer2;
-var init_JsonShapeSerializer2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/codec-v2/JsonShapeSerializer2.js"() {
-    init_protocols();
-    init_schema();
-    init_serde();
-    init_ConfigurableSerdeContext();
-    init_JsonBytesStringAdapter();
-    encoder = new TextEncoder();
-    OPEN_BRACE = 123;
-    CLOSE_BRACE = 125;
-    OPEN_BRACKET = 91;
-    CLOSE_BRACKET = 93;
-    QUOTE = 34;
-    COLON = 58;
-    COMMA = 44;
-    BACKSLASH = 92;
-    TRUE = new Uint8Array([116, 114, 117, 101]);
-    FALSE = new Uint8Array([102, 97, 108, 115, 101]);
-    NULL = new Uint8Array([110, 117, 108, 108]);
-    ESCAPE_TABLE = new Array(128).fill(null);
-    ESCAPE_TABLE[8] = "b";
-    ESCAPE_TABLE[9] = "t";
-    ESCAPE_TABLE[10] = "n";
-    ESCAPE_TABLE[12] = "f";
-    ESCAPE_TABLE[13] = "r";
-    ESCAPE_TABLE[34] = '"';
-    ESCAPE_TABLE[92] = "\\";
-    for (let i5 = 0; i5 < 32; i5++) {
-      if (ESCAPE_TABLE[i5] === null) {
-        ESCAPE_TABLE[i5] = "u00" + i5.toString(16).padStart(2, "0");
-      }
-    }
-    INITIAL_BUFFER_SIZE2 = 2048;
-    JsonShapeSerializer2 = class _JsonShapeSerializer2 extends SerdeContextConfig {
-      settings;
-      json;
-      i = 0;
-      rootSchema;
-      rawValue;
-      passthrough = false;
-      constructor(settings) {
-        super();
-        this.settings = settings;
-        this.json = alloc(INITIAL_BUFFER_SIZE2);
-      }
-      write(schema, value) {
-        this.i = 0;
-        this.rawValue = value;
-        this.rootSchema = NormalizedSchema.of(schema);
-        this.passthrough = this.rootSchema.isBlobSchema() || this.rootSchema.isStringSchema();
-        if (!this.passthrough) {
-          this.writeValue(this.rootSchema, value, void 0);
-        }
-      }
-      writeDiscriminatedDocument(schema, value) {
-        this.i = 0;
-        this.rootSchema = NormalizedSchema.of(schema);
-        const ns = this.rootSchema;
-        if (ns.isStructSchema() && value != null && typeof value === "object") {
-          this.writeValue(ns, value, void 0);
-          const prefix = `"__type":"${ns.getName(true) ?? "Unknown"}",`;
-          const z2 = prefix.length;
-          this.ensure(z2);
-          this.json.copyWithin(1 + z2, 1, this.i);
-          encoder.encodeInto(prefix, this.json.subarray(1));
-          this.i += z2;
-        } else {
-          this.writeValue(ns, value, void 0);
-        }
-      }
-      flush() {
-        this.rootSchema = void 0;
-        const finalPosition = this.i;
-        this.i = 0;
-        const raw = this.rawValue;
-        this.rawValue = void 0;
-        if (finalPosition === 0) {
-          return raw;
-        }
-        const result = this.json.subarray(0, finalPosition);
-        this.json = alloc(INITIAL_BUFFER_SIZE2);
-        return result;
-      }
-      ensure(byteCount) {
-        const { i: i5, json: json2 } = this;
-        if (i5 + byteCount > json2.length) {
-          let newSize = json2.length * 2;
-          while (newSize < i5 + byteCount) {
-            newSize *= 2;
-          }
-          const next = alloc(newSize);
-          next.set(this.json);
-          this.json = next;
-        }
-      }
-      writeAscii(s2) {
-        const z2 = s2.length;
-        this.ensure(z2);
-        let { i: i5, json: json2 } = this;
-        for (let j5 = 0; j5 < z2; ++j5) {
-          json2[i5] = s2.charCodeAt(j5);
-          i5 += 1;
-        }
-        this.i = i5;
-      }
-      writeAsciiQuoted(s2) {
-        const z2 = s2.length;
-        this.ensure(z2 + 4);
-        let { json: json2, i: i5 } = this;
-        json2[i5++] = QUOTE;
-        for (let j5 = 0; j5 < z2; ++j5) {
-          json2[i5++] = s2.charCodeAt(j5);
-        }
-        json2[i5++] = QUOTE;
-        this.i = i5;
-      }
-      writeJsonString(s2) {
-        this.ensure(s2.length * 3 + 2);
-        this.json[this.i++] = QUOTE;
-        const z2 = s2.length;
-        for (let j5 = 0; j5 < z2; ++j5) {
-          const c5 = s2.charCodeAt(j5);
-          if (c5 > 34 && c5 < 92) {
-            this.json[this.i++] = c5;
-          } else if (c5 < 128) {
-            const esc2 = ESCAPE_TABLE[c5];
-            if (esc2 !== null) {
-              this.ensure(esc2.length + 1);
-              this.json[this.i++] = BACKSLASH;
-              for (let k5 = 0; k5 < esc2.length; k5++) {
-                this.json[this.i++] = esc2.charCodeAt(k5);
-              }
-            } else {
-              this.json[this.i++] = c5;
-            }
-          } else if (c5 >= 55296 && c5 <= 56319) {
-            const next = j5 + 1 < z2 ? s2.charCodeAt(j5 + 1) : 0;
-            if (next >= 56320 && next <= 57343) {
-              this.ensure(4);
-              const { written } = encoder.encodeInto(s2.substring(j5, j5 + 2), this.json.subarray(this.i));
-              this.i += written;
-              ++j5;
-            } else {
-              this.ensure(6);
-              this.writeUnicodeEscape(c5);
-            }
-          } else if (c5 >= 56320 && c5 <= 57343) {
-            this.ensure(6);
-            this.writeUnicodeEscape(c5);
-          } else {
-            let { i: i5, json: json2 } = this;
-            if (c5 < 2048) {
-              json2[i5++] = 192 | c5 >> 6;
-              json2[i5++] = 128 | c5 & 63;
-            } else {
-              json2[i5++] = 224 | c5 >> 12;
-              json2[i5++] = 128 | c5 >> 6 & 63;
-              json2[i5++] = 128 | c5 & 63;
-            }
-            this.i = i5;
-          }
-        }
-        this.json[this.i++] = QUOTE;
-      }
-      writeUnicodeEscape(code) {
-        let { json: json2, i: i5 } = this;
-        json2[i5++] = BACKSLASH;
-        json2[i5++] = 117;
-        const hex3 = code.toString(16).padStart(4, "0");
-        for (let j5 = 0; j5 < 4; ++j5) {
-          json2[i5++] = hex3.charCodeAt(j5);
-        }
-        this.i = i5;
-      }
-      static B64 = (() => {
-        const chars2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-        const table = new Uint8Array(64);
-        for (let i5 = 0; i5 < 64; ++i5) {
-          table[i5] = chars2.charCodeAt(i5);
-        }
-        return table;
-      })();
-      writeBase64(data) {
-        const b64Len = Math.ceil(data.length / 3) * 4;
-        this.ensure(b64Len + 2);
-        const json2 = this.json;
-        const B64 = _JsonShapeSerializer2.B64;
-        let i5 = this.i;
-        json2[i5++] = QUOTE;
-        const len = data.length;
-        const remainder = len % 3;
-        const mainLen = len - remainder;
-        for (let j5 = 0; j5 < mainLen; j5 += 3) {
-          const a5 = data[j5];
-          const b5 = data[j5 + 1];
-          const c5 = data[j5 + 2];
-          json2[i5++] = B64[a5 >> 2];
-          json2[i5++] = B64[(a5 & 3) << 4 | b5 >> 4];
-          json2[i5++] = B64[(b5 & 15) << 2 | c5 >> 6];
-          json2[i5++] = B64[c5 & 63];
-        }
-        if (remainder === 2) {
-          const a5 = data[mainLen];
-          const b5 = data[mainLen + 1];
-          json2[i5++] = B64[a5 >> 2];
-          json2[i5++] = B64[(a5 & 3) << 4 | b5 >> 4];
-          json2[i5++] = B64[(b5 & 15) << 2];
-          json2[i5++] = 61;
-        } else if (remainder === 1) {
-          const a5 = data[mainLen];
-          json2[i5++] = B64[a5 >> 2];
-          json2[i5++] = B64[(a5 & 3) << 4];
-          json2[i5++] = 61;
-          json2[i5++] = 61;
-        }
-        json2[i5++] = QUOTE;
-        this.i = i5;
-      }
-      writeValue(schema, value, container) {
-        if (value == null) {
-          if (container?.isStructSchema()) {
-            if (value === void 0) {
-              const ns2 = NormalizedSchema.of(schema);
-              if (ns2.isIdempotencyToken()) {
-                this.writeAsciiQuoted(generateIdempotencyToken());
-                return;
-              }
-            }
-            return;
-          }
-          this.ensure(4);
-          this.json.set(NULL, this.i);
-          this.i += 4;
-          return;
-        }
-        const ns = NormalizedSchema.of(schema);
-        const isObject2 = typeof value === "object";
-        if (ns.isStringSchema()) {
-          const mediaType = ns.getMergedTraits().mediaType;
-          if (mediaType) {
-            const isJson = mediaType === "application/json" || mediaType.endsWith("+json");
-            if (isJson) {
-              this.writeJsonString(LazyJsonString.from(value).toString());
-              return;
-            }
-          }
-        }
-        if (isObject2) {
-          if (ns.isStructSchema()) {
-            this.writeStruct(ns, value);
-            return;
-          }
-          if (Array.isArray(value) && (ns.isListSchema() || ns.isDocumentSchema())) {
-            this.writeList(ns, value, ns.isDocumentSchema());
-            return;
-          }
-          if (ns.isMapSchema()) {
-            this.writeMap(ns, value, false);
-            return;
-          }
-          if (value instanceof Uint8Array && (ns.isBlobSchema() || ns.isDocumentSchema())) {
-            this.writeBase64(value);
-            return;
-          }
-          if (value instanceof Date && (ns.isTimestampSchema() || ns.isDocumentSchema())) {
-            this.writeTimestamp(ns, value);
-            return;
-          }
-          if (value instanceof NumericValue) {
-            this.writeAscii(value.string);
-            return;
-          }
-          if (ns.isDocumentSchema()) {
-            if (Array.isArray(value)) {
-              this.writeList(ns, value, true);
-            } else {
-              this.writeMap(ns, value, true);
-            }
-            return;
-          }
-          const json2 = JSON.stringify(value);
-          this.writeAscii(json2);
-          return;
-        }
-        if (typeof value === "string") {
-          if (ns.isBlobSchema()) {
-            const b64 = (this.serdeContext?.base64Encoder ?? toBase64)(value);
-            this.writeAsciiQuoted(b64);
-            return;
-          }
-          this.writeJsonString(value);
-          return;
-        }
-        if (typeof value === "number") {
-          if (Math.abs(value) === Infinity || Number.isNaN(value)) {
-            this.writeAsciiQuoted(String(value));
-            return;
-          }
-          const numStr = String(value);
-          this.writeAscii(numStr);
-          return;
-        }
-        if (typeof value === "boolean") {
-          this.ensure(5);
-          let { i: i5, json: json2 } = this;
-          if (value) {
-            json2.set(TRUE, i5);
-            i5 += 4;
-          } else {
-            json2.set(FALSE, i5);
-            i5 += 5;
-          }
-          this.i = i5;
-          return;
-        }
-        if (typeof value === "bigint") {
-          this.writeAscii(value.toString());
-          return;
-        }
-        this.writeAscii(String(value));
-      }
-      writeStruct(ns, value) {
-        this.ensure(2);
-        this.json[this.i++] = OPEN_BRACE;
-        let wroteAny = false;
-        const hasType = typeof value.__type === "string";
-        let writtenKeys;
-        if (hasType) {
-          writtenKeys = /* @__PURE__ */ new Set();
-        }
-        for (const [memberName, memberSchema] of ns.structIterator()) {
-          const item = value[memberName];
-          if (item == null && !memberSchema.isIdempotencyToken()) {
-            continue;
-          }
-          if (wroteAny) {
-            this.ensure(1);
-            this.json[this.i++] = COMMA;
-          }
-          wroteAny = true;
-          const targetKey = this.settings.jsonName ? memberSchema.getMergedTraits().jsonName ?? memberName : memberName;
-          if (writtenKeys) {
-            writtenKeys.add(memberName);
-            writtenKeys.add(targetKey);
-          }
-          this.writeAsciiQuoted(targetKey);
-          this.json[this.i++] = COLON;
-          this.writeValue(memberSchema, item, ns);
-        }
-        if (!wroteAny && ns.isUnionSchema()) {
-          const { $unknown } = value;
-          if (Array.isArray($unknown)) {
-            const [k5, v] = $unknown;
-            this.writeAsciiQuoted(k5);
-            this.ensure(1);
-            this.json[this.i++] = COLON;
-            this.writeValue(15, v, ns);
-          }
-        } else if (hasType) {
-          for (const k5 in value) {
-            if (writtenKeys.has(k5)) {
-              continue;
-            }
-            writtenKeys.add(k5);
-            const v = value[k5];
-            if (wroteAny) {
-              this.ensure(1);
-              this.json[this.i++] = COMMA;
-            }
-            wroteAny = true;
-            this.writeAsciiQuoted(k5);
-            this.ensure(1);
-            this.json[this.i++] = COLON;
-            this.writeValue(15, v, void 0);
-          }
-        }
-        this.ensure(1);
-        this.json[this.i++] = CLOSE_BRACE;
-      }
-      writeList(ns, value, isDocument) {
-        const sparse = !!ns.getMergedTraits().sparse;
-        const valueSchema = ns.getValueSchema();
-        if (!isDocument) {
-          if (valueSchema.isStringSchema() || valueSchema.isNumericSchema() || valueSchema.isBooleanSchema()) {
-            let hasSpecials = false;
-            for (let i5 = 0; i5 < value.length; ++i5) {
-              const v = value[i5];
-              if (Number.isNaN(v) || v === Infinity || v === -Infinity || v == null && !sparse) {
-                hasSpecials = true;
-                break;
-              }
-            }
-            let json2;
-            if (!hasSpecials) {
-              json2 = JSON.stringify(value);
-            } else {
-              const out = [];
-              for (let i5 = 0; i5 < value.length; ++i5) {
-                const v = value[i5];
-                if (v == null && !sparse)
-                  continue;
-                if (Number.isNaN(v) || v === Infinity || v === -Infinity) {
-                  out.push(String(v));
-                } else {
-                  out.push(v);
-                }
-              }
-              json2 = JSON.stringify(out);
-            }
-            this.ensure(json2.length * 3);
-            this.i += encoder.encodeInto(json2, this.json.subarray(this.i)).written;
-            return;
-          }
-        }
-        this.ensure(2);
-        this.json[this.i++] = OPEN_BRACKET;
-        let wroteFirstItem = false;
-        for (let i5 = 0; i5 < value.length; ++i5) {
-          const item = value[i5];
-          if (isDocument ? item === void 0 : item == null && !sparse) {
-            continue;
-          }
-          if (wroteFirstItem) {
-            this.ensure(1);
-            this.json[this.i++] = COMMA;
-          }
-          this.writeValue(valueSchema, item, void 0);
-          wroteFirstItem = true;
-        }
-        this.ensure(1);
-        this.json[this.i++] = CLOSE_BRACKET;
-      }
-      writeMap(ns, value, isDocument) {
-        const sparse = !!ns.getMergedTraits().sparse;
-        const valueSchema = ns.getValueSchema();
-        if (!isDocument) {
-          if (valueSchema.isStringSchema() || valueSchema.isNumericSchema() || valueSchema.isBooleanSchema()) {
-            let modifications;
-            for (const k5 in value) {
-              const v = value[k5];
-              if (Number.isNaN(v) || v === Infinity || v === -Infinity) {
-                (modifications ??= {})[k5] = v;
-                value[k5] = String(v);
-              } else if (v === null && !sparse) {
-                (modifications ??= {})[k5] = null;
-                value[k5] = void 0;
-              }
-            }
-            const json2 = JSON.stringify(value);
-            if (modifications) {
-              Object.assign(value, modifications);
-            }
-            this.ensure(json2.length * 3);
-            this.i += encoder.encodeInto(json2, this.json.subarray(this.i)).written;
-            return;
-          }
-        }
-        this.ensure(2);
-        this.json[this.i++] = OPEN_BRACE;
-        let first = true;
-        for (const k5 in value) {
-          const v = value[k5];
-          if (isDocument ? v === void 0 : v == null && !sparse) {
-            continue;
-          }
-          if (!first) {
-            this.ensure(1);
-            this.json[this.i++] = COMMA;
-          }
-          first = false;
-          this.writeJsonString(k5);
-          this.ensure(1);
-          this.json[this.i++] = COLON;
-          this.writeValue(valueSchema, v, void 0);
-        }
-        this.ensure(1);
-        this.json[this.i++] = CLOSE_BRACE;
-      }
-      writeTimestamp(ns, value) {
-        const format2 = determineTimestampFormat(ns, this.settings);
-        switch (format2) {
-          case 5: {
-            const iso = value.toISOString().replace(".000Z", "Z");
-            this.writeAsciiQuoted(iso);
-            return;
-          }
-          case 6: {
-            this.writeAsciiQuoted(dateToUtcString(value));
-            return;
-          }
-          case 7: {
-            const epochSecs = String(value.getTime() / 1e3);
-            this.writeAscii(epochSecs);
-            return;
-          }
-          default: {
-            const epochSecs = String(value.getTime() / 1e3);
-            this.writeAscii(epochSecs);
-            return;
-          }
-        }
-      }
-    };
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/codec-v2/JsonCodec2.js
-var JsonCodec2;
-var init_JsonCodec2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/codec-v2/JsonCodec2.js"() {
-    init_ConfigurableSerdeContext();
-    init_JsonShapeDeserializer2();
-    init_JsonShapeSerializer2();
-    JsonCodec2 = class extends SerdeContextConfig {
-      settings;
-      constructor(settings) {
-        super();
-        this.settings = settings;
-      }
-      createSerializer() {
-        const serializer = new JsonShapeSerializer2(this.settings);
-        serializer.setSerdeContext(this.serdeContext);
-        return serializer;
-      }
-      createDeserializer() {
-        const deserializer = new JsonShapeDeserializer2(this.settings);
-        deserializer.setSerdeContext(this.serdeContext);
-        return deserializer;
-      }
-    };
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsJsonRpcProtocol.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsJsonRpcProtocol.js
 var AwsJsonRpcProtocol;
 var init_AwsJsonRpcProtocol = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsJsonRpcProtocol.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsJsonRpcProtocol.js"() {
     init_protocols();
     init_schema();
     init_ProtocolLib();
-    init_JsonCodec2();
-    init_parseJsonBody();
     AwsJsonRpcProtocol = class extends RpcProtocol {
       serializer;
       deserializer;
@@ -37785,10 +38428,10 @@ var init_AwsJsonRpcProtocol = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsJson1_0Protocol.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsJson1_0Protocol.js
 var AwsJson1_0Protocol;
 var init_AwsJson1_0Protocol = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsJson1_0Protocol.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsJson1_0Protocol.js"() {
     init_AwsJsonRpcProtocol();
     AwsJson1_0Protocol = class extends AwsJsonRpcProtocol {
       constructor({ defaultNamespace, errorTypeRegistries: errorTypeRegistries5, serviceTarget, awsQueryCompatible, jsonCodec }) {
@@ -37813,10 +38456,10 @@ var init_AwsJson1_0Protocol = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsJson1_1Protocol.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsJson1_1Protocol.js
 var AwsJson1_1Protocol;
 var init_AwsJson1_1Protocol = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsJson1_1Protocol.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsJson1_1Protocol.js"() {
     init_AwsJsonRpcProtocol();
     AwsJson1_1Protocol = class extends AwsJsonRpcProtocol {
       constructor({ defaultNamespace, errorTypeRegistries: errorTypeRegistries5, serviceTarget, awsQueryCompatible, jsonCodec }) {
@@ -37841,15 +38484,13 @@ var init_AwsJson1_1Protocol = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsRestJsonProtocol.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsRestJsonProtocol.js
 var AwsRestJsonProtocol;
 var init_AwsRestJsonProtocol = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsRestJsonProtocol.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/AwsRestJsonProtocol.js"() {
     init_protocols();
     init_schema();
     init_ProtocolLib();
-    init_JsonCodec2();
-    init_parseJsonBody();
     AwsRestJsonProtocol = class extends HttpBindingProtocol {
       serializer;
       deserializer;
@@ -37928,447 +38569,6 @@ var init_AwsRestJsonProtocol = __esm({
       }
       getDefaultContentType() {
         return "application/json";
-      }
-    };
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/codec-v1/JsonShapeDeserializer.js
-var JsonShapeDeserializer;
-var init_JsonShapeDeserializer = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/codec-v1/JsonShapeDeserializer.js"() {
-    init_protocols();
-    init_schema();
-    init_serde();
-    init_serde();
-    init_ConfigurableSerdeContext();
-    init_UnionSerde();
-    init_jsonReviver();
-    init_needsReviver();
-    init_parseJsonBody();
-    init_writeKey();
-    JsonShapeDeserializer = class extends SerdeContextConfig {
-      settings;
-      constructor(settings) {
-        super();
-        this.settings = settings;
-      }
-      async read(schema, data) {
-        const reviver = needsReviver(schema) ? jsonReviver : void 0;
-        return this._read(schema, typeof data === "string" ? JSON.parse(data, reviver) : await parseJsonBody(data, this.serdeContext, schema));
-      }
-      readObject(schema, data) {
-        return this._read(schema, data);
-      }
-      _read(schema, value) {
-        const isObject2 = value !== null && typeof value === "object";
-        const ns = NormalizedSchema.of(schema);
-        if (isObject2) {
-          if (ns.isStructSchema()) {
-            const record2 = value;
-            const union2 = ns.isUnionSchema();
-            const out = {};
-            let nameMap = void 0;
-            const { jsonName } = this.settings;
-            if (jsonName) {
-              nameMap = {};
-            }
-            let unionSerde;
-            if (union2) {
-              unionSerde = new UnionSerde(record2, out);
-            }
-            for (const [memberName, memberSchema] of ns.structIterator()) {
-              let fromKey = memberName;
-              if (jsonName) {
-                fromKey = memberSchema.getMergedTraits().jsonName ?? fromKey;
-                nameMap[fromKey] = memberName;
-              }
-              if (union2) {
-                unionSerde.mark(fromKey);
-              }
-              if (record2[fromKey] != null) {
-                out[memberName] = this._read(memberSchema, record2[fromKey]);
-              }
-            }
-            if (union2) {
-              unionSerde.writeUnknown();
-            } else if (typeof record2.__type === "string") {
-              for (const k5 in record2) {
-                const v = record2[k5];
-                const t = jsonName ? nameMap[k5] ?? k5 : k5;
-                if (!(t in out)) {
-                  out[t] = v;
-                }
-              }
-            }
-            return out;
-          }
-          if (Array.isArray(value) && ns.isListSchema()) {
-            const listMember = ns.getValueSchema();
-            const out = [];
-            for (const item of value) {
-              out.push(this._read(listMember, item));
-            }
-            return out;
-          }
-          if (ns.isMapSchema()) {
-            const mapMember = ns.getValueSchema();
-            const out = {};
-            for (const _k in value) {
-              if (_k === "__proto__") {
-                writeKey(out);
-              }
-              out[_k] = this._read(mapMember, value[_k]);
-            }
-            return out;
-          }
-        }
-        if (ns.isBlobSchema() && typeof value === "string") {
-          return fromBase64(value);
-        }
-        const mediaType = ns.getMergedTraits().mediaType;
-        if (ns.isStringSchema() && typeof value === "string" && mediaType) {
-          const isJson = mediaType === "application/json" || mediaType.endsWith("+json");
-          if (isJson) {
-            return LazyJsonString.from(value);
-          }
-          return value;
-        }
-        if (ns.isTimestampSchema() && value != null) {
-          const format2 = determineTimestampFormat(ns, this.settings);
-          switch (format2) {
-            case 5:
-              return parseRfc3339DateTimeWithOffset(value);
-            case 6:
-              return parseRfc7231DateTime(value);
-            case 7:
-              return parseEpochTimestamp(value);
-            default:
-              console.warn("Missing timestamp format, parsing value with Date constructor:", value);
-              return new Date(value);
-          }
-        }
-        if (ns.isBigIntegerSchema() && (typeof value === "number" || typeof value === "string")) {
-          return BigInt(value);
-        }
-        if (ns.isBigDecimalSchema() && value != void 0) {
-          if (value instanceof NumericValue) {
-            return value;
-          }
-          const untyped = value;
-          if (untyped.type === "bigDecimal" && "string" in untyped) {
-            return new NumericValue(untyped.string, untyped.type);
-          }
-          return new NumericValue(String(value), "bigDecimal");
-        }
-        if (ns.isNumericSchema() && typeof value === "string") {
-          switch (value) {
-            case "Infinity":
-              return Infinity;
-            case "-Infinity":
-              return -Infinity;
-            case "NaN":
-              return NaN;
-          }
-          return value;
-        }
-        if (ns.isDocumentSchema()) {
-          if (isObject2) {
-            const out = Array.isArray(value) ? [] : {};
-            for (const k5 in value) {
-              if (k5 === "__proto__") {
-                writeKey(out);
-              }
-              const v = value[k5];
-              if (v instanceof NumericValue) {
-                out[k5] = v;
-              } else {
-                out[k5] = this._read(ns, v);
-              }
-            }
-            return out;
-          } else {
-            return structuredClone(value);
-          }
-        }
-        return value;
-      }
-    };
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/jsonReplacer.js
-var NUMERIC_CONTROL_CHAR, JsonReplacer;
-var init_jsonReplacer = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/jsonReplacer.js"() {
-    init_serde();
-    NUMERIC_CONTROL_CHAR = String.fromCharCode(925);
-    JsonReplacer = class {
-      values = /* @__PURE__ */ new Map();
-      counter = 0;
-      stage = 0;
-      createReplacer() {
-        if (this.stage === 1) {
-          throw new Error("@aws-sdk/core/protocols - JsonReplacer already created.");
-        }
-        if (this.stage === 2) {
-          throw new Error("@aws-sdk/core/protocols - JsonReplacer exhausted.");
-        }
-        this.stage = 1;
-        return (key, value) => {
-          if (value instanceof NumericValue) {
-            const v = `${NUMERIC_CONTROL_CHAR + "nv" + this.counter++}_` + value.string;
-            this.values.set(`"${v}"`, value.string);
-            return v;
-          }
-          if (typeof value === "bigint") {
-            const s2 = value.toString();
-            const v = `${NUMERIC_CONTROL_CHAR + "b" + this.counter++}_` + s2;
-            this.values.set(`"${v}"`, s2);
-            return v;
-          }
-          return value;
-        };
-      }
-      replaceInJson(json2) {
-        if (this.stage === 0) {
-          throw new Error("@aws-sdk/core/protocols - JsonReplacer not created yet.");
-        }
-        if (this.stage === 2) {
-          throw new Error("@aws-sdk/core/protocols - JsonReplacer exhausted.");
-        }
-        this.stage = 2;
-        if (this.counter === 0) {
-          return json2;
-        }
-        for (const [key, value] of this.values) {
-          json2 = json2.replace(key, value);
-        }
-        return json2;
-      }
-    };
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/codec-v1/JsonShapeSerializer.js
-var JsonShapeSerializer;
-var init_JsonShapeSerializer = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/codec-v1/JsonShapeSerializer.js"() {
-    init_protocols();
-    init_schema();
-    init_serde();
-    init_ConfigurableSerdeContext();
-    init_jsonReplacer();
-    init_writeKey();
-    JsonShapeSerializer = class extends SerdeContextConfig {
-      settings;
-      buffer;
-      useReplacer = false;
-      rootSchema;
-      constructor(settings) {
-        super();
-        this.settings = settings;
-      }
-      write(schema, value) {
-        this.rootSchema = NormalizedSchema.of(schema);
-        this.buffer = this._write(this.rootSchema, value);
-      }
-      flush() {
-        const { rootSchema, useReplacer } = this;
-        this.rootSchema = void 0;
-        this.useReplacer = false;
-        if (rootSchema?.isStructSchema() || rootSchema?.isDocumentSchema()) {
-          if (!useReplacer) {
-            return JSON.stringify(this.buffer);
-          }
-          const replacer = new JsonReplacer();
-          return replacer.replaceInJson(JSON.stringify(this.buffer, replacer.createReplacer(), 0));
-        }
-        return this.buffer;
-      }
-      writeDiscriminatedDocument(schema, value) {
-        this.write(schema, value);
-        if (typeof this.buffer === "object") {
-          this.buffer.__type = NormalizedSchema.of(schema).getName(true);
-        }
-      }
-      _write(schema, value, container) {
-        const isObject2 = value !== null && typeof value === "object";
-        const ns = NormalizedSchema.of(schema);
-        if (isObject2) {
-          if (ns.isStructSchema()) {
-            const record2 = value;
-            const out = {};
-            const { jsonName } = this.settings;
-            let nameMap = void 0;
-            if (jsonName) {
-              nameMap = {};
-            }
-            let outCount = 0;
-            for (const [memberName, memberSchema] of ns.structIterator()) {
-              const serializableValue = this._write(memberSchema, record2[memberName], ns);
-              if (serializableValue !== void 0) {
-                let targetKey = memberName;
-                if (jsonName) {
-                  targetKey = memberSchema.getMergedTraits().jsonName ?? memberName;
-                  nameMap[memberName] = targetKey;
-                }
-                out[targetKey] = serializableValue;
-                outCount++;
-              }
-            }
-            if (ns.isUnionSchema() && outCount === 0) {
-              const { $unknown } = record2;
-              if (Array.isArray($unknown)) {
-                const [k5, v] = $unknown;
-                if (k5 === "__proto__") {
-                  writeKey(out);
-                }
-                out[k5] = this._write(15, v);
-              }
-            } else if (typeof record2.__type === "string") {
-              for (const k5 in record2) {
-                const v = record2[k5];
-                const targetKey = jsonName ? nameMap[k5] ?? k5 : k5;
-                if (!(targetKey in out)) {
-                  out[targetKey] = this._write(15, v);
-                }
-              }
-            }
-            return out;
-          }
-          if (Array.isArray(value) && ns.isListSchema()) {
-            const listMember = ns.getValueSchema();
-            const out = [];
-            const sparse = !!ns.getMergedTraits().sparse;
-            for (const item of value) {
-              if (sparse || item != null) {
-                out.push(this._write(listMember, item));
-              }
-            }
-            return out;
-          }
-          if (ns.isMapSchema()) {
-            const mapMember = ns.getValueSchema();
-            const out = {};
-            const sparse = !!ns.getMergedTraits().sparse;
-            for (const _k in value) {
-              const _v = value[_k];
-              if (sparse || _v != null) {
-                if (_k === "__proto__") {
-                  writeKey(out);
-                }
-                out[_k] = this._write(mapMember, _v);
-              }
-            }
-            return out;
-          }
-          if (value instanceof Uint8Array && ns.isBlobSchema()) {
-            if (ns === this.rootSchema) {
-              return value;
-            }
-            return (this.serdeContext?.base64Encoder ?? toBase64)(value);
-          }
-          if (value instanceof Date && (ns.isTimestampSchema() || ns.isDocumentSchema())) {
-            const format2 = determineTimestampFormat(ns, this.settings);
-            switch (format2) {
-              case 5:
-                return value.toISOString().replace(".000Z", "Z");
-              case 6:
-                return dateToUtcString(value);
-              case 7:
-                return value.getTime() / 1e3;
-              default:
-                console.warn("Missing timestamp format, using epoch seconds", value);
-                return value.getTime() / 1e3;
-            }
-          }
-          if (value instanceof NumericValue) {
-            this.useReplacer = true;
-          }
-        }
-        if (value === null && container?.isStructSchema()) {
-          return void 0;
-        }
-        if (ns.isStringSchema()) {
-          if (typeof value === "undefined" && ns.isIdempotencyToken()) {
-            return generateIdempotencyToken();
-          }
-          const mediaType = ns.getMergedTraits().mediaType;
-          if (value != null && mediaType) {
-            const isJson = mediaType === "application/json" || mediaType.endsWith("+json");
-            if (isJson) {
-              return LazyJsonString.from(value);
-            }
-          }
-          return value;
-        }
-        if (typeof value === "number") {
-          if (Math.abs(value) === Infinity || isNaN(value)) {
-            return String(value);
-          }
-          return value;
-        }
-        if (typeof value === "string" && ns.isBlobSchema()) {
-          if (ns === this.rootSchema) {
-            return value;
-          }
-          return (this.serdeContext?.base64Encoder ?? toBase64)(value);
-        }
-        if (typeof value === "bigint") {
-          this.useReplacer = true;
-        }
-        if (ns.isDocumentSchema()) {
-          if (isObject2) {
-            if (value instanceof Uint8Array) {
-              return (this.serdeContext?.base64Encoder ?? toBase64)(value);
-            }
-            const out = Array.isArray(value) ? [] : {};
-            for (const k5 in value) {
-              const v = value[k5];
-              if (k5 === "__proto__") {
-                writeKey(out);
-              }
-              if (v instanceof NumericValue) {
-                this.useReplacer = true;
-                out[k5] = v;
-              } else {
-                out[k5] = this._write(ns, v);
-              }
-            }
-            return out;
-          } else {
-            return structuredClone(value);
-          }
-        }
-        return value;
-      }
-    };
-  }
-});
-
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/codec-v1/JsonCodec.js
-var JsonCodec;
-var init_JsonCodec = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/codec-v1/JsonCodec.js"() {
-    init_ConfigurableSerdeContext();
-    init_JsonShapeDeserializer();
-    init_JsonShapeSerializer();
-    JsonCodec = class extends SerdeContextConfig {
-      settings;
-      constructor(settings) {
-        super();
-        this.settings = settings;
-      }
-      createSerializer() {
-        const serializer = new JsonShapeSerializer(this.settings);
-        serializer.setSerdeContext(this.serdeContext);
-        return serializer;
-      }
-      createDeserializer() {
-        const deserializer = new JsonShapeDeserializer(this.settings);
-        deserializer.setSerdeContext(this.serdeContext);
-        return deserializer;
       }
     };
   }
@@ -38497,7 +38697,7 @@ var require_dist_cjs7 = __commonJS({
         return xmlText += !hasChildren ? "/>" : `>${this.children.map((c5) => c5.toString()).join("")}</${this.name}>`;
       }
     };
-    function writeKey2(obj) {
+    function writeKey3(obj) {
       Object.defineProperty(obj, "__proto__", { value: void 0, writable: true, enumerable: true, configurable: true });
     }
     function parseXML3(xml) {
@@ -38598,7 +38798,7 @@ var require_dist_cjs7 = __commonJS({
           ++p3.i;
           p3.trim();
           if (name === "__proto__") {
-            writeKey2(attrs);
+            writeKey3(attrs);
           }
           attrs[name] = p3.readAttrValue();
           hasAttrs = true;
@@ -38672,7 +38872,7 @@ var require_dist_cjs7 = __commonJS({
         }
         for (const child of childTags) {
           if (child.tag === "__proto__") {
-            writeKey2(obj);
+            writeKey3(obj);
           }
           if (child.tag in obj) {
             if (Array.isArray(obj[child.tag])) {
@@ -38686,7 +38886,7 @@ var require_dist_cjs7 = __commonJS({
         }
         for (const [k5, v] of Object.entries(attrs)) {
           if (k5 === "__proto__") {
-            writeKey2(obj);
+            writeKey3(obj);
           }
           obj[k5] = v;
         }
@@ -38735,19 +38935,74 @@ var require_dist_cjs7 = __commonJS({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/XmlShapeDeserializer.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/ConfigurableSerdeContext.js
+var SerdeContextConfig2;
+var init_ConfigurableSerdeContext2 = __esm({
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/ConfigurableSerdeContext.js"() {
+    SerdeContextConfig2 = class {
+      serdeContext;
+      setSerdeContext(serdeContext) {
+        this.serdeContext = serdeContext;
+      }
+    };
+  }
+});
+
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/UnionSerde.js
+var UnionSerde2;
+var init_UnionSerde2 = __esm({
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/UnionSerde.js"() {
+    UnionSerde2 = class {
+      from;
+      to;
+      keys;
+      constructor(from, to) {
+        this.from = from;
+        this.to = to;
+        const keys = Object.keys(this.from);
+        const set2 = new Set(keys);
+        set2.delete("__type");
+        this.keys = set2;
+      }
+      mark(key) {
+        this.keys.delete(key);
+      }
+      hasUnknown() {
+        return this.keys.size === 1 && Object.keys(this.to).length === 0;
+      }
+      writeUnknown() {
+        if (this.hasUnknown()) {
+          const k5 = this.keys.values().next().value;
+          const v = this.from[k5];
+          this.to.$unknown = [k5, v];
+        }
+      }
+    };
+  }
+});
+
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/writeKey.js
+function writeKey2(obj) {
+  Object.defineProperty(obj, "__proto__", { value: void 0, writable: true, enumerable: true, configurable: true });
+}
+var init_writeKey2 = __esm({
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/writeKey.js"() {
+  }
+});
+
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/XmlShapeDeserializer.js
 var import_xml_builder, XmlShapeDeserializer;
 var init_XmlShapeDeserializer = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/XmlShapeDeserializer.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/XmlShapeDeserializer.js"() {
     import_xml_builder = __toESM(require_dist_cjs7());
     init_client2();
     init_protocols();
     init_schema();
     init_serde();
-    init_ConfigurableSerdeContext();
-    init_UnionSerde();
-    init_writeKey();
-    XmlShapeDeserializer = class extends SerdeContextConfig {
+    init_ConfigurableSerdeContext2();
+    init_UnionSerde2();
+    init_writeKey2();
+    XmlShapeDeserializer = class extends SerdeContextConfig2 {
       settings;
       stringDeserializer;
       constructor(settings) {
@@ -38824,7 +39079,7 @@ var init_XmlShapeDeserializer = __esm({
               const key = entry[keyProperty];
               const value2 = entry[valueProperty];
               if (key === "__proto__") {
-                writeKey(buffer);
+                writeKey2(buffer);
               }
               buffer[key] = this.readSchema(memberNs, value2);
             }
@@ -38834,7 +39089,7 @@ var init_XmlShapeDeserializer = __esm({
             const union2 = ns.isUnionSchema();
             let unionSerde;
             if (union2) {
-              unionSerde = new UnionSerde(value, buffer);
+              unionSerde = new UnionSerde2(value, buffer);
             }
             for (const [memberName, memberSchema] of ns.structIterator()) {
               const memberTraits = memberSchema.getMergedTraits();
@@ -38892,16 +39147,16 @@ var init_XmlShapeDeserializer = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/query/QueryShapeSerializer.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/query/QueryShapeSerializer.js
 var QueryShapeSerializer;
 var init_QueryShapeSerializer = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/query/QueryShapeSerializer.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/query/QueryShapeSerializer.js"() {
     init_protocols();
     init_schema();
     init_serde();
     init_serde();
-    init_ConfigurableSerdeContext();
-    QueryShapeSerializer = class extends SerdeContextConfig {
+    init_ConfigurableSerdeContext2();
+    QueryShapeSerializer = class extends SerdeContextConfig2 {
       settings;
       buffer;
       constructor(settings) {
@@ -39072,10 +39327,10 @@ var init_QueryShapeSerializer = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/query/AwsQueryProtocol.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/query/AwsQueryProtocol.js
 var AwsQueryProtocol;
 var init_AwsQueryProtocol = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/query/AwsQueryProtocol.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/query/AwsQueryProtocol.js"() {
     init_protocols();
     init_schema();
     init_ProtocolLib();
@@ -39212,10 +39467,10 @@ var init_AwsQueryProtocol = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/query/AwsEc2QueryProtocol.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/query/AwsEc2QueryProtocol.js
 var AwsEc2QueryProtocol;
 var init_AwsEc2QueryProtocol = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/query/AwsEc2QueryProtocol.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/query/AwsEc2QueryProtocol.js"() {
     init_AwsQueryProtocol();
     AwsEc2QueryProtocol = class extends AwsQueryProtocol {
       options;
@@ -39240,14 +39495,24 @@ var init_AwsEc2QueryProtocol = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/parseXmlBody.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/common.js
+var collectBodyString2;
+var init_common2 = __esm({
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/common.js"() {
+    init_protocols();
+    init_serde();
+    collectBodyString2 = (streamBody, context) => collectBody(streamBody, context).then((body) => (context?.utf8Encoder ?? toUtf8)(body));
+  }
+});
+
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/parseXmlBody.js
 var import_xml_builder2, parseXmlBody, parseXmlErrorBody, loadRestXmlErrorCode;
 var init_parseXmlBody = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/parseXmlBody.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/parseXmlBody.js"() {
     import_xml_builder2 = __toESM(require_dist_cjs7());
     init_client2();
-    init_common();
-    parseXmlBody = (streamBody, context) => collectBodyString(streamBody, context).then((encoded) => {
+    init_common2();
+    parseXmlBody = (streamBody, context) => collectBodyString2(streamBody, context).then((encoded) => {
       if (encoded.length) {
         let parsedObj;
         try {
@@ -39292,17 +39557,17 @@ var init_parseXmlBody = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/XmlShapeSerializer.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/XmlShapeSerializer.js
 var import_xml_builder3, XmlShapeSerializer;
 var init_XmlShapeSerializer = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/XmlShapeSerializer.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/XmlShapeSerializer.js"() {
     import_xml_builder3 = __toESM(require_dist_cjs7());
     init_protocols();
     init_schema();
     init_serde();
     init_serde();
-    init_ConfigurableSerdeContext();
-    XmlShapeSerializer = class extends SerdeContextConfig {
+    init_ConfigurableSerdeContext2();
+    XmlShapeSerializer = class extends SerdeContextConfig2 {
       settings;
       stringBuffer;
       byteBuffer;
@@ -39570,14 +39835,14 @@ var init_XmlShapeSerializer = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/XmlCodec.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/XmlCodec.js
 var XmlCodec;
 var init_XmlCodec = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/XmlCodec.js"() {
-    init_ConfigurableSerdeContext();
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/XmlCodec.js"() {
+    init_ConfigurableSerdeContext2();
     init_XmlShapeDeserializer();
     init_XmlShapeSerializer();
-    XmlCodec = class extends SerdeContextConfig {
+    XmlCodec = class extends SerdeContextConfig2 {
       settings;
       constructor(settings) {
         super();
@@ -39597,10 +39862,10 @@ var init_XmlCodec = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/AwsRestXmlProtocol.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/AwsRestXmlProtocol.js
 var AwsRestXmlProtocol;
 var init_AwsRestXmlProtocol = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/AwsRestXmlProtocol.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/xml/AwsRestXmlProtocol.js"() {
     init_protocols();
     init_schema();
     init_ProtocolLib();
@@ -39696,10 +39961,10 @@ var init_AwsRestXmlProtocol = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/awsExpectUnion.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/awsExpectUnion.js
 var awsExpectUnion;
 var init_awsExpectUnion = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/awsExpectUnion.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/json/awsExpectUnion.js"() {
     init_serde();
     awsExpectUnion = (value) => {
       if (value == null) {
@@ -39713,10 +39978,10 @@ var init_awsExpectUnion = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/coercing-serializers.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/coercing-serializers.js
 var _toStr, _toBool, _toNum;
 var init_coercing_serializers = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/coercing-serializers.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/coercing-serializers.js"() {
     _toStr = (val) => {
       if (val == null) {
         return val;
@@ -39773,7 +40038,7 @@ var init_coercing_serializers = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/index.js
+// ../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/index.js
 var protocols_exports2 = {};
 __export(protocols_exports2, {
   AwsEc2QueryProtocol: () => AwsEc2QueryProtocol,
@@ -39807,19 +40072,13 @@ __export(protocols_exports2, {
   parseXmlErrorBody: () => parseXmlErrorBody
 });
 var init_protocols2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+core@3.978.1/node_modules/@aws-sdk/core/dist-es/submodules/protocols/index.js"() {
+  "../node_modules/.pnpm/@aws-sdk+core@3.978.5/node_modules/@aws-sdk/core/dist-es/submodules/protocols/index.js"() {
     init_AwsSmithyRpcV2CborProtocol();
     init_AwsJson1_0Protocol();
     init_AwsJson1_1Protocol();
     init_AwsJsonRpcProtocol();
     init_AwsRestJsonProtocol();
-    init_JsonCodec();
-    init_JsonShapeDeserializer();
-    init_JsonShapeSerializer();
-    init_JsonCodec2();
-    init_JsonShapeDeserializer2();
-    init_JsonShapeSerializer2();
-    init_parseJsonBody();
+    init_protocols();
     init_AwsEc2QueryProtocol();
     init_AwsQueryProtocol();
     init_QueryShapeSerializer();
@@ -39833,10 +40092,10 @@ var init_protocols2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/endpoint/bdd.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/endpoint/bdd.js
 var k, a, b, c, d, e, f, g, h, i, j, _data, root, r, nodes, bdd;
 var init_bdd = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/endpoint/bdd.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/endpoint/bdd.js"() {
     init_endpoints();
     k = "ref";
     a = -1;
@@ -39926,10 +40185,10 @@ var init_bdd = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/endpoint/endpointResolver.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/endpoint/endpointResolver.js
 var cache, defaultEndpointResolver;
 var init_endpointResolver = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/endpoint/endpointResolver.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/endpoint/endpointResolver.js"() {
     init_client3();
     init_endpoints();
     init_bdd();
@@ -39947,12 +40206,13 @@ var init_endpointResolver = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/SSOOIDCServiceException.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/SSOOIDCServiceException.js
 var SSOOIDCServiceException;
 var init_SSOOIDCServiceException = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/SSOOIDCServiceException.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/SSOOIDCServiceException.js"() {
     init_client2();
     SSOOIDCServiceException = class _SSOOIDCServiceException extends ServiceException {
+      static shapeId = "smithy.ts.sdk.synthetic.com.amazonaws.ssooidc#SSOOIDCServiceException";
       constructor(options) {
         super(options);
         Object.setPrototypeOf(this, _SSOOIDCServiceException.prototype);
@@ -39961,12 +40221,13 @@ var init_SSOOIDCServiceException = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/errors.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/errors.js
 var AccessDeniedException, AuthorizationPendingException, ExpiredTokenException, InternalServerException, InvalidClientException, InvalidGrantException, InvalidRequestException, InvalidScopeException, SlowDownException, UnauthorizedClientException, UnsupportedGrantTypeException;
 var init_errors = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/errors.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/errors.js"() {
     init_SSOOIDCServiceException();
     AccessDeniedException = class _AccessDeniedException extends SSOOIDCServiceException {
+      static shapeId = "com.amazonaws.ssooidc#AccessDeniedException";
       name = "AccessDeniedException";
       $fault = "client";
       error;
@@ -39985,6 +40246,7 @@ var init_errors = __esm({
       }
     };
     AuthorizationPendingException = class _AuthorizationPendingException extends SSOOIDCServiceException {
+      static shapeId = "com.amazonaws.ssooidc#AuthorizationPendingException";
       name = "AuthorizationPendingException";
       $fault = "client";
       error;
@@ -40001,6 +40263,7 @@ var init_errors = __esm({
       }
     };
     ExpiredTokenException = class _ExpiredTokenException extends SSOOIDCServiceException {
+      static shapeId = "com.amazonaws.ssooidc#ExpiredTokenException";
       name = "ExpiredTokenException";
       $fault = "client";
       error;
@@ -40017,6 +40280,7 @@ var init_errors = __esm({
       }
     };
     InternalServerException = class _InternalServerException extends SSOOIDCServiceException {
+      static shapeId = "com.amazonaws.ssooidc#InternalServerException";
       name = "InternalServerException";
       $fault = "server";
       error;
@@ -40033,6 +40297,7 @@ var init_errors = __esm({
       }
     };
     InvalidClientException = class _InvalidClientException extends SSOOIDCServiceException {
+      static shapeId = "com.amazonaws.ssooidc#InvalidClientException";
       name = "InvalidClientException";
       $fault = "client";
       error;
@@ -40049,6 +40314,7 @@ var init_errors = __esm({
       }
     };
     InvalidGrantException = class _InvalidGrantException extends SSOOIDCServiceException {
+      static shapeId = "com.amazonaws.ssooidc#InvalidGrantException";
       name = "InvalidGrantException";
       $fault = "client";
       error;
@@ -40065,6 +40331,7 @@ var init_errors = __esm({
       }
     };
     InvalidRequestException = class _InvalidRequestException extends SSOOIDCServiceException {
+      static shapeId = "com.amazonaws.ssooidc#InvalidRequestException";
       name = "InvalidRequestException";
       $fault = "client";
       error;
@@ -40083,6 +40350,7 @@ var init_errors = __esm({
       }
     };
     InvalidScopeException = class _InvalidScopeException extends SSOOIDCServiceException {
+      static shapeId = "com.amazonaws.ssooidc#InvalidScopeException";
       name = "InvalidScopeException";
       $fault = "client";
       error;
@@ -40099,6 +40367,7 @@ var init_errors = __esm({
       }
     };
     SlowDownException = class _SlowDownException extends SSOOIDCServiceException {
+      static shapeId = "com.amazonaws.ssooidc#SlowDownException";
       name = "SlowDownException";
       $fault = "client";
       error;
@@ -40115,6 +40384,7 @@ var init_errors = __esm({
       }
     };
     UnauthorizedClientException = class _UnauthorizedClientException extends SSOOIDCServiceException {
+      static shapeId = "com.amazonaws.ssooidc#UnauthorizedClientException";
       name = "UnauthorizedClientException";
       $fault = "client";
       error;
@@ -40131,6 +40401,7 @@ var init_errors = __esm({
       }
     };
     UnsupportedGrantTypeException = class _UnsupportedGrantTypeException extends SSOOIDCServiceException {
+      static shapeId = "com.amazonaws.ssooidc#UnsupportedGrantTypeException";
       name = "UnsupportedGrantTypeException";
       $fault = "client";
       error;
@@ -40149,10 +40420,10 @@ var init_errors = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/schemas/schemas_0.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/schemas/schemas_0.js
 var _ADE, _APE, _AT, _CS, _CT, _CTR, _CTRr, _CV, _ETE, _ICE, _IGE, _IRE, _ISE, _ISEn, _IT, _RT, _SDE, _UCE, _UGTE, _aT, _c, _cI, _cS, _cV, _co, _dC, _e, _eI, _ed, _gT, _h, _hE, _iT, _r, _rT, _rU, _s, _sc, _se, _tT, n0, _s_registry, SSOOIDCServiceException$, n0_registry, AccessDeniedException$, AuthorizationPendingException$, ExpiredTokenException$, InternalServerException$, InvalidClientException$, InvalidGrantException$, InvalidRequestException$, InvalidScopeException$, SlowDownException$, UnauthorizedClientException$, UnsupportedGrantTypeException$, errorTypeRegistries, AccessToken, ClientSecret, CodeVerifier, IdToken, RefreshToken, CreateTokenRequest$, CreateTokenResponse$, Scopes, CreateToken$;
 var init_schemas_0 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/schemas/schemas_0.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/schemas/schemas_0.js"() {
     init_schema();
     init_errors();
     init_SSOOIDCServiceException();
@@ -40338,10 +40609,10 @@ var init_schemas_0 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/runtimeConfig.shared.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/runtimeConfig.shared.js
 var getRuntimeConfig;
 var init_runtimeConfig_shared = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/runtimeConfig.shared.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/runtimeConfig.shared.js"() {
     init_httpAuthSchemes2();
     init_protocols2();
     init_dist_es();
@@ -40391,10 +40662,10 @@ var init_runtimeConfig_shared = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/runtimeConfig.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/runtimeConfig.js
 var import_node_http_handler, getRuntimeConfig2;
 var init_runtimeConfig = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/runtimeConfig.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/runtimeConfig.js"() {
     init_package();
     init_client3();
     init_httpAuthSchemes2();
@@ -40438,10 +40709,10 @@ var init_runtimeConfig = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/auth/httpAuthExtensionConfiguration.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/auth/httpAuthExtensionConfiguration.js
 var getHttpAuthExtensionConfiguration, resolveHttpAuthRuntimeConfig;
 var init_httpAuthExtensionConfiguration = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/auth/httpAuthExtensionConfiguration.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/auth/httpAuthExtensionConfiguration.js"() {
     getHttpAuthExtensionConfiguration = (runtimeConfig) => {
       const _httpAuthSchemes = runtimeConfig.httpAuthSchemes;
       let _httpAuthSchemeProvider = runtimeConfig.httpAuthSchemeProvider;
@@ -40482,10 +40753,10 @@ var init_httpAuthExtensionConfiguration = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/runtimeExtensions.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/runtimeExtensions.js
 var resolveRuntimeExtensions;
 var init_runtimeExtensions = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/runtimeExtensions.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/runtimeExtensions.js"() {
     init_client3();
     init_client2();
     init_protocols();
@@ -40498,10 +40769,10 @@ var init_runtimeExtensions = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/SSOOIDCClient.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/SSOOIDCClient.js
 var SSOOIDCClient;
 var init_SSOOIDCClient = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/SSOOIDCClient.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/SSOOIDCClient.js"() {
     init_client3();
     init_dist_es();
     init_client2();
@@ -40551,10 +40822,10 @@ var init_SSOOIDCClient = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/commandBuilder.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/commandBuilder.js
 var command, _ep0, _mw0;
 var init_commandBuilder = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/commandBuilder.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/commandBuilder.js"() {
     init_client2();
     init_endpoints();
     init_EndpointParameters();
@@ -40564,10 +40835,10 @@ var init_commandBuilder = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/commands/CreateTokenCommand.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/commands/CreateTokenCommand.js
 var CreateTokenCommand;
 var init_CreateTokenCommand = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/commands/CreateTokenCommand.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/commands/CreateTokenCommand.js"() {
     init_commandBuilder();
     init_schemas_0();
     CreateTokenCommand = class extends command(_ep0, _mw0, "CreateToken", CreateToken$) {
@@ -40575,10 +40846,10 @@ var init_CreateTokenCommand = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/SSOOIDC.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/SSOOIDC.js
 var commands, SSOOIDC;
 var init_SSOOIDC = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/SSOOIDC.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/SSOOIDC.js"() {
     init_client2();
     init_CreateTokenCommand();
     init_SSOOIDCClient();
@@ -40591,17 +40862,17 @@ var init_SSOOIDC = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/commands/index.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/commands/index.js
 var init_commands = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/commands/index.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/commands/index.js"() {
     init_CreateTokenCommand();
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/enums.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/enums.js
 var AccessDeniedExceptionReason, InvalidRequestExceptionReason;
 var init_enums = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/enums.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/enums.js"() {
     AccessDeniedExceptionReason = {
       KMS_ACCESS_DENIED: "KMS_AccessDeniedException"
     };
@@ -40614,13 +40885,13 @@ var init_enums = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/models_0.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/models_0.js
 var init_models_0 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/models_0.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/models/models_0.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/index.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/index.js
 var sso_oidc_exports = {};
 __export(sso_oidc_exports, {
   $Command: () => Command2,
@@ -40660,7 +40931,7 @@ __export(sso_oidc_exports, {
   errorTypeRegistries: () => errorTypeRegistries
 });
 var init_sso_oidc = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/index.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso-oidc/index.js"() {
     init_SSOOIDCClient();
     init_SSOOIDC();
     init_commands();
@@ -40673,9 +40944,9 @@ var init_sso_oidc = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+token-providers@3.1138.0/node_modules/@aws-sdk/token-providers/dist-cjs/index.js
+// ../node_modules/.pnpm/@aws-sdk+token-providers@3.1155.0/node_modules/@aws-sdk/token-providers/dist-cjs/index.js
 var require_dist_cjs8 = __commonJS({
-  "../node_modules/.pnpm/@aws-sdk+token-providers@3.1138.0/node_modules/@aws-sdk/token-providers/dist-cjs/index.js"(exports2) {
+  "../node_modules/.pnpm/@aws-sdk+token-providers@3.1155.0/node_modules/@aws-sdk/token-providers/dist-cjs/index.js"(exports2) {
     var { setTokenFeature: setTokenFeature2 } = (init_client3(), __toCommonJS(client_exports2));
     var { getBearerTokenEnvKey: getBearerTokenEnvKey2 } = (init_httpAuthSchemes2(), __toCommonJS(httpAuthSchemes_exports));
     var { TokenProviderError: TokenProviderError2, getSSOTokenFilepath: getSSOTokenFilepath2, parseKnownFiles: parseKnownFiles2, getProfileName: getProfileName2, loadSsoSessionData: loadSsoSessionData2, getSSOTokenFromFile: getSSOTokenFromFile2, memoize: memoize2, chain: chain2 } = (init_config2(), __toCommonJS(config_exports));
@@ -40732,6 +41003,7 @@ var require_dist_cjs8 = __commonJS({
       return writeFile2(tokenFilepath, tokenString);
     };
     var lastRefreshAttemptTimes = /* @__PURE__ */ new Map();
+    var inFlightRefreshes = /* @__PURE__ */ new Map();
     var fromSso = (init = {}) => async ({ callerClientConfig } = {}) => {
       init.logger?.debug("@aws-sdk/token-providers - fromSso");
       const profiles = await parseKnownFiles2(init);
@@ -40745,6 +41017,10 @@ var require_dist_cjs8 = __commonJS({
         throw new TokenProviderError2(`Profile '${profileName}' is missing required property 'sso_session'.`);
       }
       const ssoSessionName = profile["sso_session"];
+      const inFlightRefresh = inFlightRefreshes.get(ssoSessionName);
+      if (inFlightRefresh) {
+        return await inFlightRefresh;
+      }
       const ssoSessions = await loadSsoSessionData2(init);
       const ssoSession = ssoSessions[ssoSessionName];
       if (!ssoSession) {
@@ -40773,6 +41049,10 @@ var require_dist_cjs8 = __commonJS({
       if (existingToken.expiration.getTime() - Date.now() > EXPIRE_WINDOW_MS) {
         return existingToken;
       }
+      const inFlightRefreshAfterReadingToken = inFlightRefreshes.get(ssoSessionName);
+      if (inFlightRefreshAfterReadingToken) {
+        return await inFlightRefreshAfterReadingToken;
+      }
       const lastRefreshAttemptTime = lastRefreshAttemptTimes.get(ssoSessionName) ?? 0;
       if (Date.now() - lastRefreshAttemptTime < 30 * 1e3) {
         validateTokenExpiry(existingToken);
@@ -40781,28 +41061,36 @@ var require_dist_cjs8 = __commonJS({
       validateTokenKey("clientId", ssoToken.clientId, true);
       validateTokenKey("clientSecret", ssoToken.clientSecret, true);
       validateTokenKey("refreshToken", ssoToken.refreshToken, true);
-      try {
-        lastRefreshAttemptTimes.set(ssoSessionName, Date.now());
-        const newSsoOidcToken = await getNewSsoOidcToken(ssoToken, ssoRegion, init, callerClientConfig);
-        validateTokenKey("accessToken", newSsoOidcToken.accessToken);
-        validateTokenKey("expiresIn", newSsoOidcToken.expiresIn);
-        const newTokenExpiration = new Date(Date.now() + newSsoOidcToken.expiresIn * 1e3);
+      const refresh = (async () => {
         try {
-          await writeSSOTokenToFile(ssoSessionName, {
-            ...ssoToken,
-            accessToken: newSsoOidcToken.accessToken,
-            expiresAt: newTokenExpiration.toISOString(),
-            refreshToken: newSsoOidcToken.refreshToken
-          });
+          lastRefreshAttemptTimes.set(ssoSessionName, Date.now());
+          const newSsoOidcToken = await getNewSsoOidcToken(ssoToken, ssoRegion, init, callerClientConfig);
+          validateTokenKey("accessToken", newSsoOidcToken.accessToken);
+          validateTokenKey("expiresIn", newSsoOidcToken.expiresIn);
+          const newTokenExpiration = new Date(Date.now() + newSsoOidcToken.expiresIn * 1e3);
+          try {
+            await writeSSOTokenToFile(ssoSessionName, {
+              ...ssoToken,
+              accessToken: newSsoOidcToken.accessToken,
+              expiresAt: newTokenExpiration.toISOString(),
+              refreshToken: newSsoOidcToken.refreshToken
+            });
+          } catch (error64) {
+          }
+          return {
+            token: newSsoOidcToken.accessToken,
+            expiration: newTokenExpiration
+          };
         } catch (error64) {
+          validateTokenExpiry(existingToken);
+          return existingToken;
         }
-        return {
-          token: newSsoOidcToken.accessToken,
-          expiration: newTokenExpiration
-        };
-      } catch (error64) {
-        validateTokenExpiry(existingToken);
-        return existingToken;
+      })();
+      inFlightRefreshes.set(ssoSessionName, refresh);
+      try {
+        return await refresh;
+      } finally {
+        inFlightRefreshes.delete(ssoSessionName);
       }
     };
     var fromStatic2 = ({ token, logger: logger2 }) => async () => {
@@ -40822,7 +41110,7 @@ var require_dist_cjs8 = __commonJS({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/auth/httpAuthSchemeProvider.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/auth/httpAuthSchemeProvider.js
 function createAwsAuthSigv4HttpAuthOption2(authParameters) {
   return {
     schemeId: "aws.auth#sigv4",
@@ -40845,7 +41133,7 @@ function createSmithyApiNoAuthHttpAuthOption2(authParameters) {
 }
 var defaultSSOHttpAuthSchemeParametersProvider, defaultSSOHttpAuthSchemeProvider, resolveHttpAuthSchemeConfig2;
 var init_httpAuthSchemeProvider2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/auth/httpAuthSchemeProvider.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/auth/httpAuthSchemeProvider.js"() {
     init_httpAuthSchemes2();
     init_client2();
     defaultSSOHttpAuthSchemeParametersProvider = async (config2, context, input2) => {
@@ -40880,10 +41168,10 @@ var init_httpAuthSchemeProvider2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/endpoint/EndpointParameters.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/endpoint/EndpointParameters.js
 var resolveClientEndpointParameters2, commonParams2;
 var init_EndpointParameters2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/endpoint/EndpointParameters.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/endpoint/EndpointParameters.js"() {
     resolveClientEndpointParameters2 = (options) => {
       return Object.assign(options, {
         useDualstackEndpoint: options.useDualstackEndpoint ?? false,
@@ -40900,10 +41188,10 @@ var init_EndpointParameters2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/endpoint/bdd.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/endpoint/bdd.js
 var k2, a2, b2, c2, d2, e2, f2, g2, h2, i2, j2, _data2, root2, r2, nodes2, bdd2;
 var init_bdd2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/endpoint/bdd.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/endpoint/bdd.js"() {
     init_endpoints();
     k2 = "ref";
     a2 = -1;
@@ -40993,10 +41281,10 @@ var init_bdd2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/endpoint/endpointResolver.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/endpoint/endpointResolver.js
 var cache2, defaultEndpointResolver2;
 var init_endpointResolver2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/endpoint/endpointResolver.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/endpoint/endpointResolver.js"() {
     init_client3();
     init_endpoints();
     init_bdd2();
@@ -41014,12 +41302,13 @@ var init_endpointResolver2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/models/SSOServiceException.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/models/SSOServiceException.js
 var SSOServiceException;
 var init_SSOServiceException = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/models/SSOServiceException.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/models/SSOServiceException.js"() {
     init_client2();
     SSOServiceException = class _SSOServiceException extends ServiceException {
+      static shapeId = "smithy.ts.sdk.synthetic.com.amazonaws.sso#SSOServiceException";
       constructor(options) {
         super(options);
         Object.setPrototypeOf(this, _SSOServiceException.prototype);
@@ -41028,12 +41317,13 @@ var init_SSOServiceException = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/models/errors.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/models/errors.js
 var InvalidRequestException2, ResourceNotFoundException, TooManyRequestsException, UnauthorizedException;
 var init_errors2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/models/errors.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/models/errors.js"() {
     init_SSOServiceException();
     InvalidRequestException2 = class _InvalidRequestException extends SSOServiceException {
+      static shapeId = "com.amazonaws.sso#InvalidRequestException";
       name = "InvalidRequestException";
       $fault = "client";
       constructor(opts) {
@@ -41046,6 +41336,7 @@ var init_errors2 = __esm({
       }
     };
     ResourceNotFoundException = class _ResourceNotFoundException extends SSOServiceException {
+      static shapeId = "com.amazonaws.sso#ResourceNotFoundException";
       name = "ResourceNotFoundException";
       $fault = "client";
       constructor(opts) {
@@ -41058,6 +41349,7 @@ var init_errors2 = __esm({
       }
     };
     TooManyRequestsException = class _TooManyRequestsException extends SSOServiceException {
+      static shapeId = "com.amazonaws.sso#TooManyRequestsException";
       name = "TooManyRequestsException";
       $fault = "client";
       constructor(opts) {
@@ -41070,6 +41362,7 @@ var init_errors2 = __esm({
       }
     };
     UnauthorizedException = class _UnauthorizedException extends SSOServiceException {
+      static shapeId = "com.amazonaws.sso#UnauthorizedException";
       name = "UnauthorizedException";
       $fault = "client";
       constructor(opts) {
@@ -41084,10 +41377,10 @@ var init_errors2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/schemas/schemas_0.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/schemas/schemas_0.js
 var _ATT, _GRC, _GRCR, _GRCRe, _IRE2, _RC, _RNFE, _SAKT, _STT, _TMRE, _UE, _aI, _aKI, _aT2, _ai, _c2, _e2, _ex, _h2, _hE2, _hH, _hQ, _m, _rC, _rN, _rn, _s2, _sAK, _sT, _xasbt, n02, _s_registry2, SSOServiceException$, n0_registry2, InvalidRequestException$2, ResourceNotFoundException$, TooManyRequestsException$, UnauthorizedException$, errorTypeRegistries2, AccessTokenType, SecretAccessKeyType, SessionTokenType, GetRoleCredentialsRequest$, GetRoleCredentialsResponse$, RoleCredentials$, GetRoleCredentials$;
 var init_schemas_02 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/schemas/schemas_0.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/schemas/schemas_0.js"() {
     init_schema();
     init_errors2();
     init_SSOServiceException();
@@ -41205,10 +41498,10 @@ var init_schemas_02 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/runtimeConfig.shared.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/runtimeConfig.shared.js
 var getRuntimeConfig3;
 var init_runtimeConfig_shared2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/runtimeConfig.shared.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/runtimeConfig.shared.js"() {
     init_httpAuthSchemes2();
     init_protocols2();
     init_dist_es();
@@ -41258,10 +41551,10 @@ var init_runtimeConfig_shared2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/runtimeConfig.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/runtimeConfig.js
 var import_node_http_handler2, getRuntimeConfig4;
 var init_runtimeConfig2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/runtimeConfig.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/runtimeConfig.js"() {
     init_package();
     init_client3();
     init_httpAuthSchemes2();
@@ -41305,10 +41598,10 @@ var init_runtimeConfig2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/auth/httpAuthExtensionConfiguration.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/auth/httpAuthExtensionConfiguration.js
 var getHttpAuthExtensionConfiguration2, resolveHttpAuthRuntimeConfig2;
 var init_httpAuthExtensionConfiguration2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/auth/httpAuthExtensionConfiguration.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/auth/httpAuthExtensionConfiguration.js"() {
     getHttpAuthExtensionConfiguration2 = (runtimeConfig) => {
       const _httpAuthSchemes = runtimeConfig.httpAuthSchemes;
       let _httpAuthSchemeProvider = runtimeConfig.httpAuthSchemeProvider;
@@ -41349,10 +41642,10 @@ var init_httpAuthExtensionConfiguration2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/runtimeExtensions.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/runtimeExtensions.js
 var resolveRuntimeExtensions2;
 var init_runtimeExtensions2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/runtimeExtensions.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/runtimeExtensions.js"() {
     init_client3();
     init_client2();
     init_protocols();
@@ -41365,10 +41658,10 @@ var init_runtimeExtensions2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/SSOClient.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/SSOClient.js
 var SSOClient;
 var init_SSOClient = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/SSOClient.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/SSOClient.js"() {
     init_client3();
     init_dist_es();
     init_client2();
@@ -41418,10 +41711,10 @@ var init_SSOClient = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/commandBuilder.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/commandBuilder.js
 var command2, _ep02, _mw02;
 var init_commandBuilder2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/commandBuilder.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/commandBuilder.js"() {
     init_client2();
     init_endpoints();
     init_EndpointParameters2();
@@ -41431,10 +41724,10 @@ var init_commandBuilder2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/commands/GetRoleCredentialsCommand.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/commands/GetRoleCredentialsCommand.js
 var GetRoleCredentialsCommand;
 var init_GetRoleCredentialsCommand = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/commands/GetRoleCredentialsCommand.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/commands/GetRoleCredentialsCommand.js"() {
     init_commandBuilder2();
     init_schemas_02();
     GetRoleCredentialsCommand = class extends command2(_ep02, _mw02, "GetRoleCredentials", GetRoleCredentials$) {
@@ -41442,10 +41735,10 @@ var init_GetRoleCredentialsCommand = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/SSO.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/SSO.js
 var commands2, SSO;
 var init_SSO = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/SSO.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/SSO.js"() {
     init_client2();
     init_GetRoleCredentialsCommand();
     init_SSOClient();
@@ -41458,20 +41751,20 @@ var init_SSO = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/commands/index.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/commands/index.js
 var init_commands2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/commands/index.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/commands/index.js"() {
     init_GetRoleCredentialsCommand();
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/models/models_0.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/models/models_0.js
 var init_models_02 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/models/models_0.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/models/models_0.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/index.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/index.js
 var sso_exports = {};
 __export(sso_exports, {
   $Command: () => Command2,
@@ -41496,7 +41789,7 @@ __export(sso_exports, {
   errorTypeRegistries: () => errorTypeRegistries2
 });
 var init_sso = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/index.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sso/index.js"() {
     init_SSOClient();
     init_SSO();
     init_commands2();
@@ -41508,18 +41801,18 @@ var init_sso = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+credential-provider-sso@3.973.16/node_modules/@aws-sdk/credential-provider-sso/dist-cjs/loadSso-BGYXHf8s.js
+// ../node_modules/.pnpm/@aws-sdk+credential-provider-sso@3.973.20/node_modules/@aws-sdk/credential-provider-sso/dist-cjs/loadSso-BGYXHf8s.js
 var require_loadSso_BGYXHf8s = __commonJS({
-  "../node_modules/.pnpm/@aws-sdk+credential-provider-sso@3.973.16/node_modules/@aws-sdk/credential-provider-sso/dist-cjs/loadSso-BGYXHf8s.js"(exports2) {
+  "../node_modules/.pnpm/@aws-sdk+credential-provider-sso@3.973.20/node_modules/@aws-sdk/credential-provider-sso/dist-cjs/loadSso-BGYXHf8s.js"(exports2) {
     var { GetRoleCredentialsCommand: GetRoleCredentialsCommand2, SSOClient: SSOClient2 } = (init_sso(), __toCommonJS(sso_exports));
     exports2.GetRoleCredentialsCommand = GetRoleCredentialsCommand2;
     exports2.SSOClient = SSOClient2;
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+credential-provider-sso@3.973.16/node_modules/@aws-sdk/credential-provider-sso/dist-cjs/index.js
+// ../node_modules/.pnpm/@aws-sdk+credential-provider-sso@3.973.20/node_modules/@aws-sdk/credential-provider-sso/dist-cjs/index.js
 var require_dist_cjs9 = __commonJS({
-  "../node_modules/.pnpm/@aws-sdk+credential-provider-sso@3.973.16/node_modules/@aws-sdk/credential-provider-sso/dist-cjs/index.js"(exports2) {
+  "../node_modules/.pnpm/@aws-sdk+credential-provider-sso@3.973.20/node_modules/@aws-sdk/credential-provider-sso/dist-cjs/index.js"(exports2) {
     var { CredentialsProviderError: CredentialsProviderError2, getSSOTokenFromFile: getSSOTokenFromFile2, getProfileName: getProfileName2, parseKnownFiles: parseKnownFiles2, loadSsoSessionData: loadSsoSessionData2 } = (init_config2(), __toCommonJS(config_exports));
     var { setCredentialFeature: setCredentialFeature2 } = (init_client3(), __toCommonJS(client_exports2));
     var { fromSso } = require_dist_cjs8();
@@ -41696,9 +41989,9 @@ Reference: https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.ht
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+signature-v4-multi-region@3.996.47/node_modules/@aws-sdk/signature-v4-multi-region/dist-cjs/index.js
+// ../node_modules/.pnpm/@aws-sdk+signature-v4-multi-region@3.996.49/node_modules/@aws-sdk/signature-v4-multi-region/dist-cjs/index.js
 var require_dist_cjs10 = __commonJS({
-  "../node_modules/.pnpm/@aws-sdk+signature-v4-multi-region@3.996.47/node_modules/@aws-sdk/signature-v4-multi-region/dist-cjs/index.js"(exports2) {
+  "../node_modules/.pnpm/@aws-sdk+signature-v4-multi-region@3.996.49/node_modules/@aws-sdk/signature-v4-multi-region/dist-cjs/index.js"(exports2) {
     var { SignatureV4: SignatureV42, signatureV4aContainer } = require_dist_cjs2();
     var signatureV4CrtContainer = {
       CrtSignerV4: null
@@ -41828,10 +42121,10 @@ var require_dist_cjs10 = __commonJS({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/endpoint/bdd.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/endpoint/bdd.js
 var q, a3, b3, c3, d3, e3, f3, g3, h3, i3, j3, k3, l, m, n, o, p, _data3, root3, r3, nodes3, bdd3;
 var init_bdd3 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/endpoint/bdd.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/endpoint/bdd.js"() {
     init_endpoints();
     q = "ref";
     a3 = -1;
@@ -41997,10 +42290,10 @@ var init_bdd3 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/endpoint/endpointResolver.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/endpoint/endpointResolver.js
 var cache3, defaultEndpointResolver3;
 var init_endpointResolver3 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/endpoint/endpointResolver.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/endpoint/endpointResolver.js"() {
     init_client3();
     init_endpoints();
     init_bdd3();
@@ -42018,7 +42311,7 @@ var init_endpointResolver3 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/auth/httpAuthSchemeProvider.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/auth/httpAuthSchemeProvider.js
 function createAwsAuthSigv4HttpAuthOption3(authParameters) {
   return {
     schemeId: "aws.auth#sigv4",
@@ -42056,7 +42349,7 @@ function createSmithyApiNoAuthHttpAuthOption3(authParameters) {
 }
 var import_signature_v4_multi_region, createEndpointRuleSetHttpAuthSchemeParametersProvider, _defaultSTSHttpAuthSchemeParametersProvider, defaultSTSHttpAuthSchemeParametersProvider, createEndpointRuleSetHttpAuthSchemeProvider, _defaultSTSHttpAuthSchemeProvider, defaultSTSHttpAuthSchemeProvider, resolveHttpAuthSchemeConfig3;
 var init_httpAuthSchemeProvider3 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/auth/httpAuthSchemeProvider.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/auth/httpAuthSchemeProvider.js"() {
     init_httpAuthSchemes2();
     import_signature_v4_multi_region = __toESM(require_dist_cjs10());
     init_client2();
@@ -42155,10 +42448,10 @@ var init_httpAuthSchemeProvider3 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/endpoint/EndpointParameters.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/endpoint/EndpointParameters.js
 var resolveClientEndpointParameters3, commonParams3;
 var init_EndpointParameters3 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/endpoint/EndpointParameters.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/endpoint/EndpointParameters.js"() {
     resolveClientEndpointParameters3 = (options) => {
       return Object.assign(options, {
         useDualstackEndpoint: options.useDualstackEndpoint ?? false,
@@ -42177,12 +42470,13 @@ var init_EndpointParameters3 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/models/STSServiceException.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/models/STSServiceException.js
 var STSServiceException;
 var init_STSServiceException = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/models/STSServiceException.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/models/STSServiceException.js"() {
     init_client2();
     STSServiceException = class _STSServiceException extends ServiceException {
+      static shapeId = "smithy.ts.sdk.synthetic.com.amazonaws.sts#STSServiceException";
       constructor(options) {
         super(options);
         Object.setPrototypeOf(this, _STSServiceException.prototype);
@@ -42191,12 +42485,13 @@ var init_STSServiceException = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/models/errors.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/models/errors.js
 var ExpiredTokenException2, MalformedPolicyDocumentException, PackedPolicyTooLargeException, RegionDisabledException, IDPRejectedClaimException, InvalidIdentityTokenException, IDPCommunicationErrorException;
 var init_errors3 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/models/errors.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/models/errors.js"() {
     init_STSServiceException();
     ExpiredTokenException2 = class _ExpiredTokenException extends STSServiceException {
+      static shapeId = "com.amazonaws.sts#ExpiredTokenException";
       name = "ExpiredTokenException";
       $fault = "client";
       constructor(opts) {
@@ -42209,6 +42504,7 @@ var init_errors3 = __esm({
       }
     };
     MalformedPolicyDocumentException = class _MalformedPolicyDocumentException extends STSServiceException {
+      static shapeId = "com.amazonaws.sts#MalformedPolicyDocumentException";
       name = "MalformedPolicyDocumentException";
       $fault = "client";
       constructor(opts) {
@@ -42221,6 +42517,7 @@ var init_errors3 = __esm({
       }
     };
     PackedPolicyTooLargeException = class _PackedPolicyTooLargeException extends STSServiceException {
+      static shapeId = "com.amazonaws.sts#PackedPolicyTooLargeException";
       name = "PackedPolicyTooLargeException";
       $fault = "client";
       constructor(opts) {
@@ -42233,6 +42530,7 @@ var init_errors3 = __esm({
       }
     };
     RegionDisabledException = class _RegionDisabledException extends STSServiceException {
+      static shapeId = "com.amazonaws.sts#RegionDisabledException";
       name = "RegionDisabledException";
       $fault = "client";
       constructor(opts) {
@@ -42245,6 +42543,7 @@ var init_errors3 = __esm({
       }
     };
     IDPRejectedClaimException = class _IDPRejectedClaimException extends STSServiceException {
+      static shapeId = "com.amazonaws.sts#IDPRejectedClaimException";
       name = "IDPRejectedClaimException";
       $fault = "client";
       constructor(opts) {
@@ -42257,6 +42556,7 @@ var init_errors3 = __esm({
       }
     };
     InvalidIdentityTokenException = class _InvalidIdentityTokenException extends STSServiceException {
+      static shapeId = "com.amazonaws.sts#InvalidIdentityTokenException";
       name = "InvalidIdentityTokenException";
       $fault = "client";
       constructor(opts) {
@@ -42269,6 +42569,7 @@ var init_errors3 = __esm({
       }
     };
     IDPCommunicationErrorException = class _IDPCommunicationErrorException extends STSServiceException {
+      static shapeId = "com.amazonaws.sts#IDPCommunicationErrorException";
       name = "IDPCommunicationErrorException";
       $fault = "client";
       $retryable = {};
@@ -42284,10 +42585,10 @@ var init_errors3 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/schemas/schemas_0.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/schemas/schemas_0.js
 var _A, _AKI, _AR, _ARI, _ARR, _ARRs, _ARU, _ARWWI, _ARWWIR, _ARWWIRs, _Au, _C, _CA, _DS, _E, _EI, _ETE2, _IDPCEE, _IDPRCE, _IITE, _K, _MPDE, _MSTS, _P, _PA, _PAr, _PC, _PCLT, _PCr, _PDT, _PI, _PPS, _PPTLE, _Pr, _RA, _RDE, _RSN, _SAK, _SFWIT, _SI, _SN, _ST, _STS, _STU, _T, _TC, _TTK, _Ta, _V, _WIT, _a, _aKST, _aQE, _c3, _cTT, _e3, _hE3, _m2, _pDLT, _s3, _tLT, n03, _s_registry3, STSServiceException$, n0_registry3, ExpiredTokenException$2, IDPCommunicationErrorException$, IDPRejectedClaimException$, InvalidIdentityTokenException$, MalformedPolicyDocumentException$, PackedPolicyTooLargeException$, RegionDisabledException$, errorTypeRegistries3, accessKeySecretType, clientTokenType, AssumedRoleUser$, AssumeRoleRequest$, AssumeRoleResponse$, AssumeRoleWithWebIdentityRequest$, AssumeRoleWithWebIdentityResponse$, Credentials$, PolicyDescriptorType$, ProvidedContext$, Tag$, policyDescriptorListType, ProvidedContextsListType, tagKeyListType, tagListType, AssumeRole$, AssumeRoleWithWebIdentity$;
 var init_schemas_03 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/schemas/schemas_0.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/schemas/schemas_0.js"() {
     init_schema();
     init_errors3();
     init_STSServiceException();
@@ -42544,10 +42845,10 @@ var init_schemas_03 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/runtimeConfig.shared.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/runtimeConfig.shared.js
 var import_signature_v4_multi_region2, getRuntimeConfig5;
 var init_runtimeConfig_shared3 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/runtimeConfig.shared.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/runtimeConfig.shared.js"() {
     init_httpAuthSchemes2();
     init_protocols2();
     import_signature_v4_multi_region2 = __toESM(require_dist_cjs10());
@@ -42605,10 +42906,10 @@ var init_runtimeConfig_shared3 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/runtimeConfig.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/runtimeConfig.js
 var import_node_http_handler3, getRuntimeConfig6;
 var init_runtimeConfig3 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/runtimeConfig.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/runtimeConfig.js"() {
     init_package();
     init_client3();
     init_httpAuthSchemes2();
@@ -42671,10 +42972,10 @@ var init_runtimeConfig3 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/auth/httpAuthExtensionConfiguration.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/auth/httpAuthExtensionConfiguration.js
 var getHttpAuthExtensionConfiguration3, resolveHttpAuthRuntimeConfig3;
 var init_httpAuthExtensionConfiguration3 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/auth/httpAuthExtensionConfiguration.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/auth/httpAuthExtensionConfiguration.js"() {
     getHttpAuthExtensionConfiguration3 = (runtimeConfig) => {
       const _httpAuthSchemes = runtimeConfig.httpAuthSchemes;
       let _httpAuthSchemeProvider = runtimeConfig.httpAuthSchemeProvider;
@@ -42715,10 +43016,10 @@ var init_httpAuthExtensionConfiguration3 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/runtimeExtensions.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/runtimeExtensions.js
 var resolveRuntimeExtensions3;
 var init_runtimeExtensions3 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/runtimeExtensions.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/runtimeExtensions.js"() {
     init_client3();
     init_client2();
     init_protocols();
@@ -42731,10 +43032,10 @@ var init_runtimeExtensions3 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/STSClient.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/STSClient.js
 var STSClient;
 var init_STSClient = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/STSClient.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/STSClient.js"() {
     init_client3();
     init_dist_es();
     init_client2();
@@ -42785,10 +43086,10 @@ var init_STSClient = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commandBuilder.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commandBuilder.js
 var command3, _ep03, _mw03;
 var init_commandBuilder3 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commandBuilder.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commandBuilder.js"() {
     init_client2();
     init_endpoints();
     init_EndpointParameters3();
@@ -42798,10 +43099,10 @@ var init_commandBuilder3 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commands/AssumeRoleCommand.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commands/AssumeRoleCommand.js
 var AssumeRoleCommand;
 var init_AssumeRoleCommand = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commands/AssumeRoleCommand.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commands/AssumeRoleCommand.js"() {
     init_commandBuilder3();
     init_schemas_03();
     AssumeRoleCommand = class extends command3(_ep03, _mw03, "AssumeRole", AssumeRole$) {
@@ -42809,10 +43110,10 @@ var init_AssumeRoleCommand = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commands/AssumeRoleWithWebIdentityCommand.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commands/AssumeRoleWithWebIdentityCommand.js
 var AssumeRoleWithWebIdentityCommand;
 var init_AssumeRoleWithWebIdentityCommand = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commands/AssumeRoleWithWebIdentityCommand.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commands/AssumeRoleWithWebIdentityCommand.js"() {
     init_commandBuilder3();
     init_schemas_03();
     AssumeRoleWithWebIdentityCommand = class extends command3(_ep03, _mw03, "AssumeRoleWithWebIdentity", AssumeRoleWithWebIdentity$) {
@@ -42820,10 +43121,10 @@ var init_AssumeRoleWithWebIdentityCommand = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/STS.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/STS.js
 var commands3, STS;
 var init_STS = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/STS.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/STS.js"() {
     init_client2();
     init_AssumeRoleCommand();
     init_AssumeRoleWithWebIdentityCommand();
@@ -42838,24 +43139,24 @@ var init_STS = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commands/index.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commands/index.js
 var init_commands3 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commands/index.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/commands/index.js"() {
     init_AssumeRoleCommand();
     init_AssumeRoleWithWebIdentityCommand();
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/models/models_0.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/models/models_0.js
 var init_models_03 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/models/models_0.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/models/models_0.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/defaultStsRoleAssumers.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/defaultStsRoleAssumers.js
 var getAccountIdFromAssumedRoleUser, resolveRegion, getDefaultRoleAssumer, getDefaultRoleAssumerWithWebIdentity, isH2;
 var init_defaultStsRoleAssumers = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/defaultStsRoleAssumers.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/defaultStsRoleAssumers.js"() {
     init_client3();
     init_AssumeRoleCommand();
     init_AssumeRoleWithWebIdentityCommand();
@@ -42960,10 +43261,10 @@ var init_defaultStsRoleAssumers = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/defaultRoleAssumers.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/defaultRoleAssumers.js
 var getCustomizableStsClientCtor, getDefaultRoleAssumer2, getDefaultRoleAssumerWithWebIdentity2, decorateDefaultCredentialProvider;
 var init_defaultRoleAssumers = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/defaultRoleAssumers.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/defaultRoleAssumers.js"() {
     init_defaultStsRoleAssumers();
     init_STSClient();
     getCustomizableStsClientCtor = (baseCtor, customizations) => {
@@ -42989,7 +43290,7 @@ var init_defaultRoleAssumers = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/index.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/index.js
 var sts_exports = {};
 __export(sts_exports, {
   $Command: () => Command2,
@@ -43031,7 +43332,7 @@ __export(sts_exports, {
   getDefaultRoleAssumerWithWebIdentity: () => getDefaultRoleAssumerWithWebIdentity2
 });
 var init_sts = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/index.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/sts/index.js"() {
     init_STSClient();
     init_STS();
     init_commands3();
@@ -43044,7 +43345,7 @@ var init_sts = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/auth/httpAuthSchemeProvider.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/auth/httpAuthSchemeProvider.js
 function createAwsAuthSigv4HttpAuthOption4(authParameters) {
   return {
     schemeId: "aws.auth#sigv4",
@@ -43067,7 +43368,7 @@ function createSmithyApiNoAuthHttpAuthOption4(authParameters) {
 }
 var defaultSigninHttpAuthSchemeParametersProvider, defaultSigninHttpAuthSchemeProvider, resolveHttpAuthSchemeConfig4;
 var init_httpAuthSchemeProvider4 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/auth/httpAuthSchemeProvider.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/auth/httpAuthSchemeProvider.js"() {
     init_httpAuthSchemes2();
     init_client2();
     defaultSigninHttpAuthSchemeParametersProvider = async (config2, context, input2) => {
@@ -43102,10 +43403,10 @@ var init_httpAuthSchemeProvider4 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/endpoint/EndpointParameters.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/endpoint/EndpointParameters.js
 var resolveClientEndpointParameters4, commonParams4;
 var init_EndpointParameters4 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/endpoint/EndpointParameters.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/endpoint/EndpointParameters.js"() {
     resolveClientEndpointParameters4 = (options) => {
       return Object.assign(options, {
         useDualstackEndpoint: options.useDualstackEndpoint ?? false,
@@ -43122,10 +43423,10 @@ var init_EndpointParameters4 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/endpoint/bdd.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/endpoint/bdd.js
 var s, a4, b4, c4, d4, e4, f4, g4, h4, i4, j4, k4, l2, m2, n2, o2, p2, q2, _data4, root4, r4, nodes4, bdd4;
 var init_bdd4 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/endpoint/bdd.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/endpoint/bdd.js"() {
     init_endpoints();
     s = "ref";
     a4 = -1;
@@ -43325,10 +43626,10 @@ var init_bdd4 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/endpoint/endpointResolver.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/endpoint/endpointResolver.js
 var cache4, defaultEndpointResolver4;
 var init_endpointResolver4 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/endpoint/endpointResolver.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/endpoint/endpointResolver.js"() {
     init_client3();
     init_endpoints();
     init_bdd4();
@@ -43346,12 +43647,13 @@ var init_endpointResolver4 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/SigninServiceException.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/SigninServiceException.js
 var SigninServiceException;
 var init_SigninServiceException = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/SigninServiceException.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/SigninServiceException.js"() {
     init_client2();
     SigninServiceException = class _SigninServiceException extends ServiceException {
+      static shapeId = "smithy.ts.sdk.synthetic.com.amazonaws.signin#SigninServiceException";
       constructor(options) {
         super(options);
         Object.setPrototypeOf(this, _SigninServiceException.prototype);
@@ -43360,12 +43662,13 @@ var init_SigninServiceException = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/errors.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/errors.js
 var AccessDeniedException2, InternalServerException2, TooManyRequestsError, ValidationException;
 var init_errors4 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/errors.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/errors.js"() {
     init_SigninServiceException();
     AccessDeniedException2 = class _AccessDeniedException extends SigninServiceException {
+      static shapeId = "com.amazonaws.signin#AccessDeniedException";
       name = "AccessDeniedException";
       $fault = "client";
       error;
@@ -43380,6 +43683,7 @@ var init_errors4 = __esm({
       }
     };
     InternalServerException2 = class _InternalServerException extends SigninServiceException {
+      static shapeId = "com.amazonaws.signin#InternalServerException";
       name = "InternalServerException";
       $fault = "server";
       error;
@@ -43394,6 +43698,7 @@ var init_errors4 = __esm({
       }
     };
     TooManyRequestsError = class _TooManyRequestsError extends SigninServiceException {
+      static shapeId = "com.amazonaws.signin#TooManyRequestsError";
       name = "TooManyRequestsError";
       $fault = "client";
       error;
@@ -43408,6 +43713,7 @@ var init_errors4 = __esm({
       }
     };
     ValidationException = class _ValidationException extends SigninServiceException {
+      static shapeId = "com.amazonaws.signin#ValidationException";
       name = "ValidationException";
       $fault = "client";
       error;
@@ -43424,10 +43730,10 @@ var init_errors4 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/schemas/schemas_0.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/schemas/schemas_0.js
 var _ADE2, _AT2, _COAT, _COATR, _COATRB, _COATRBr, _COATRr, _COATWIAM, _COATWIAMR, _COATWIAMRr, _ISE2, _OAAT, _RT2, _TMRE2, _VE, _aKI2, _aT3, _at, _c4, _cI2, _cV2, _co2, _e4, _eI2, _ei, _gT2, _gt, _h3, _hE4, _iT2, _jN, _m3, _r2, _rT2, _rU2, _s4, _sAK2, _sT2, _se2, _tI, _tO, _tT2, _tt, n04, _s_registry4, SigninServiceException$, n0_registry4, AccessDeniedException$2, InternalServerException$2, TooManyRequestsError$, ValidationException$, errorTypeRegistries4, OAuthAccessToken, RefreshToken2, AccessToken$, CreateOAuth2TokenRequest$, CreateOAuth2TokenRequestBody$, CreateOAuth2TokenResponse$, CreateOAuth2TokenResponseBody$, CreateOAuth2TokenWithIAMRequest$, CreateOAuth2TokenWithIAMResponse$, CreateOAuth2Token$, CreateOAuth2TokenWithIAM$;
 var init_schemas_04 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/schemas/schemas_0.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/schemas/schemas_0.js"() {
     init_schema();
     init_errors4();
     init_SigninServiceException();
@@ -43607,10 +43913,10 @@ var init_schemas_04 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/runtimeConfig.shared.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/runtimeConfig.shared.js
 var getRuntimeConfig7;
 var init_runtimeConfig_shared4 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/runtimeConfig.shared.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/runtimeConfig.shared.js"() {
     init_httpAuthSchemes2();
     init_protocols2();
     init_dist_es();
@@ -43660,10 +43966,10 @@ var init_runtimeConfig_shared4 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/runtimeConfig.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/runtimeConfig.js
 var import_node_http_handler4, getRuntimeConfig8;
 var init_runtimeConfig4 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/runtimeConfig.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/runtimeConfig.js"() {
     init_package();
     init_client3();
     init_httpAuthSchemes2();
@@ -43707,10 +44013,10 @@ var init_runtimeConfig4 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/auth/httpAuthExtensionConfiguration.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/auth/httpAuthExtensionConfiguration.js
 var getHttpAuthExtensionConfiguration4, resolveHttpAuthRuntimeConfig4;
 var init_httpAuthExtensionConfiguration4 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/auth/httpAuthExtensionConfiguration.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/auth/httpAuthExtensionConfiguration.js"() {
     getHttpAuthExtensionConfiguration4 = (runtimeConfig) => {
       const _httpAuthSchemes = runtimeConfig.httpAuthSchemes;
       let _httpAuthSchemeProvider = runtimeConfig.httpAuthSchemeProvider;
@@ -43751,10 +44057,10 @@ var init_httpAuthExtensionConfiguration4 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/runtimeExtensions.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/runtimeExtensions.js
 var resolveRuntimeExtensions4;
 var init_runtimeExtensions4 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/runtimeExtensions.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/runtimeExtensions.js"() {
     init_client3();
     init_client2();
     init_protocols();
@@ -43767,10 +44073,10 @@ var init_runtimeExtensions4 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/SigninClient.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/SigninClient.js
 var SigninClient;
 var init_SigninClient = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/SigninClient.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/SigninClient.js"() {
     init_client3();
     init_dist_es();
     init_client2();
@@ -43820,10 +44126,10 @@ var init_SigninClient = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commandBuilder.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commandBuilder.js
 var command4, _ep04, _ep1, _mw04;
 var init_commandBuilder4 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commandBuilder.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commandBuilder.js"() {
     init_client2();
     init_endpoints();
     init_EndpointParameters4();
@@ -43838,10 +44144,10 @@ var init_commandBuilder4 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commands/CreateOAuth2TokenCommand.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commands/CreateOAuth2TokenCommand.js
 var CreateOAuth2TokenCommand;
 var init_CreateOAuth2TokenCommand = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commands/CreateOAuth2TokenCommand.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commands/CreateOAuth2TokenCommand.js"() {
     init_commandBuilder4();
     init_schemas_04();
     CreateOAuth2TokenCommand = class extends command4(_ep04, _mw04, "CreateOAuth2Token", CreateOAuth2Token$) {
@@ -43849,10 +44155,10 @@ var init_CreateOAuth2TokenCommand = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commands/CreateOAuth2TokenWithIAMCommand.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commands/CreateOAuth2TokenWithIAMCommand.js
 var CreateOAuth2TokenWithIAMCommand;
 var init_CreateOAuth2TokenWithIAMCommand = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commands/CreateOAuth2TokenWithIAMCommand.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commands/CreateOAuth2TokenWithIAMCommand.js"() {
     init_commandBuilder4();
     init_schemas_04();
     CreateOAuth2TokenWithIAMCommand = class extends command4(_ep1, _mw04, "CreateOAuth2TokenWithIAM", CreateOAuth2TokenWithIAM$) {
@@ -43860,10 +44166,10 @@ var init_CreateOAuth2TokenWithIAMCommand = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/Signin.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/Signin.js
 var commands4, Signin;
 var init_Signin = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/Signin.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/Signin.js"() {
     init_client2();
     init_CreateOAuth2TokenCommand();
     init_CreateOAuth2TokenWithIAMCommand();
@@ -43878,18 +44184,18 @@ var init_Signin = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commands/index.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commands/index.js
 var init_commands4 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commands/index.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/commands/index.js"() {
     init_CreateOAuth2TokenCommand();
     init_CreateOAuth2TokenWithIAMCommand();
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/enums.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/enums.js
 var OAuth2ErrorCode;
 var init_enums2 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/enums.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/enums.js"() {
     OAuth2ErrorCode = {
       AUTHCODE_EXPIRED: "AUTHCODE_EXPIRED",
       CONFLICT: "CONFLICT",
@@ -43904,13 +44210,13 @@ var init_enums2 = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/models_0.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/models_0.js
 var init_models_04 = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/models_0.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/models/models_0.js"() {
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/index.js
+// ../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/index.js
 var signin_exports = {};
 __export(signin_exports, {
   $Command: () => Command2,
@@ -43942,7 +44248,7 @@ __export(signin_exports, {
   errorTypeRegistries: () => errorTypeRegistries4
 });
 var init_signin = __esm({
-  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.46/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/index.js"() {
+  "../node_modules/.pnpm/@aws-sdk+nested-clients@3.997.50/node_modules/@aws-sdk/nested-clients/dist-es/submodules/signin/index.js"() {
     init_SigninClient();
     init_Signin();
     init_commands4();
@@ -43955,9 +44261,9 @@ var init_signin = __esm({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+credential-provider-login@3.972.79/node_modules/@aws-sdk/credential-provider-login/dist-cjs/index.js
+// ../node_modules/.pnpm/@aws-sdk+credential-provider-login@3.972.83/node_modules/@aws-sdk/credential-provider-login/dist-cjs/index.js
 var require_dist_cjs11 = __commonJS({
-  "../node_modules/.pnpm/@aws-sdk+credential-provider-login@3.972.79/node_modules/@aws-sdk/credential-provider-login/dist-cjs/index.js"(exports2) {
+  "../node_modules/.pnpm/@aws-sdk+credential-provider-login@3.972.83/node_modules/@aws-sdk/credential-provider-login/dist-cjs/index.js"(exports2) {
     var { setCredentialFeature: setCredentialFeature2 } = (init_client3(), __toCommonJS(client_exports2));
     var { CredentialsProviderError: CredentialsProviderError2, parseKnownFiles: parseKnownFiles2, getProfileName: getProfileName2 } = (init_config2(), __toCommonJS(config_exports));
     var { HttpRequest: HttpRequest2 } = (init_protocols(), __toCommonJS(protocols_exports));
@@ -44240,9 +44546,9 @@ var require_dist_cjs11 = __commonJS({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+credential-provider-process@3.972.72/node_modules/@aws-sdk/credential-provider-process/dist-cjs/index.js
+// ../node_modules/.pnpm/@aws-sdk+credential-provider-process@3.972.76/node_modules/@aws-sdk/credential-provider-process/dist-cjs/index.js
 var require_dist_cjs12 = __commonJS({
-  "../node_modules/.pnpm/@aws-sdk+credential-provider-process@3.972.72/node_modules/@aws-sdk/credential-provider-process/dist-cjs/index.js"(exports2) {
+  "../node_modules/.pnpm/@aws-sdk+credential-provider-process@3.972.76/node_modules/@aws-sdk/credential-provider-process/dist-cjs/index.js"(exports2) {
     var { externalDataInterceptor: externalDataInterceptor2, CredentialsProviderError: CredentialsProviderError2, parseKnownFiles: parseKnownFiles2, getProfileName: getProfileName2 } = (init_config2(), __toCommonJS(config_exports));
     var { exec } = require("node:child_process");
     var { promisify } = require("node:util");
@@ -44314,9 +44620,9 @@ var require_dist_cjs12 = __commonJS({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+credential-provider-web-identity@3.972.78/node_modules/@aws-sdk/credential-provider-web-identity/dist-cjs/index.js
+// ../node_modules/.pnpm/@aws-sdk+credential-provider-web-identity@3.972.82/node_modules/@aws-sdk/credential-provider-web-identity/dist-cjs/index.js
 var require_dist_cjs13 = __commonJS({
-  "../node_modules/.pnpm/@aws-sdk+credential-provider-web-identity@3.972.78/node_modules/@aws-sdk/credential-provider-web-identity/dist-cjs/index.js"(exports2) {
+  "../node_modules/.pnpm/@aws-sdk+credential-provider-web-identity@3.972.82/node_modules/@aws-sdk/credential-provider-web-identity/dist-cjs/index.js"(exports2) {
     var { setCredentialFeature: setCredentialFeature2 } = (init_client3(), __toCommonJS(client_exports2));
     var { CredentialsProviderError: CredentialsProviderError2, externalDataInterceptor: externalDataInterceptor2 } = (init_config2(), __toCommonJS(config_exports));
     var { readFileSync } = require("node:fs");
@@ -44374,9 +44680,9 @@ var require_dist_cjs13 = __commonJS({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+credential-provider-ini@3.973.17/node_modules/@aws-sdk/credential-provider-ini/dist-cjs/index.js
+// ../node_modules/.pnpm/@aws-sdk+credential-provider-ini@3.973.21/node_modules/@aws-sdk/credential-provider-ini/dist-cjs/index.js
 var require_dist_cjs14 = __commonJS({
-  "../node_modules/.pnpm/@aws-sdk+credential-provider-ini@3.973.17/node_modules/@aws-sdk/credential-provider-ini/dist-cjs/index.js"(exports2) {
+  "../node_modules/.pnpm/@aws-sdk+credential-provider-ini@3.973.21/node_modules/@aws-sdk/credential-provider-ini/dist-cjs/index.js"(exports2) {
     var { CredentialsProviderError: CredentialsProviderError2, chain: chain2, getProfileName: getProfileName2, parseKnownFiles: parseKnownFiles2 } = (init_config2(), __toCommonJS(config_exports));
     var { setCredentialFeature: setCredentialFeature2 } = (init_client3(), __toCommonJS(client_exports2));
     var resolveCredentialSource = (credentialSource, profileName, logger2) => {
@@ -44571,9 +44877,9 @@ var require_dist_cjs14 = __commonJS({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+credential-provider-node@3.972.84/node_modules/@aws-sdk/credential-provider-node/dist-cjs/index.js
+// ../node_modules/.pnpm/@aws-sdk+credential-provider-node@3.972.88/node_modules/@aws-sdk/credential-provider-node/dist-cjs/index.js
 var require_dist_cjs15 = __commonJS({
-  "../node_modules/.pnpm/@aws-sdk+credential-provider-node@3.972.84/node_modules/@aws-sdk/credential-provider-node/dist-cjs/index.js"(exports2) {
+  "../node_modules/.pnpm/@aws-sdk+credential-provider-node@3.972.88/node_modules/@aws-sdk/credential-provider-node/dist-cjs/index.js"(exports2) {
     var { ENV_KEY, ENV_SECRET, fromEnv: fromEnv2 } = require_dist_cjs3();
     var { chain: chain2, CredentialsProviderError: CredentialsProviderError2, ENV_PROFILE: ENV_PROFILE2 } = (init_config2(), __toCommonJS(config_exports));
     var ENV_IMDS_DISABLED2 = "AWS_EC2_METADATA_DISABLED";
@@ -44727,9 +45033,9 @@ var require_dist_cjs15 = __commonJS({
   }
 });
 
-// ../node_modules/.pnpm/@aws-sdk+client-ssm@3.1147.0/node_modules/@aws-sdk/client-ssm/dist-cjs/index.js
+// ../node_modules/.pnpm/@aws-sdk+client-ssm@3.1156.0/node_modules/@aws-sdk/client-ssm/dist-cjs/index.js
 var require_dist_cjs16 = __commonJS({
-  "../node_modules/.pnpm/@aws-sdk+client-ssm@3.1147.0/node_modules/@aws-sdk/client-ssm/dist-cjs/index.js"(exports2) {
+  "../node_modules/.pnpm/@aws-sdk+client-ssm@3.1156.0/node_modules/@aws-sdk/client-ssm/dist-cjs/index.js"(exports2) {
     var { awsEndpointFunctions: awsEndpointFunctions2, emitWarningIfUnsupportedVersion: emitWarningIfUnsupportedVersion$1, createDefaultUserAgentProvider: createDefaultUserAgentProvider2, NODE_APP_ID_CONFIG_OPTIONS: NODE_APP_ID_CONFIG_OPTIONS2, getAwsRegionExtensionConfiguration: getAwsRegionExtensionConfiguration2, resolveAwsRegionExtensionConfiguration: resolveAwsRegionExtensionConfiguration2, resolveUserAgentConfig: resolveUserAgentConfig2, resolveHostHeaderConfig: resolveHostHeaderConfig2, getUserAgentPlugin: getUserAgentPlugin2, getHostHeaderPlugin: getHostHeaderPlugin2, getLoggerPlugin: getLoggerPlugin2, getRecursionDetectionPlugin: getRecursionDetectionPlugin2 } = (init_client3(), __toCommonJS(client_exports2));
     var { getHttpAuthSchemeEndpointRuleSetPlugin: getHttpAuthSchemeEndpointRuleSetPlugin2, DefaultIdentityProviderConfig: DefaultIdentityProviderConfig2, getHttpSigningPlugin: getHttpSigningPlugin2, createPaginator: createPaginator2 } = (init_dist_es(), __toCommonJS(dist_es_exports));
     var { normalizeProvider: normalizeProvider3, getSmithyContext: getSmithyContext2, ServiceException: ServiceException2, NoOpLogger: NoOpLogger2, emitWarningIfUnsupportedVersion: emitWarningIfUnsupportedVersion3, loadConfigsForDefaultMode: loadConfigsForDefaultMode2, getDefaultExtensionConfiguration: getDefaultExtensionConfiguration2, resolveDefaultRuntimeConfig: resolveDefaultRuntimeConfig2, Client: Client2, makeBuilder: makeBuilder2, createWaiter: createWaiter2, checkExceptions: checkExceptions2, WaiterState: WaiterState2, createAggregatedClient: createAggregatedClient2 } = (init_client2(), __toCommonJS(client_exports));
@@ -44798,7 +45104,7 @@ var require_dist_cjs16 = __commonJS({
       Region: { type: "builtInParams", name: "region" },
       UseDualStack: { type: "builtInParams", name: "useDualstackEndpoint" }
     };
-    var version2 = "3.1146.0";
+    var version2 = "3.1155.0";
     var packageInfo = {
       version: version2
     };
@@ -44899,12 +45205,14 @@ var require_dist_cjs16 = __commonJS({
     };
     customEndpointFunctions2.aws = awsEndpointFunctions2;
     var SSMServiceException = class _SSMServiceException extends ServiceException2 {
+      static shapeId = "smithy.ts.sdk.synthetic.com.amazonaws.ssm#SSMServiceException";
       constructor(options) {
         super(options);
         Object.setPrototypeOf(this, _SSMServiceException.prototype);
       }
     };
     var AccessDeniedException3 = class _AccessDeniedException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#AccessDeniedException";
       name = "AccessDeniedException";
       $fault = "client";
       Message;
@@ -44919,6 +45227,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InternalServerError = class _InternalServerError extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InternalServerError";
       name = "InternalServerError";
       $fault = "server";
       Message;
@@ -44933,6 +45242,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidResourceId = class _InvalidResourceId extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidResourceId";
       name = "InvalidResourceId";
       $fault = "client";
       constructor(opts) {
@@ -44945,6 +45255,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidResourceType = class _InvalidResourceType extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidResourceType";
       name = "InvalidResourceType";
       $fault = "client";
       constructor(opts) {
@@ -44957,6 +45268,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var TooManyTagsError = class _TooManyTagsError extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#TooManyTagsError";
       name = "TooManyTagsError";
       $fault = "client";
       constructor(opts) {
@@ -44969,6 +45281,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var TooManyUpdates = class _TooManyUpdates extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#TooManyUpdates";
       name = "TooManyUpdates";
       $fault = "client";
       Message;
@@ -44983,6 +45296,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var AlreadyExistsException = class _AlreadyExistsException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#AlreadyExistsException";
       name = "AlreadyExistsException";
       $fault = "client";
       Message;
@@ -44997,6 +45311,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var OpsItemConflictException = class _OpsItemConflictException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#OpsItemConflictException";
       name = "OpsItemConflictException";
       $fault = "client";
       Message;
@@ -45011,6 +45326,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var OpsItemInvalidParameterException = class _OpsItemInvalidParameterException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#OpsItemInvalidParameterException";
       name = "OpsItemInvalidParameterException";
       $fault = "client";
       ParameterNames;
@@ -45027,6 +45343,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var OpsItemLimitExceededException = class _OpsItemLimitExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#OpsItemLimitExceededException";
       name = "OpsItemLimitExceededException";
       $fault = "client";
       ResourceTypes;
@@ -45047,6 +45364,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var OpsItemNotFoundException = class _OpsItemNotFoundException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#OpsItemNotFoundException";
       name = "OpsItemNotFoundException";
       $fault = "client";
       Message;
@@ -45061,6 +45379,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var OpsItemRelatedItemAlreadyExistsException = class _OpsItemRelatedItemAlreadyExistsException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#OpsItemRelatedItemAlreadyExistsException";
       name = "OpsItemRelatedItemAlreadyExistsException";
       $fault = "client";
       Message;
@@ -45079,6 +45398,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var DuplicateInstanceId = class _DuplicateInstanceId extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#DuplicateInstanceId";
       name = "DuplicateInstanceId";
       $fault = "client";
       constructor(opts) {
@@ -45091,6 +45411,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidCommandId = class _InvalidCommandId extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidCommandId";
       name = "InvalidCommandId";
       $fault = "client";
       constructor(opts) {
@@ -45103,6 +45424,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidInstanceId = class _InvalidInstanceId extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidInstanceId";
       name = "InvalidInstanceId";
       $fault = "client";
       Message;
@@ -45117,6 +45439,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var DoesNotExistException = class _DoesNotExistException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#DoesNotExistException";
       name = "DoesNotExistException";
       $fault = "client";
       Message;
@@ -45131,6 +45454,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidParameters = class _InvalidParameters extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidParameters";
       name = "InvalidParameters";
       $fault = "client";
       Message;
@@ -45145,6 +45469,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var AssociationAlreadyExists = class _AssociationAlreadyExists extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#AssociationAlreadyExists";
       name = "AssociationAlreadyExists";
       $fault = "client";
       constructor(opts) {
@@ -45157,6 +45482,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var AssociationLimitExceeded = class _AssociationLimitExceeded extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#AssociationLimitExceeded";
       name = "AssociationLimitExceeded";
       $fault = "client";
       constructor(opts) {
@@ -45169,6 +45495,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidDocument = class _InvalidDocument extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidDocument";
       name = "InvalidDocument";
       $fault = "client";
       Message;
@@ -45183,6 +45510,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidDocumentVersion = class _InvalidDocumentVersion extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidDocumentVersion";
       name = "InvalidDocumentVersion";
       $fault = "client";
       Message;
@@ -45197,6 +45525,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidOutputLocation = class _InvalidOutputLocation extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidOutputLocation";
       name = "InvalidOutputLocation";
       $fault = "client";
       constructor(opts) {
@@ -45209,6 +45538,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidSchedule = class _InvalidSchedule extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidSchedule";
       name = "InvalidSchedule";
       $fault = "client";
       Message;
@@ -45223,6 +45553,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidTag = class _InvalidTag extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidTag";
       name = "InvalidTag";
       $fault = "client";
       Message;
@@ -45237,6 +45568,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidTarget = class _InvalidTarget extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidTarget";
       name = "InvalidTarget";
       $fault = "client";
       Message;
@@ -45251,6 +45583,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidTargetMaps = class _InvalidTargetMaps extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidTargetMaps";
       name = "InvalidTargetMaps";
       $fault = "client";
       Message;
@@ -45265,6 +45598,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var UnsupportedPlatformType = class _UnsupportedPlatformType extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#UnsupportedPlatformType";
       name = "UnsupportedPlatformType";
       $fault = "client";
       Message;
@@ -45279,6 +45613,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ConflictException = class _ConflictException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ConflictException";
       name = "ConflictException";
       $fault = "client";
       Message;
@@ -45293,6 +45628,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ServiceQuotaExceededException = class _ServiceQuotaExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ServiceQuotaExceededException";
       name = "ServiceQuotaExceededException";
       $fault = "client";
       Message;
@@ -45315,6 +45651,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var DocumentAlreadyExists = class _DocumentAlreadyExists extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#DocumentAlreadyExists";
       name = "DocumentAlreadyExists";
       $fault = "client";
       Message;
@@ -45329,6 +45666,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var DocumentLimitExceeded = class _DocumentLimitExceeded extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#DocumentLimitExceeded";
       name = "DocumentLimitExceeded";
       $fault = "client";
       Message;
@@ -45343,6 +45681,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidDocumentContent = class _InvalidDocumentContent extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidDocumentContent";
       name = "InvalidDocumentContent";
       $fault = "client";
       Message;
@@ -45357,6 +45696,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidDocumentSchemaVersion = class _InvalidDocumentSchemaVersion extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidDocumentSchemaVersion";
       name = "InvalidDocumentSchemaVersion";
       $fault = "client";
       Message;
@@ -45371,6 +45711,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var MaxDocumentSizeExceeded = class _MaxDocumentSizeExceeded extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#MaxDocumentSizeExceeded";
       name = "MaxDocumentSizeExceeded";
       $fault = "client";
       Message;
@@ -45385,6 +45726,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var NoLongerSupportedException = class _NoLongerSupportedException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#NoLongerSupportedException";
       name = "NoLongerSupportedException";
       $fault = "client";
       Message;
@@ -45399,6 +45741,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var IdempotentParameterMismatch = class _IdempotentParameterMismatch extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#IdempotentParameterMismatch";
       name = "IdempotentParameterMismatch";
       $fault = "client";
       Message;
@@ -45413,6 +45756,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ResourceLimitExceededException = class _ResourceLimitExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ResourceLimitExceededException";
       name = "ResourceLimitExceededException";
       $fault = "client";
       Message;
@@ -45427,6 +45771,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var OpsItemAccessDeniedException = class _OpsItemAccessDeniedException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#OpsItemAccessDeniedException";
       name = "OpsItemAccessDeniedException";
       $fault = "client";
       Message;
@@ -45441,6 +45786,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var OpsItemAlreadyExistsException = class _OpsItemAlreadyExistsException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#OpsItemAlreadyExistsException";
       name = "OpsItemAlreadyExistsException";
       $fault = "client";
       Message;
@@ -45457,6 +45803,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var OpsMetadataAlreadyExistsException = class _OpsMetadataAlreadyExistsException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#OpsMetadataAlreadyExistsException";
       name = "OpsMetadataAlreadyExistsException";
       $fault = "client";
       constructor(opts) {
@@ -45469,6 +45816,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var OpsMetadataInvalidArgumentException = class _OpsMetadataInvalidArgumentException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#OpsMetadataInvalidArgumentException";
       name = "OpsMetadataInvalidArgumentException";
       $fault = "client";
       constructor(opts) {
@@ -45481,6 +45829,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var OpsMetadataLimitExceededException = class _OpsMetadataLimitExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#OpsMetadataLimitExceededException";
       name = "OpsMetadataLimitExceededException";
       $fault = "client";
       constructor(opts) {
@@ -45493,6 +45842,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var OpsMetadataTooManyUpdatesException = class _OpsMetadataTooManyUpdatesException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#OpsMetadataTooManyUpdatesException";
       name = "OpsMetadataTooManyUpdatesException";
       $fault = "client";
       constructor(opts) {
@@ -45505,6 +45855,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ResourceDataSyncAlreadyExistsException = class _ResourceDataSyncAlreadyExistsException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ResourceDataSyncAlreadyExistsException";
       name = "ResourceDataSyncAlreadyExistsException";
       $fault = "client";
       SyncName;
@@ -45519,6 +45870,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ResourceDataSyncCountExceededException = class _ResourceDataSyncCountExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ResourceDataSyncCountExceededException";
       name = "ResourceDataSyncCountExceededException";
       $fault = "client";
       Message;
@@ -45533,6 +45885,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ResourceDataSyncInvalidConfigurationException = class _ResourceDataSyncInvalidConfigurationException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ResourceDataSyncInvalidConfigurationException";
       name = "ResourceDataSyncInvalidConfigurationException";
       $fault = "client";
       Message;
@@ -45547,6 +45900,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidActivation = class _InvalidActivation extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidActivation";
       name = "InvalidActivation";
       $fault = "client";
       Message;
@@ -45561,6 +45915,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidActivationId = class _InvalidActivationId extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidActivationId";
       name = "InvalidActivationId";
       $fault = "client";
       Message;
@@ -45575,6 +45930,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var AssociationDoesNotExist = class _AssociationDoesNotExist extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#AssociationDoesNotExist";
       name = "AssociationDoesNotExist";
       $fault = "client";
       Message;
@@ -45589,6 +45945,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ResourceNotFoundException2 = class _ResourceNotFoundException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ResourceNotFoundException";
       name = "ResourceNotFoundException";
       $fault = "client";
       Message;
@@ -45603,6 +45960,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var AssociatedInstances = class _AssociatedInstances extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#AssociatedInstances";
       name = "AssociatedInstances";
       $fault = "client";
       constructor(opts) {
@@ -45615,6 +45973,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidDocumentOperation = class _InvalidDocumentOperation extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidDocumentOperation";
       name = "InvalidDocumentOperation";
       $fault = "client";
       Message;
@@ -45629,6 +45988,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidDeleteInventoryParametersException = class _InvalidDeleteInventoryParametersException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidDeleteInventoryParametersException";
       name = "InvalidDeleteInventoryParametersException";
       $fault = "client";
       Message;
@@ -45643,6 +46003,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidInventoryRequestException = class _InvalidInventoryRequestException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidInventoryRequestException";
       name = "InvalidInventoryRequestException";
       $fault = "client";
       Message;
@@ -45657,6 +46018,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidOptionException = class _InvalidOptionException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidOptionException";
       name = "InvalidOptionException";
       $fault = "client";
       Message;
@@ -45671,6 +46033,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidTypeNameException = class _InvalidTypeNameException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidTypeNameException";
       name = "InvalidTypeNameException";
       $fault = "client";
       Message;
@@ -45685,6 +46048,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var OpsMetadataNotFoundException = class _OpsMetadataNotFoundException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#OpsMetadataNotFoundException";
       name = "OpsMetadataNotFoundException";
       $fault = "client";
       constructor(opts) {
@@ -45697,6 +46061,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ParameterNotFound = class _ParameterNotFound extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ParameterNotFound";
       name = "ParameterNotFound";
       $fault = "client";
       constructor(opts) {
@@ -45709,6 +46074,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ResourceInUseException = class _ResourceInUseException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ResourceInUseException";
       name = "ResourceInUseException";
       $fault = "client";
       Message;
@@ -45723,6 +46089,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ResourceDataSyncNotFoundException = class _ResourceDataSyncNotFoundException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ResourceDataSyncNotFoundException";
       name = "ResourceDataSyncNotFoundException";
       $fault = "client";
       SyncName;
@@ -45741,6 +46108,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var MalformedResourcePolicyDocumentException = class _MalformedResourcePolicyDocumentException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#MalformedResourcePolicyDocumentException";
       name = "MalformedResourcePolicyDocumentException";
       $fault = "client";
       Message;
@@ -45755,6 +46123,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ResourcePolicyConflictException = class _ResourcePolicyConflictException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ResourcePolicyConflictException";
       name = "ResourcePolicyConflictException";
       $fault = "client";
       Message;
@@ -45769,6 +46138,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ResourcePolicyInvalidParameterException = class _ResourcePolicyInvalidParameterException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ResourcePolicyInvalidParameterException";
       name = "ResourcePolicyInvalidParameterException";
       $fault = "client";
       ParameterNames;
@@ -45785,6 +46155,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ResourcePolicyNotFoundException = class _ResourcePolicyNotFoundException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ResourcePolicyNotFoundException";
       name = "ResourcePolicyNotFoundException";
       $fault = "client";
       Message;
@@ -45799,6 +46170,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var TargetInUseException = class _TargetInUseException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#TargetInUseException";
       name = "TargetInUseException";
       $fault = "client";
       Message;
@@ -45813,6 +46185,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidFilter = class _InvalidFilter extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidFilter";
       name = "InvalidFilter";
       $fault = "client";
       Message;
@@ -45827,6 +46200,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidNextToken = class _InvalidNextToken extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidNextToken";
       name = "InvalidNextToken";
       $fault = "client";
       Message;
@@ -45841,6 +46215,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidAssociationVersion = class _InvalidAssociationVersion extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidAssociationVersion";
       name = "InvalidAssociationVersion";
       $fault = "client";
       Message;
@@ -45855,6 +46230,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var AssociationExecutionDoesNotExist = class _AssociationExecutionDoesNotExist extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#AssociationExecutionDoesNotExist";
       name = "AssociationExecutionDoesNotExist";
       $fault = "client";
       Message;
@@ -45869,6 +46245,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidFilterKey = class _InvalidFilterKey extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidFilterKey";
       name = "InvalidFilterKey";
       $fault = "client";
       constructor(opts) {
@@ -45881,6 +46258,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidFilterValue = class _InvalidFilterValue extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidFilterValue";
       name = "InvalidFilterValue";
       $fault = "client";
       Message;
@@ -45895,6 +46273,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var AutomationExecutionNotFoundException = class _AutomationExecutionNotFoundException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#AutomationExecutionNotFoundException";
       name = "AutomationExecutionNotFoundException";
       $fault = "client";
       Message;
@@ -45909,6 +46288,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidPermissionType = class _InvalidPermissionType extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidPermissionType";
       name = "InvalidPermissionType";
       $fault = "client";
       Message;
@@ -45923,6 +46303,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var UnsupportedOperatingSystem = class _UnsupportedOperatingSystem extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#UnsupportedOperatingSystem";
       name = "UnsupportedOperatingSystem";
       $fault = "client";
       Message;
@@ -45937,6 +46318,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidInstanceInformationFilterValue = class _InvalidInstanceInformationFilterValue extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidInstanceInformationFilterValue";
       name = "InvalidInstanceInformationFilterValue";
       $fault = "client";
       constructor(opts) {
@@ -45949,6 +46331,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidInstancePropertyFilterValue = class _InvalidInstancePropertyFilterValue extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidInstancePropertyFilterValue";
       name = "InvalidInstancePropertyFilterValue";
       $fault = "client";
       constructor(opts) {
@@ -45961,6 +46344,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidDeletionIdException = class _InvalidDeletionIdException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidDeletionIdException";
       name = "InvalidDeletionIdException";
       $fault = "client";
       Message;
@@ -45975,6 +46359,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidFilterOption = class _InvalidFilterOption extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidFilterOption";
       name = "InvalidFilterOption";
       $fault = "client";
       constructor(opts) {
@@ -45987,6 +46372,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var OpsItemRelatedItemAssociationNotFoundException = class _OpsItemRelatedItemAssociationNotFoundException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#OpsItemRelatedItemAssociationNotFoundException";
       name = "OpsItemRelatedItemAssociationNotFoundException";
       $fault = "client";
       Message;
@@ -46001,6 +46387,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ThrottlingException = class _ThrottlingException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ThrottlingException";
       name = "ThrottlingException";
       $fault = "client";
       Message;
@@ -46019,6 +46406,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ValidationException2 = class _ValidationException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ValidationException";
       name = "ValidationException";
       $fault = "client";
       Message;
@@ -46035,6 +46423,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidDocumentType = class _InvalidDocumentType extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidDocumentType";
       name = "InvalidDocumentType";
       $fault = "client";
       Message;
@@ -46049,6 +46438,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var UnsupportedCalendarException = class _UnsupportedCalendarException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#UnsupportedCalendarException";
       name = "UnsupportedCalendarException";
       $fault = "client";
       Message;
@@ -46063,6 +46453,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidPluginName = class _InvalidPluginName extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidPluginName";
       name = "InvalidPluginName";
       $fault = "client";
       constructor(opts) {
@@ -46075,6 +46466,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvocationDoesNotExist = class _InvocationDoesNotExist extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvocationDoesNotExist";
       name = "InvocationDoesNotExist";
       $fault = "client";
       constructor(opts) {
@@ -46087,6 +46479,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var UnsupportedFeatureRequiredException = class _UnsupportedFeatureRequiredException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#UnsupportedFeatureRequiredException";
       name = "UnsupportedFeatureRequiredException";
       $fault = "client";
       Message;
@@ -46101,6 +46494,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidAggregatorException = class _InvalidAggregatorException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidAggregatorException";
       name = "InvalidAggregatorException";
       $fault = "client";
       Message;
@@ -46115,6 +46509,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidInventoryGroupException = class _InvalidInventoryGroupException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidInventoryGroupException";
       name = "InvalidInventoryGroupException";
       $fault = "client";
       Message;
@@ -46129,6 +46524,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidResultAttributeException = class _InvalidResultAttributeException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidResultAttributeException";
       name = "InvalidResultAttributeException";
       $fault = "client";
       Message;
@@ -46143,6 +46539,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidKeyId = class _InvalidKeyId extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidKeyId";
       name = "InvalidKeyId";
       $fault = "client";
       constructor(opts) {
@@ -46155,6 +46552,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ParameterVersionNotFound = class _ParameterVersionNotFound extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ParameterVersionNotFound";
       name = "ParameterVersionNotFound";
       $fault = "client";
       constructor(opts) {
@@ -46167,6 +46565,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ServiceSettingNotFound = class _ServiceSettingNotFound extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ServiceSettingNotFound";
       name = "ServiceSettingNotFound";
       $fault = "client";
       Message;
@@ -46181,6 +46580,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ParameterVersionLabelLimitExceeded = class _ParameterVersionLabelLimitExceeded extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ParameterVersionLabelLimitExceeded";
       name = "ParameterVersionLabelLimitExceeded";
       $fault = "client";
       constructor(opts) {
@@ -46193,6 +46593,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var UnsupportedOperationException = class _UnsupportedOperationException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#UnsupportedOperationException";
       name = "UnsupportedOperationException";
       $fault = "client";
       Message;
@@ -46207,6 +46608,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var DocumentPermissionLimit = class _DocumentPermissionLimit extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#DocumentPermissionLimit";
       name = "DocumentPermissionLimit";
       $fault = "client";
       Message;
@@ -46221,6 +46623,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ComplianceTypeCountLimitExceededException = class _ComplianceTypeCountLimitExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ComplianceTypeCountLimitExceededException";
       name = "ComplianceTypeCountLimitExceededException";
       $fault = "client";
       Message;
@@ -46235,6 +46638,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidItemContentException = class _InvalidItemContentException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidItemContentException";
       name = "InvalidItemContentException";
       $fault = "client";
       TypeName;
@@ -46251,6 +46655,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ItemSizeLimitExceededException = class _ItemSizeLimitExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ItemSizeLimitExceededException";
       name = "ItemSizeLimitExceededException";
       $fault = "client";
       TypeName;
@@ -46267,6 +46672,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var TotalSizeLimitExceededException = class _TotalSizeLimitExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#TotalSizeLimitExceededException";
       name = "TotalSizeLimitExceededException";
       $fault = "client";
       Message;
@@ -46281,6 +46687,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var CustomSchemaCountLimitExceededException = class _CustomSchemaCountLimitExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#CustomSchemaCountLimitExceededException";
       name = "CustomSchemaCountLimitExceededException";
       $fault = "client";
       Message;
@@ -46295,6 +46702,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidInventoryItemContextException = class _InvalidInventoryItemContextException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidInventoryItemContextException";
       name = "InvalidInventoryItemContextException";
       $fault = "client";
       Message;
@@ -46309,6 +46717,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ItemContentMismatchException = class _ItemContentMismatchException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ItemContentMismatchException";
       name = "ItemContentMismatchException";
       $fault = "client";
       TypeName;
@@ -46325,6 +46734,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var SubTypeCountLimitExceededException = class _SubTypeCountLimitExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#SubTypeCountLimitExceededException";
       name = "SubTypeCountLimitExceededException";
       $fault = "client";
       Message;
@@ -46339,6 +46749,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var UnsupportedInventoryItemContextException = class _UnsupportedInventoryItemContextException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#UnsupportedInventoryItemContextException";
       name = "UnsupportedInventoryItemContextException";
       $fault = "client";
       TypeName;
@@ -46355,6 +46766,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var UnsupportedInventorySchemaVersionException = class _UnsupportedInventorySchemaVersionException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#UnsupportedInventorySchemaVersionException";
       name = "UnsupportedInventorySchemaVersionException";
       $fault = "client";
       Message;
@@ -46369,6 +46781,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var HierarchyLevelLimitExceededException = class _HierarchyLevelLimitExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#HierarchyLevelLimitExceededException";
       name = "HierarchyLevelLimitExceededException";
       $fault = "client";
       constructor(opts) {
@@ -46381,6 +46794,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var HierarchyTypeMismatchException = class _HierarchyTypeMismatchException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#HierarchyTypeMismatchException";
       name = "HierarchyTypeMismatchException";
       $fault = "client";
       constructor(opts) {
@@ -46393,6 +46807,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var IncompatiblePolicyException = class _IncompatiblePolicyException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#IncompatiblePolicyException";
       name = "IncompatiblePolicyException";
       $fault = "client";
       constructor(opts) {
@@ -46405,6 +46820,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidAllowedPatternException = class _InvalidAllowedPatternException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidAllowedPatternException";
       name = "InvalidAllowedPatternException";
       $fault = "client";
       constructor(opts) {
@@ -46417,6 +46833,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidPolicyAttributeException = class _InvalidPolicyAttributeException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidPolicyAttributeException";
       name = "InvalidPolicyAttributeException";
       $fault = "client";
       constructor(opts) {
@@ -46429,6 +46846,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidPolicyTypeException = class _InvalidPolicyTypeException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidPolicyTypeException";
       name = "InvalidPolicyTypeException";
       $fault = "client";
       constructor(opts) {
@@ -46441,6 +46859,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ParameterAlreadyExists = class _ParameterAlreadyExists extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ParameterAlreadyExists";
       name = "ParameterAlreadyExists";
       $fault = "client";
       constructor(opts) {
@@ -46453,6 +46872,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ParameterLimitExceeded = class _ParameterLimitExceeded extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ParameterLimitExceeded";
       name = "ParameterLimitExceeded";
       $fault = "client";
       constructor(opts) {
@@ -46465,6 +46885,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ParameterMaxVersionLimitExceeded = class _ParameterMaxVersionLimitExceeded extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ParameterMaxVersionLimitExceeded";
       name = "ParameterMaxVersionLimitExceeded";
       $fault = "client";
       constructor(opts) {
@@ -46477,6 +46898,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ParameterPatternMismatchException = class _ParameterPatternMismatchException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ParameterPatternMismatchException";
       name = "ParameterPatternMismatchException";
       $fault = "client";
       constructor(opts) {
@@ -46489,6 +46911,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var PoliciesLimitExceededException = class _PoliciesLimitExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#PoliciesLimitExceededException";
       name = "PoliciesLimitExceededException";
       $fault = "client";
       constructor(opts) {
@@ -46501,6 +46924,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var UnsupportedParameterType = class _UnsupportedParameterType extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#UnsupportedParameterType";
       name = "UnsupportedParameterType";
       $fault = "client";
       constructor(opts) {
@@ -46513,6 +46937,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ResourcePolicyLimitExceededException = class _ResourcePolicyLimitExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ResourcePolicyLimitExceededException";
       name = "ResourcePolicyLimitExceededException";
       $fault = "client";
       Limit;
@@ -46531,6 +46956,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var FeatureNotAvailableException = class _FeatureNotAvailableException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#FeatureNotAvailableException";
       name = "FeatureNotAvailableException";
       $fault = "client";
       Message;
@@ -46545,6 +46971,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var AutomationStepNotFoundException = class _AutomationStepNotFoundException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#AutomationStepNotFoundException";
       name = "AutomationStepNotFoundException";
       $fault = "client";
       Message;
@@ -46559,6 +46986,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidAutomationSignalException = class _InvalidAutomationSignalException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidAutomationSignalException";
       name = "InvalidAutomationSignalException";
       $fault = "client";
       Message;
@@ -46573,6 +47001,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidNotificationConfig = class _InvalidNotificationConfig extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidNotificationConfig";
       name = "InvalidNotificationConfig";
       $fault = "client";
       Message;
@@ -46587,6 +47016,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidOutputFolder = class _InvalidOutputFolder extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidOutputFolder";
       name = "InvalidOutputFolder";
       $fault = "client";
       constructor(opts) {
@@ -46599,6 +47029,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidRole = class _InvalidRole extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidRole";
       name = "InvalidRole";
       $fault = "client";
       Message;
@@ -46613,6 +47044,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidAssociation = class _InvalidAssociation extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidAssociation";
       name = "InvalidAssociation";
       $fault = "client";
       Message;
@@ -46627,6 +47059,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var AutomationDefinitionNotFoundException = class _AutomationDefinitionNotFoundException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#AutomationDefinitionNotFoundException";
       name = "AutomationDefinitionNotFoundException";
       $fault = "client";
       Message;
@@ -46641,6 +47074,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var AutomationDefinitionVersionNotFoundException = class _AutomationDefinitionVersionNotFoundException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#AutomationDefinitionVersionNotFoundException";
       name = "AutomationDefinitionVersionNotFoundException";
       $fault = "client";
       Message;
@@ -46655,6 +47089,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var AutomationExecutionLimitExceededException = class _AutomationExecutionLimitExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#AutomationExecutionLimitExceededException";
       name = "AutomationExecutionLimitExceededException";
       $fault = "client";
       Message;
@@ -46669,6 +47104,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidAutomationExecutionParametersException = class _InvalidAutomationExecutionParametersException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidAutomationExecutionParametersException";
       name = "InvalidAutomationExecutionParametersException";
       $fault = "client";
       Message;
@@ -46683,6 +47119,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var AutomationDefinitionNotApprovedException = class _AutomationDefinitionNotApprovedException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#AutomationDefinitionNotApprovedException";
       name = "AutomationDefinitionNotApprovedException";
       $fault = "client";
       Message;
@@ -46697,6 +47134,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var TargetNotConnected = class _TargetNotConnected extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#TargetNotConnected";
       name = "TargetNotConnected";
       $fault = "client";
       Message;
@@ -46711,6 +47149,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidAutomationStatusUpdateException = class _InvalidAutomationStatusUpdateException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidAutomationStatusUpdateException";
       name = "InvalidAutomationStatusUpdateException";
       $fault = "client";
       Message;
@@ -46725,6 +47164,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var AssociationVersionLimitExceeded = class _AssociationVersionLimitExceeded extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#AssociationVersionLimitExceeded";
       name = "AssociationVersionLimitExceeded";
       $fault = "client";
       Message;
@@ -46739,6 +47179,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var InvalidUpdate = class _InvalidUpdate extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#InvalidUpdate";
       name = "InvalidUpdate";
       $fault = "client";
       Message;
@@ -46753,6 +47194,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var StatusUnchanged = class _StatusUnchanged extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#StatusUnchanged";
       name = "StatusUnchanged";
       $fault = "client";
       constructor(opts) {
@@ -46765,6 +47207,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var DocumentVersionLimitExceeded = class _DocumentVersionLimitExceeded extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#DocumentVersionLimitExceeded";
       name = "DocumentVersionLimitExceeded";
       $fault = "client";
       Message;
@@ -46779,6 +47222,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var DuplicateDocumentContent = class _DuplicateDocumentContent extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#DuplicateDocumentContent";
       name = "DuplicateDocumentContent";
       $fault = "client";
       Message;
@@ -46793,6 +47237,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var DuplicateDocumentVersionName = class _DuplicateDocumentVersionName extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#DuplicateDocumentVersionName";
       name = "DuplicateDocumentVersionName";
       $fault = "client";
       Message;
@@ -46807,6 +47252,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var OpsMetadataKeyLimitExceededException = class _OpsMetadataKeyLimitExceededException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#OpsMetadataKeyLimitExceededException";
       name = "OpsMetadataKeyLimitExceededException";
       $fault = "client";
       constructor(opts) {
@@ -46819,6 +47265,7 @@ var require_dist_cjs16 = __commonJS({
       }
     };
     var ResourceDataSyncConflictException = class _ResourceDataSyncConflictException extends SSMServiceException {
+      static shapeId = "com.amazonaws.ssm#ResourceDataSyncConflictException";
       name = "ResourceDataSyncConflictException";
       $fault = "client";
       Message;
@@ -66590,7 +67037,7 @@ var import_client_ssm = __toESM(require_dist_cjs16());
 // src/parse.ts
 var import_yaml = __toESM(require_dist());
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/classic/external.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/classic/external.js
 var external_exports = {};
 __export(external_exports, {
   $brand: () => $brand,
@@ -66853,7 +67300,7 @@ __export(external_exports, {
   xor: () => xor
 });
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/index.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/index.js
 var core_exports2 = {};
 __export(core_exports2, {
   $ZodAny: () => $ZodAny,
@@ -67170,7 +67617,7 @@ __export(core_exports2, {
   withParser: () => withParser
 });
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/util.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/util.js
 var util_exports = {};
 __export(util_exports, {
   BIGINT_FORMAT_RANGES: () => BIGINT_FORMAT_RANGES,
@@ -67241,6 +67688,7 @@ __export(util_exports, {
   required: () => required,
   safeExtend: () => safeExtend,
   shallowClone: () => shallowClone,
+  sizeCaps: () => sizeCaps,
   slugify: () => slugify,
   stringifyPrimitive: () => stringifyPrimitive,
   toZod: () => toZod,
@@ -67760,6 +68208,18 @@ function prefixIssues(path, issues) {
 function unwrapMessage(message) {
   return typeof message === "string" ? message : message?.message;
 }
+function sizeCaps(defChecks) {
+  const caps = [];
+  for (const ch of defChecks ?? []) {
+    const d5 = ch._zod.def;
+    if (!/_(length|size)$|_equals$/.test(d5.check))
+      break;
+    const max = d5.maximum ?? d5.length ?? d5.size;
+    if (max >= 0)
+      caps.push([max, ch]);
+  }
+  return caps;
+}
 function attachSchema(issues, start, inst) {
   var _a4;
   for (let i5 = start; i5 < issues.length; i5++) {
@@ -68013,7 +68473,7 @@ function constantCatch(value) {
   return fn;
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/core.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/core.js
 var _a2;
 var NEVER = /* @__PURE__ */ Object.freeze({
   status: "aborted"
@@ -68135,7 +68595,7 @@ function config(newConfig) {
   return globalConfig;
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/errors.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/errors.js
 function _getMessage() {
   const internals = this._zod;
   internals.message ?? (internals.message = JSON.stringify(internals.def, jsonStringifyReplacer, 2));
@@ -68327,7 +68787,7 @@ function prettifyError(error64) {
   return lines.join("\n");
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/parse.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/parse.js
 function finalizeParams(callee, params) {
   return { callee: params?.callee ?? callee, Err: params?.Err };
 }
@@ -68487,7 +68947,7 @@ var _safeDecodeAsync = (_Err) => async (schema, value, _ctx) => {
 };
 var safeDecodeAsync = /* @__PURE__ */ _safeDecodeAsync($ZodRealError);
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/regexes.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/regexes.js
 var regexes_exports = {};
 __export(regexes_exports, {
   anyString: () => anyString,
@@ -68659,7 +69119,7 @@ var sha512_hex = /^[0-9a-fA-F]{128}$/;
 var sha512_base64 = /* @__PURE__ */ fixedBase64(86, "==");
 var sha512_base64url = /* @__PURE__ */ fixedBase64url(86);
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/checks.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/checks.js
 var $ZodCheck = /* @__PURE__ */ $constructor("$ZodCheck", (inst, def) => {
   var _a4;
   inst._zod ?? (inst._zod = {});
@@ -69135,7 +69595,7 @@ var $ZodCheckOverwrite = /* @__PURE__ */ $constructor("$ZodCheckOverwrite", (ins
   };
 });
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/doc.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/doc.js
 var Doc = class {
   constructor(args = [], closed = {}) {
     this.content = [];
@@ -69176,14 +69636,14 @@ ${content.join("\n")}
   }
 };
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/versions.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/versions.js
 var version = {
   major: 4,
   minor: 6,
-  patch: 5
+  patch: 7
 };
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/schemas.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/schemas.js
 var $ZodType = /* @__PURE__ */ $constructor("$ZodType", (inst, def) => {
   var _a4;
   inst ?? (inst = {});
@@ -69936,6 +70396,31 @@ var $ZodDate = /* @__PURE__ */ $constructor("$ZodDate", (inst, def) => {
     return payload2;
   };
 });
+function capSize(inst, size) {
+  const caps = sizeCaps(inst._zod.def.checks);
+  if (!caps.length)
+    return;
+  const cap = Math.min(...caps.map((c5) => c5[0]));
+  const parse4 = inst._zod.parse;
+  inst._zod.parse = (payload2, ctx) => {
+    const n3 = size(payload2.value);
+    if (n3 > cap && !ctx?.skipChecks && ctx?.direction !== "backward") {
+      for (const [max, ch] of sizeCaps(inst._zod.def.checks)) {
+        if (n3 > max && ch._zod.def.when(payload2)) {
+          const start = payload2.issues.length;
+          ch._zod.check(payload2);
+          payload2.issues[start].continue = false;
+          attachSchema(payload2.issues, start, inst);
+          return payload2;
+        }
+      }
+    }
+    return parse4(payload2, ctx);
+  };
+}
+var arraySize = (input2) => Array.isArray(input2) ? input2.length : -1;
+var mapSize = (input2) => input2 instanceof Map ? input2.size : -1;
+var setSize = (input2) => input2 instanceof Set ? input2.size : -1;
 function handleArrayResult(result, final, index) {
   if (result.issues.length) {
     final.issues.push(...prefixIssues(index, result.issues));
@@ -69979,6 +70464,7 @@ var $ZodArray = /* @__PURE__ */ $constructor("$ZodArray", (inst, def) => {
     }
     return payload2;
   };
+  capSize(inst, arraySize);
 });
 function handlePropertyResult(result, final, key, input2, optin, optout) {
   const isPresent = key in input2;
@@ -70935,6 +71421,7 @@ var $ZodMap = /* @__PURE__ */ $constructor("$ZodMap", (inst, def) => {
       return Promise.all(proms).then(() => payload2);
     return payload2;
   };
+  capSize(inst, mapSize);
 });
 function handleMapResult(keyResult, valueResult, final, key, input2, inst, ctx) {
   if (keyResult.issues.length) {
@@ -71001,6 +71488,7 @@ var $ZodSet = /* @__PURE__ */ $constructor("$ZodSet", (inst, def) => {
       return Promise.all(proms).then(() => payload2);
     return payload2;
   };
+  capSize(inst, setSize);
 });
 function handleSetResult(result, final) {
   if (result.issues.length) {
@@ -71597,7 +72085,7 @@ function handleRefineResult(result, payload2, input2, inst) {
   }
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/memoizer.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/memoizer.js
 var $ZodCyclicError = class extends Error {
   constructor() {
     super(`Cannot parse a reference cycle that closes through a transform`);
@@ -71874,7 +72362,7 @@ function isBackEdge(ctx, value) {
   return backEdges !== void 0 && isRef(value) && backEdges.has(value);
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/index.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/index.js
 var locales_exports = {};
 __export(locales_exports, {
   ar: () => ar_default,
@@ -71942,7 +72430,7 @@ __export(locales_exports, {
   zhTW: () => zh_TW_default
 });
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ar.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ar.js
 var error3 = () => {
   const Sizable = {
     string: { unit: "\u062D\u0631\u0641", verb: "\u0623\u0646 \u064A\u062D\u0648\u064A" },
@@ -72054,7 +72542,7 @@ function ar_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/az.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/az.js
 var error4 = () => {
   const Sizable = {
     string: { unit: "simvol", verb: "olmal\u0131d\u0131r" },
@@ -72165,7 +72653,7 @@ function az_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/be.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/be.js
 function getBelarusianPlural(count, one, few, many) {
   const absCount = Math.abs(count);
   const lastDigit = absCount % 10;
@@ -72334,7 +72822,7 @@ function be_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/bg.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/bg.js
 var error6 = () => {
   const Sizable = {
     string: { unit: "\u0441\u0438\u043C\u0432\u043E\u043B\u0430", verb: "\u0434\u0430 \u0441\u044A\u0434\u044A\u0440\u0436\u0430" },
@@ -72460,7 +72948,7 @@ function bg_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/bn.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/bn.js
 var error7 = () => {
   const Sizable = {
     string: { unit: "\u0985\u0995\u09CD\u09B7\u09B0", verb: "\u09A5\u09BE\u0995\u09A4\u09C7 \u09B9\u09AC\u09C7" },
@@ -72574,7 +73062,7 @@ function bn_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ca.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ca.js
 var error8 = () => {
   const Sizable = {
     string: { unit: "car\xE0cters", verb: "contenir" },
@@ -72688,7 +73176,7 @@ function ca_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ckb.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ckb.js
 var error9 = () => {
   const Sizable = {
     string: { unit: "\u067E\u06CC\u062A", verb: "\u0628\u06CE\u062A" },
@@ -72821,7 +73309,7 @@ function ckb_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/cs.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/cs.js
 var error10 = () => {
   const Sizable = {
     string: { unit: "znak\u016F", verb: "m\xEDt" },
@@ -72938,7 +73426,7 @@ function cs_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/da.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/da.js
 var error11 = () => {
   const Sizable = {
     string: { unit: "tegn", verb: "havde" },
@@ -73059,7 +73547,7 @@ function da_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/de.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/de.js
 var error12 = () => {
   const Sizable = {
     string: { unit: "Zeichen", verb: "zu haben" },
@@ -73173,7 +73661,7 @@ function de_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/el.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/el.js
 var error13 = () => {
   const Sizable = {
     string: { unit: "\u03C7\u03B1\u03C1\u03B1\u03BA\u03C4\u03AE\u03C1\u03B5\u03C2", verb: "\u03BD\u03B1 \u03AD\u03C7\u03B5\u03B9" },
@@ -73286,7 +73774,7 @@ function el_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/en.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/en.js
 var error14 = () => {
   const Sizable = {
     string: { unit: "characters", verb: "to have" },
@@ -73411,7 +73899,7 @@ function en_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/eo.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/eo.js
 var error15 = () => {
   const Sizable = {
     string: { unit: "karaktrojn", verb: "havi" },
@@ -73526,7 +74014,7 @@ function eo_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/es.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/es.js
 var error16 = () => {
   const Sizable = {
     string: { unit: "caracteres", verb: "tener" },
@@ -73663,7 +74151,7 @@ function es_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/fa.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/fa.js
 var error17 = () => {
   const Sizable = {
     string: { unit: "\u06A9\u0627\u0631\u0627\u06A9\u062A\u0631", verb: "\u062F\u0627\u0634\u062A\u0647 \u0628\u0627\u0634\u062F" },
@@ -73783,7 +74271,7 @@ function fa_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/fi.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/fi.js
 var error18 = () => {
   const Sizable = {
     string: { unit: "merkki\xE4", subject: "merkkijonon" },
@@ -73901,7 +74389,7 @@ function fi_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/fr.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/fr.js
 var error19 = () => {
   const Sizable = {
     string: { unit: "caract\xE8res", verb: "avoir" },
@@ -74031,7 +74519,7 @@ function fr_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/fr-CA.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/fr-CA.js
 var error20 = () => {
   const Sizable = {
     string: { unit: "caract\xE8res", verb: "avoir" },
@@ -74144,7 +74632,7 @@ function fr_CA_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/gu.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/gu.js
 var error21 = () => {
   const Sizable = {
     string: { unit: "\u0A85\u0A95\u0ACD\u0AB7\u0AB0", verb: "\u0AB9\u0ACB\u0AB5\u0ABE \u0A9C\u0ACB\u0A88\u0A8F" },
@@ -74258,7 +74746,7 @@ function gu_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/he.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/he.js
 var error22 = () => {
   const TypeNames = {
     string: { label: "\u05DE\u05D7\u05E8\u05D5\u05D6\u05EA", gender: "f" },
@@ -74460,7 +74948,7 @@ function he_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/hi.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/hi.js
 var error23 = () => {
   const Sizable = {
     string: { unit: "\u0905\u0915\u094D\u0937\u0930", verb: "\u0930\u0916\u0928\u0947 \u0915\u0947 \u0932\u093F\u090F" },
@@ -74572,7 +75060,7 @@ function hi_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/hr.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/hr.js
 var error24 = () => {
   const Sizable = {
     string: { unit: "znakova", verb: "imati" },
@@ -74699,7 +75187,7 @@ function hr_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/hu.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/hu.js
 var error25 = () => {
   const Sizable = {
     string: { unit: "karakter", verb: "legyen" },
@@ -74813,7 +75301,7 @@ function hu_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/hy.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/hy.js
 function getArmenianPlural(count, one, many) {
   return Math.abs(count) === 1 ? one : many;
 }
@@ -74972,7 +75460,7 @@ function hy_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/id.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/id.js
 var error27 = () => {
   const Sizable = {
     string: { unit: "karakter", verb: "memiliki" },
@@ -75084,7 +75572,7 @@ function id_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/is.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/is.js
 var error28 = () => {
   const Sizable = {
     string: { unit: "stafi", verb: "a\xF0 hafa" },
@@ -75199,7 +75687,7 @@ function is_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/it.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/it.js
 var error29 = () => {
   const Sizable = {
     string: { unit: "caratteri", verb: "avere" },
@@ -75313,7 +75801,7 @@ function it_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ja.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ja.js
 var error30 = () => {
   const Sizable = {
     string: { unit: "\u6587\u5B57", verb: "\u3067\u3042\u308B" },
@@ -75426,7 +75914,7 @@ function ja_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ka.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ka.js
 var error31 = () => {
   const Sizable = {
     string: { unit: "\u10E1\u10D8\u10DB\u10D1\u10DD\u10DA\u10DD", verb: "\u10E3\u10DC\u10D3\u10D0 \u10E8\u10D4\u10D8\u10EA\u10D0\u10D5\u10D3\u10D4\u10E1" },
@@ -75544,7 +76032,7 @@ function ka_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/km.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/km.js
 var error32 = () => {
   const Sizable = {
     string: { unit: "\u178F\u17BD\u17A2\u1780\u17D2\u179F\u179A", verb: "\u1782\u17BD\u179A\u1798\u17B6\u1793" },
@@ -75660,12 +76148,12 @@ function km_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/kh.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/kh.js
 function kh_default() {
   return km_default();
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/kn.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/kn.js
 var error33 = () => {
   const Sizable = {
     string: { unit: "\u0C85\u0C95\u0CCD\u0CB7\u0CB0\u0C97\u0CB3\u0CC1", verb: "\u0CB9\u0CCA\u0C82\u0CA6\u0CB2\u0CC1" },
@@ -75781,7 +76269,7 @@ function kn_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ko.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ko.js
 var error34 = () => {
   const Sizable = {
     string: { unit: "\uBB38\uC790", verb: "to have" },
@@ -75898,7 +76386,7 @@ function ko_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/lt.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/lt.js
 var capitalizeFirstCharacter = (text) => {
   return text.charAt(0).toUpperCase() + text.slice(1);
 };
@@ -76106,7 +76594,7 @@ function lt_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/mk.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/mk.js
 var error36 = () => {
   const Sizable = {
     string: { unit: "\u0437\u043D\u0430\u0446\u0438", verb: "\u0434\u0430 \u0438\u043C\u0430\u0430\u0442" },
@@ -76221,7 +76709,7 @@ function mk_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ms.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ms.js
 var error37 = () => {
   const Sizable = {
     string: { unit: "aksara", verb: "mempunyai" },
@@ -76334,7 +76822,7 @@ function ms_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ne.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ne.js
 var error38 = () => {
   const Sizable = {
     string: { unit: "\u0905\u0915\u094D\u0937\u0930", verb: "\u0939\u0941\u0928\u0941\u092A\u0930\u094D\u091B" },
@@ -76446,7 +76934,7 @@ function ne_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/nl.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/nl.js
 var error39 = () => {
   const Sizable = {
     string: { unit: "tekens", verb: "heeft" },
@@ -76562,7 +77050,7 @@ function nl_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/nn.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/nn.js
 var error40 = () => {
   const Sizable = {
     string: { unit: "teikn", verb: "\xE5 ha" },
@@ -76676,7 +77164,7 @@ function nn_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/no.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/no.js
 var error41 = () => {
   const Sizable = {
     string: { unit: "tegn", verb: "\xE5 ha" },
@@ -76790,7 +77278,7 @@ function no_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ota.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ota.js
 var error42 = () => {
   const Sizable = {
     string: { unit: "harf", verb: "olmal\u0131d\u0131r" },
@@ -76905,7 +77393,7 @@ function ota_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ps.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ps.js
 var error43 = () => {
   const Sizable = {
     string: { unit: "\u062A\u0648\u06A9\u064A", verb: "\u0648\u0644\u0631\u064A" },
@@ -77025,7 +77513,7 @@ function ps_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/pl.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/pl.js
 var error44 = () => {
   const Sizable = {
     string: { unit: "znak\xF3w", verb: "mie\u0107" },
@@ -77140,7 +77628,7 @@ function pl_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/pt.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/pt.js
 var error45 = () => {
   const Sizable = {
     string: { unit: "caracteres" },
@@ -77284,7 +77772,7 @@ function pt_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/pt-BR.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/pt-BR.js
 var error46 = () => {
   const Sizable = {
     string: { unit: "caracteres" },
@@ -77429,7 +77917,7 @@ function pt_BR_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ro.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ro.js
 var error47 = () => {
   const Sizable = {
     string: { unit: "caractere", verb: "s\u0103 aib\u0103" },
@@ -77552,7 +78040,7 @@ function ro_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ru.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ru.js
 function getRussianPlural(count, one, few, many) {
   const absCount = Math.abs(count);
   const lastDigit = absCount % 10;
@@ -77721,7 +78209,7 @@ function ru_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/sk.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/sk.js
 var error49 = () => {
   const Sizable = {
     string: { unit: "znakov", verb: "ma\u0165" },
@@ -77838,7 +78326,7 @@ function sk_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/sl.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/sl.js
 var error50 = () => {
   const Sizable = {
     string: { unit: "znakov", verb: "imeti" },
@@ -77953,7 +78441,7 @@ function sl_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/sv.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/sv.js
 var error51 = () => {
   const Sizable = {
     string: { unit: "tecken", verb: "att ha" },
@@ -78069,7 +78557,7 @@ function sv_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ta.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ta.js
 var error52 = () => {
   const Sizable = {
     string: { unit: "\u0B8E\u0BB4\u0BC1\u0BA4\u0BCD\u0BA4\u0BC1\u0B95\u0BCD\u0B95\u0BB3\u0BCD", verb: "\u0B95\u0BCA\u0BA3\u0BCD\u0B9F\u0BBF\u0BB0\u0BC1\u0B95\u0BCD\u0B95 \u0BB5\u0BC7\u0BA3\u0BCD\u0B9F\u0BC1\u0BAE\u0BCD" },
@@ -78185,7 +78673,7 @@ function ta_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/tg.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/tg.js
 var error53 = () => {
   const Sizable = {
     string: { unit: "\u0430\u043B\u043E\u043C\u0430\u0442", verb: "\u0434\u043E\u0448\u0442\u0430 \u0431\u043E\u0448\u0430\u0434" },
@@ -78302,7 +78790,7 @@ function tg_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/th.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/th.js
 var error54 = () => {
   const Sizable = {
     string: { unit: "\u0E15\u0E31\u0E27\u0E2D\u0E31\u0E01\u0E29\u0E23", verb: "\u0E04\u0E27\u0E23\u0E21\u0E35" },
@@ -78418,7 +78906,7 @@ function th_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/tk.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/tk.js
 var error55 = () => {
   const Sizable = {
     string: { unit: "simwol", verb: "bolmaly" },
@@ -78526,7 +79014,7 @@ function tk_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/tr.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/tr.js
 var error56 = () => {
   const Sizable = {
     string: { unit: "karakter", verb: "olmal\u0131" },
@@ -78637,7 +79125,7 @@ function tr_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/uk.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/uk.js
 var error57 = () => {
   const Sizable = {
     string: { unit: "\u0441\u0438\u043C\u0432\u043E\u043B\u0456\u0432", verb: "\u043C\u0430\u0442\u0438\u043C\u0435" },
@@ -78751,12 +79239,12 @@ function uk_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ua.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ua.js
 function ua_default() {
   return uk_default();
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/ur.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/ur.js
 var error58 = () => {
   const Sizable = {
     string: { unit: "\u062D\u0631\u0648\u0641", verb: "\u06C1\u0648\u0646\u0627" },
@@ -78872,7 +79360,7 @@ function ur_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/uz.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/uz.js
 var error59 = () => {
   const Sizable = {
     string: { unit: "belgi", verb: "bo\u2018lishi kerak" },
@@ -78986,7 +79474,7 @@ function uz_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/vi.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/vi.js
 var error60 = () => {
   const Sizable = {
     string: { unit: "k\xFD t\u1EF1", verb: "c\xF3" },
@@ -79100,7 +79588,7 @@ function vi_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/zh-CN.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/zh-CN.js
 var error61 = () => {
   const Sizable = {
     string: { unit: "\u5B57\u7B26", verb: "\u5305\u542B" },
@@ -79215,7 +79703,7 @@ function zh_CN_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/zh-TW.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/zh-TW.js
 var error62 = () => {
   const Sizable = {
     string: { unit: "\u5B57\u5143", verb: "\u64C1\u6709" },
@@ -79328,7 +79816,7 @@ function zh_TW_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/locales/yo.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/locales/yo.js
 var error63 = () => {
   const Sizable = {
     string: { unit: "\xE0mi", verb: "n\xED" },
@@ -79441,7 +79929,7 @@ function yo_default() {
   };
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/registries.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/registries.js
 var _a3;
 var $output = /* @__PURE__ */ Symbol("ZodOutput");
 var $input = /* @__PURE__ */ Symbol("ZodInput");
@@ -79491,7 +79979,7 @@ function registry() {
 (_a3 = globalThis).__zod_globalRegistry ?? (_a3.__zod_globalRegistry = registry());
 var globalRegistry = globalThis.__zod_globalRegistry;
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/compile.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/compile.js
 var INVALID = /* @__PURE__ */ Symbol.for("zod.compile.invalid");
 var FALLBACK_FLAG = /* @__PURE__ */ Symbol.for("zod.compile.fallback");
 var ZodCompileAsyncError = class extends Error {
@@ -80531,9 +81019,15 @@ function generateNullableCheck(doc, ctx, schema, accessor, buildsValue = true) {
   doc.write(`}`);
   return outputVar;
 }
+function generateSizeGate(doc, schema, size) {
+  for (const [max, check2] of sizeCaps(schema._zod.def.checks)) {
+    doc.write(`if (${size} > ${numericOperand(max, check2._zod.def.check)}) return INVALID;`);
+  }
+}
 function generateArrayCheck(doc, ctx, schema, accessor, buildsValue = true) {
   const def = schema._zod.def;
   doc.write(`if (!Array.isArray(${accessor})) return INVALID;`);
+  generateSizeGate(doc, schema, `${accessor}.length`);
   const outputVar = buildsValue ? newVar(ctx) : null;
   const iVar = newVar(ctx);
   const elemVar = newVar(ctx);
@@ -80933,6 +81427,7 @@ function literalPropertyKey(ctx, key) {
 function generateMapCheck(doc, ctx, schema, accessor) {
   const def = schema._zod.def;
   doc.write(`if (!(${accessor} instanceof Map)) return INVALID;`);
+  generateSizeGate(doc, schema, `${accessor}.size`);
   const outputVar = newVar(ctx);
   const kVar = newVar(ctx);
   const valVar = newVar(ctx);
@@ -80949,6 +81444,7 @@ function generateMapCheck(doc, ctx, schema, accessor) {
 function generateSetCheck(doc, ctx, schema, accessor) {
   const def = schema._zod.def;
   doc.write(`if (!(${accessor} instanceof Set)) return INVALID;`);
+  generateSizeGate(doc, schema, `${accessor}.size`);
   const outputVar = newVar(ctx);
   const valVar = newVar(ctx);
   doc.write(`const ${outputVar} = new Set();`);
@@ -81093,7 +81589,7 @@ function generateTransformCheck(doc, ctx, schema, accessor) {
   return accessor;
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/api.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/api.js
 function snapshotChecks(def) {
   if (def.checks)
     def.checks = [...def.checks];
@@ -82152,7 +82648,7 @@ function _stringFormat(Class2, format2, fnOrRegex, _params = {}) {
   return inst;
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/to-json-schema.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/to-json-schema.js
 function assignProps(target, ...sources) {
   for (const source of sources) {
     for (const key of Reflect.ownKeys(source)) {
@@ -82682,7 +83178,7 @@ var createStandardJSONSchemaMethod = (schema, io, processors = {}) => (params) =
   return finalize(ctx, schema);
 };
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/json-schema-processors.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/json-schema-processors.js
 var narrowMin = (agg, key, value) => {
   if (agg[key] === void 0 || value > agg[key])
     agg[key] = value;
@@ -83430,7 +83926,7 @@ function toJSONSchema(input2, params) {
   return finalize(ctx, input2);
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/json-schema-generator.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/json-schema-generator.js
 var JSONSchemaGenerator = class {
   /** @deprecated Access via ctx instead */
   get metadataRegistry() {
@@ -83508,10 +84004,10 @@ var JSONSchemaGenerator = class {
   }
 };
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/json-schema.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/json-schema.js
 var json_schema_exports = {};
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/classic/schemas.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/classic/schemas.js
 var schemas_exports2 = {};
 __export(schemas_exports2, {
   ZodAny: () => ZodAny,
@@ -83692,7 +84188,7 @@ __export(schemas_exports2, {
   xor: () => xor
 });
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/classic/checks.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/classic/checks.js
 var checks_exports2 = {};
 __export(checks_exports2, {
   endsWith: () => _endsWith,
@@ -83727,7 +84223,7 @@ __export(checks_exports2, {
   uppercase: () => _uppercase
 });
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/classic/errors.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/classic/errors.js
 var _installedErrorProtos = /* @__PURE__ */ new WeakSet([Object.prototype, Error.prototype]);
 function _lazyMethod(proto, key, make) {
   Object.defineProperty(proto, key, {
@@ -83773,7 +84269,7 @@ var ZodRealError = /* @__PURE__ */ $constructor("ZodError", initializer2, void 0
   Parent: Error
 });
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/classic/parse.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/classic/parse.js
 var parse2 = /* @__PURE__ */ _parse(ZodRealError);
 var parseAsync2 = /* @__PURE__ */ _parseAsync(ZodRealError);
 var safeParse2 = /* @__PURE__ */ _safeParse(ZodRealError);
@@ -83787,7 +84283,7 @@ var safeDecode2 = /* @__PURE__ */ _safeDecode(ZodRealError);
 var safeEncodeAsync2 = /* @__PURE__ */ _safeEncodeAsync(ZodRealError);
 var safeDecodeAsync2 = /* @__PURE__ */ _safeDecodeAsync(ZodRealError);
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/classic/schemas.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/classic/schemas.js
 function _ensureDefaultLocale() {
   if (!globalConfig.localeError)
     config(en_default());
@@ -85252,7 +85748,7 @@ function preprocess(fn, schema) {
   });
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/classic/compat.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/classic/compat.js
 var ZodIssueCode = {
   invalid_type: "invalid_type",
   too_big: "too_big",
@@ -85278,7 +85774,7 @@ var ZodFirstPartyTypeKind;
 /* @__PURE__ */ (function(ZodFirstPartyTypeKind2) {
 })(ZodFirstPartyTypeKind || (ZodFirstPartyTypeKind = {}));
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/classic/iso.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/classic/iso.js
 var iso_exports = {};
 __export(iso_exports, {
   ZodISODate: () => ZodISODate,
@@ -85303,7 +85799,7 @@ function duration2(params) {
   return _isoDuration(ZodISODuration, params);
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/classic/from-json-schema.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/classic/from-json-schema.js
 var z = {
   ...schemas_exports2,
   ...checks_exports2,
@@ -86036,7 +86532,7 @@ function fromJSONSchema(schema, params) {
   return convertSchema(normalized, ctx);
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/core/visit.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/core/visit.js
 var RESOLVING = /* @__PURE__ */ Symbol("z.visit/resolving");
 function visit(schema, fnOrHandlers) {
   const fn = typeof fnOrHandlers === "function" ? fnOrHandlers : (node2, rewritten) => {
@@ -86191,7 +86687,7 @@ function visit(schema, fnOrHandlers) {
   return run2(schema);
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/classic/deep-partial.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/classic/deep-partial.js
 function deepPartial(schema) {
   return visit(schema, {
     object: (s2) => s2.partial(),
@@ -86203,7 +86699,7 @@ function deepPartial(schema) {
   });
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/classic/in-out.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/classic/in-out.js
 function withChecks(side, checks) {
   if (!checks?.length)
     return side;
@@ -86233,7 +86729,7 @@ function output(schema) {
   });
 }
 
-// ../node_modules/.pnpm/zod@4.6.5/node_modules/zod/v4/classic/coerce.js
+// ../node_modules/.pnpm/zod@4.6.7/node_modules/zod/v4/classic/coerce.js
 var coerce_exports = {};
 __export(coerce_exports, {
   bigint: () => bigint3,
