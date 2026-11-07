@@ -1,5 +1,10 @@
 # Changelog
 
+## [v1.5.1](https://github.com/globis-org/sre-actions/compare/v1.5.0...v1.5.1) - 2026-11-07
+
+- chore(deps): update jdx/mise-action action to v5.2.4 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/181
+- chore(deps): update jdx/mise-action action to v5.2.5 by @renovate[bot] in https://github.com/globis-org/sre-actions/pull/184
+
 ## [v1.5.0](https://github.com/globis-org/sre-actions/compare/v1.4.1...v1.5.0) - 2026-11-02
 
 - modify(pr-context): forget を一覧に載せ、解釈できない変更は incomplete にし、コメントできる行の一覧を書き出す by @yukin01 in https://github.com/globis-org/sre-actions/pull/173
