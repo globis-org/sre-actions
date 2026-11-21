@@ -22,17 +22,17 @@
     "all": "pnpm format-check && pnpm lint && pnpm -r run type-check && pnpm test"
   },
   "devDependencies": {
-    "@tsconfig/node24": "24.0.5",
-    "@tsconfig/strictest": "2.0.8",
-    "@types/node": "26.6.5",
+    "@tsconfig/node24": "24.0.6",
+    "@tsconfig/strictest": "2.0.9",
+    "@types/node": "26.6.6",
     "esbuild": "0.28.2",
-    "oxfmt": "0.74.0",
-    "oxlint": "1.89.0",
+    "oxfmt": "0.78.0",
+    "oxlint": "1.93.0",
     "typescript": "7.0.2",
-    "vitest": "5.0.5"
+    "vitest": "5.1.0"
   },
   "engines": {
     "node": ">=24"
   },
-  "packageManager": "pnpm@12.15.0"
+  "packageManager": "pnpm@12.21.0"
 }
